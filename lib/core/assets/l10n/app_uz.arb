@@ -1,6 +1,26 @@
 {
-  "appName": "EKO SFERA",
-  "@appName": {
-    "description": "The conventional newborn programmer greeting"
-  }
+    "appName": "EKO SFERA",
+    "appNameM": "Eko sfera MChJ",
+    "boardingDescription": "Chiqindilar bilan bog’liq ishlarni amalga oshirish bo’yicha DXSh korxonasi",
+    "continueBoarding": "Davom etish",
+    "@appName": {
+        "description": "The conventional newborn programmer greeting"
+    },
+    "chooseLang": "Tilni tanlang",
+    "welcome": "Xush kelibsiz!",
+    "login": "Tizimga kirish",
+    "password": "Parol",
+    "enter": "Kirish",
+    "error": "Noto’g’ri login",
+    "passwordCannotBeEmpty": "Parol bo'sh bo'lishi mumkin emas",
+    "passwordMustBeAtLeast8CharactersLong": "Parol kamida 8 ta belgidan iborat bo'lishi kerak",
+    "passwordMustContainAtLeastOneUppercaseLetter": "Parol kamida bitta katta harfdan iborat bo'lishi kerak",
+    "passwordMustContainAtLeastOneLowercaseLetter": "Parol kamida bitta kichik harfdan iborat bo'lishi kerak",
+    "passwordMustContainAtLeastOneNumber": "Parol kamida bitta raqamni o'z ichiga olishi kerak",
+    "passwordMustContainAtLeastOneSpecialCharacter": "Parol kamida bitta maxsus belgi bo'lishi kerak",
+    "passwordCannotContainSpaces": "Parol joylarida bo'sh joy bo'lolmaydi",
+    "usernameCannotBeEmpty": "Foydalanuvchi ismi bo'sh bo'lishi mumkin emas",
+    "usernameCannotHaveLeadingOrTrailingSpaces": "Foydalanuvchi nomi etakchi yoki orqa joylarga ega bo'lolmaydi",
+    "usernameMustBeBetween3And30Characters": "Foydalanuvchi nomi 3 dan 30 gacha belgilar bo'lishi kerak",
+    "usernameCanOnlyContainLettersNumbersPeriodsAndUnderscores": "Foydalanuvchi nomi faqat harflar, raqamlar, davrlar va pastki chiziqlarda bo'lishi mumkin"
 }

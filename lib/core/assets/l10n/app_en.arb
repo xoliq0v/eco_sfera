@@ -1,0 +1,26 @@
+{
+    "appName": "EKO SFERA",
+    "appNameM": "Eko sfera MChJ",
+    "boardingDescription": "PPP enterprise for the implementation of works related to waste",
+    "continueBoarding": "Continue",
+    "@appName": {
+        "description": "The conventional newborn programmer greeting"
+    },
+    "chooseLang": "Choose language",
+    "welcome": "Welcome!",
+    "login": "Login",
+    "password": "Password",
+    "enter": "Enter",
+    "error": "Invalid login",
+    "passwordCannotBeEmpty": "Password cannot be empty",
+    "passwordMustBeAtLeast8CharactersLong": "Password must be at least 8 characters long",
+    "passwordMustContainAtLeastOneUppercaseLetter": "Password must contain at least one uppercase letter",
+    "passwordMustContainAtLeastOneLowercaseLetter": "Password must contain at least one lowercase letter",
+    "passwordMustContainAtLeastOneNumber": "Password must contain at least one number",
+    "passwordMustContainAtLeastOneSpecialCharacter": "Password must contain at least one special character",
+    "passwordCannotContainSpaces": "Password cannot contain spaces",
+    "usernameCannotBeEmpty": "Username cannot be empty",
+    "usernameCannotHaveLeadingOrTrailingSpaces": "Username cannot have leading or trailing spaces",
+    "usernameMustBeBetween3And30Characters": "Username must be between 3 and 30 characters",
+    "usernameCanOnlyContainLettersNumbersPeriodsAndUnderscores": "Username can only contain letters, numbers, periods, and underscores"
+}

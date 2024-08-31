@@ -1,0 +1,26 @@
+{
+    "appName": "EKO SFERA",
+    "appNameM": "Eko sfera MChJ",
+    "boardingDescription": "ГЧП предприятие по осуществлению работ связанных с отходами",
+    "continueBoarding": "Продолжать",
+    "@appName": {
+        "description": "The conventional newborn programmer greeting"
+    },
+    "chooseLang": "Выберите язык",
+    "welcome": "Добро пожаловать!",
+    "login": "Авторизоваться",
+    "password": "Пароль",
+    "enter": "Входить",
+    "error": "Неверный логин",
+    "passwordCannotBeEmpty": "Пароль не может быть пустым",
+    "passwordMustBeAtLeast8CharactersLong": "Пароль должен быть не менее 8 символов длиной",
+    "passwordMustContainAtLeastOneUppercaseLetter": "Пароль должен содержать как минимум одну верхнюю букву",
+    "passwordMustContainAtLeastOneLowercaseLetter": "Пароль должен содержать как минимум одну строчную букву",
+    "passwordMustContainAtLeastOneNumber": "Пароль должен содержать хотя бы один номер",
+    "passwordMustContainAtLeastOneSpecialCharacter": "Пароль должен содержать хотя бы один специальный символ",
+    "passwordCannotContainSpaces": "Пароль не может содержать пробелов",
+    "usernameCannotBeEmpty": "Имя пользователя не может быть пустым",
+    "usernameCannotHaveLeadingOrTrailingSpaces": "Имя пользователя не может иметь ведущих или следственных мест",
+    "usernameMustBeBetween3And30Characters": "Имя пользователя должно быть от 3 до 30 символов",
+    "usernameCanOnlyContainLettersNumbersPeriodsAndUnderscores": "Имя пользователя может содержать только буквы, числа, периоды и подчеркивания"
+}

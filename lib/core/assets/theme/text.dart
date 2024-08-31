@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 abstract class ThemeOfText {
 
-  static TextTheme theme (){
-    return const TextTheme(
+  static TextTheme theme (ColorScheme colorScheme){
+    return TextTheme(
       displayLarge: displayLarge,
       displayMedium: displayMedium,
-      displaySmall: displaySmall,
+      displaySmall: displaySmall(colorScheme),
       headlineMedium: headlineMedium,
       headlineSmall: headlineSmall,
       titleLarge: titleLarge,
@@ -33,9 +33,10 @@ abstract class ThemeOfText {
     fontWeight: FontWeight.w900,
   );
 
-  static const displaySmall = TextStyle(
+  static TextStyle displaySmall(ColorScheme colorScheme) => TextStyle(
     fontSize: 22,
     fontWeight: FontWeight.w700,
+    color: colorScheme.brightness == Brightness.light ? Colors.white : Colors.black,
   );
 
   static const headlineMedium = TextStyle(

@@ -20,6 +20,8 @@ dependencies:
   get_it: ^7.7.0
   flutter_bloc: ^8.1.6
   bloc: ^8.1.4
+  flutter_svg: ^2.0.10+1
+  gap: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -35,6 +37,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/icons/
 
   fonts:
      - family: Montserrat
