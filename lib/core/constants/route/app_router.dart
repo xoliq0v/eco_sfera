@@ -2,7 +2,8 @@ import 'package:auto_route/auto_route.dart';
 
 import 'app_router.gr.dart';
 
-@AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
+
+@AutoRouterConfig()
 class AppRouter extends RootStackRouter {
 
   @override
@@ -14,6 +15,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: ChooseLanguageRoute.page,),
     AutoRoute(page: BoardingRoute.page,),
     AutoRoute(page: AuthRoute.page,),
+    AutoRoute(page: NoInternetRoute.page)
   ];
 
   @override

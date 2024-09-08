@@ -14,10 +14,10 @@ class EcoButton extends StatelessWidget {
   final String text;
 
   /// The width of the button, defaulting to 200 pixels.
-  final double width;
+  final double? width;
 
   /// The height of the button, defaulting to 60 pixels.
-  final double height;
+  final double? height;
 
   /// The border radius of the button, defaulting to 10 pixels,
   /// providing rounded corners.
@@ -31,18 +31,22 @@ class EcoButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.text,
-    this.width = 200,
-    this.height = 60,
+    this.width,
+    this.height,
     this.borderRadius = 10,
     this.gradientColors = const [AppColors.main, AppColors.glen],
   });
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final bool isTablet = MediaQuery.sizeOf(context).shortestSide >= 600;
+    final double maxWidth = MediaQuery.sizeOf(context).width * (isTablet ? 0.6 : 0.8);
+    final buttonHeight = height ?? screenSize.height * 0.06;
     return Container(
       // The button's container provides the background gradient and dimensions.
-      width: width,
-      height: height,
+      width: maxWidth,
+      height: buttonHeight,
       decoration: BoxDecoration(
         // Rounded corners with a customizable border radius.
         borderRadius: BorderRadius.circular(borderRadius),

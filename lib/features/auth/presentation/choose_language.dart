@@ -60,21 +60,21 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                       child: EcoButton(onPressed: (){
                         context.navigateTo(const BoardingRoute());
                         context.read<LocaleCubit>().changeLocale('uz');
-                      }, text: 'Uz',width: double.maxFinite,),
+                      }, text: 'Uz',),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20,right: 20,top: 20),
                       child: EcoButton(onPressed: (){
                         context.navigateTo(const BoardingRoute());
                         context.read<LocaleCubit>().changeLocale('ru');
-                      }, text: 'Ру',width: double.maxFinite,),
+                      }, text: 'Ру'),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20,right: 20,top: 20),
                       child: EcoButton(onPressed: (){
                         context.navigateTo(const BoardingRoute());
                         context.read<LocaleCubit>().changeLocale('en');
-                      }, text: 'En',width: double.maxFinite,),
+                      }, text: 'En',),
                     ),
                   ],
                 ),

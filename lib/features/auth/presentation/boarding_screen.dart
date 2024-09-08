@@ -15,27 +15,33 @@ class BoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var l10n = context.l10n;
+    var isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Positioned(
+          isLandscape ? Positioned(
+            top: 0,
+            left: 0,
+            bottom: 0,
+            child: Image.asset(AppImage.boarding,fit: BoxFit.cover,),
+          ) : Positioned(
             top: 0,
             left: 0,
             right: 0,
-            child: Image.asset(AppImage.boarding,),
+            child: Image.asset(AppImage.boarding,fit: BoxFit.cover,),
           ),
           Positioned(
             bottom: 0,
-            top: MediaQuery.of(context).size.height / 2.2,
+            /// Maybe there is issue !
+            right: isLandscape ? -MediaQuery.sizeOf(context).width / 8 : 0,
+            top: isLandscape ? 0 : MediaQuery.of(context).size.height / 2.2,
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
               child: CustomPaint(
-                  size: Size(MediaQuery.of(context).size.width, (MediaQuery.of(context).size.height / 1.7).toDouble()), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-                  painter: RPSCustomPainter(context),
+                  painter: isLandscape ? IPCustomPainter() : RPSCustomPainter(context),
                   child: SizedBox(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
@@ -56,12 +62,10 @@ class BoardingScreen extends StatelessWidget {
                           ),
                         ),
                         const Gap(40),
-                        Padding(
-                            padding: const EdgeInsets.only(left: 30,right: 35),
-                          child: EcoButton(onPressed: (){
+                        EcoButton(
+                              onPressed: (){
                             context.navigateTo(const AuthRoute());
                           }, text: l10n.continueBoarding),
-                        )
                       ],
                     ),
                   )

@@ -79,3 +79,49 @@ class RPSCustomPainter extends CustomPainter {
     return true;
   }
 }
+
+class IPCustomPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.fill;
+
+    final path = Path();
+
+    // Move to top-right corner
+    path.moveTo(size.width, 0);
+
+    // Line to top-left corner with slight curve
+    path.lineTo(size.width * 0.24, 0);
+
+    // Create the left curve
+    path.quadraticBezierTo(
+        size.width * 0.1, size.height * 0.05,
+        size.width * 0.12, size.height * 0.28
+    );
+
+    // Create the middle curve
+    path.quadraticBezierTo(
+        size.width * 0.14, size.height * 0.5,
+        size.width * 0.06, size.height * 0.76
+    );
+
+    // Create the bottom curve
+    path.quadraticBezierTo(
+        size.width * 0.02, size.height * 0.85,
+        0, size.height
+    );
+
+    // Line to bottom-right corner
+    path.lineTo(size.width, size.height);
+
+    // Close the path
+    path.close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
+}
