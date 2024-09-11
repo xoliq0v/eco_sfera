@@ -7,7 +7,7 @@ import 'app_router.gr.dart';
 class AppRouter extends RootStackRouter {
 
   @override
-  RouteType get defaultRouteType => const RouteType.material(); //.cupertino, .adaptive ..etc
+  RouteType get defaultRouteType => const RouteType.adaptive(); //.cupertino, .adaptive ..etc
 
   @override
   List<AutoRoute> get routes => [
@@ -15,7 +15,8 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: ChooseLanguageRoute.page,),
     AutoRoute(page: BoardingRoute.page,),
     AutoRoute(page: AuthRoute.page,),
-    AutoRoute(page: NoInternetRoute.page)
+    AutoRoute(page: NoInternetRoute.page),
+    AutoRoute(page: MainRoute.page)
   ];
 
   @override

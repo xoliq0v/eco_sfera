@@ -7,6 +7,8 @@ import 'package:eco_sfera/core/widgets/fields/eco_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
+import '../../../core/constants/route/app_router.gr.dart';
+
 
 @RoutePage()
 class AuthScreen extends StatefulWidget {
@@ -127,8 +129,10 @@ class _AuthScreenState extends State<AuthScreen> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: EcoButton(
-                      onPressed: (){},
-                      text: l10n.enter,
+                      onPressed: (){
+                        context.navigateTo(MainRoute());
+                      },
+                      child: Text(l10n.enter),
                       borderRadius: 30,
                     ),
                   ),

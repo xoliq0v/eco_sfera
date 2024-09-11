@@ -12,7 +12,7 @@ abstract class ThemeConfig {
       error: Colors.red,
       surface: AppColors.alpineGoat,
       onPrimary: Colors.purple,
-      onSecondary: Colors.yellow,
+      onSecondary: AppColors.mintZest,
       onBackground: Colors.pink,
       onError: Colors.redAccent,
       onSurface: Colors.black,
@@ -79,10 +79,11 @@ abstract class ThemeConfig {
       error: Colors.red,
       surface: AppColors.blackOut,
       onPrimary: AppColors.main,
-      onSecondary: AppColors.blackWash,
+      onSecondary: AppColors.dynamicBlack,
       onBackground: AppColors.blackWash,
       onError: Colors.red,
       onSurface: Colors.white,
+      
     );
     return ThemeData(
       useMaterial3: true,

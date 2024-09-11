@@ -22,5 +22,7 @@
     "usernameCannotBeEmpty": "Имя пользователя не может быть пустым",
     "usernameCannotHaveLeadingOrTrailingSpaces": "Имя пользователя не может иметь ведущих или следственных мест",
     "usernameMustBeBetween3And30Characters": "Имя пользователя должно быть от 3 до 30 символов",
-    "usernameCanOnlyContainLettersNumbersPeriodsAndUnderscores": "Имя пользователя может содержать только буквы, числа, периоды и подчеркивания"
+    "usernameCanOnlyContainLettersNumbersPeriodsAndUnderscores": "Имя пользователя может содержать только буквы, числа, периоды и подчеркивания",
+    "waste": "Напрасно тратить",
+    "secondary": "Ikkilmachi"
 }

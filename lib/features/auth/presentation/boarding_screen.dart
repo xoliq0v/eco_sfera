@@ -65,7 +65,7 @@ class BoardingScreen extends StatelessWidget {
                         EcoButton(
                               onPressed: (){
                             context.navigateTo(const AuthRoute());
-                          }, text: l10n.continueBoarding),
+                          }, child: Text(l10n.continueBoarding)),
                       ],
                     ),
                   )

@@ -12,5 +12,7 @@ class AppIcons {
   // General
   static const String eyeOpen = 'assets/icons/eye-open.svg';
   static const String eyeClosed = 'assets/icons/eye-closed.svg';
+  static const String trash02 = 'assets/icons/trash-02.svg';
+  static const String iconParkRecycling = 'assets/icons/icon-park-recycling.svg';
 
 }

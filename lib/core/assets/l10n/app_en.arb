@@ -22,5 +22,7 @@
     "usernameCannotBeEmpty": "Username cannot be empty",
     "usernameCannotHaveLeadingOrTrailingSpaces": "Username cannot have leading or trailing spaces",
     "usernameMustBeBetween3And30Characters": "Username must be between 3 and 30 characters",
-    "usernameCanOnlyContainLettersNumbersPeriodsAndUnderscores": "Username can only contain letters, numbers, periods, and underscores"
+    "usernameCanOnlyContainLettersNumbersPeriodsAndUnderscores": "Username can only contain letters, numbers, periods, and underscores",
+    "waste": "Waste",
+    "secondary": "Secondary"
 }

@@ -1,60 +1,90 @@
 name: eco_sfera
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: 'none'  # This project won't be published to pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.0 <4.0.0'
+  sdk: '>=3.4.0 <4.0.0'  # Dart SDK version constraint
 
 dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.6
-  auto_route: ^9.2.2
+  # -------------------------------
+  # UI Libraries
+  # -------------------------------
+  cupertino_icons: ^1.0.6  # Icons for iOS style apps
+  google_fonts: ^6.2.1  # Google Fonts package
+  flutter_svg: ^2.0.10+1  # SVG rendering
+  gap: ^3.0.1  # Widget for adding space between UI components
+
+  # -------------------------------
+  # Core Libraries
+  # -------------------------------
   flutter_localizations:
-    sdk: flutter
-  intl: any
-  google_fonts: ^6.2.1
-  get_it: ^7.7.0
-  flutter_bloc: ^8.1.6
-  bloc: ^8.1.4
-  flutter_svg: ^2.0.10+1
-  gap: ^3.0.1
-  shared_preferences: ^2.3.2
-  connectivity: ^3.0.6
-  equatable: ^2.0.5
+    sdk: flutter  # Localization support
+  intl: any  # Internationalization
+  get_it: ^7.7.0  # Dependency injection using service locator
+  flutter_bloc: ^8.1.6  # BLoC state management
+  bloc: ^8.1.4  # Core BLoC package
+  equatable: ^2.0.5  # Simplifies equality comparisons
+  injectable: ^2.4.4  # Dependency injection
+
+  # -------------------------------
+  # Network Libraries
+  # -------------------------------
+  connectivity: ^3.0.6  # Network connectivity status
+
+  # -------------------------------
+  # Storage and Preferences
+  # -------------------------------
+  shared_preferences: ^2.3.2  # Local storage for simple data
+  flutter_staggered_grid_view: ^0.7.0
 
 dev_dependencies:
   flutter_test:
-    sdk: flutter
+    sdk: flutter  # Package for writing unit tests
 
-  flutter_lints: ^3.0.0
-  auto_route_generator:
-  build_runner:
+  # -------------------------------
+  # Code Generation
+  # -------------------------------
+  flutter_lints: ^3.0.0  # Ensures best practices for your code
+  auto_route_generator:  # Code generator for auto_route
+  build_runner:  # Tool for code generation
+  injectable_generator:  # Code generator for Injectable package
 
 flutter:
-  generate: true
-  uses-material-design: true
+  generate: true  # Enable code generation
+  uses-material-design: true  # Uses Material Design in the app
 
+  # -------------------------------
+  # Assets
+  # -------------------------------
   assets:
-    - assets/images/
-    - assets/icons/
+    - assets/images/  # Image assets directory
+    - assets/icons/   # Icon assets directory
 
+  # -------------------------------
+  # Fonts
+  # -------------------------------
   fonts:
-     - family: Montserrat
-       fonts:
-         - asset: assets/fonts/Montserrat/static/Montserrat-Regular.ttf
-           style: normal
-         - asset: assets/fonts/Montserrat/static/Montserrat-Italic.ttf
-           style: italic
+    - family: Montserrat  # Custom font family
+      fonts:
+        - asset: assets/fonts/Montserrat/static/Montserrat-Regular.ttf
+          style: normal
+        - asset: assets/fonts/Montserrat/static/Montserrat-Italic.ttf
+          style: italic
 
+# -------------------------------
+# Localization Configuration
+# -------------------------------
 flutter_intl:
   enabled: true
-  class_name: AppLocalization
-  arb-dir: lib/l10n
+  class_name: AppLocalization  # The class name generated for localization
+  arb-dir: lib/l10n  # Directory where .arb files for localization are stored
   preferred-supported-locales:
-    - en
-    - es
-  use-deferred-loading: true
+    - en  # English
+    - uz  # Uzbek
+    - ru  # Russian
+  use-deferred-loading: true  # Enable deferred loading for translations

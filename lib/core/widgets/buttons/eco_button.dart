@@ -11,7 +11,7 @@ class EcoButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   /// The text label displayed on the button.
-  final String text;
+  final Widget child;
 
   /// The width of the button, defaulting to 200 pixels.
   final double? width;
@@ -30,7 +30,7 @@ class EcoButton extends StatelessWidget {
   const EcoButton({
     super.key,
     required this.onPressed,
-    required this.text,
+    required this.child,
     this.width,
     this.height,
     this.borderRadius = 10,
@@ -67,10 +67,7 @@ class EcoButton extends StatelessWidget {
           ),
         ),
         // The text style is consistent with the app's overall typography.
-        child: Text(
-          text,
-          style: Theme.of(context).textTheme.displaySmall,
-        ),
+        child: child,
       ),
     );
   }

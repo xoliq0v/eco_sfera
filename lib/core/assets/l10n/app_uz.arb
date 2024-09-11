@@ -22,5 +22,7 @@
     "usernameCannotBeEmpty": "Foydalanuvchi ismi bo'sh bo'lishi mumkin emas",
     "usernameCannotHaveLeadingOrTrailingSpaces": "Foydalanuvchi nomi etakchi yoki orqa joylarga ega bo'lolmaydi",
     "usernameMustBeBetween3And30Characters": "Foydalanuvchi nomi 3 dan 30 gacha belgilar bo'lishi kerak",
-    "usernameCanOnlyContainLettersNumbersPeriodsAndUnderscores": "Foydalanuvchi nomi faqat harflar, raqamlar, davrlar va pastki chiziqlarda bo'lishi mumkin"
+    "usernameCanOnlyContainLettersNumbersPeriodsAndUnderscores": "Foydalanuvchi nomi faqat harflar, raqamlar, davrlar va pastki chiziqlarda bo'lishi mumkin",
+    "waste": "Chiqindi",
+    "secondary": "вторичный"
 }

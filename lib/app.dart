@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/assets/l10n/app_localizations.dart';
 import 'core/assets/theme/theme.dart';
 import 'core/constants/route/app_router.dart';
-import 'core/singleton/di.dart';
+import 'core/singleton/di.config.dart';
 import 'core/utils/bloc/connectivity/connectivity_cubit.dart';
 import 'core/utils/bloc/connectivity/connectivity_state.dart';
 import 'core/utils/bloc/locale_cubit.dart';
