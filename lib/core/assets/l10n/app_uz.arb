@@ -24,5 +24,9 @@
     "usernameMustBeBetween3And30Characters": "Foydalanuvchi nomi 3 dan 30 gacha belgilar bo'lishi kerak",
     "usernameCanOnlyContainLettersNumbersPeriodsAndUnderscores": "Foydalanuvchi nomi faqat harflar, raqamlar, davrlar va pastki chiziqlarda bo'lishi mumkin",
     "waste": "Chiqindi",
-    "secondary": "вторичный"
+    "secondary": "вторичный",
+    "totalBalance": "Umumiy balans",
+    "orders": "Buyurtmalar",
+    "fromWhere": "Qayerdan",
+    "acceptance": "Qabul qilish"
 }

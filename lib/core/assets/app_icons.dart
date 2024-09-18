@@ -14,5 +14,14 @@ class AppIcons {
   static const String eyeClosed = 'assets/icons/eye-closed.svg';
   static const String trash02 = 'assets/icons/trash-02.svg';
   static const String iconParkRecycling = 'assets/icons/icon-park-recycling.svg';
+  static const String home03 = 'assets/icons/home-03.svg';
+  static const String menu02 = 'assets/icons/menu-02.svg';
+  static const String coinsRotate = 'assets/icons/coins-rotate.svg';
+  static const String clockForward = 'assets/icons/clock-forward.svg';
+  static const String userProfiles02 = 'assets/icons/user-profiles-02.svg';
+  static const String delivery = 'assets/icons/delivery.svg';
+
+  // Profiles & Users
+  static const String userProfile02 = 'assets/icons/user-profile-02.svg';
 
 }

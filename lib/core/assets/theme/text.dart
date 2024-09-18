@@ -2,8 +2,7 @@ import 'package:eco_sfera/core/assets/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 abstract class ThemeOfText {
-
-  static TextTheme theme (ColorScheme colorScheme){
+  static TextTheme theme(ColorScheme colorScheme) {
     return TextTheme(
       displayLarge: displayLarge,
       displayMedium: displayMedium,
@@ -21,7 +20,7 @@ abstract class ThemeOfText {
     );
   }
 
-  /// EcoSfera text style
+  /// EcoSfera text styles
   static const displayLarge = TextStyle(
     fontSize: 40,
     color: AppColors.main,
@@ -45,7 +44,6 @@ abstract class ThemeOfText {
     color: AppColors.greatFalls,
   );
 
-  // done
   static const headlineSmall = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w400,
@@ -93,5 +91,4 @@ abstract class ThemeOfText {
     fontWeight: FontWeight.w600,
     color: AppColors.greatFalls,
   );
-
 }

@@ -1,3 +1,4 @@
+import 'package:eco_sfera/features/navigation/presentation/bloc/navigation_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
@@ -15,4 +16,5 @@ final getIt = GetIt.instance;
 void init() {
   getIt.registerLazySingleton(() => AppRouter());
   getIt.registerLazySingleton(() => ThemeCubit());
+  getIt.registerLazySingleton(() => NavigationBloc());
 }

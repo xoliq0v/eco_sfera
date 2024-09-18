@@ -41,7 +41,7 @@ class EcoButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final bool isTablet = MediaQuery.sizeOf(context).shortestSide >= 600;
-    final double maxWidth = MediaQuery.sizeOf(context).width * (isTablet ? 0.6 : 0.8);
+    final double maxWidth = width ?? MediaQuery.sizeOf(context).width * (isTablet ? 0.6 : 0.8);
     final buttonHeight = height ?? screenSize.height * 0.06;
     return Container(
       // The button's container provides the background gradient and dimensions.

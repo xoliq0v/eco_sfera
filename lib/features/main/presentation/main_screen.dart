@@ -1,7 +1,10 @@
 import 'package:eco_sfera/core/assets/app_icons.dart';
 import 'package:eco_sfera/core/assets/app_image.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:eco_sfera/core/constants/route/app_router.gr.dart';
 import 'package:eco_sfera/core/extension/localization_extension.dart';
 import 'package:eco_sfera/features/main/presentation/widget/eco_service_item.dart';
+import 'package:eco_sfera/features/main/presentation/widget/grid_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,6 +12,7 @@ import 'package:gap/gap.dart';
 
 import '../../../core/widgets/buttons/eco_button.dart';
 
+@RoutePage()
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
 
@@ -120,7 +124,9 @@ class MainScreen extends StatelessWidget {
               child: Column(
                 children: [
                   EcoButton(
-                    onPressed: () {},
+                    onPressed: () { context.router.navigate(NavigationRoute(routes: [
+
+                    ])); },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -133,7 +139,7 @@ class MainScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   EcoButton(
-                    onPressed: () {},
+                    onPressed: () { context.router.navigate(NavigationRoute(routes: [])); },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -154,42 +160,4 @@ class MainScreen extends StatelessWidget {
   }
 }
 
-class GridItem {
-  final String title;
-  final String image;
-  final ItemType itemType;
 
-  const GridItem({
-    required this.title,
-    required this.image,
-    this.itemType = ItemType.medium,
-  });
-}
-
-class GridTile extends StatelessWidget {
-  final int columnSpan;
-  final int rowSpan;
-  final Widget child;
-
-  const GridTile({
-    Key? key,
-    required this.columnSpan,
-    required this.rowSpan,
-    required this.child,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final width = constraints.maxWidth * columnSpan + (columnSpan - 1) * 10;
-        final height = constraints.maxHeight * rowSpan + (rowSpan - 1) * 10;
-        return SizedBox(
-          width: width,
-          height: height,
-          child: child,
-        );
-      },
-    );
-  }
-}

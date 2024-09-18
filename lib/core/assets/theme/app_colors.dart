@@ -11,5 +11,6 @@ class AppColors {
   static const Color blackOut = Color.fromRGBO(34, 34, 34, 1.0);
   static const Color mintZest = Color.fromRGBO(204, 255, 225, 1.0);
   static const Color dynamicBlack = Color.fromRGBO(30, 30, 30, 1.0);
+  static const Color  cactusWater = Color.fromRGBO(205, 251, 226, 1.0);
 
 }

@@ -16,7 +16,19 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: BoardingRoute.page,),
     AutoRoute(page: AuthRoute.page,),
     AutoRoute(page: NoInternetRoute.page),
-    AutoRoute(page: MainRoute.page)
+    AutoRoute(page: MainRoute.page),
+    AutoRoute(
+      path: '/navigation',
+      page: NavigationRoute.page,
+      children: [
+        AutoRoute(path: 'home', page: HomeRoute.page),
+        AutoRoute(path: 'orders', page: OrdersRoute.page),
+        AutoRoute(path: 'buy', page: BuyRoute.page),
+        AutoRoute(path: 'history', page: HistoryRoute.page),
+        AutoRoute(path: 'profile', page: ProfileRoute.page),
+      ]
+    ),
+    // AutoRoute(page: SecondaryMain.page),
   ];
 
   @override
