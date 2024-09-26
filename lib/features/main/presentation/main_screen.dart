@@ -34,12 +34,13 @@ class MainScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
+            const Gap(10),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(10.0),
                 child: StaggeredGrid.count(
                   crossAxisCount: 4,
-                  mainAxisSpacing: 8,
+                  mainAxisSpacing: 10,
                   crossAxisSpacing: 8,
                   children: [
                     StaggeredGridTile.count(

@@ -20,7 +20,7 @@ class MotionTabBar extends StatefulWidget {
   // badge
   final List<Widget?>? badges;
 
-  MotionTabBar({
+  MotionTabBar({super.key,
     this.textStyle,
     this.tabIconColor = Colors.black,
     this.tabIconSize = 24,
@@ -39,7 +39,7 @@ class MotionTabBar extends StatefulWidget {
     this.controller,
   })  : assert(labels.contains(initialSelectedTab)),
         assert(svgIconPaths != null && svgIconPaths.length == labels.length),
-        assert((badges != null && badges.length > 0) ? badges.length == labels.length : true);
+        assert((badges != null && badges.isNotEmpty) ? badges.length == labels.length : true);
 
   @override
   _MotionTabBarState createState() => _MotionTabBarState();

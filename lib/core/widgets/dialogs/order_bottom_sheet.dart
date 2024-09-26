@@ -28,9 +28,9 @@ class OrderBottomSheet {
               Container(
                 height: 270,
                 width: double.maxFinite,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.background,
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(25),
                     topRight: Radius.circular(25)
                   )

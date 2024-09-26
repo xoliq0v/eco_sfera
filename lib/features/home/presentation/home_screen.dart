@@ -33,6 +33,9 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
+      body: YandexMap(
+        nightModeEnabled: Theme.of(context).brightness == Brightness.dark ? true : false,
+      ),
     );
   }
 }

@@ -1,14 +1,15 @@
 import 'package:eco_sfera/core/extension/localization_extension.dart';
 import 'package:eco_sfera/core/libs/motion_tab_bar/motion-tab-controller.dart';
 import 'package:eco_sfera/core/singleton/di.config.dart';
+import 'package:eco_sfera/features/history/presentation/admissions_history_page.dart';
 import 'package:eco_sfera/features/home/presentation/home_screen.dart';
 import 'package:eco_sfera/features/navigation/presentation/bloc/navigation_bloc.dart';
 import 'package:eco_sfera/features/navigation/presentation/bloc/navigation_state.dart';
 import 'package:eco_sfera/features/orders/presentation/orders_page.dart';
+import 'package:eco_sfera/features/buy/presentation/buy_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../core/assets/app_icons.dart';
 import '../../../core/assets/theme/app_colors.dart';
@@ -52,6 +53,8 @@ class _NavigationState extends State<NavigationScreen> with TickerProviderStateM
           return Scaffold(
             body: PageView(
               children: [
+                AdmissionsHistoryPage(),
+                BuyPage(),
                 OrdersPage(),
                 HomeScreen()
               ],
@@ -73,11 +76,12 @@ class _NavigationState extends State<NavigationScreen> with TickerProviderStateM
                   ],
                   tabSize: 50,
                   tabBarHeight: 60,
-                  textStyle: const TextStyle(
+                  textStyle: TextStyle(
                     fontSize: 12,
-                    color: Colors.black,
+                    color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.w500,
                   ),
+                  tabBarColor: Theme.of(context).colorScheme.background,
                   tabIconColor: AppColors.main,
                   tabIconSize: 28.0,
                   tabIconSelectedSize: 26.0,

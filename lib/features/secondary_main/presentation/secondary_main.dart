@@ -2,7 +2,7 @@
 // import 'package:eco_sfera/core/assets/theme/app_colors.dart';
 // import 'package:eco_sfera/core/extension/localization_extension.dart';
 // import 'package:eco_sfera/features/orders/presentation/orders_page.dart';
-// import 'package:eco_sfera/features/payment/presentation/payment_page.dart';
+// import 'package:eco_sfera/features/payment/presentation/buy_page.dart';
 // import 'package:eco_sfera/features/profile/presentation/profile_page.dart';
 // import 'package:flutter/material.dart';
 // import 'package:auto_route/annotations.dart';

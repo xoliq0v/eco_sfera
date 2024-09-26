@@ -1,6 +1,9 @@
 import 'package:eco_sfera/core/extension/localization_extension.dart';
 import 'package:eco_sfera/core/widgets/buttons/eco_icon_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 
 class EcoTextField extends StatefulWidget {
   final String hintText;
@@ -20,6 +23,11 @@ class EcoTextField extends StatefulWidget {
   final Color? backgroundColor;
   final Color iconColor;
   final bool validateOnChange;
+  final String? topRightText;
+  final String? svgSuffixIcon;
+  final Function()? svgSuffixIconPressed;
+  final List<TextInputFormatter>? inputFormatters;
+  final Function(String? value)? onChanged;
 
   const EcoTextField({
     super.key,
@@ -35,11 +43,16 @@ class EcoTextField extends StatefulWidget {
     this.decoration,
     this.width,
     this.height,
-    this.radius = 20,
+    this.radius = 15,
     this.autocorrect = true,
     this.backgroundColor,
     this.iconColor = Colors.black,
     this.validateOnChange = false,
+    this.topRightText,
+    this.svgSuffixIcon,
+    this.svgSuffixIconPressed,
+    this.inputFormatters,
+    this.onChanged
   });
 
   @override
@@ -65,12 +78,11 @@ class _EcoTextFieldState extends State<EcoTextField> {
 
   @override
   Widget build(BuildContext context) {
-    var l10n = context.l10n;
     final colorScheme = Theme.of(context).colorScheme;
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final bool isTablet = MediaQuery.sizeOf(context).shortestSide >= 600;
-        final double maxWidth = MediaQuery.sizeOf(context).width * (isTablet ? 0.6 : 0.8);
+        final double maxWidth = MediaQuery.sizeOf(context).width * (isTablet ? 0.6 : 0.9);
         final double horizontalPadding = isTablet ? 20 : 16;
 
         final double fontSize = isTablet ? 16 : 14;
@@ -83,6 +95,12 @@ class _EcoTextFieldState extends State<EcoTextField> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if (widget.topRightText != null)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                    child: Text(widget.topRightText!,style: Theme.of(context).textTheme.headlineSmall,),
+                ),
+
               Container(
                 width: fieldWidth,
                 height: fieldHeight,
@@ -98,7 +116,11 @@ class _EcoTextFieldState extends State<EcoTextField> {
                   textInputAction: widget.textInputAction,
                   validator: widget.validator,
                   style: TextStyle(fontSize: fontSize),
+                  inputFormatters: widget.inputFormatters,
                   onChanged: (value) {
+                    if(widget.onChanged!=null){
+                      widget.onChanged!(value);
+                    }
                     if (widget.validateOnChange) {
                       _runValidator(value);
                     }
@@ -109,7 +131,15 @@ class _EcoTextFieldState extends State<EcoTextField> {
                     prefixIcon: widget.prefixIcon != null ? Icon(widget.prefixIcon, size: iconSize, color: widget.iconColor) : null,
                     suffixIcon: Row(
                       mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        if(widget.svgSuffixIcon != null)...[
+                          InkWell(
+                            onTap: widget.svgSuffixIconPressed,
+                              child: SvgPicture.asset(widget.svgSuffixIcon!)),
+                          const Gap(15)
+                        ],
+
                         if (_errorText != null)
                           Icon(Icons.error_outline, color: colorScheme.error, size: iconSize),
                         if (widget.obscureText)
@@ -136,7 +166,7 @@ class _EcoTextFieldState extends State<EcoTextField> {
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(widget.radius ?? maxWidth * 0.025),
-                      borderSide: BorderSide(color: _errorText != null ? colorScheme.error : Colors.transparent, width: 1.0),
+                      borderSide: BorderSide(color: _errorText != null ? colorScheme.error : colorScheme.surface, width: 2.0),
                     ),
                     errorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(widget.radius ?? maxWidth * 0.025),
@@ -160,6 +190,7 @@ class _EcoTextFieldState extends State<EcoTextField> {
                   padding: const EdgeInsets.only(top: 4, left: 12),
                   child: Text(
                     _errorText!,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: colorScheme.error, fontSize: fontSize * 0.8),
                   ),
                 ),

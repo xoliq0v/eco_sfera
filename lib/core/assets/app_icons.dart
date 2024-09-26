@@ -23,5 +23,6 @@ class AppIcons {
 
   // Profiles & Users
   static const String userProfile02 = 'assets/icons/user-profile-02.svg';
+  static const String scan = 'assets/icons/scan.svg';
 
 }

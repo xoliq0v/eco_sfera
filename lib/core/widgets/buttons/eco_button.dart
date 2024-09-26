@@ -27,15 +27,43 @@ class EcoButton extends StatelessWidget {
   /// defaulting to a gradient from [AppColors.main] to [AppColors.glen].
   final List<Color> gradientColors;
 
+  final Color? backgroundColor;
+  final BoxBorder? border;
+  final EdgeInsetsGeometry padding;
+
   const EcoButton({
     super.key,
     required this.onPressed,
     required this.child,
     this.width,
     this.height,
+    this.backgroundColor,
     this.borderRadius = 10,
+    this.border,
     this.gradientColors = const [AppColors.main, AppColors.glen],
+    this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
   });
+
+  factory EcoButton.min({
+    required VoidCallback onPressed,
+    required Widget child,
+    Color? backgroundColor,
+    double borderRadius = 8,
+    BoxBorder? border,
+    List<Color> gradientColors = const [AppColors.main, AppColors.glen],
+    EdgeInsetsGeometry padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+  }) {
+    return EcoButton(
+      onPressed: onPressed,
+      child: child,
+      width: 220, // Reduced width for mini button
+      height: 40, // Reduced height for mini button
+      backgroundColor: backgroundColor,
+      borderRadius: borderRadius,
+      border: border,
+      gradientColors: gradientColors,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,11 +79,13 @@ class EcoButton extends StatelessWidget {
         // Rounded corners with a customizable border radius.
         borderRadius: BorderRadius.circular(borderRadius),
         // Gradient background transitioning from one color to another.
-        gradient: LinearGradient(
+        gradient: backgroundColor == null ? LinearGradient(
           colors: gradientColors,
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
-        ),
+        ) : null,
+        border: border,
+        color: backgroundColor,
       ),
       child: ElevatedButton(
         // Handles the button's functionality and content.

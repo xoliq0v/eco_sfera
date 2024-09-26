@@ -11,18 +11,16 @@ import '../../data/models/order.dart';
 
 class OrderItem extends StatelessWidget {
   final Order order;
-  const OrderItem({super.key, required this.order});
+  final Function()? onTap;
+  const OrderItem({super.key, required this.order,this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        OrderBottomSheet.show(context,order.fromLocation);
-        log('\$TAB');
-      },
+      onTap: onTap,
       child: Container(
         width: double.maxFinite,
-        height: 140,
+        height: 150,
         margin: const EdgeInsets.only(
           right: 20,
           left: 20,
@@ -35,10 +33,8 @@ class OrderItem extends StatelessWidget {
                   blurRadius: 1
               )
             ],
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(
-                25
-            )
+            color: Theme.of(context).colorScheme.surface,
+            borderRadius: BorderRadius.circular(25)
         ),
         child: Column(
           children: [
@@ -60,20 +56,23 @@ class OrderItem extends StatelessWidget {
                                 Text(
                                   order.title,
                                   overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 20
                                   ),
                                 ),
-                                Text(
-                                  order.description,
-                                  style: Theme.of(context).textTheme.headlineMedium,
+                                Flexible(
+                                    child: Text(
+                                      order.description,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: Theme.of(context).textTheme.headlineMedium,
+                                    )
                                 )
                               ],
                             ),
                           )
                       ),
-                      SvgPicture.asset(AppIcons.delivery),
+                      SvgPicture.asset(AppIcons.delivery,color: Theme.of(context).colorScheme.primary,),
                       const Gap(10)
                     ],
                   ),

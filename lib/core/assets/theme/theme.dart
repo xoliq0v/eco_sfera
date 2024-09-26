@@ -1,5 +1,7 @@
+import 'package:eco_sfera/core/extension/color.dart';
 import 'package:flutter/material.dart';
 import 'package:eco_sfera/core/assets/theme/app_colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 abstract class ThemeConfig {
   static ThemeData get light {
@@ -24,7 +26,7 @@ abstract class ThemeConfig {
         elevation: 0,
         color: Colors.white,
         titleTextStyle: TextStyle(
-          fontSize: 25,
+          fontSize: 18,
           color: AppColors.blackWash,
           fontWeight: FontWeight.w700
         ),
@@ -35,6 +37,10 @@ abstract class ThemeConfig {
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
+          textStyle: GoogleFonts.inter(
+            color: colorScheme.textButton,
+            fontSize: 14,
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(40),
           ),
@@ -42,7 +48,7 @@ abstract class ThemeConfig {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: colorScheme.surface,
+        fillColor: colorScheme.background,
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: colorScheme.primary, width: 1.0),
           borderRadius: BorderRadius.circular(10),
@@ -67,61 +73,60 @@ abstract class ThemeConfig {
         hintStyle: TextStyle(color: colorScheme.onSurface.withOpacity(0.5)),
       ),
       colorScheme: colorScheme,
-      textTheme: const TextTheme(
-        displayLarge: const TextStyle(
+      textTheme: TextTheme(
+        displayLarge: GoogleFonts.inter(
           fontSize: 40,
           color: AppColors.main,
-          fontFamily: 'Montserrat',
         ),
-        displayMedium: const TextStyle(
+        displayMedium: GoogleFonts.inter(
           fontSize: 36,
           fontWeight: FontWeight.w900,
         ),
-        displaySmall: TextStyle(
+        displaySmall: GoogleFonts.inter(
           fontSize: 22,
           fontWeight: FontWeight.w700,
           color: Colors.white,
         ),
-        headlineMedium: const TextStyle(
+        headlineMedium: GoogleFonts.inter(
           fontSize: 17,
           fontWeight: FontWeight.w400,
           color: AppColors.greatFalls,
         ),
-        headlineSmall: const TextStyle(
+        headlineSmall: GoogleFonts.inter(
           fontSize: 12,
           fontWeight: FontWeight.w400,
           color: AppColors.greatFalls,
           letterSpacing: -0.17,
         ),
-        titleLarge: const TextStyle(
+        titleLarge: GoogleFonts.inter(
           fontSize: 10,
           fontWeight: FontWeight.w500,
         ),
-        bodyLarge: const TextStyle(
+        bodyLarge: GoogleFonts.inter(
           fontSize: 14,
           fontWeight: FontWeight.w600,
         ),
-        bodyMedium: const TextStyle(
+        bodyMedium: GoogleFonts.inter(
           fontSize: 13,
           fontWeight: FontWeight.w500,
         ),
-        titleMedium: const TextStyle(
+        titleMedium: GoogleFonts.inter(
           fontSize: 14,
           fontWeight: FontWeight.w400,
         ),
-        titleSmall: const TextStyle(
+        titleSmall: GoogleFonts.inter(
           fontSize: 13,
           fontWeight: FontWeight.w500,
         ),
-        bodySmall: const TextStyle(
+        bodySmall: GoogleFonts.inter(
           fontSize: 10,
           fontWeight: FontWeight.w400,
         ),
-        labelLarge: const TextStyle(
+        labelLarge: GoogleFonts.inter(
           fontSize: 15,
           fontWeight: FontWeight.w600,
         ),
-        labelSmall: const TextStyle(
+        labelSmall: GoogleFonts.inter(
           fontSize: 12,
           fontWeight: FontWeight.w600,
           color: AppColors.greatFalls,
@@ -150,11 +155,11 @@ abstract class ThemeConfig {
       scaffoldBackgroundColor: AppColors.blackWash,
       appBarTheme: const AppBarTheme(
         elevation: 0,
-        color: AppColors.blackWash,
+        color: Colors.black,
         titleTextStyle: TextStyle(
-          fontSize: 40,
-          color: AppColors.main,
-          fontFamily: 'Montserrat',
+            fontSize: 23,
+            color: Colors.white,
+            fontWeight: FontWeight.w700
         ),
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.white),

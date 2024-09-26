@@ -1,6 +1,7 @@
-import 'package:eco_sfera/core/assets/extensions/color.dart';
+import 'package:eco_sfera/core/extension/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 
 enum ItemType {
   small,
@@ -46,7 +47,7 @@ class EcoServiceItem extends StatelessWidget {
                     height: itemType == ItemType.large ? 190 : 60,
                     decoration: BoxDecoration(
                       color: colorScheme.cardColor,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(itemType == ItemType.large ? 35 : 20),
                     ),
                   ),
                 ),
@@ -69,6 +70,7 @@ class EcoServiceItem extends StatelessWidget {
               ],
             ),
           ),
+          const Gap(5),
           Center(child: Text(title)),
         ],
       ),
