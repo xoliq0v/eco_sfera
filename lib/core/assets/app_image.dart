@@ -1,6 +1,3 @@
-import 'package:eco_sfera/features/auth/presentation/boarding_screen.dart';
-import 'package:eco_sfera/features/main/presentation/main_screen.dart';
-
 class AppImage {
 
   /// [BoardingScreen]
@@ -16,6 +13,8 @@ class AppImage {
   static const String orders = 'assets/images/orders.svg';
   static const String profile = 'assets/images/profile.svg';
   static const String report = 'assets/images/reports.svg';
+  static const String iconBackground = 'assets/images/profile-background.svg';
+  static const String cardImage = 'assets/images/card.svg';
 
 
 }

@@ -21,6 +21,7 @@ class SuccessPaymentDialog {
                   color: Theme.of(context).scaffoldBackgroundColor,
                   border: Border.all(
                     width: 2,
+                    color: Theme.of(context).scaffoldBackgroundColor
                   ),
                   borderRadius: BorderRadius.circular(30)
                 ),

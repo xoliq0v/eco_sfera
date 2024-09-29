@@ -24,5 +24,11 @@ class AppIcons {
   // Profiles & Users
   static const String userProfile02 = 'assets/icons/user-profile-02.svg';
   static const String scan = 'assets/icons/scan.svg';
+  static const String arrowUp = 'assets/icons/arrow-up.svg';
+  static const String arrowDown = 'assets/icons/down-arrow.svg';
+  static const String bell02 = 'assets/icons/bell-02.svg';
+  static const String globe01 = 'assets/icons/globe-01.svg';
+  static const String phone = 'assets/icons/phone.svg';
+  static const String settings = 'assets/icons/settings.svg';
 
 }

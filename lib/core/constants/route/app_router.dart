@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-
 import 'app_router.gr.dart';
 
 
@@ -28,7 +27,9 @@ class AppRouter extends RootStackRouter {
         AutoRoute(path: 'profile', page: ProfileRoute.page),
       ]
     ),
-    AutoRoute(page: PaymentRoute.page)
+    AutoRoute(page: PaymentRoute.page),
+    AutoRoute(page: SettingsRoute.page),
+    AutoRoute(page: MyAccountRoute.page),
     // AutoRoute(page: SecondaryMain.page),
   ];
 

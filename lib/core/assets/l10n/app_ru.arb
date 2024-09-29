@@ -60,5 +60,15 @@
     "branchName": "Название филиала",
     "noDataAvailable": "Нет доступных данных",
     "thePaymentWasSuccessful": "Платеж прошел успешно",
-    "admissionsHistory": "История поступления"
+    "admissionsHistory": "История поступления",
+    "notifications": "Уведомления",
+    "language": "Язык",
+    "settings": "Настройки",
+    "contactPhoneNumber": "Контактный номер телефона",
+    "exit": "Выход",
+    "selectALanguage": "Выберите язык",
+    "select": "Выбирать",
+    "nightMode": "Ночной режим",
+    "myAccount": "Мой счет",
+    "theHistoryOfWormOutput": "История выхода червя"
 }

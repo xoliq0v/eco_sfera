@@ -14,6 +14,7 @@ import 'package:auto_route/auto_route.dart';
 import '../../../core/assets/app_icons.dart';
 import '../../../core/assets/theme/app_colors.dart';
 import '../../../core/libs/motion_tab_bar/motion-tab-bar.dart';
+import '../../profile/presentation/profile_page.dart';
 
 @RoutePage()
 class NavigationScreen extends StatefulWidget {
@@ -53,6 +54,7 @@ class _NavigationState extends State<NavigationScreen> with TickerProviderStateM
           return Scaffold(
             body: PageView(
               children: [
+                ProfilePage(),
                 AdmissionsHistoryPage(),
                 BuyPage(),
                 OrdersPage(),

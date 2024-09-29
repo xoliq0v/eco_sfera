@@ -60,5 +60,15 @@
     "branchName": "Branch Name",
     "noDataAvailable": "No data available",
     "thePaymentWasSuccessful": "The payment was successful",
-    "admissionsHistory": "Admissions History"
+    "admissionsHistory": "Admissions History",
+    "notifications": "Notifications",
+    "language": "Language",
+    "settings": "Settings",
+    "contactPhoneNumber": "Contact phone number",
+    "exit": "Exit",
+    "selectALanguage": "Select a language",
+    "select": "Select",
+    "nightMode": "Night mode",
+    "myAccount": "My account",
+    "theHistoryOfWormOutput": "The history of worm output"
 }
