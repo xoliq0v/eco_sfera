@@ -17,16 +17,16 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: NoInternetRoute.page),
     AutoRoute(page: MainRoute.page),
     AutoRoute(
-      path: '/navigation',
       page: NavigationRoute.page,
       children: [
-        AutoRoute(path: 'home', page: HomeRoute.page),
-        AutoRoute(path: 'orders', page: OrdersRoute.page),
-        AutoRoute(path: 'buy', page: BuyRoute.page,),
-        AutoRoute(path: 'admissions', page: AdmissionsHistoryRoute.page),
-        AutoRoute(path: 'profile', page: ProfileRoute.page),
+        AutoRoute(page: HomeRoute.page),
+        AutoRoute(page: OrdersRoute.page),
+        AutoRoute(page: BuyRoute.page,),
+        AutoRoute(page: AdmissionsHistoryRoute.page),
+        // AutoRoute(page: ProfileRoute.page),
       ]
     ),
+    AutoRoute(page: ProfileRoute.page, path: '/profile'),
     AutoRoute(page: PaymentRoute.page),
     AutoRoute(page: SettingsRoute.page),
     AutoRoute(page: MyAccountRoute.page),

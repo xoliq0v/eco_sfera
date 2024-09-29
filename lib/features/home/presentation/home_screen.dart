@@ -6,6 +6,7 @@ import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 import '../../../core/assets/app_icons.dart';
 import '../../../core/assets/theme/app_colors.dart';
+import '../../../core/constants/route/app_router.gr.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {
@@ -19,9 +20,14 @@ class HomeScreen extends StatelessWidget {
         centerTitle: false,
         automaticallyImplyLeading: false,
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(15),
-            child: SvgPicture.asset(AppIcons.userProfile02),
+          InkWell(
+            onTap: (){
+              context.router.push(const ProfileRoute());
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: SvgPicture.asset(AppIcons.userProfile02,color: Theme.of(context).colorScheme.primary,),
+            ),
           )
         ],
         leading: null,

@@ -6,11 +6,8 @@ import 'navigation_state.dart';
 part 'navigation_event.dart';
 part 'navigation_bloc.freezed.dart';
 
-@injectable
-class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
-  NavigationBloc() : super(const NavigationState()) {
-    on<ToggleItemsSet>((event, emit) {
-      emit(state.copyWith(showAlternateItems: event.showAlternateItems));
-    });
-  }
+class NavigationCubit extends Cubit<int> {
+  NavigationCubit() : super(0);
+
+  void setTab(int index) => emit(index);
 }

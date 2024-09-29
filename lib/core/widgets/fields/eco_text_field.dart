@@ -1,4 +1,3 @@
-import 'package:eco_sfera/core/extension/localization_extension.dart';
 import 'package:eco_sfera/core/widgets/buttons/eco_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -16,5 +16,5 @@ final getIt = GetIt.instance;
 void init() {
   getIt.registerLazySingleton(() => AppRouter());
   getIt.registerLazySingleton(() => ThemeCubit());
-  getIt.registerLazySingleton(() => NavigationBloc());
+  getIt.registerLazySingleton(() => NavigationCubit());
 }
