@@ -18,6 +18,8 @@ dependencies:
   google_fonts: ^6.2.1  # Google Fonts package
   flutter_svg: ^2.0.10+1  # SVG rendering
   gap: ^3.0.1  # Widget for adding space between UI components
+  flutter_dash: ^1.0.0
+  signature: ^5.5.0
 
   # -------------------------------
   # Core Libraries

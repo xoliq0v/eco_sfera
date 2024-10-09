@@ -24,7 +24,7 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<ConnectivityBloc>(
-          create: (BuildContext context) => ConnectivityBloc(),
+          create: (BuildContext context) => getIt<ConnectivityBloc>(),
         ),
         BlocProvider<ThemeCubit>(
           create: (context) => getIt<ThemeCubit>(),

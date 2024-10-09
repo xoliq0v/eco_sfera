@@ -30,5 +30,13 @@ class AppIcons {
   static const String globe01 = 'assets/icons/globe-01.svg';
   static const String phone = 'assets/icons/phone.svg';
   static const String settings = 'assets/icons/settings.svg';
+  static const String activity = 'assets/icons/activity.svg';
+  static const String home01 = 'assets/icons/home-01.svg';
+  static const String file01 = 'assets/icons/file-02.svg';
+  static const String trash = 'assets/icons/trash.svg';
+  static const String undo = 'assets/icons/undo.svg';
+  static const String route = 'assets/icons/route-vector.svg';
+  static const String camera01 = 'assets/icons/camera-01.svg';
+  static const String solarGallery = 'assets/icons/solar-gallery.svg';
 
 }

@@ -15,6 +15,8 @@ class AppImage {
   static const String report = 'assets/images/reports.svg';
   static const String iconBackground = 'assets/images/profile-background.svg';
   static const String cardImage = 'assets/images/card.svg';
+  static const String frameGreen = 'assets/images/frame-green.svg';
+  static const String frameBlue = 'assets/images/frame-blue.svg';
 
 
 }

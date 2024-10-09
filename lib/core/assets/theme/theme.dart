@@ -157,7 +157,7 @@ abstract class ThemeConfig {
         elevation: 0,
         color: Colors.black,
         titleTextStyle: TextStyle(
-            fontSize: 23,
+            fontSize: 18,
             color: Colors.white,
             fontWeight: FontWeight.w700
         ),
@@ -168,6 +168,10 @@ abstract class ThemeConfig {
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
+          textStyle: GoogleFonts.inter(
+            color: colorScheme.textButton,
+            fontSize: 14,
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(40),
           ),

@@ -6,6 +6,7 @@ class EcoDropdownMenu extends StatelessWidget {
   final Function(String?) onChanged;
   final String? topText;
   final EdgeInsetsGeometry? padding;
+  final double? width;
 
   const EcoDropdownMenu({
     super.key,
@@ -14,6 +15,7 @@ class EcoDropdownMenu extends StatelessWidget {
     required this.onChanged,
     this.topText,
     this.padding,
+    this.width
   });
 
   @override
@@ -27,10 +29,10 @@ class EcoDropdownMenu extends StatelessWidget {
           if(topText!=null)
             Padding(
               padding: const EdgeInsets.only(bottom: 5),
-              child: Align(alignment: Alignment.centerLeft, child: Text(topText!,style: Theme.of(context).textTheme.headlineSmall,)),
+              child: Text(topText!,style: Theme.of(context).textTheme.headlineSmall,),
             ),
           DropdownMenu<String>(
-            width: MediaQuery.sizeOf(context).width * 0.9,
+            width: width ?? MediaQuery.sizeOf(context).width * 0.9,
             onSelected: onChanged,
             initialSelection: '',
             dropdownMenuEntries: items,

@@ -3,18 +3,18 @@ import 'package:eco_sfera/core/extension/localization_extension.dart';
 import 'package:eco_sfera/core/libs/motion_tab_bar/motion-tab-bar.dart';
 import 'package:eco_sfera/core/libs/motion_tab_bar/motion-tab-controller.dart';
 import 'package:eco_sfera/core/singleton/di.config.dart';
+import 'package:eco_sfera/features/navigation/data/model/navigation_params.dart';
 import 'package:eco_sfera/features/navigation/presentation/bloc/navigation_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 
-import '../../../core/assets/app_icons.dart';
 import '../../../core/assets/theme/app_colors.dart';
 
 @RoutePage()
 class NavigationScreen extends StatefulWidget {
-  final List<PageRouteInfo> routes;
-  const NavigationScreen({super.key,required this.routes});
+  final NavigationParams params;
+  const NavigationScreen({super.key,required this.params});
 
   @override
   State<NavigationScreen> createState() => _NavigationState();
@@ -29,7 +29,7 @@ class _NavigationState extends State<NavigationScreen> with TickerProviderStateM
   void initState() {
 
     motionTabBarController = MotionTabBarController(
-        length: widget.routes.length,
+        length: widget.params.page.length,
         vsync: this
     );
 
@@ -42,29 +42,18 @@ class _NavigationState extends State<NavigationScreen> with TickerProviderStateM
     l10n = context.l10n;
 
     return BlocProvider(
-      create: (context) => getIt<NavigationCubit>(),
+      create: (context) => NavigationCubit(),
       child: AutoTabsScaffold(
-        routes: [
-            const HomeRoute(),
-            OrdersRoute(),
-            const BuyRoute(),
-            const AdmissionsHistoryRoute(),
-          ],
+        routes: widget.params.page,
         bottomNavigationBuilder: (_, tabsRouter) {
           return BlocBuilder<NavigationCubit, int>(
             builder: (context, state) {
 
               return MotionTabBar(
                 controller: motionTabBarController,
-                initialSelectedTab: "Home",
-                labels: const ["Home", "Menu", "Payment", "History", "Profile"],
-                svgIconPaths: const [
-                  AppIcons.home03,
-                  AppIcons.menu02,
-                  AppIcons.coinsRotate,
-                  AppIcons.clockForward,
-                  AppIcons.userProfile02,
-                ],
+                initialSelectedTab: widget.params.labels.first,
+                labels: widget.params.labels,
+                svgIconPaths: widget.params.svg,
                 tabSize: 50,
                 tabBarHeight: 60,
                 textStyle: TextStyle(

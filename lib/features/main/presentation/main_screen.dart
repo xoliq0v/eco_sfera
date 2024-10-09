@@ -1,10 +1,12 @@
 import 'package:eco_sfera/core/assets/app_icons.dart';
 import 'package:eco_sfera/core/assets/app_image.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:eco_sfera/core/assets/l10n/app_localizations.dart';
 import 'package:eco_sfera/core/constants/route/app_router.gr.dart';
 import 'package:eco_sfera/core/extension/localization_extension.dart';
 import 'package:eco_sfera/features/main/presentation/widget/eco_service_item.dart';
 import 'package:eco_sfera/features/main/presentation/widget/grid_item.dart';
+import 'package:eco_sfera/features/navigation/data/model/navigation_params.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,6 +17,8 @@ import '../../../core/widgets/buttons/eco_button.dart';
 @RoutePage()
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
+
+
 
   final List<GridItem> items = [
     const GridItem(title: 'Buyurtmalar', image: AppImage.orders),
@@ -48,8 +52,10 @@ class MainScreen extends StatelessWidget {
                       mainAxisCellCount: 1.2,
                       child: EcoServiceItem(
                         image: items[0].image,
-                        title: items[0].title,
-                        onClick: () {},
+                        title: l10n.orders,
+                        onClick: () {
+
+                        },
                       ),
                     ),
                     StaggeredGridTile.count(
@@ -57,7 +63,7 @@ class MainScreen extends StatelessWidget {
                       mainAxisCellCount: 1.2,
                       child: EcoServiceItem(
                         image: items[1].image,
-                        title: items[1].title,
+                        title: l10n.buy,
                         onClick: () {},
                       ),
                     ),
@@ -66,7 +72,7 @@ class MainScreen extends StatelessWidget {
                       mainAxisCellCount: 1.2,
                       child: EcoServiceItem(
                         image: items[2].image,
-                        title: items[2].title,
+                        title: l10n.history,
                         onClick: () {},
                       ),
                     ),
@@ -75,7 +81,7 @@ class MainScreen extends StatelessWidget {
                       mainAxisCellCount: 1.2,
                       child: EcoServiceItem(
                         image: items[3].image,
-                        title: items[3].title,
+                        title: l10n.partners,
                         onClick: () {},
                       ),
                     ),
@@ -84,7 +90,7 @@ class MainScreen extends StatelessWidget {
                       mainAxisCellCount: 2.4,
                       child: EcoServiceItem(
                         image: items[4].image,
-                        title: items[4].title,
+                        title: l10n.roadMap,
                         itemType: items[4].itemType,
                         onClick: () {},
                       ),
@@ -94,7 +100,7 @@ class MainScreen extends StatelessWidget {
                       mainAxisCellCount: 1.2,
                       child: EcoServiceItem(
                         image: items[5].image,
-                        title: items[5].title,
+                        title: l10n.reports,
                         onClick: () {},
                       ),
                     ),
@@ -103,7 +109,7 @@ class MainScreen extends StatelessWidget {
                       mainAxisCellCount: 1.2,
                       child: EcoServiceItem(
                         image: items[6].image,
-                        title: items[6].title,
+                        title: l10n.polygon,
                         onClick: () {},
                       ),
                     ),
@@ -112,7 +118,7 @@ class MainScreen extends StatelessWidget {
                       mainAxisCellCount: 1.2,
                       child: EcoServiceItem(
                         image: items[7].image,
-                        title: items[7].title,
+                        title: l10n.profile,
                         onClick: () {},
                       ),
                     ),
@@ -125,9 +131,7 @@ class MainScreen extends StatelessWidget {
               child: Column(
                 children: [
                   EcoButton(
-                    onPressed: () { context.router.navigate(NavigationRoute(routes: [
-
-                    ])); },
+                    onPressed: () { context.router.navigate(NavigationRoute(params: firstParam(l10n))); },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -140,7 +144,9 @@ class MainScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   EcoButton(
-                    onPressed: () { context.router.navigate(NavigationRoute(routes: [])); },
+                    onPressed: () { context.router.navigate(NavigationRoute(
+                      params: secondParam(l10n)
+                    )); },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -159,6 +165,55 @@ class MainScreen extends StatelessWidget {
       ),
     );
   }
+
+  NavigationParams firstParam(AppLocalizations l10n){
+    return NavigationParams(
+        svg: [
+          AppIcons.home03,
+          AppIcons.activity,
+          AppIcons.home01,
+          AppIcons.file01
+        ],
+        labels: [
+          l10n.home,
+          l10n.roadMap,
+          l10n.polygon,
+          l10n.reports
+        ],
+        page: const[
+          HomeRoute(),
+          RoadMapRoute(),
+          PolygonRoute(),
+          ReportRoute()
+        ]
+    );
+  }
+
+  NavigationParams secondParam(AppLocalizations l10n){
+    return NavigationParams(
+        svg: [
+          AppIcons.home03,
+          AppIcons.menu02,
+          AppIcons.coinsRotate,
+          AppIcons.clockForward,
+          AppIcons.userProfile02
+        ],
+        labels: [
+          l10n.home,
+          l10n.menu,
+          l10n.payment,
+          l10n.history,
+          l10n.profile
+        ],
+        page: <PageRouteInfo<dynamic>>[
+          const HomeRoute(),
+          OrdersRoute(),
+          const BuyRoute(),
+          const AdmissionsHistoryRoute(),
+        ]
+    );
+  }
+
 }
 
 

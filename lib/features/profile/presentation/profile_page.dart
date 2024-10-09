@@ -5,6 +5,7 @@ import 'package:eco_sfera/core/assets/theme/app_colors.dart';
 import 'package:eco_sfera/core/constants/route/app_router.gr.dart';
 import 'package:eco_sfera/core/extension/localization_extension.dart';
 import 'package:eco_sfera/core/widgets/buttons/eco_button.dart';
+import 'package:eco_sfera/core/widgets/dialogs/change_avatar_bottom_sheet.dart';
 import 'package:eco_sfera/core/widgets/dialogs/change_language_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -53,17 +54,22 @@ class _ProfilePageState extends State<ProfilePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Gap(30),
+                    const Gap(30),
                     IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_ios,size: 20,color: colorScheme.background,),),
-                    Gap(25),
+                    const Gap(25),
                     Row(
                       children: [
                         //https://www.wilsoncenter.org/sites/default/files/media/images/person/james-person-1.jpg
-                        const CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(
-                            'https://www.wilsoncenter.org/sites/default/files/media/images/person/james-person-1.jpg'
+                        InkWell(
+                          onTap:(){
+                            ChangeAvatarBottomSheet.show(context);
+                          },
+                          child: const CircleAvatar(
+                            backgroundImage: CachedNetworkImageProvider(
+                              'https://www.wilsoncenter.org/sites/default/files/media/images/person/james-person-1.jpg'
+                            ),
+                            maxRadius: 30,
                           ),
-                          maxRadius: 30,
                         ),
                         const Gap(15),
                         Column(

@@ -1,4 +1,5 @@
 import 'package:eco_sfera/core/extension/localization_extension.dart';
+import 'package:eco_sfera/core/widgets/dialogs/switch_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,7 +23,8 @@ class HomeScreen extends StatelessWidget {
         actions: [
           InkWell(
             onTap: (){
-              context.router.push(const ProfileRoute());
+              // context.router.push(const ProfileRoute());
+              SwitchBottomSheet.show(context);
             },
             child: Padding(
               padding: const EdgeInsets.all(15),

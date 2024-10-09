@@ -20,7 +20,7 @@ class OrderBottomSheet {
                 width: 60,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   borderRadius: BorderRadius.circular(250),
                 ),
               ),

@@ -1,7 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'navigation_state.dart';
 
 part 'navigation_event.dart';
 part 'navigation_bloc.freezed.dart';
