@@ -4,31 +4,21 @@ import 'package:bloc/bloc.dart';
 import 'package:connectivity/connectivity.dart';
 
 import 'connectivity_state.dart';
-import 'connectivity_event.dart';
 
-class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
-  final Connectivity _connectivity = Connectivity();
+enum ConnectivityStatus { connected, disconnected }
+
+class ConnectivityBloc extends Cubit<ConnectivityState> {
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
-  ConnectivityBloc() : super(ConnectivityUnknown()) {
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen((ConnectivityResult result) async {
-          add(ConnectivityChanged(result));
-        });
-    on<ConnectivityChanged>(_onConnectivityChanged);
-  }
-
-  void _onConnectivityChanged(ConnectivityChanged event, emit) async {
-    final connectivity = event.connectivity;
-    if (connectivity == ConnectivityResult.none) {
-      emit(ConnectivityNone());
-    } else if (connectivity == ConnectivityResult.wifi) {
-      emit(ConnectivityWifi());
-    } else if (connectivity == ConnectivityResult.mobile) {
-      emit(ConnectivityMobile());
-    } else {
-      emit(ConnectivityNone());
-    }
+  ConnectivityBloc() : super(const ConnectivityState(status: ConnectivityStatus.connected)) {
+    final Connectivity connectivity = Connectivity();
+    _connectivitySubscription = connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
+      if (result == ConnectivityResult.none) {
+        emit(const ConnectivityState(status: ConnectivityStatus.disconnected));
+      } else {
+        emit(const ConnectivityState(status: ConnectivityStatus.connected));
+      }
+    });
   }
 
   @override

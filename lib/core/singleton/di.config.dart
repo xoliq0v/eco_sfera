@@ -1,21 +1,13 @@
-import 'package:eco_sfera/features/navigation/presentation/bloc/navigation_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
-import '../constants/route/app_router.dart';
-import '../utils/bloc/connectivity/connectivity_cubit.dart';
-import '../utils/bloc/theme_cubit.dart';
-
+import 'di.config.config.dart';
 
 final getIt = GetIt.instance;
 
 @InjectableInit(
   initializerName: 'init', // default
   preferRelativeImports: true, // default
-  asExtension: true, // default
+  asExtension: false, // default
 )
-void init() {
-  getIt.registerLazySingleton(() => AppRouter());
-  getIt.registerLazySingleton(() => ThemeCubit());
-  getIt.registerLazySingleton(() => ConnectivityBloc());
-}
+void configureDependencies() => init(getIt);

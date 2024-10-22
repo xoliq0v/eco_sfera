@@ -1,16 +1,11 @@
 import 'package:equatable/equatable.dart';
 
-abstract class ConnectivityState extends Equatable {
-  const ConnectivityState();
+import 'connectivity_cubit.dart';
+
+class ConnectivityState extends Equatable {
+  final ConnectivityStatus status;
+  const ConnectivityState({required this.status});
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [status];
 }
-
-class ConnectivityUnknown extends ConnectivityState {}
-
-class ConnectivityNone extends ConnectivityState {}
-
-class ConnectivityWifi extends ConnectivityState {}
-
-class ConnectivityMobile extends ConnectivityState {}

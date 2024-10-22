@@ -8,7 +8,7 @@ import 'core/utils/bloc/locale_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  init();
+  configureDependencies();
   final localeCubit = await LocaleCubit.create();
 
   bool sharedPrefsWorking = await localeCubit.testSharedPreferences();

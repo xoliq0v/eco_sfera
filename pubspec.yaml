@@ -64,6 +64,7 @@ dev_dependencies:
   injectable_generator:  # Code generator for Injectable package
   freezed: ^2.5.2
   json_serializable: ^6.8.0
+  flutter_launcher_icons: ^0.14.1
 
 flutter:
   generate: true  # Enable code generation
@@ -75,6 +76,7 @@ flutter:
   assets:
     - assets/images/  # Image assets directory
     - assets/icons/   # Icon assets directory
+    - assets/   # Icon assets directory
 
   # -------------------------------
   # Fonts
@@ -99,3 +101,10 @@ flutter_intl:
     - uz  # Uzbek
     - ru  # Russian
   use-deferred-loading: true  # Enable deferred loading for translations
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/app.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21

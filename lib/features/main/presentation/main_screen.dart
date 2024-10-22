@@ -53,9 +53,7 @@ class MainScreen extends StatelessWidget {
                       child: EcoServiceItem(
                         image: items[0].image,
                         title: l10n.orders,
-                        onClick: () {
-
-                        },
+                        onClick: () {},
                       ),
                     ),
                     StaggeredGridTile.count(
@@ -131,7 +129,7 @@ class MainScreen extends StatelessWidget {
               child: Column(
                 children: [
                   EcoButton(
-                    onPressed: () { context.router.navigate(NavigationRoute(params: firstParam(l10n))); },
+                    onPressed: () { context.router.navigate(NavigationRoute(params: firstParam(l10n)),); },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

@@ -1,13 +1,13 @@
 
-import 'package:eco_sfera/features/no_internent/presentation/no_internet_screen.dart';
+import 'package:eco_sfera/core/widgets/dialogs/no_internet_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import 'core/assets/l10n/app_localizations.dart';
 import 'core/assets/theme/theme.dart';
 import 'core/constants/route/app_router.dart';
-import 'core/singleton/di.config.dart';
 import 'core/utils/bloc/connectivity/connectivity_cubit.dart';
 import 'core/utils/bloc/connectivity/connectivity_state.dart';
 import 'core/utils/bloc/locale_cubit.dart';
@@ -24,10 +24,10 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<ConnectivityBloc>(
-          create: (BuildContext context) => getIt<ConnectivityBloc>(),
+          create: (BuildContext context) => ConnectivityBloc(),
         ),
         BlocProvider<ThemeCubit>(
-          create: (context) => getIt<ThemeCubit>(),
+          create: (context) => GetIt.I<ThemeCubit>(),
         ),
         BlocProvider<LocaleCubit>.value(
           value: localeCubit,
@@ -36,8 +36,8 @@ class App extends StatelessWidget {
       child: BlocBuilder<ConnectivityBloc, ConnectivityState>(
           builder: (context, state) {
             setOrientation(context);
-            if (state is ConnectivityNone) {
-              return const NoInternetScreen();
+            if (state.status == ConnectivityStatus.disconnected) {
+              NoInternetDialog.monitorConnection(context);
             }
             return BlocBuilder<LocaleCubit, Locale>(
               builder: (context, locale) {
@@ -80,4 +80,3 @@ class App extends StatelessWidget {
     }
   }
 }
-
