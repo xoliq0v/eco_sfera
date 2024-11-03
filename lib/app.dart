@@ -1,82 +1,72 @@
-
-import 'package:eco_sfera/core/widgets/dialogs/no_internet_dialog.dart';
+import 'package:alice/alice.dart';
+import 'package:app_bloc/app_bloc.dart';
+import 'package:eco_sfera/di/injection.dart';
+import 'package:core/core.dart';
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:navigation/navigation.dart';
 
-import 'core/assets/l10n/app_localizations.dart';
-import 'core/assets/theme/theme.dart';
-import 'core/constants/route/app_router.dart';
-import 'core/utils/bloc/connectivity/connectivity_cubit.dart';
-import 'core/utils/bloc/connectivity/connectivity_state.dart';
-import 'core/utils/bloc/locale_cubit.dart';
-import 'core/utils/bloc/theme_cubit.dart';
 
-class App extends StatelessWidget {
-  final LocaleCubit localeCubit;
-  App({super.key, required this.localeCubit});
+class App extends StatefulWidget {
+  const App({super.key});
 
-  final appRouter = AppRouter();
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  final _appRouter = getIt.get<AppRouter>();
+  // final _alice = getIt.get<Alice>();
+
+  @override
+  void initState() {
+    // _alice.setNavigatorKey(_appRouter.navigatorKey);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<ConnectivityBloc>(
-          create: (BuildContext context) => ConnectivityBloc(),
-        ),
-        BlocProvider<ThemeCubit>(
-          create: (context) => GetIt.I<ThemeCubit>(),
-        ),
-        BlocProvider<LocaleCubit>.value(
-          value: localeCubit,
-        ),
-      ],
-      child: BlocBuilder<ConnectivityBloc, ConnectivityState>(
-          builder: (context, state) {
-            setOrientation(context);
-            if (state.status == ConnectivityStatus.disconnected) {
-              NoInternetDialog.monitorConnection(context);
-            }
-            return BlocBuilder<LocaleCubit, Locale>(
-              builder: (context, locale) {
-                return BlocBuilder<ThemeCubit, ThemeMode>(
-                  builder: (BuildContext context, ThemeMode theme) {
-                    return MaterialApp.router(
-                      routerConfig: appRouter.config(),
-                      title: 'Eko Sfera',
-                      localizationsDelegates: AppLocalizations.localizationsDelegates,
-                      supportedLocales: AppLocalizations.supportedLocales,
-                      locale: locale,
-                      theme: ThemeConfig.light,
-                      darkTheme: ThemeConfig.dark,
-                      themeMode: theme,
-                    );
-                  },
-                );
-              },
-            );
-          }),
+    return EasyLocalization(
+      supportedLocales: AppLocaleConfig.supportedLocales,
+      path: AppLocaleConfig.localePath,
+      fallbackLocale: const Locale(AppLocaleConfig.fallbackLocale),
+      useOnlyLangCode: true,
+      useFallbackTranslations: true,
+      // assetLoader: const CodegenLoader(),
+      child: ScreenUtilInit(
+        designSize: const Size(393, 852),
+        child: _MaterialApp(appRouter: _appRouter),
+      ),
     );
   }
-  bool isTablet(BuildContext context) {
-    final shortestSide = MediaQuery.of(context).size.shortestSide;
-    return shortestSide >= 600; // Generally, 600dp is considered the breakpoint for tablets
-  }
-  void setOrientation(BuildContext context) {
-    if (isTablet(context)) {
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ]);
-    } else {
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]);
-    }
+}
+
+class _MaterialApp extends StatelessWidget {
+  const _MaterialApp({required this.appRouter});
+
+  final AppRouter appRouter;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      theme: ThemeConfig.light,
+      darkTheme: ThemeConfig.dark,
+      builder: (context, child) {
+        FlutterNativeSplash.remove();
+        return Toast(
+          navigatorKey: appRouter.navigatorKey,
+          child: child ?? const SizedBox(),
+        );
+      },
+      routerConfig: appRouter.config(
+        navigatorObservers: () => [
+          AppRouteObserver(),
+        ],
+      ),
+    );
   }
 }

@@ -1,18 +1,24 @@
-import 'dart:developer';
-
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'app.dart';
-import 'core/singleton/di.config.dart';
-import 'core/utils/bloc/locale_cubit.dart';
+import 'di/injection.dart';
+import 'package:app_bloc/app_bloc.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies();
-  final localeCubit = await LocaleCubit.create();
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await Future.wait([
+    configInjection(),
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]),
+    EasyLocalization.ensureInitialized(),
 
-  bool sharedPrefsWorking = await localeCubit.testSharedPreferences();
-  log('SharedPreferences working: $sharedPrefsWorking');
+  ]);
 
-  runApp(App(localeCubit: localeCubit));
+  Bloc.observer = AppBlocObserver();
+  runApp(const App());
 }

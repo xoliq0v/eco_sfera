@@ -1,0 +1,1 @@
+class NotPermissionLocation implements Exception {}
