@@ -232,6 +232,14 @@ extension AppLanguage on BuildContext {
     return setLocale(Locale(lang));
   }
 
+  String currentLocale(){
+    return switch (locale.currentLanguage()) {
+      AppLanguages.ru => 'ru',
+      AppLanguages.uz => 'uz',
+      AppLanguages.en => 'en',
+    };
+  }
+
   String currentLocaleIcon() {
     return switch (locale.currentLanguage()) {
       AppLanguages.ru => AppIcons.globe01,

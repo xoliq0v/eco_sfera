@@ -112,7 +112,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     10.verticalSpace,
                     InkWell(
                       onTap: (){
-                        // ChangeLanguageSheet.show(context);
+                        ChangeLanguageSheet.show(context);
                       },
                       child: Container(
                         width: MediaQuery.sizeOf(context).width * 0.9,

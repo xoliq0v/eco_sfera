@@ -16,7 +16,6 @@ void main() async {
       DeviceOrientation.portraitUp,
     ]),
     EasyLocalization.ensureInitialized(),
-
   ]);
 
   Bloc.observer = AppBlocObserver();

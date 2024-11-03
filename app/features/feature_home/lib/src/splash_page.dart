@@ -1,9 +1,8 @@
 import 'package:core/core.dart';
 import 'package:app_bloc/app_bloc.dart';
+import 'package:design_system/design_system.dart';
 import 'package:navigation/navigation.dart';
 import 'package:flutter/material.dart';
-
-import 'constants/app_image.dart';
 
 @RoutePage()
 class SplashScreen extends StatefulWidget implements AutoRouteWrapper {
@@ -50,27 +49,29 @@ class _SplashScreenState extends State<SplashScreen> {
           },
         );
       },
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(
-              AppImage.logo,
-              width: 100,
-              height: 100,
-            ),
-            Text(
-              LocaleKeys.appName.tr(context: context),
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .displayMedium
-                  ?.copyWith(
-                fontWeight: FontWeight.w700,
+      child: Material(
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                AppIcons.appLogoImage,
+                width: 100,
+                height: 100,
               ),
-            )
-          ],
+              Text(
+                LocaleKeys.appName.tr(context: context),
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .displayMedium
+                    ?.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -81,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if (!isFinished || !context.mounted || isLostConnectionPage) return;
       switch (hasConnection) {
         case true:
-          await navigateAuthPage(context);
+          await navigateChooseLangPage(context);
         case false:
           await navigateLostConnectionPage(context);
         case null:
@@ -90,7 +91,7 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-  Future<void> navigateAuthPage(BuildContext context) async {
+  Future<void> navigateChooseLangPage(BuildContext context) async {
     return NavigationUtils.getAuthNavigator().navigateChooseLangPage();
   }
 
@@ -100,6 +101,5 @@ class _SplashScreenState extends State<SplashScreen> {
       context: context,
       onResult: (p0) {},
     );
-    return NavigationUtils.getAuthNavigator().navigateChooseLangPage();
   }
 }

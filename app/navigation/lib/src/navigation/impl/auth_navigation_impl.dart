@@ -21,7 +21,7 @@ class AuthNavigationImpl extends AuthNavigation {
 
   @override
   Future<void> navigateChooseLangPage() {
-    return appRouter.navigate(const ChooseLanguageRoute());
+    return appRouter.replaceAll([const ChooseLanguageRoute()]);
   }
 
   @override

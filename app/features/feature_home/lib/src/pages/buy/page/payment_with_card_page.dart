@@ -119,10 +119,10 @@ class _PaymentWithCardPageState extends State<PaymentWithCardPage> {
         const Expanded(child: SizedBox.shrink()),
         EcoButton(
             onPressed: (){
-              // LoadingDialog.show(context);
+              LoadingDialog.show(context);
               Future.delayed(const Duration(seconds: 3),(){
-                Navigator.of(context).pop();
-                // SuccessPaymentDialog.show(context);
+                context.router.back();
+                SuccessPaymentDialog.show(context);
               });
             },
           borderRadius: 35,

@@ -5,11 +5,21 @@ class AppIcons {
   static const _assetsImagesPath = 'assets/images';
   static const _assetsTabBarPath = 'assets/tab_bar';
 
-  static const languageBulkImage = '$_assetsBulkImagesPath/language.png';
-  static const messagesBulkImage = '$_assetsBulkImagesPath/messages.png';
-  static const notificationBulkImage =
-      '$_assetsBulkImagesPath/notification.png';
-  static const ratingBulkImage = '$_assetsBulkImagesPath/rating.png';
+  static const appLogoImage = '$_assetsImagesPath/app_logo.png';
+
+  static const String boarding = '$_assetsImagesPath/boarding.jpg';
+  static const String buying = '$_assetsImagesPath/buying.svg';
+  static const String partners = '$_assetsImagesPath/customers.svg';
+  static const String history = '$_assetsImagesPath/history.svg';
+  static const String polygon = '$_assetsImagesPath/layer.svg';
+  static const String roadMap = '$_assetsImagesPath/map.svg';
+  static const String orders = '$_assetsImagesPath/orders.svg';
+  static const String profile = '$_assetsImagesPath/profile.svg';
+  static const String report = '$_assetsImagesPath/reports.svg';
+  static const String iconBackground = '$_assetsImagesPath/profile-background.svg';
+  static const String cardImage = '$_assetsImagesPath/card.svg';
+  static const String frameGreen = '$_assetsImagesPath/frame-green.svg';
+  static const String frameBlue = '$_assetsImagesPath/frame-blue.svg';
 
   static const arrowBackIcon = '$_assetsIconsPath/arrow_back.svg';
   static const arrowForwardIcon = '$_assetsIconsPath/arrow_forward.svg';

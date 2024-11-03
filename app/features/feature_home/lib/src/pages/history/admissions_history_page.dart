@@ -1,6 +1,7 @@
 
 
 import 'package:core/core.dart' hide Order;
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
 import '../orders/data/models/order.dart';
@@ -34,7 +35,7 @@ class _AdmissionsHistoryPageState extends State<AdmissionsHistoryPage> {
             return OrderItem(
                 order: list[0],
               onTap: (){
-                // AdmissionSheet.show(context);
+                AdmissionSheet.show(context);
               },
             );
           }

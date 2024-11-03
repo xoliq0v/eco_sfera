@@ -38,7 +38,6 @@ flutter:
     - assets/bulk_images/
     - assets/icons/
     - assets/images/
-    - assets/tab_bar/
 
 #  fonts:
 #    - family: Rubik

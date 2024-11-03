@@ -2,8 +2,6 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:design_system/design_system.dart' hide AppImage;
 
-import '../../../constants/app_image.dart';
-
 @RoutePage()
 class BoardingScreen extends StatelessWidget {
   const BoardingScreen({super.key});
@@ -19,12 +17,12 @@ class BoardingScreen extends StatelessWidget {
             top: 0,
             left: 0,
             bottom: 0,
-            child: Image.asset(AppImage.boarding,fit: BoxFit.cover,),
+            child: Image.asset(AppIcons.boarding,fit: BoxFit.cover,),
           ) : Positioned(
             top: 0,
             left: 0,
             right: 0,
-            child: Image.asset(AppImage.boarding,fit: BoxFit.cover,),
+            child: Image.asset(AppIcons.boarding,fit: BoxFit.cover,),
           ),
           Positioned(
             bottom: 0,

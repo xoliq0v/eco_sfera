@@ -47,23 +47,23 @@ class _PaymentWithAccountNumberState extends State<PaymentWithAccountNumber> {
         20.verticalSpace,
         EcoButton.min(
           onPressed: (){
-            // BillingInformationSheet.show(
-            //     context,
-            //     {
-            //       l10n.checkNumber: "681768746984265",
-            //       l10n.calculated: "50 000",
-            //       l10n.phoneNumber: "Joseph lilkhan",
-            //       l10n.stir: "579461238",
-            //       l10n.address: "Qalatoy",
-            //       l10n.lastBalance: "2 518",
-            //       l10n.payments: "50 000",
-            //       l10n.time: "14.08.2024 14:43:25",
-            //       l10n.organizationPhoneNumber: "+998 48 321 65 89",
-            //       l10n.nameOfTheOrganization: "Eko sfera MChJ",
-            //       l10n.organizationAddress: "Baxmal tumani",
-            //       l10n.branchName: "Бахмалбский район",
-            //     }
-            // );
+            BillingInformationSheet.show(
+                context,
+                {
+                  LocaleKeys.checkNumber: "681768746984265",
+                  LocaleKeys.calculated: "50 000",
+                  LocaleKeys.phoneNumber: "Joseph lilkhan",
+                  LocaleKeys.stir: "579461238",
+                  LocaleKeys.address: "Qalatoy",
+                  LocaleKeys.lastBalance: "2 518",
+                  LocaleKeys.payments: "50 000",
+                  LocaleKeys.time: "14.08.2024 14:43:25",
+                  LocaleKeys.organizationPhoneNumber: "+998 48 321 65 89",
+                  LocaleKeys.nameOfTheOrganization: "Eko sfera MChJ",
+                  LocaleKeys.organizationAddress: "Baxmal tumani",
+                  LocaleKeys.branchName: "Бахмалбский район",
+                }
+            );
           },
           backgroundColor: colorScheme.background,
           borderRadius: 40,
@@ -82,10 +82,10 @@ class _PaymentWithAccountNumberState extends State<PaymentWithAccountNumber> {
         const Expanded(child: SizedBox.shrink()),
         EcoButton(
           onPressed: (){
-            // LoadingDialog.show(context);
-            Future.delayed(const Duration(seconds: 3),(){
-              Navigator.of(context).pop();
-              // SuccessPaymentDialog.show(context);
+            LoadingDialog.show(context);
+            Future.delayed(const Duration(seconds: 3),() {
+               context.router.back();
+              SuccessPaymentDialog.show(context);
             });
           },
           borderRadius: 35,

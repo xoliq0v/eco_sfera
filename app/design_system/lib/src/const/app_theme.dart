@@ -38,7 +38,6 @@ abstract class ThemeConfig {
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
           textStyle: GoogleFonts.inter(
-            color: colorScheme.textButton,
             fontSize: 14,
           ),
           shape: RoundedRectangleBorder(
@@ -169,7 +168,6 @@ abstract class ThemeConfig {
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
           textStyle: GoogleFonts.inter(
-            color: colorScheme.textButton,
             fontSize: 14,
           ),
           shape: RoundedRectangleBorder(

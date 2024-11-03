@@ -4,7 +4,6 @@ import 'package:core/core.dart';
 import 'package:design_system/design_system.dart' hide AppImage;
 import 'package:flutter/material.dart';
 
-import '../../../../constants/app_image.dart';
 import '../../data/model/payment_history.dart';
 import '../widget/payment_item.dart';
 
@@ -97,7 +96,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
           Stack(
             alignment: Alignment.centerLeft,
             children: [
-              Align(alignment: Alignment.center,child: SvgPicture.asset(AppImage.cardImage)),
+              Align(alignment: Alignment.center,child: SvgPicture.asset(AppIcons.cardImage)),
               SizedBox(
                 height: 170,
                 width: double.maxFinite,

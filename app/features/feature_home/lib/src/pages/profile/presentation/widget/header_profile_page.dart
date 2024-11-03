@@ -1,9 +1,6 @@
 import 'package:design_system/design_system.dart' hide AppImage;
-import 'package:feature_home/src/di/init_route.dart';
-import 'package:feature_home/src/pages/profile/presentation/utils/profile_inherit.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../constants/app_image.dart';
 
 class HeaderProfilePage extends StatefulWidget {
   const HeaderProfilePage({super.key});
@@ -39,7 +36,7 @@ class _HeaderProfilePageState extends State<HeaderProfilePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SvgPicture.asset(
-                  AppImage.iconBackground,
+                  AppIcons.iconBackground,
                 ),
                 IconButton(onPressed: (){
 
@@ -50,7 +47,7 @@ class _HeaderProfilePageState extends State<HeaderProfilePage> {
                     //https://www.wilsoncenter.org/sites/default/files/media/images/person/james-person-1.jpg
                     InkWell(
                       onTap:(){
-                        // ChangeAvatarBottomSheet.show(context);
+                        ChangeAvatarBottomSheet.show(context);
                       },
                       child: const CircleAvatar(
                         backgroundImage: NetworkImage(

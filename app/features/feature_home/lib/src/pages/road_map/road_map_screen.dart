@@ -3,8 +3,6 @@ import 'package:core/core.dart' ;
 import 'package:design_system/design_system.dart' hide AppImage;
 import 'package:flutter/material.dart';
 
-import '../../constants/app_image.dart';
-
 @RoutePage()
 class RoadMapScreen extends StatefulWidget {
   const RoadMapScreen({super.key});
@@ -62,7 +60,7 @@ class _RoadMapScreenState extends State<RoadMapScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         15.verticalSpace,
-                        SvgPicture.asset(AppImage.frameBlue,width: 40,),
+                        SvgPicture.asset(AppIcons.frameBlue,width: 40,),
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.only(top: 3,bottom: 3),
@@ -73,7 +71,7 @@ class _RoadMapScreenState extends State<RoadMapScreen> {
                             // ),
                           ),
                         ),
-                        SvgPicture.asset(AppImage.frameGreen,width: 40,),
+                        SvgPicture.asset(AppIcons.frameGreen,width: 40,),
                         15.verticalSpace,
                       ],
                     ),

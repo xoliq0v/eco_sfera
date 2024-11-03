@@ -5,7 +5,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:design_system/design_system.dart' hide AppImage;
 import 'package:navigation/navigation.dart';
 
-import '../../constants/app_image.dart';
 import '../auth/widget/eco_service_item.dart';
 
 @RoutePage()
@@ -56,7 +55,7 @@ class _MainPageState extends State<CategoryPage> {
                     crossAxisCellCount: 2,
                     mainAxisCellCount: 1.2,
                     child: EcoServiceItem(
-                      image: AppImage.orders,
+                      image: AppIcons.orders,
                       title: LocaleKeys.orders.tr(context: context),
                       onClick: () {},
                     ),
@@ -65,7 +64,7 @@ class _MainPageState extends State<CategoryPage> {
                     crossAxisCellCount: 2,
                     mainAxisCellCount: 1.2,
                     child: EcoServiceItem(
-                      image: AppImage.buying,
+                      image: AppIcons.buying,
                       title: LocaleKeys.buy.tr(context: context),
                       onClick: () {},
                     ),
@@ -74,7 +73,7 @@ class _MainPageState extends State<CategoryPage> {
                     crossAxisCellCount: 2,
                     mainAxisCellCount: 1.2,
                     child: EcoServiceItem(
-                      image: AppImage.history,
+                      image: AppIcons.history,
                       title: LocaleKeys.history.tr(context: context),
                       onClick: () {},
                     ),
@@ -83,7 +82,7 @@ class _MainPageState extends State<CategoryPage> {
                     crossAxisCellCount: 2,
                     mainAxisCellCount: 1.2,
                     child: EcoServiceItem(
-                      image: AppImage.partners,
+                      image: AppIcons.partners,
                       title: LocaleKeys.partners.tr(context: context),
                       onClick: () {},
                     ),
@@ -92,7 +91,7 @@ class _MainPageState extends State<CategoryPage> {
                     crossAxisCellCount: 2,
                     mainAxisCellCount: 2.4,
                     child: EcoServiceItem(
-                      image: AppImage.roadMap,
+                      image: AppIcons.roadMap,
                       title: LocaleKeys.roadMap.tr(context: context),
                       itemType: ItemType.large,
                       onClick: () {},
@@ -102,7 +101,7 @@ class _MainPageState extends State<CategoryPage> {
                     crossAxisCellCount: 2,
                     mainAxisCellCount: 1.2,
                     child: EcoServiceItem(
-                      image: AppImage.report,
+                      image: AppIcons.report,
                       title: LocaleKeys.reports.tr(context: context),
                       onClick: () {},
                     ),
@@ -111,7 +110,7 @@ class _MainPageState extends State<CategoryPage> {
                     crossAxisCellCount: 1,
                     mainAxisCellCount: 1.2,
                     child: EcoServiceItem(
-                      image: AppImage.polygon,
+                      image: AppIcons.polygon,
                       title: LocaleKeys.polygon.tr(context: context),
                       onClick: () {},
                     ),
@@ -120,7 +119,7 @@ class _MainPageState extends State<CategoryPage> {
                     crossAxisCellCount: 1,
                     mainAxisCellCount: 1.2,
                     child: EcoServiceItem(
-                      image: AppImage.profile,
+                      image: AppIcons.profile,
                       title: LocaleKeys.profile.tr(context: context),
                       onClick: () {},
                     ),

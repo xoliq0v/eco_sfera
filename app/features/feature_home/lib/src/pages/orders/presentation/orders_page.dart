@@ -1,5 +1,6 @@
 
 import 'package:core/core.dart' hide Order;
+import 'package:design_system/design_system.dart';
 import 'package:feature_home/src/pages/orders/data/models/order.dart';
 import 'package:feature_home/src/pages/orders/presentation/widgets/order_item.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class OrdersPage extends StatelessWidget {
             return OrderItem(
                 order: list[0],
               onTap: (){
-                // OrderBottomSheet.show(context,list[0].fromLocation);
+                OrderBottomSheet.show(context,list[0].fromLocation);
               },
             );
           }
