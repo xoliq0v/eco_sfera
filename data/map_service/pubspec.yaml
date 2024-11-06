@@ -12,7 +12,7 @@ dependencies:
     path: ../../domain/core
   flutter:
     sdk: flutter
-  yandex_mapkit: ^4.1.0
+  yandex_maps_mapkit_lite: ^4.8.1
 
 dev_dependencies:
   build_runner: 2.4.10

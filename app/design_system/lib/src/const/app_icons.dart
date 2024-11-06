@@ -1,26 +1,27 @@
 class AppIcons {
 
-  static const _assetsBulkImagesPath = 'assets/bulk_images';
   static const _assetsIconsPath = 'assets/icons';
   static const _assetsImagesPath = 'assets/images';
   static const _assetsTabBarPath = 'assets/tab_bar';
 
-  static const appLogoImage = '$_assetsImagesPath/app_logo.png';
+  static const appLogoImage = 'assets/app.png';
 
   static const String boarding = '$_assetsImagesPath/boarding.jpg';
-  static const String buying = '$_assetsImagesPath/buying.svg';
-  static const String partners = '$_assetsImagesPath/customers.svg';
-  static const String history = '$_assetsImagesPath/history.svg';
-  static const String polygon = '$_assetsImagesPath/layer.svg';
-  static const String roadMap = '$_assetsImagesPath/map.svg';
-  static const String orders = '$_assetsImagesPath/orders.svg';
-  static const String profile = '$_assetsImagesPath/profile.svg';
-  static const String report = '$_assetsImagesPath/reports.svg';
+  static const String buying = '$_assetsImagesPath/buying.png';
+  static const String partners = '$_assetsImagesPath/customers.png';
+  static const String history = '$_assetsImagesPath/history.png';
+  static const String polygon = '$_assetsImagesPath/layer.png';
+  static const String roadMap = '$_assetsImagesPath/map.png';
+  static const String orders = '$_assetsImagesPath/orders.png';
+  static const String profile = '$_assetsImagesPath/profile.png';
+  static const String report = '$_assetsImagesPath/reports.png';
   static const String iconBackground = '$_assetsImagesPath/profile-background.svg';
   static const String cardImage = '$_assetsImagesPath/card.svg';
-  static const String frameGreen = '$_assetsImagesPath/frame-green.svg';
-  static const String frameBlue = '$_assetsImagesPath/frame-blue.svg';
+  static const String appIcon = '$_assetsImagesPath/app_icon.png';
 
+  static const String frameBlue = '$_assetsIconsPath/frame_blue.png';
+  static const String frameGreen = '$_assetsIconsPath/frame_green.png';
+  static const String navigatorIcon = '$_assetsIconsPath/navigator_icon.svg';
   static const arrowBackIcon = '$_assetsIconsPath/arrow_back.svg';
   static const arrowForwardIcon = '$_assetsIconsPath/arrow_forward.svg';
   static const arrowsMoreUpIcon = '$_assetsIconsPath/arrows_more_up.svg';
@@ -29,11 +30,11 @@ class AppIcons {
   static const checkCircleIcon = '$_assetsIconsPath/check_circle.svg';
   static const closeIcon = '$_assetsIconsPath/close.svg';
   static const directionsWalkIcon = '$_assetsIconsPath/directions_walk.svg';
-  static const historyIcon = '$_assetsIconsPath/history.svg';
+  static const historyIcon = '$_assetsIconsPath/history.png';
   static const homePinIcon = '$_assetsIconsPath/home_pin.svg';
   static const iosShareIcon = '$_assetsIconsPath/ios_share.svg';
   static const locationOnIcon = '$_assetsIconsPath/location_on.svg';
-  static const mapIcon = '$_assetsIconsPath/map.svg';
+  static const mapIcon = '$_assetsIconsPath/map.png';
   static const nearMeIcon = '$_assetsIconsPath/near_me.svg';
   static const nearMeDisabledIcon = '$_assetsIconsPath/near_me_disabled.svg';
   static const personPinCircleIcon = '$_assetsIconsPath/person_pin_circle.svg';
@@ -46,7 +47,7 @@ class AppIcons {
   static const favouriteFillTabBar = '$_assetsTabBarPath/favourite_Fill.svg';
   static const homeTabBar = '$_assetsTabBarPath/home.svg';
   static const homeFillTabBar = '$_assetsTabBarPath/home_Fill.svg';
-  static const profileTabBar = '$_assetsTabBarPath/profile.svg';
+  static const profileTabBar = '$_assetsTabBarPath/profile.png';
   static const profileFillTabBar = '$_assetsTabBarPath/profile_Fill.svg';
   static const searchTabBar = '$_assetsTabBarPath/search.svg';
   static const searchFillTabBar = '$_assetsTabBarPath/search_Fill.svg';

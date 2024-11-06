@@ -11,6 +11,8 @@ dependencies:
   cached_network_image: 3.3.1
   core:
     path: ../../domain/core
+  map_service:
+    path: ../../data/map_service
   easy_refresh: 3.4.0
   expandable_page_view: 1.0.17
   flash: 3.1.1
@@ -35,9 +37,6 @@ dev_dependencies:
 flutter:
   assets:
     - assets/
-    - assets/bulk_images/
-    - assets/icons/
-    - assets/images/
 
 #  fonts:
 #    - family: Rubik

@@ -11,7 +11,6 @@ class ChangeLanguageSheet {
   };
 
   static void show(BuildContext context) {
-    final currentLocale = Localizations.localeOf(context).languageCode;
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -92,7 +91,8 @@ class _ChangeLanguageContentState extends State<_ChangeLanguageContent> {
                         height: 60,
                         borderRadius: 30,
                         onPressed: () async => await _changeLanguage(context),
-                        child: Text(LocaleKeys.select.tr(context: context)),
+                        child: Text(LocaleKeys.select.tr(context: context),
+                          style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),),
                       ),
                     ),
                   ),

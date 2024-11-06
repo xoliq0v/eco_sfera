@@ -38,9 +38,37 @@ class MainNavigationImpl extends MainNavigation {
 
   @override
   Future<void> navigateProfilePage() {
-    return appRouter.push(const ProfileRoute());
+    return appRouter.navigate(const ProfileRoute());
   }
 
+  @override
+  Future<void> navigatePaymentPage() {
+    return appRouter.navigate(const PaymentRoute());
+  }
 
+  @override
+  Future<void> navigateOrderCardPage() {
+    return appRouter.navigate(const OrderCardRoute());
+  }
+
+  @override
+  Future<void> navigateSignaturePage() {
+    return appRouter.navigate(const SignatureRoute());
+  }
+
+  @override
+  Future<void> navigateMapRoutePage() {
+    return appRouter.navigate(const MapRouteRoute(),);
+  }
+
+  @override
+  Future<void> navigateMyAccountPage() {
+    return appRouter.navigate(const MyAccountRoute());
+  }
+
+  @override
+  Future<void> navigateSettingsPage() {
+    return appRouter.navigate(const SettingsRoute());
+  }
 
 }

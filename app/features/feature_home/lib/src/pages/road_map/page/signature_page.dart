@@ -3,6 +3,7 @@ import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
 import 'package:flutter/material.dart';
+import 'package:navigation/navigation.dart';
 import 'package:signature/signature.dart';
 
 @RoutePage()
@@ -29,8 +30,6 @@ class _SignaturePageState extends State<SignaturePage> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -39,20 +38,22 @@ class _SignaturePageState extends State<SignaturePage> {
       body: Column(
         children: [
           Expanded(
-              child: Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 20
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 20
                 ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: AppColors.alpineGoat
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Signature(
-                    controller: _controller,
-                    backgroundColor: AppColors.alpineGoat,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: AppColors.alpineGoat
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Signature(
+                      controller: _controller,
+                      backgroundColor: AppColors.alpineGoat,
+                    ),
                   ),
                 ),
               ),
@@ -64,17 +65,17 @@ class _SignaturePageState extends State<SignaturePage> {
                 EcoSvgButton(width: 55, height: 55, backgroundColor: AppColors.main, onPressed: (){
                   _controller.clear();
                 }, icon: AppIcons.trash),
-                10.verticalSpace,
+                10.horizontalSpace,
                 EcoSvgButton(width: 55, height: 55, backgroundColor: AppColors.main, onPressed: (){
                   _controller.undo();
                 }, icon: AppIcons.undo),
-                10.verticalSpace,
+                10.horizontalSpace,
                 Expanded(
                   child: EcoButton(
                       height: 60,
                       borderRadius: 30,
                       onPressed: (){
-                        context.router.navigate(const MapRouteRoute());
+                        navigateMapRoutePage();
                       },
                       child: Text(LocaleKeys.acceptance.tr(context: context))
                   ),
@@ -86,5 +87,9 @@ class _SignaturePageState extends State<SignaturePage> {
         ],
       ),
     );
+  }
+
+  Future<void> navigateMapRoutePage() async{
+    NavigationUtils.getMainNavigator().navigateMapRoutePage();
   }
 }

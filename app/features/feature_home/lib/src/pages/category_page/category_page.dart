@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 import 'package:app_bloc/app_bloc.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:design_system/design_system.dart' hide AppImage;
 import 'package:navigation/navigation.dart';
 
@@ -142,7 +141,7 @@ class _MainPageState extends State<CategoryPage> {
                       children: [
                         SvgPicture.asset(AppIcons.trash02),
                         5.horizontalSpace,
-                        Text(LocaleKeys.waste.tr(context: context))
+                        Text(LocaleKeys.waste.tr(context: context),style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),)
                       ],
                     ),
                     // icon: Icons.delete_outline,
@@ -160,7 +159,7 @@ class _MainPageState extends State<CategoryPage> {
                       children: [
                         SvgPicture.asset(AppIcons.iconParkRecycling),
                         5.horizontalSpace,
-                        Text(LocaleKeys.secondary.tr(context: context))
+                        Text(LocaleKeys.secondary.tr(context: context),style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),)
                       ],
                     ),
                     // icon: Icons.recycling,
@@ -182,7 +181,7 @@ class _MainPageState extends State<CategoryPage> {
               AppIcons.file01
     ], routes: [
       LocaleKeys.home.tr(context: context),
-      LocaleKeys.menu.tr(context: context),
+      LocaleKeys.roadMap.tr(context: context),
       LocaleKeys.payment.tr(context: context),
       LocaleKeys.history.tr(context: context),
       // LocaleKeys.profile.tr(context: context)

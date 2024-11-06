@@ -4,6 +4,7 @@ import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
 import 'package:flutter/material.dart';
+import 'package:navigation/navigation.dart';
 
 @RoutePage()
 class OrderCardPage extends StatefulWidget {
@@ -47,7 +48,7 @@ class _OrderCardPageState extends State<OrderCardPage> {
             height: 60,
               borderRadius: 30,
               onPressed: (){
-                context.router.navigate(const SignatureRoute());
+                navigateSignatureRoute();
               },
               child: Text(LocaleKeys.acceptance.tr(context: context))
           ),
@@ -55,5 +56,9 @@ class _OrderCardPageState extends State<OrderCardPage> {
         ],
       ),
     );
+  }
+
+  Future<void> navigateSignatureRoute() async{
+    NavigationUtils.getMainNavigator().navigateSignaturePage();
   }
 }

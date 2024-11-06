@@ -30,20 +30,6 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // return Column(
-    //   appBar: AppBar(
-    //     leading: IconButton(
-    //       onPressed: (){
-    //         context.router.popForced();
-    //       },
-    //       icon: const Icon(Icons.keyboard_arrow_left,size: 40,),
-    //       padding: const EdgeInsets.all(5),
-    //     ),
-    //   ),
-    //   children: [
-    //
-    //   ]
-    // );
     return Material(
       color: Theme.of(context).scaffoldBackgroundColor,
       child: SafeArea(
@@ -147,7 +133,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           // context.navigateTo(MainRoute());
                           navigateCategoryPage(context);
                         },
-                        child: Text(LocaleKeys.enter.tr(context: context)),
+                        child: Text(LocaleKeys.enter.tr(context: context),style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),),
                       ),
                     ),
                   ],

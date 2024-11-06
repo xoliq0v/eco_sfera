@@ -10,6 +10,6 @@ abstract class MainRoutes{
 
   PageRouteInfo getConfirmedHistoryPage();
 
-  PageRouteInfo getProfilePage();
+  PageRouteInfo getRoadMapPage();
 
 }

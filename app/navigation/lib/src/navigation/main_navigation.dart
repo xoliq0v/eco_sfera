@@ -18,6 +18,18 @@ abstract class MainNavigation {
 
   Future<void> navigateProfilePage();
 
+  Future<void> navigatePaymentPage();
+
+  Future<void> navigateOrderCardPage();
+
+  Future<void> navigateSignaturePage();
+
+  Future<void> navigateMapRoutePage();
+
+  Future<void> navigateMyAccountPage();
+
+  Future<void> navigateSettingsPage();
+
   // Future<void> navigateProfilePage();
   //
   // Future<void> navigateAdmissionHistoryPage();

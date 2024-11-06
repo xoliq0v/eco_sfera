@@ -20,12 +20,12 @@ class Assets {
   static const String iconsDirectionsWalk = 'assets/icons/directions_walk.svg';
   static const String iconsFavorite = 'assets/icons/favorite.svg';
   static const String iconsFavorite1 = 'assets/icons/favorite-1.svg';
-  static const String iconsHistory = 'assets/icons/history.svg';
+  static const String iconsHistory = 'assets/icons/history.png';
   static const String iconsHomePin = 'assets/icons/home_pin.svg';
   static const String iconsInfo = 'assets/icons/info.svg';
   static const String iconsIosShare = 'assets/icons/ios_share.svg';
   static const String iconsLocationOn = 'assets/icons/location_on.svg';
-  static const String iconsMap = 'assets/icons/map.svg';
+  static const String iconsMap = 'assets/icons/map.png';
   static const String iconsMoreHoriz = 'assets/icons/more_horiz.svg';
   static const String iconsNearMe = 'assets/icons/near_me.svg';
   static const String iconsNearMeDisabled = 'assets/icons/near_me_disabled.svg';
@@ -55,7 +55,7 @@ class Assets {
   static const String tabBarFavouriteFill = 'assets/tab_bar/favourite_Fill.svg';
   static const String tabBarHome = 'assets/tab_bar/home.svg';
   static const String tabBarHomeFill = 'assets/tab_bar/home_Fill.svg';
-  static const String tabBarProfile = 'assets/tab_bar/profile.svg';
+  static const String tabBarProfile = 'assets/tab_bar/profile.png';
   static const String tabBarProfileFill = 'assets/tab_bar/profile_Fill.svg';
   static const String tabBarSearch = 'assets/tab_bar/search.svg';
   static const String tabBarSearchFill = 'assets/tab_bar/search_Fill.svg';

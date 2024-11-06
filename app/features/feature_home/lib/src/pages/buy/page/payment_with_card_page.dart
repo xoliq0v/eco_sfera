@@ -121,7 +121,7 @@ class _PaymentWithCardPageState extends State<PaymentWithCardPage> {
             onPressed: (){
               LoadingDialog.show(context);
               Future.delayed(const Duration(seconds: 3),(){
-                context.router.back();
+                context.router.popForced();
                 SuccessPaymentDialog.show(context);
               });
             },

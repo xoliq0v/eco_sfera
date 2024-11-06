@@ -66,30 +66,32 @@ class _MotionTabItemState extends State<MotionTabItem> {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          Container(
-            height: double.infinity,
-            width: double.infinity,
+          Align(
             alignment: Alignment.center,
-            child: AnimatedAlign(
-              duration: const Duration(milliseconds: ANIM_DURATION),
-              alignment: Alignment(0, textYAlign),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: widget.selected
-                    ? Text(
-                  widget.title!,
-                  style: widget.textStyle,
-                  softWrap: false,
-                  maxLines: 1,
-                  textAlign: TextAlign.center,
-                )
-                    : Text(''),
+            child: SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: AnimatedAlign(
+                duration: const Duration(milliseconds: ANIM_DURATION),
+                alignment: Alignment(0, textYAlign),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: widget.selected
+                      ? Text(
+                    widget.title!,
+                    style: widget.textStyle,
+                    softWrap: false,
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                  )
+                      : Text(''),
+                ),
               ),
             ),
           ),
           InkWell(
             onTap: () => widget.callbackFunction(),
-            child: Container(
+            child: SizedBox(
               height: double.infinity,
               width: double.infinity,
               child: AnimatedAlign(

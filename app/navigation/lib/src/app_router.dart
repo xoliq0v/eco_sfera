@@ -9,11 +9,9 @@ part 'app_router.gr.dart';
   modules: [FeatureHomeModule],
 )
 class AppRouter extends _$AppRouter {
-  // AppRouter({
-  //   required this.bottomNavigationGuard,
-  // });
 
-  // final CategoryDetailGuard bottomNavigationGuard;
+  @override
+  RouteType get defaultRouteType => const RouteType.adaptive();
 
   @override
   List<AutoRoute> get routes {
@@ -26,11 +24,12 @@ class AppRouter extends _$AppRouter {
 
       AutoRoute(
         page: MainRoute.page,
+        // type: const RouteType.cupertino(),
         children: [
           AutoRoute(page: HomeRoute.page,),
           AutoRoute(page: BuyRoute.page,),
           AutoRoute(page: OrdersRoute.page,),
-          AutoRoute(page: ProfileRoute.page,),
+          AutoRoute(page: RoadMapRoute.page,),
           AutoRoute(page: AdmissionsHistoryRoute.page),
         ]
       ),
@@ -40,7 +39,9 @@ class AppRouter extends _$AppRouter {
       AutoRoute(page: MyAccountRoute.page),
       AutoRoute(page: OrderCardRoute.page),
       AutoRoute(page: SignatureRoute.page),
-      AutoRoute(page: MapRouteRoute.page),
+      AutoRoute(page: MapRouteRoute.page,
+        // type: const RouteType.cupertino(),
+      ),
     ];
   }
 

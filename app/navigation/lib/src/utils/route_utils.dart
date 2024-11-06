@@ -5,10 +5,9 @@ mixin RouteUtils {
     final mainRoutes = GetIt.I.get<MainRoutes>();
     return [
       mainRoutes.getHomePage(),
-      mainRoutes.getOrderPage(),
+      mainRoutes.getRoadMapPage(),
       mainRoutes.getPaymentPage(),
       mainRoutes.getConfirmedHistoryPage(),
-      mainRoutes.getProfilePage(),
     ];
   }
   static List<PageRouteInfo> getSecondaryRoutes() {
@@ -18,7 +17,6 @@ mixin RouteUtils {
       mainRoutes.getOrderPage(),
       mainRoutes.getPaymentPage(),
       mainRoutes.getConfirmedHistoryPage(),
-      mainRoutes.getProfilePage(),
     ];
   }
 

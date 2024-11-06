@@ -53,13 +53,14 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Image.asset(
-                AppIcons.appLogoImage,
-                width: 100,
-                height: 100,
+                AppIcons.appIcon,
+                width: 60,
+                height: 60,
               ),
+              10.horizontalSpace,
               Text(
                 LocaleKeys.appName.tr(context: context),
                 style: Theme
@@ -101,5 +102,6 @@ class _SplashScreenState extends State<SplashScreen> {
       context: context,
       onResult: (p0) {},
     );
+    return NavigationUtils.getAuthNavigator().navigateChooseLangPage();
   }
 }

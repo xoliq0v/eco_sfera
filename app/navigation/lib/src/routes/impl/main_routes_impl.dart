@@ -24,8 +24,8 @@ class MainRoutesImpl extends MainRoutes {
   }
 
   @override
-  PageRouteInfo getProfilePage() {
-    return const ProfileRoute();
+  PageRouteInfo getRoadMapPage() {
+    return const RoadMapRoute();
   }
 
 }

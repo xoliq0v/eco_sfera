@@ -84,7 +84,7 @@ class _PaymentWithAccountNumberState extends State<PaymentWithAccountNumber> {
           onPressed: (){
             LoadingDialog.show(context);
             Future.delayed(const Duration(seconds: 3),() {
-               context.router.back();
+              if (context.router.canPop()) context.router.popForced();
               SuccessPaymentDialog.show(context);
             });
           },

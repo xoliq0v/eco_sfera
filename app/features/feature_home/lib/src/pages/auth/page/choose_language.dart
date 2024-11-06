@@ -49,7 +49,7 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                         // context.navigateTo(const BoardingRoute());
                           navigateAuthPage(context);
                         context.changeCurrentLanguage('uz');
-                      }, child: const Text('Uz'),),
+                      }, child: Text('Uz',style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),),),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20,right: 20,top: 20),
@@ -59,7 +59,7 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                             navigateAuthPage(context);
                         // context.navigateTo(const BoardingRoute());
                         context.changeCurrentLanguage('ru');
-                      }, child: const Text('Ру')),
+                      }, child: Text('Ру',style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),)),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20,right: 20,top: 20),
@@ -69,7 +69,7 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                         // context.navigateTo(const BoardingRoute());
                           navigateAuthPage(context);
                         context.changeCurrentLanguage('en');
-                      }, child: const Text('En'),),
+                      }, child: Text('En',style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),),),
                     ),
                   ],
                 ),

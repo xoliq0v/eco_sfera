@@ -64,3 +64,4 @@ export 'src/widget/dialog/order_bottom_sheet.dart';
 export 'src/widget/dialog/report_bottom_sheet.dart';
 export 'src/widget/dialog/success_payment_dialog.dart';
 export 'src/widget/dialog/switch_bottom_sheet.dart';
+export 'src/widget/flutter_dash.dart';

@@ -16,23 +16,23 @@ class PaymentItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    DateFormat('HH:mm').format(paymentHistory.date),
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  Text(
-                    paymentHistory.description,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  )
-                ],
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  DateFormat('HH:mm').format(paymentHistory.date),
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                Text(
+                  paymentHistory.description,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                )
+              ],
             ),
+            const Spacer(),
             RichText(
               text: TextSpan(
                 children: [
@@ -45,7 +45,7 @@ class PaymentItem extends StatelessWidget {
                   TextSpan(
                     text: 'sum',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
                     ),
                   ),
                 ],

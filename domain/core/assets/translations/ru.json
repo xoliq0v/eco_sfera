@@ -104,5 +104,10 @@
     "theSumTotalOfTickets": "Общая сумма билетов",
     "dailyWalkingDistance": "Ежедневная пешая дистанция",
     "takingPictures": "Фотографировать",
-    "chooseFromGallery": "Выбрать из галереи"
+    "chooseFromGallery": "Выбрать из галереи",
+    "stopLoading": "Остановить загрузку?",
+    "stop": "Стоп",
+    "waitMore": "Подожди еще",
+    "noInternetConnection": "Отсутствует интернет соединение...",
+    "tryAgain": "Повторить попытку"
 }

@@ -2,6 +2,7 @@
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
+import 'package:navigation/navigation.dart';
 
 @RoutePage()
 class BuyPage extends StatefulWidget {
@@ -223,8 +224,9 @@ class _BuyPageState extends State<BuyPage> {
                         borderRadius: 40,
                         onPressed: (){
                           // context.router.navigate(const PaymentRoute());
+                          navigatePaymentPage();
                         },
-                        child: Text(LocaleKeys.acceptance.tr())
+                        child: Text(LocaleKeys.acceptance.tr(),style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),)
                     )
                   ],
                 ),
@@ -234,6 +236,10 @@ class _BuyPageState extends State<BuyPage> {
         ),
       ),
     );
+  }
+
+  Future<void> navigatePaymentPage() async{
+    return NavigationUtils.getMainNavigator().navigatePaymentPage();
   }
 }
 

@@ -104,5 +104,10 @@
     "theSumTotalOfTickets": "The sum total of tickets",
     "dailyWalkingDistance": "Daily walking distance",
     "takingPictures": "Taking pictures",
-    "chooseFromGallery": "Choose from gallery"
+    "chooseFromGallery": "Choose from gallery",
+    "stopLoading": "Stop loading?",
+    "stop": "Stop",
+    "waitMore": "Wait more",
+    "noInternetConnection": "No internet connection...",
+    "tryAgain": "Try again"
 }

@@ -43,11 +43,13 @@ class EcoServiceItem extends StatelessWidget {
                   bottom: 0,
                   right: 0,
                   left: 0,
-                  child: Container(
+                  child: SizedBox(
                     height: itemType == ItemType.large ? 190 : 60,
-                    decoration: BoxDecoration(
-                      color: colorScheme.cardColor,
-                      borderRadius: BorderRadius.circular(itemType == ItemType.large ? 35 : 20),
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: colorScheme.cardColor,
+                        borderRadius: BorderRadius.circular(itemType == ItemType.large ? 35 : 20),
+                      ),
                     ),
                   ),
                 ),
@@ -61,7 +63,7 @@ class EcoServiceItem extends StatelessWidget {
                         top: itemType == ItemType.large ? 25 : 0,
                         bottom: itemType == ItemType.large ? 25 : 0,
                       ),
-                    child: SvgPicture.asset(
+                    child: Image.asset(
                       image,
                       height: itemType == ItemType.large ? 120 : 80,
                     ),

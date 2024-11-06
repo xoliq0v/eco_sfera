@@ -104,5 +104,10 @@
     "theSumTotalOfTickets": "Jami talonlar yig’indisi",
     "dailyWalkingDistance": "Kunlik yurgan masofasi",
     "takingPictures": "Suratga olish",
-    "chooseFromGallery": "Galireyadan tanlash"
+    "chooseFromGallery": "Galireyadan tanlash",
+    "stopLoading": "Yuklash toʻxtatilsinmi?",
+    "stop": "To'xtatish",
+    "waitMore": "Davom etish",
+    "noInternetConnection": "Internet aloqasi yo'q...",
+    "tryAgain": "Qayta urinib ko'ring"
 }

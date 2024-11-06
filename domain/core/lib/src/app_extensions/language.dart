@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 mixin AppLocaleConfig {
   static const String fallbackLocale = 'ru';
-  static const String localePath = 'packages/core/assets/translations/';
+  static const String localePath = 'packages/core/assets/translations';
 
   static const List<Locale> supportedLocales = [
     Locale('ru'),

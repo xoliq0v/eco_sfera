@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
@@ -54,11 +56,19 @@ class _HomeScreenState extends State<HomePage> {
           ],
         ),
       ),
-      body: YandexMap(
-        nightModeEnabled: Theme.of(context).brightness == Brightness.dark,
-        onMapCreated: (controller) {
+      body: Visibility(
+        visible: Platform.isAndroid,
+          // replacement: ,
+          child: YandexMap(
+            // scrollGesturesEnabled: false,
+            // rotateGesturesEnabled: false,
+            // tiltGesturesEnabled: false,
+            // zoomGesturesEnabled: false,
+            // nightModeEnabled: Theme.of(context).brightness == Brightness.dark,
+            onMapCreated: (controller) {
 
-        },
+            },
+          )
       ),
     );
   }

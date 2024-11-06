@@ -41,8 +41,8 @@ class _LostConnectionPageState extends State<LostConnectionPage> {
                     height: 189.r,
                   ),
                   26.verticalSpace,
-                  const Text(
-                    'Отсутствует интернет соединение...',
+                  Text(
+                    LocaleKeys.noInternetConnection.tr(context: context),
                     style: AppTextConstants.style16W400,
                   ),
                 ],
@@ -55,7 +55,7 @@ class _LostConnectionPageState extends State<LostConnectionPage> {
                     onPressed: retry.call,
                     loading: value,
                     maxHeight: 50.h,
-                    child: const Text('Повторить попытку'),
+                    child: Text(LocaleKeys.tryAgain.tr(context: context),style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),),
                   );
                 },
               ),

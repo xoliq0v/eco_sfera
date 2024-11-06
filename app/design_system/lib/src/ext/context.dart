@@ -10,6 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 extension BottomSheetExt on BuildContext {
+
+  ColorScheme get colorScheme => Theme.of(this).colorScheme;
+
   Future<void> popBottomSheet() async {
     await router.maybePop();
     return Future.delayed(const Duration(milliseconds: 350));
@@ -34,12 +37,14 @@ extension BottomSheetExt on BuildContext {
       ),
       topControl: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 40, sigmaY: 40),
-        child: Container(
+        child: SizedBox(
           height: 4.h,
           width: 60.w,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(6),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: colorScheme.surface,
+              borderRadius: BorderRadius.circular(6),
+            ),
           ),
         ),
       ),

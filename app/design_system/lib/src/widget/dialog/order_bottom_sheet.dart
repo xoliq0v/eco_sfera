@@ -11,17 +11,6 @@ class OrderBottomSheet {
           child: Column(
             children: [
               SizedBox(
-                width: 60,
-                height: 4,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    borderRadius: BorderRadius.circular(250),
-                  ),
-                ),
-              ),
-              10.verticalSpace,
-              SizedBox(
                 height: 270,
                 width: double.maxFinite,
                 child: DecoratedBox(
@@ -85,7 +74,7 @@ class OrderBottomSheet {
                               onPressed: (){
                                 context.popBottomSheet();
                               },
-                              child: Text(LocaleKeys.acceptance.tr(context: context))
+                              child: Text(LocaleKeys.acceptance.tr(context: context),style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),)
                           ),
                         ),
                       )

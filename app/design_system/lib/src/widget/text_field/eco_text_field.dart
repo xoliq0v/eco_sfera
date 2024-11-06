@@ -101,88 +101,90 @@ class _EcoTextFieldState extends State<EcoTextField> {
                     child: Text(widget.topRightText!,style: Theme.of(context).textTheme.headlineSmall,),
                 ),
 
-              Container(
+              SizedBox(
                 width: fieldWidth,
                 height: fieldHeight,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(widget.radius!),
-                  color: widget.backgroundColor,
-                ),
-                child: TextFormField(
-                  autocorrect: widget.autocorrect,
-                  controller: widget.controller,
-                  keyboardType: widget.keyboardType,
-                  obscureText: _isObscured,
-                  textInputAction: widget.textInputAction,
-                  validator: widget.validator,
-                  style: TextStyle(fontSize: fontSize),
-                  inputFormatters: widget.inputFormatters,
-                  onChanged: (value) {
-                    if(widget.onChanged!=null){
-                      widget.onChanged!(value);
-                    }
-                    if (widget.validateOnChange) {
-                      _runValidator(value);
-                    }
-                  },
-                  decoration: InputDecoration(
-                    hintText: widget.hintText,
-                    hintStyle: TextStyle(color: colorScheme.onSurface.withOpacity(0.5), fontSize: fontSize),
-                    prefixIcon: widget.prefixIcon != null ? Icon(widget.prefixIcon, size: iconSize, color: widget.iconColor) : null,
-                    suffixIcon: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        if(widget.svgSuffixIcon != null)...[
-                          InkWell(
-                            onTap: widget.svgSuffixIconPressed,
-                              child: SvgPicture.asset(widget.svgSuffixIcon!)),
-                          15.horizontalSpace
-                        ],
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(widget.radius!),
+                    color: widget.backgroundColor,
+                  ),
+                  child: TextFormField(
+                    autocorrect: widget.autocorrect,
+                    controller: widget.controller,
+                    keyboardType: widget.keyboardType,
+                    obscureText: _isObscured,
+                    textInputAction: widget.textInputAction,
+                    validator: widget.validator,
+                    style: TextStyle(fontSize: fontSize),
+                    inputFormatters: widget.inputFormatters,
+                    onChanged: (value) {
+                      if(widget.onChanged!=null){
+                        widget.onChanged!(value);
+                      }
+                      if (widget.validateOnChange) {
+                        _runValidator(value);
+                      }
+                    },
+                    decoration: InputDecoration(
+                      hintText: widget.hintText,
+                      hintStyle: TextStyle(color: colorScheme.onSurface.withOpacity(0.5), fontSize: fontSize),
+                      prefixIcon: widget.prefixIcon != null ? Icon(widget.prefixIcon, size: iconSize, color: widget.iconColor) : null,
+                      suffixIcon: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          if(widget.svgSuffixIcon != null)...[
+                            InkWell(
+                              onTap: widget.svgSuffixIconPressed,
+                                child: SvgPicture.asset(widget.svgSuffixIcon!)),
+                            15.horizontalSpace
+                          ],
 
-                        if (_errorText != null)
-                          Icon(Icons.error_outline, color: colorScheme.error, size: iconSize),
-                          15.horizontalSpace,
-                        if (widget.obscureText)
-                          EcoIconButton(
-                            icon: _isObscured ? Icons.visibility_outlined : Icons.visibility_off_outlined,
-                            onPressed: () {
-                              setState(() {
-                                _isObscured = !_isObscured;
-                              });
-                            },
-                            color: widget.iconColor,
-                          ),
-                        if (widget.suffixIcon != null && !widget.obscureText)
-                          Icon(widget.suffixIcon, size: iconSize, color: widget.iconColor),
-                      ],
+                          if (_errorText != null)
+                            Icon(Icons.error_outline, color: colorScheme.error, size: iconSize),
+                            15.horizontalSpace,
+                          if (widget.obscureText)
+                            EcoIconButton(
+                              icon: _isObscured ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                              onPressed: () {
+                                setState(() {
+                                  _isObscured = !_isObscured;
+                                });
+                              },
+                              color: widget.iconColor,
+                            ),
+                          if (widget.suffixIcon != null && !widget.obscureText)
+                            Icon(widget.suffixIcon, size: iconSize, color: widget.iconColor),
+                        ],
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(widget.radius ?? maxWidth * 0.025),
+                        borderSide: BorderSide(color: _errorText != null ? colorScheme.error : colorScheme.secondary, width: 2.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(widget.radius ?? maxWidth * 0.025),
+                        borderSide: BorderSide(color: _errorText != null ? colorScheme.error : colorScheme.secondary, width: 2.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(widget.radius ?? maxWidth * 0.025),
+                        borderSide: BorderSide(color: _errorText != null ? colorScheme.error : colorScheme.surface, width: 2.0),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(widget.radius ?? maxWidth * 0.025),
+                        borderSide: BorderSide(color: colorScheme.error, width: 1.0),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(widget.radius ?? maxWidth * 0.025),
+                        borderSide: BorderSide(color: colorScheme.error, width: 2.0),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: maxWidth * 0.04,
+                          vertical: (widget.height ?? maxWidth * 0.12) / 4
+                      ),
+                      fillColor: widget.backgroundColor,
+                      filled: true,
                     ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(widget.radius ?? maxWidth * 0.025),
-                      borderSide: BorderSide(color: _errorText != null ? colorScheme.error : colorScheme.secondary, width: 2.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(widget.radius ?? maxWidth * 0.025),
-                      borderSide: BorderSide(color: _errorText != null ? colorScheme.error : colorScheme.secondary, width: 2.0),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(widget.radius ?? maxWidth * 0.025),
-                      borderSide: BorderSide(color: _errorText != null ? colorScheme.error : colorScheme.surface, width: 2.0),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(widget.radius ?? maxWidth * 0.025),
-                      borderSide: BorderSide(color: colorScheme.error, width: 1.0),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(widget.radius ?? maxWidth * 0.025),
-                      borderSide: BorderSide(color: colorScheme.error, width: 2.0),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(
-                        horizontal: maxWidth * 0.04,
-                        vertical: (widget.height ?? maxWidth * 0.12) / 4
-                    ),
-                    fillColor: widget.backgroundColor,
-                    filled: true,
                   ),
                 ),
               ),

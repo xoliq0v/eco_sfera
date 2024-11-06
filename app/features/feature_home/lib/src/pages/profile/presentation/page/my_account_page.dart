@@ -107,7 +107,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                     children: [
                       Text('lorem ipsum',style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white),),
                       Text('100,000sum',style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white,fontWeight: FontWeight.w700,fontSize: 20),),
-                      const Expanded(child: SizedBox.shrink()),
+                      const Spacer(),
                       Text('lorem ipsum',style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white),),
                     ],
                   ),

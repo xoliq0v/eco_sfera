@@ -1,32 +1,13 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
-/// The `EcoButton` is a custom Flutter widget that provides a stylized button
-/// with a gradient background and customizable dimensions. It is designed to offer
-/// a flexible and visually appealing button option for applications, especially
-/// those following the eco-sphere theme.
-
 class EcoButton extends StatelessWidget {
-  /// A callback function that is triggered when the button is pressed.
   final VoidCallback onPressed;
-
-  /// The text label displayed on the button.
   final Widget child;
-
-  /// The width of the button, defaulting to 200 pixels.
   final double? width;
-
-  /// The height of the button, defaulting to 60 pixels.
   final double? height;
-
-  /// The border radius of the button, defaulting to 10 pixels,
-  /// providing rounded corners.
   final double borderRadius;
-
-  /// A list of colors used to create the gradient background of the button,
-  /// defaulting to a gradient from [AppColors.main] to [AppColors.glen].
   final List<Color> gradientColors;
-
   final Color? backgroundColor;
   final BoxBorder? border;
   final EdgeInsetsGeometry padding;
@@ -67,40 +48,40 @@ class EcoButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final bool isTablet = MediaQuery.sizeOf(context).shortestSide >= 600;
-    final double maxWidth = width ?? MediaQuery.sizeOf(context).width * (isTablet ? 0.6 : 0.8);
-    final buttonHeight = height ?? screenSize.height * 0.06;
-    return SizedBox(
-      width: maxWidth,
-      height: buttonHeight,
-      child: DecoratedBox(
-        // The button's container provides the background gradient and dimensions.
-        decoration: BoxDecoration(
-          // Rounded corners with a customizable border radius.
-          borderRadius: BorderRadius.circular(borderRadius),
-          // Gradient background transitioning from one color to another.
-          gradient: backgroundColor == null ? LinearGradient(
-            colors: gradientColors,
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-          ) : null,
-          border: border,
-          color: backgroundColor,
-        ),
-        child: ElevatedButton(
-          // Handles the button's functionality and content.
-          onPressed: onPressed,
-          style: ElevatedButton.styleFrom(
-            // Applies the same border radius to the button shape.
-            shape: RoundedRectangleBorder(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final bool isTablet = constraints.maxWidth >= 600;
+        final double maxWidth = width ?? constraints.maxWidth * (isTablet ? 0.6 : 0.8);
+        final double buttonHeight = height ?? constraints.maxHeight * 0.06;
+        return SizedBox(
+          width: maxWidth,
+          height: buttonHeight,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(borderRadius),
+              gradient: backgroundColor == null
+                  ? LinearGradient(
+                colors: gradientColors,
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              )
+                  : null,
+              border: border,
+              color: backgroundColor,
+            ),
+            child: ElevatedButton(
+              onPressed: onPressed,
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(borderRadius),
+                ),
+                foregroundColor: Colors.white,
+              ),
+              child: child,
             ),
           ),
-          // The text style is consistent with the app's overall typography.
-          child: child,
-        ),
-      ),
+        );
+      },
     );
   }
 }

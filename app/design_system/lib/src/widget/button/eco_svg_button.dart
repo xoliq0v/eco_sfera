@@ -20,20 +20,22 @@ class EcoSvgButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: width ?? 70,
       height: height ?? 70,
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(50)
-      ),
-      child: InkWell(
-        onTap: onPressed,
-        child: Padding(
-          padding: const EdgeInsets.all(13.0),
-          child: SvgPicture.asset(
-              icon,
-            color: color,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(50)
+        ),
+        child: InkWell(
+          onTap: onPressed,
+          child: Padding(
+            padding: const EdgeInsets.all(13.0),
+            child: SvgPicture.asset(
+                icon,
+              color: color,
+            ),
           ),
         ),
       ),

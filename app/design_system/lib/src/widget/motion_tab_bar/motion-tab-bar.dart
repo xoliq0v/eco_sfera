@@ -145,7 +145,7 @@ class _MotionTabBarState extends State<MotionTabBar> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
           color: widget.tabBarColor,
           boxShadow: const [
@@ -162,20 +162,22 @@ class _MotionTabBarState extends State<MotionTabBar> with TickerProviderStateMix
         child: Stack(
           alignment: Alignment.topCenter,
           children: <Widget>[
-            Container(
+            SizedBox(
               height: widget.tabBarHeight,
-              decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(15)
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: generateTabItems(),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(15)
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: generateTabItems(),
+                ),
               ),
             ),
             IgnorePointer(
-              child: Container(
+              child: DecoratedBox(
                 decoration: const BoxDecoration(color: Colors.transparent),
                 child: Align(
                   heightFactor: 0,
