@@ -32,7 +32,7 @@ class _BuyPageState extends State<BuyPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(LocaleKeys.totalBalance,style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 13),),
+              Text(LocaleKeys.totalBalance.tr(context: context),style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 13),),
               Text('0sum',style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppColors.main),)
             ],
           ),
@@ -231,7 +231,10 @@ class _BuyPageState extends State<BuyPage> {
                   ],
                 ),
               ),
-            )
+            ),
+            SliverToBoxAdapter(
+              child: AppScreen.bottomNavBarHeight.verticalSpace,
+            ),
           ],
         ),
       ),

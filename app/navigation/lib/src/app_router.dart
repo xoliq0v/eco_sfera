@@ -24,7 +24,7 @@ class AppRouter extends _$AppRouter {
 
       AutoRoute(
         page: MainRoute.page,
-        // type: const RouteType.cupertino(),
+        type: const RouteType.cupertino(),
         children: [
           AutoRoute(page: HomeRoute.page,),
           AutoRoute(page: BuyRoute.page,),
@@ -40,7 +40,7 @@ class AppRouter extends _$AppRouter {
       AutoRoute(page: OrderCardRoute.page),
       AutoRoute(page: SignatureRoute.page),
       AutoRoute(page: MapRouteRoute.page,
-        // type: const RouteType.cupertino(),
+        type: const RouteType.cupertino(),
       ),
     ];
   }

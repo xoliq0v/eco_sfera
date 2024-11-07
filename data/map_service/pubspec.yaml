@@ -10,9 +10,11 @@ environment:
 dependencies:
   core:
     path: ../../domain/core
+  yandex_mapkit_lite:
+    path: ../yandex-mapkit-lite-flutter
   flutter:
     sdk: flutter
-  yandex_maps_mapkit_lite: ^4.8.1
+#  yandex_maps_mapkit_lite: ^4.8.1
 
 dev_dependencies:
   build_runner: 2.4.10

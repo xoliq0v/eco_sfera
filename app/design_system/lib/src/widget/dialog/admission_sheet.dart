@@ -1,6 +1,6 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-import 'package:map_service/map_service.dart';
+import 'package:yandex_mapkit_lite/yandex_mapkit_lite.dart';
 
 class AdmissionSheet {
   static void show(BuildContext context) {
@@ -91,13 +91,7 @@ class _MapWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 5),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
-          child: YandexMap(onMapCreated: (MapWindow ) {  },
-            // scrollGesturesEnabled: false,
-            // rotateGesturesEnabled: false,
-            // tiltGesturesEnabled: false,
-            // zoomGesturesEnabled: false,
-            // nightModeEnabled: Theme.of(context).brightness == Brightness.dark,
-          ),
+          child: MapWidget(onControllerCreated: (MapWindow ) {  }, mapObjects: [],),
         ),
       ),
     );

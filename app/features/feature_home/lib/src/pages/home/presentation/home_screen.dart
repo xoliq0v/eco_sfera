@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-import 'package:map_service/map_service.dart';
+import 'package:yandex_mapkit_lite/yandex_mapkit_lite.dart';
 
 @RoutePage()
 class HomePage extends StatefulWidget {
@@ -15,6 +15,8 @@ class HomePage extends StatefulWidget {
 
 class _HomeScreenState extends State<HomePage> {
 
+  late YandexMapController yandexMapController;
+
   @override
   void initState() {
     super.initState();
@@ -22,6 +24,7 @@ class _HomeScreenState extends State<HomePage> {
 
   @override
   void dispose() {
+    yandexMapController.dispose();
     super.dispose();
   }
 
@@ -34,7 +37,7 @@ class _HomeScreenState extends State<HomePage> {
         actions: [
           InkWell(
             onTap: () => {
-              // SwitchBottomSheet.show(context)
+              SwitchBottomSheet.show(context)
             },
             child: Padding(
               padding: const EdgeInsets.all(15),
@@ -56,19 +59,14 @@ class _HomeScreenState extends State<HomePage> {
           ],
         ),
       ),
-      body: Visibility(
-        visible: Platform.isAndroid,
-          // replacement: ,
-          child: YandexMap(
-            // scrollGesturesEnabled: false,
-            // rotateGesturesEnabled: false,
-            // tiltGesturesEnabled: false,
-            // zoomGesturesEnabled: false,
-            // nightModeEnabled: Theme.of(context).brightness == Brightness.dark,
-            onMapCreated: (controller) {
-
-            },
-          )
+      body: MapWidget(
+        // scrollGesturesEnabled: false,
+        // rotateGesturesEnabled: false,
+        // tiltGesturesEnabled: false,
+        // zoomGesturesEnabled: false,
+        onControllerCreated: (controller) {
+          yandexMapController = controller;
+        }, mapObjects: [],
       ),
     );
   }

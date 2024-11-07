@@ -17,48 +17,58 @@ class SwitchBottomSheet{
         return IntrinsicHeight(
           child: Column(
             children: [
-              Container(
+              SizedBox(
                 width: 60,
                 height: 4,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  borderRadius: BorderRadius.circular(250),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(25),
+                      topLeft: Radius.circular(25)
+                    ),
+                  ),
                 ),
               ),
               10.verticalSpace,
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 50,
-                  top: 20,
-                  right: 25,
-                  left: 25
-                ),
+              DecoratedBox(
                 decoration: BoxDecoration(
                   color: Theme.of(context).scaffoldBackgroundColor,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20)
+                  ),
                 ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        SvgPicture.asset(AppIcons.trash02),
-                        5.verticalSpace,
-                        Text(LocaleKeys.waste.tr(context: context))
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: Divider( color: Theme.of(context).colorScheme.primary ),
-                    ),
-                    // Dash(length: 400, dashGap: 0,dashColor: Theme.of(context).colorScheme.primary,),
-                    Row(
-                      children: [
-                        SvgPicture.asset(AppIcons.iconParkRecycling),
-                        5.verticalSpace,
-                        Text(LocaleKeys.secondary.tr(context: context))
-                      ],
-                    ),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 20,
+                    top: 20,
+                    right: 25,
+                    left: 25
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          SvgPicture.asset(AppIcons.trash02,color: Theme.of(context).primaryColor,),
+                          5.horizontalSpace,
+                          Text(LocaleKeys.waste.tr(context: context))
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: Divider( color: Theme.of(context).colorScheme.primary ),
+                      ),
+                      // Dash(length: 400, dashGap: 0,dashColor: Theme.of(context).colorScheme.primary,),
+                      Row(
+                        children: [
+                          SvgPicture.asset(AppIcons.iconParkRecycling,color: Theme.of(context).primaryColor,),
+                          5.horizontalSpace,
+                          Text(LocaleKeys.secondary.tr(context: context))
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               )
             ],

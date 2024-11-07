@@ -2,6 +2,7 @@ import 'package:design_system/design_system.dart';
 import 'package:feature_home/src/pages/road_map/widget/custom_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:yandex_mapkit_lite/yandex_mapkit_lite.dart';
 // import 'package:yandex_mapkit/yandex_mapkit.dart';
 import 'package:map_service/map_service.dart';
 
@@ -29,15 +30,15 @@ class _MapRoutePageState extends State<MapRoutePage> {
     return Material(
       child: Stack(
         children: [
-          YandexMap(
+          MapWidget(
             // nightModeEnabled: Theme.of(context).brightness == Brightness.dark ? true : false,
             //   tiltGesturesEnabled: false,
             //   zoomGesturesEnabled: false,
             //   rotateGesturesEnabled: false,
             //   scrollGesturesEnabled: false,
-            onMapCreated: (yandexMapController){
+            onControllerCreated: (yandexMapController){
               // this.yandexMapController = yandexMapController;
-            },
+            }, mapObjects: [],
           ),
           Positioned(
             bottom: 0,
