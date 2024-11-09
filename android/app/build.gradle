@@ -23,20 +23,18 @@ if (flutterVersionName == null) {
     flutterVersionName = "1.0"
 }
 
-
-
 android {
     namespace = "com.aladdin.eco_sfera"
+    compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
-    compileSdk = flutter.compileSdkVersion ?: 33
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = JavaVersion.VERSION_1_8
     }
 
     defaultConfig {
@@ -44,20 +42,17 @@ android {
         applicationId = "com.aladdin.eco_sfera"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdk = flutter.minSdkVersion ?: 21
-        targetSdk = flutter.targetSdkVersion ?: 33
+        minSdkVersion 26
+        targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
     }
 
     buildTypes {
-        buildTypes {
-            release {
-                signingConfig signingConfigs.release
-            }
-            debug {
-                signingConfig signingConfigs.debug
-            }
+        release {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig = signingConfigs.debug
         }
     }
 }
@@ -68,4 +63,5 @@ flutter {
 
 dependencies {
     implementation 'com.yandex.android:maps.mobile:4.6.1-lite'
+    implementation "com.google.android.gms:play-services-location:21.1.0"
 }
