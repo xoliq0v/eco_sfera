@@ -39,4 +39,10 @@ class AuthNavigationImpl extends AuthNavigation {
       },
     );
   }
+
+
+  @override
+  Future<void> navigateBoardingPage() {
+    return appRouter.navigate(const BoardingRoute());
+  }
 }

@@ -1,12 +1,12 @@
-import 'package:alice/alice.dart';
-import 'package:app_bloc/app_bloc.dart';
+// import 'package:alice/alice.dart';
+// import 'package:app_bloc/app_bloc.dart';
 import 'package:eco_sfera/di/injection.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:navigation/navigation.dart';
-
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -21,6 +21,7 @@ class _AppState extends State<App> {
 
   @override
   void initState() {
+    // Uncomment if using Alice for network debugging:
     // _alice.setNavigatorKey(_appRouter.navigatorKey);
     super.initState();
   }
@@ -33,12 +34,36 @@ class _AppState extends State<App> {
       fallbackLocale: const Locale(AppLocaleConfig.fallbackLocale),
       useOnlyLangCode: true,
       useFallbackTranslations: true,
-      // assetLoader: const CodegenLoader(),
       child: ScreenUtilInit(
         designSize: const Size(393, 852),
-        child: _MaterialApp(appRouter: _appRouter),
+        child: DeviceOrientationLock(
+          child: _MaterialApp(appRouter: _appRouter),
+        ),
       ),
     );
+  }
+}
+
+class DeviceOrientationLock extends StatelessWidget {
+  final Widget child;
+
+  const DeviceOrientationLock({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    final isTablet = MediaQuery.of(context).size.width >= 600;
+    if (isTablet) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+    } else {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]);
+    }
+    return child;
   }
 }
 
@@ -59,7 +84,7 @@ class _MaterialApp extends StatelessWidget {
         FlutterNativeSplash.remove();
         return Toast(
           navigatorKey: appRouter.navigatorKey,
-          child: child ?? const SizedBox(),
+          child: child ?? const SizedBox.shrink(),
         );
       },
       routerConfig: appRouter.config(

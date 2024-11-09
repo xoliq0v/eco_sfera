@@ -37,7 +37,7 @@ class EcoButton extends StatelessWidget {
     return EcoButton(
       onPressed: onPressed,
       child: child,
-      width: 220, // Reduced width for mini button
+      width: 200, // Reduced width for mini button
       height: 40, // Reduced height for mini button
       backgroundColor: backgroundColor,
       borderRadius: borderRadius,

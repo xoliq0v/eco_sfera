@@ -4,8 +4,8 @@ import 'package:core/core.dart';
 import 'package:design_system/design_system.dart' hide AppImage;
 import 'package:flutter/material.dart';
 
-import '../../data/model/payment_history.dart';
-import '../widget/payment_item.dart';
+import '../../../data/model/payment_history.dart';
+import '../../widget/payment_item.dart';
 
 @RoutePage()
 class MyAccountPage extends StatefulWidget {
@@ -19,59 +19,58 @@ class _MyAccountPageState extends State<MyAccountPage> {
 
   List<PaymentHistory> getTestPaymentHistory() {
     return [
-      // PaymentHistory(
-      //   date: DateTime(2024, 9, 17, 14, 30),
-      //   description: "Grocery shopping",
-      //   amount: -50000,
-      // ),
-      // PaymentHistory(
-      //   date: DateTime(2024, 9, 17, 18, 45),
-      //   description: "Salary deposit",
-      //   amount: 1500000,
-      // ),
-      // PaymentHistory(
-      //   date: DateTime(2024, 9, 16, 10, 15),
-      //   description: "Coffee shop",
-      //   amount: -15000,
-      // ),
-      // PaymentHistory(
-      //   date: DateTime(2024, 9, 16, 13, 20),
-      //   description: "Online purchase",
-      //   amount: -75000,
-      // ),
-      // PaymentHistory(
-      //   date: DateTime(2024, 9, 15, 9, 0),
-      //   description: "Transport fare",
-      //   amount: -10000,
-      // ),
-      // PaymentHistory(
-      //   date: DateTime(2024, 9, 15, 20, 30),
-      //   description: "Restaurant dinner",
-      //   amount: -120000,
-      // ),
-      // PaymentHistory(
-      //   date: DateTime(2024, 9, 14, 11, 45),
-      //   description: "Freelance payment",
-      //   amount: 500000,
-      // ),
-      // PaymentHistory(
-      //   date: DateTime(2024, 9, 13, 16, 0),
-      //   description: "Utility bill",
-      //   amount: -80000,
-      // ),
-      // PaymentHistory(
-      //   date: DateTime(2024, 9, 12, 14, 30),
-      //   description: "Book purchase",
-      //   amount: -25000,
-      // ),
-      // PaymentHistory(
-      //   date: DateTime(2024, 9, 11, 9, 15),
-      //   description: "Gym membership",
-      //   amount: -100000,
-      // ),
+      PaymentHistory(
+        date: DateTime(2024, 9, 17, 14, 30),
+        description: "Grocery shopping",
+        amount: -50000,
+      ),
+      PaymentHistory(
+        date: DateTime(2024, 9, 17, 18, 45),
+        description: "Salary deposit",
+        amount: 1500000,
+      ),
+      PaymentHistory(
+        date: DateTime(2024, 9, 16, 10, 15),
+        description: "Coffee shop",
+        amount: -15000,
+      ),
+      PaymentHistory(
+        date: DateTime(2024, 9, 16, 13, 20),
+        description: "Online purchase",
+        amount: -75000,
+      ),
+      PaymentHistory(
+        date: DateTime(2024, 9, 15, 9, 0),
+        description: "Transport fare",
+        amount: -10000,
+      ),
+      PaymentHistory(
+        date: DateTime(2024, 9, 15, 20, 30),
+        description: "Restaurant dinner",
+        amount: -120000,
+      ),
+      PaymentHistory(
+        date: DateTime(2024, 9, 14, 11, 45),
+        description: "Freelance payment",
+        amount: 500000,
+      ),
+      PaymentHistory(
+        date: DateTime(2024, 9, 13, 16, 0),
+        description: "Utility bill",
+        amount: -80000,
+      ),
+      PaymentHistory(
+        date: DateTime(2024, 9, 12, 14, 30),
+        description: "Book purchase",
+        amount: -25000,
+      ),
+      PaymentHistory(
+        date: DateTime(2024, 9, 11, 9, 15),
+        description: "Gym membership",
+        amount: -100000,
+      ),
     ];
   }
-
 
   @override
   Widget build(BuildContext context) {

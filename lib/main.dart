@@ -12,9 +12,6 @@ void main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await Future.wait([
     configInjection(),
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]),
     EasyLocalization.ensureInitialized(),
   ]);
 

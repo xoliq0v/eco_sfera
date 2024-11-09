@@ -71,4 +71,5 @@ class MainNavigationImpl extends MainNavigation {
     return appRouter.navigate(const SettingsRoute());
   }
 
+
 }

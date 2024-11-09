@@ -19,25 +19,15 @@ class RouteDetailTile extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(
         top: isFirst ? 10 : 0,
-        bottom: isLast ? 30 : 0,
       ),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          borderRadius: isFirst ? const BorderRadius.only(
-            topRight: Radius.circular(25),
-            topLeft: Radius.circular(25),
-          ) : BorderRadius.circular(0),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(child: Text(keyText, style: Theme.of(context).textTheme.bodyLarge)),
-              Expanded(child: Text(valueText, style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.end)),
-            ],
-          ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(child: Text(keyText, style: Theme.of(context).textTheme.bodyLarge)),
+            Expanded(child: Text(valueText, style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.end)),
+          ],
         ),
       ),
     );
