@@ -21,6 +21,7 @@ class AppIcons {
 
   static const String frameBlue = '$_assetsIconsPath/frame_blue.png';
   static const String frameGreen = '$_assetsIconsPath/frame_green.png';
+  static const String disconnect = '$_assetsIconsPath/disconnect.png';
   static const String navigatorIcon = '$_assetsIconsPath/navigator_icon.svg';
   static const arrowBackIcon = '$_assetsIconsPath/arrow_back.svg';
   static const arrowForwardIcon = '$_assetsIconsPath/arrow_forward.svg';
@@ -81,7 +82,6 @@ class AppIcons {
   static const String arrowDown = '$_assetsIconsPath/down-arrow.svg';
   static const String bell02 = '$_assetsIconsPath/bell-02.svg';
   static const String globe01 = '$_assetsIconsPath/globe-01.svg';
-  static const String disconnect = '$_assetsIconsPath/disconnect.png';
   static const String phone = '$_assetsIconsPath/phone.svg';
   static const String settings = '$_assetsIconsPath/settings.svg';
   static const String activity = '$_assetsIconsPath/activity.svg';

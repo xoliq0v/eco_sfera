@@ -29,16 +29,16 @@ class _LostConnectionPageState extends State<LostConnectionPage> {
         child: Padding(
           padding: REdgeInsets.all(16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(),
-              const Spacer(),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  AppImage.asset(
+                  Image.asset(
                     AppIcons.disconnect,
-                    width: 189.r,
-                    height: 189.r,
+                    width: 100.r,
+                    height: 100.r,
                   ),
                   26.verticalSpace,
                   Text(

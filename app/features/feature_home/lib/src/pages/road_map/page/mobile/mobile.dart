@@ -1,4 +1,3 @@
-
 part of '../../road_map_screen.dart';
 
 class _Mobile extends StatefulWidget {
@@ -19,7 +18,7 @@ class Mobile extends State<_Mobile> {
       LocaleKeys.workOrder: "01.06.2024",
       LocaleKeys.carNumber: "8:00-17:00",
       LocaleKeys.car: "ISUZU musravoz",
-      LocaleKeys.driver: "Qurbonov O’ktam",
+      LocaleKeys.driver: "Qurbonov O'ktam",
       LocaleKeys.combinedRoute: "21-22marshrut",
       LocaleKeys.departure: "8:00",
       LocaleKeys.returnN: "17:00",
@@ -63,19 +62,33 @@ class Mobile extends State<_Mobile> {
             ),
           ),
           30.verticalSpace.toBoxAdapter(),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                final key = routeDetails.keys.elementAt(index);
-                final value = routeDetails.values.elementAt(index);
-                return RouteDetailTile(
-                  keyText: key,
-                  valueText: value,
-                  isFirst: index == 0,
-                  isLast: index == routeDetails.length - 1,
-                );
-              },
-              childCount: routeDetails.length,
+          SliverPadding(
+            padding: EdgeInsets.zero,
+            sliver: SliverToBoxAdapter(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(25),
+                    topRight: Radius.circular(25),
+                  ),
+                ),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: routeDetails.length,
+                  itemBuilder: (context, index) {
+                    final key = routeDetails.keys.elementAt(index);
+                    final value = routeDetails.values.elementAt(index);
+                    return RouteDetailTile(
+                      keyText: key,
+                      valueText: value,
+                      isFirst: index == 0,
+                      isLast: index == routeDetails.length - 1,
+                    );
+                  },
+                ),
+              ),
             ),
           ),
         ],
