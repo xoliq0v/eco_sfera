@@ -1,6 +1,7 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:design_system/design_system.dart' hide AppImage;
+import 'package:navigation/navigation.dart';
 
 @RoutePage()
 class BoardingScreen extends StatelessWidget {
@@ -55,10 +56,14 @@ class BoardingScreen extends StatelessWidget {
                           ),
                         ),
                         40.verticalSpace,
-                        EcoElevatedButton(
-                              onPressed: (){
-                            // context.navigateTo(const AuthRoute());
-                          }, child: Text(LocaleKeys.continueBoarding.tr(context: context))),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: EcoMaterialButton(
+                              minWidth: 500,
+                                onPressed: (){
+                                  navigateAuthPage(context);
+                            }, child: Text(LocaleKeys.continueBoarding.tr(context: context),style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),)),
+                        ),
                       ],
                     ),
                   )
@@ -69,4 +74,9 @@ class BoardingScreen extends StatelessWidget {
       )
     );
   }
+
+  Future<void> navigateAuthPage(BuildContext context) async {
+    return NavigationUtils.getAuthNavigator().navigateAuthPage();
+  }
+
 }

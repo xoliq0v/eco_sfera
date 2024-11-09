@@ -79,7 +79,7 @@ class _PaymentWithAccountNumberState extends State<PaymentWithAccountNumber> {
             ),
           ),
         ),
-        const Expanded(child: SizedBox.shrink()),
+        const Spacer(),
         EcoButton(
           onPressed: (){
             LoadingDialog.show(context);
@@ -90,7 +90,6 @@ class _PaymentWithAccountNumberState extends State<PaymentWithAccountNumber> {
           },
           borderRadius: 35,
           height: 60,
-          width: MediaQuery.sizeOf(context).width * 0.9,
           child: Text(LocaleKeys.confirmation.tr(context: context)),
         ),
         25.verticalSpacingRadius

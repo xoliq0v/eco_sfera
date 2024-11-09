@@ -47,7 +47,7 @@ class _LostConnectionPageState extends State<LostConnectionPage> {
                   ),
                 ],
               ),
-              const Spacer(),
+              25.verticalSpace,
               ValueListenableBuilder(
                 valueListenable: loading,
                 builder: (BuildContext context, bool value, Widget? child) {

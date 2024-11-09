@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i22;
 import 'package:core/core.dart' as _i24;
-import 'package:feature_home/src/main_page.dart' as _i9;
+import 'package:feature_home/src/pages/main/main_page.dart' as _i9;
 import 'package:feature_home/src/pages/auth/auth_screen.dart' as _i2;
 import 'package:feature_home/src/pages/auth/page/boarding_screen.dart' as _i3;
 import 'package:feature_home/src/pages/auth/page/choose_language.dart' as _i6;
@@ -25,18 +25,18 @@ import 'package:feature_home/src/pages/home/presentation/home_screen.dart'
 import 'package:feature_home/src/pages/orders/presentation/orders_page.dart'
     as _i13;
 import 'package:feature_home/src/pages/polygon/polygon_screen.dart' as _i15;
-import 'package:feature_home/src/pages/profile/presentation/page/my_account_page.dart'
+import 'package:feature_home/src/pages/profile/presentation/page/mobile/my_account_page.dart'
     as _i11;
-import 'package:feature_home/src/pages/profile/presentation/page/settings_page.dart'
+import 'package:feature_home/src/pages/profile/presentation/page/mobile/settings_page.dart'
     as _i19;
 import 'package:feature_home/src/pages/profile/presentation/profile_page.dart'
     as _i16;
 import 'package:feature_home/src/pages/reports/report_screen.dart' as _i17;
-import 'package:feature_home/src/pages/road_map/page/map_route_page.dart'
+import 'package:feature_home/src/pages/road_map/page/mobile/map_route_page.dart'
     as _i10;
-import 'package:feature_home/src/pages/road_map/page/order_card_page.dart'
+import 'package:feature_home/src/pages/road_map/page/mobile/order_card_page.dart'
     as _i12;
-import 'package:feature_home/src/pages/road_map/page/signature_page.dart'
+import 'package:feature_home/src/pages/road_map/page/mobile/signature_page.dart'
     as _i20;
 import 'package:feature_home/src/pages/road_map/road_map_screen.dart' as _i18;
 import 'package:feature_home/src/splash_page.dart' as _i21;
@@ -72,13 +72,13 @@ abstract class $FeatureHomeModule extends _i22.AutoRouterModule {
     CategoryRoute.name: (routeData) {
       return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i22.WrappedRoute(child: const _i5.CategoryPage()),
+        child: _i5.CategoryPage(),
       );
     },
     ChooseLanguageRoute.name: (routeData) {
       return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i6.ChooseLanguageScreen(),
+        child: const _i6.ChooseLanguagePage(),
       );
     },
     HistoryRoute.name: (routeData) {
@@ -159,7 +159,7 @@ abstract class $FeatureHomeModule extends _i22.AutoRouterModule {
     RoadMapRoute.name: (routeData) {
       return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i18.RoadMapScreen(),
+        child: const _i18.RoadMapPage(),
       );
     },
     SettingsRoute.name: (routeData) {

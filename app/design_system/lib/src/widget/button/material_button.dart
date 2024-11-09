@@ -7,7 +7,7 @@ class EcoMaterialButton extends MaterialButton {
     required super.child,
     super.color = AppColors.green,
     super.disabledColor = AppColors.gray,
-    super.minWidth,
+    super.minWidth = 500,
     double radius = 16,
     super.key,
     super.elevation = 0,
@@ -58,6 +58,8 @@ class EcoElevatedButton extends ElevatedButton {
     Color backgroundColor = AppColors.green,
     Color disabledColor = AppColors.gray,
     double radius = 16,
+    double maxHeight = 50,
+    double maxWidth = 500,
     super.key,
     double elevation = 0,
     EdgeInsetsGeometry? padding,
@@ -65,6 +67,7 @@ class EcoElevatedButton extends ElevatedButton {
           style: ElevatedButton.styleFrom(
             backgroundColor: backgroundColor,
             disabledBackgroundColor: disabledColor,
+            maximumSize: Size(maxWidth, maxHeight),
             padding: padding ??
                 EdgeInsets.symmetric(
                   vertical: 16.h,
@@ -91,6 +94,7 @@ class EcoElevatedButton extends ElevatedButton {
     double elevation = 0,
     double minHeight = double.minPositive,
     double maxHeight = 50,
+    double maxWidth = 500,
     EdgeInsetsGeometry? padding,
     Color? loadingBackgroundColor,
     Color foregroundColor = Colors.black,
@@ -104,7 +108,7 @@ class EcoElevatedButton extends ElevatedButton {
                   horizontal: 8.w,
                 ),
             minimumSize: Size.fromHeight(minHeight),
-            maximumSize: Size.fromHeight(maxHeight),
+            maximumSize: Size(maxWidth, maxHeight),
             elevation: elevation,
             textStyle: AppTextConstants.styleButton,
             foregroundColor: foregroundColor,

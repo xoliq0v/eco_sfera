@@ -1,18 +1,11 @@
-import 'dart:io';
 
-import 'package:core/core.dart';
-import 'package:app_bloc/app_bloc.dart';
-import 'package:design_system/design_system.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:navigation/navigation.dart';
+part of '../../main_page.dart';
 
-@RoutePage()
-class MainPage extends StatefulWidget implements AutoRouteWrapper {
+class _Mobile extends StatefulWidget implements AutoRouteWrapper {
   final List<PageRouteInfo<dynamic>> pages;
   final List<String> icons;
   final List<String> routes;
-  const MainPage({
+  const _Mobile({
     super.key,
     required this.pages,
     required this.icons,
@@ -20,7 +13,7 @@ class MainPage extends StatefulWidget implements AutoRouteWrapper {
   });
 
   @override
-  State<MainPage> createState() => _NavigationState();
+  State<_Mobile> createState() => Mobile();
 
   @override
   Widget wrappedRoute(BuildContext context) {
@@ -37,7 +30,7 @@ class MainPage extends StatefulWidget implements AutoRouteWrapper {
   }
 }
 
-class _NavigationState extends State<MainPage> {
+class Mobile extends State<_Mobile> {
 
   final connectionLock = Lock();
 

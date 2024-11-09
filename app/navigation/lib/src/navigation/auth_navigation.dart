@@ -13,4 +13,6 @@ abstract class AuthNavigation {
     required void Function(bool) onResult,
   });
 
+  Future<void> navigateBoardingPage();
+
 }

@@ -1,7 +1,5 @@
 import 'package:design_system/design_system.dart';
-import 'package:feature_home/src/main_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 enum ItemType {
   small,
