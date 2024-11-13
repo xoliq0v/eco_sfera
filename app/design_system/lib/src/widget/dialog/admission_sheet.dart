@@ -1,6 +1,5 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-import 'package:yandex_mapkit_lite/yandex_mapkit_lite.dart';
 
 class AdmissionSheet {
   static void show(BuildContext context) {
@@ -21,12 +20,10 @@ class _AdmissionSheetContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IntrinsicHeight(
-      child: SafeArea(
-        child: Column(
-          children: [
-            _SheetBody(),
-          ],
-        ),
+      child: Column(
+        children: [
+          _SheetBody(),
+        ],
       ),
     );
   }
@@ -64,6 +61,7 @@ class _SheetBody extends StatelessWidget {
                 ],
               ),
             ),
+            AppScreen.bottomBarHeight.verticalSpace
           ],
         ),
       ),

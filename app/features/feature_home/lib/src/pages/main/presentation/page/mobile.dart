@@ -1,7 +1,7 @@
 
 part of '../../main_page.dart';
 
-class _Mobile extends StatefulWidget implements AutoRouteWrapper {
+class _Mobile extends StatefulWidget {
   final List<PageRouteInfo<dynamic>> pages;
   final List<String> icons;
   final List<String> routes;
@@ -15,67 +15,23 @@ class _Mobile extends StatefulWidget implements AutoRouteWrapper {
   @override
   State<_Mobile> createState() => Mobile();
 
-  @override
-  Widget wrappedRoute(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<InternetConnectivityController>(
-          create: (context) {
-            return AppBlocHelper.getInternetConnectivityController();
-          },
-        ),
-      ],
-      child: this,
-    );
-  }
 }
 
 class Mobile extends State<_Mobile> {
 
-  final connectionLock = Lock();
-
-  bool hasConnection = true;
-  bool isLostConnectionPage = false;
-
   @override
   Widget build(BuildContext context) {
-    return BlocListener<InternetConnectivityController,
-        InternetConnectivityControllerState>(
-      listener: (context, state) {
-        state.mapOrNull(
-          connected: (value) {
-            hasConnection = true;
-          },
-          disconnected: (value) {
-            hasConnection = false;
-            navigateLostConnection();
-          },
-        );
-      },
-      child: Visibility(
-        visible: Platform.isIOS,
-        replacement: _View(pages: widget.pages,icons: widget.icons,routes: widget.routes,),
-        child: CupertinoScaffold(
-          overlayStyle: SystemUiOverlayStyle(
-            statusBarBrightness: Theme.of(context).brightness,
-          ),
-          topRadius: const Radius.circular(10),
-          body: _View(pages: widget.pages,icons: widget.icons,routes: widget.routes,),
+    return Visibility(
+      visible: Platform.isIOS,
+      replacement: _View(pages: widget.pages,icons: widget.icons,routes: widget.routes,),
+      child: CupertinoScaffold(
+        overlayStyle: SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
         ),
+        topRadius: const Radius.circular(10),
+        body: _View(pages: widget.pages,icons: widget.icons,routes: widget.routes,),
       ),
     );
-  }
-
-  Future<void> navigateLostConnection() async {
-    await connectionLock.synchronized(() async {
-      if (isLostConnectionPage || hasConnection) return;
-      isLostConnectionPage = true;
-      await NavigationUtils.getMainNavigator().navigateLostConnectionPage(
-        context: context,
-        onResult: (p0) {},
-      );
-      isLostConnectionPage = false;
-    });
   }
 
 }
