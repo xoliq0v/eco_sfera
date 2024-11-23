@@ -13,6 +13,8 @@ dependencies:
   easy_localization_loader: 2.0.2
   envied: 0.5.4+1
   equatable: 2.0.5
+  alice:
+    path: ../alice
   flutter:
     sdk: flutter
   flutter_local_notifications: 17.2.1+2

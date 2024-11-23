@@ -1,5 +1,6 @@
 // import 'package:alice/alice.dart';
 // import 'package:app_bloc/app_bloc.dart';
+import 'package:alice/alice.dart';
 import 'package:eco_sfera/di/injection.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
@@ -17,12 +18,12 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final _appRouter = getIt.get<AppRouter>();
-  // final _alice = getIt.get<Alice>();
+  final _alice = getIt.get<Alice>();
 
   @override
   void initState() {
     // Uncomment if using Alice for network debugging:
-    // _alice.setNavigatorKey(_appRouter.navigatorKey);
+    _alice.setNavigatorKey(_appRouter.navigatorKey);
     super.initState();
   }
 

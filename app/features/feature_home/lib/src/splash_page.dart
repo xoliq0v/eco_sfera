@@ -3,6 +3,7 @@ import 'package:app_bloc/app_bloc.dart';
 import 'package:design_system/design_system.dart';
 import 'package:navigation/navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:use_case/use_case.dart';
 
 @RoutePage()
 class SplashScreen extends StatefulWidget implements AutoRouteWrapper {
@@ -24,14 +25,28 @@ class _SplashScreenState extends State<SplashScreen> {
   bool isFinished = false;
   bool? hasConnection;
   bool isLostConnectionPage = false;
-
   final _navigateLock = Lock();
+  final getTokenUseCase = GetIt.I<GetToken>();
 
   @override
   void initState() {
-    isFinished = true;
-    navigateNext(context);
     super.initState();
+    checkTokenAndNavigate();
+  }
+
+  Future<void> checkTokenAndNavigate() async {
+    // Fetch the token using your use case (adjust based on your use case implementation)
+    // final token = await GetTokenUseCase().call();
+    final token = await getTokenUseCase.get();
+
+    if (token != null && token.isNotEmpty) {
+      // If token exists, navigate to the main page
+      navigateToMainPage(context);
+    } else {
+      // If no token, check connectivity and proceed as before
+      isFinished = true;
+      navigateNext(context);
+    }
   }
 
   @override
@@ -63,11 +78,7 @@ class _SplashScreenState extends State<SplashScreen> {
               10.horizontalSpace,
               Text(
                 LocaleKeys.appName.tr(context: context),
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .displayMedium
-                    ?.copyWith(
+                style: Theme.of(context).textTheme.displayMedium?.copyWith(
                   fontWeight: FontWeight.w700,
                 ),
               )
@@ -84,12 +95,18 @@ class _SplashScreenState extends State<SplashScreen> {
       switch (hasConnection) {
         case true:
           await navigateChooseLangPage(context);
+          break;
         case false:
           await navigateLostConnectionPage(context);
+          break;
         case null:
           break;
       }
     });
+  }
+
+  Future<void> navigateToMainPage(BuildContext context) async {
+    await NavigationUtils.getAuthNavigator().navigateCategoryPage();
   }
 
   Future<void> navigateChooseLangPage(BuildContext context) async {

@@ -1,7 +1,7 @@
 abstract class SecureStorage {
-  Future<void> savePassword(String value);
+  Future<void> saveToken(String value);
 
-  Future<String?> getPassword();
+  Future<String?> getToken();
 
   Future<void> closeSession();
 }

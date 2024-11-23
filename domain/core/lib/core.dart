@@ -20,6 +20,7 @@ export 'package:synchronized/synchronized.dart';
 export 'package:yandex_geocoder/yandex_geocoder.dart'
     show KindRequest,KindResponse, ReverseGeocodeRequest, YandexGeocoder;
 export 'package:google_maps_flutter/google_maps_flutter.dart' hide MapType;
+export 'package:alice/alice.dart';
 
 // export 'generated/codegen_loader.g.dart';
 export 'generated/locale_keys.g.dart';

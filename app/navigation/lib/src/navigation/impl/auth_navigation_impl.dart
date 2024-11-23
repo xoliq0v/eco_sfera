@@ -16,7 +16,7 @@ class AuthNavigationImpl extends AuthNavigation {
 
   @override
   Future<void> navigateCategoryPage() {
-    return appRouter.navigate(const CategoryRoute());
+    return appRouter.replaceAll([const CategoryRoute()]);
   }
 
   @override

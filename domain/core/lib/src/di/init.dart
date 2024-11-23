@@ -2,6 +2,7 @@
 import 'dart:async';
 
 import 'package:core/core.dart';
+import 'package:flutter/foundation.dart';
 
 @module
 abstract class CoreModule{
@@ -18,9 +19,8 @@ abstract class CoreModule{
   }
 
   @lazySingleton
-  @Named('map_api_key')
-  String provideMapApiKey(Env env) {
-    return env.mapApiKey;
+  Alice provideAlice() {
+    return Alice(showNotification: kDebugMode);
   }
 
   @lazySingleton

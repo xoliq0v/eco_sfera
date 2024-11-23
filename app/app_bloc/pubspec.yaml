@@ -11,6 +11,8 @@ dependencies:
   bloc_concurrency: 0.2.5
   core:
     path: ../../domain/core
+  use_case:
+    path: ../../domain/use_case
   flutter_bloc: 8.1.5
   flutter:
     sdk: flutter

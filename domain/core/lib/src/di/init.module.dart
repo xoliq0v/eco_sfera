@@ -16,6 +16,7 @@ class CorePackageModule extends _i526.MicroPackageModule {
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
     final coreModule = _$CoreModule();
     gh.singleton<_i494.Env>(() => coreModule.provideDevEnv());
+    gh.lazySingleton<_i494.Alice>(() => coreModule.provideAlice());
     gh.lazySingleton<_i494.Connectivity>(
         () => coreModule.provideConnectivity());
     gh.lazySingleton<String>(
@@ -25,10 +26,6 @@ class CorePackageModule extends _i526.MicroPackageModule {
     gh.lazySingleton<_i494.InternetConnectionChecker>(() =>
         coreModule.provideInternetConnectionChecker(
             gh<String>(instanceName: 'base_url')));
-    gh.lazySingleton<String>(
-      () => coreModule.provideMapApiKey(gh<_i494.Env>()),
-      instanceName: 'map_api_key',
-    );
   }
 }
 

@@ -54,7 +54,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(2, 7660169785711106312),
       name: 'UserProfileEntity',
-      lastPropertyId: const obx_int.IdUid(7, 8423579992317054344),
+      lastPropertyId: const obx_int.IdUid(22, 3263433173223413176),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -63,28 +63,58 @@ final _entities = <obx_int.ModelEntity>[
             type: 6,
             flags: 129),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 8385587943357634432),
-            name: 'phoneNumber',
+            id: const obx_int.IdUid(11, 1627340263017365609),
+            name: 'vehicle',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 2333836987821698992),
-            name: 'firstName',
+            id: const obx_int.IdUid(13, 285691341126716429),
+            name: 'earnings',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 9202848570399426465),
-            name: 'lastName',
+            id: const obx_int.IdUid(14, 8802556399451145160),
+            name: 'outlay',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 3565756125708468250),
-            name: 'cId',
-            type: 6,
+            id: const obx_int.IdUid(15, 7844316547805418831),
+            name: 'login',
+            type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(7, 8423579992317054344),
-            name: 'lang',
+            id: const obx_int.IdUid(16, 1473454065051819177),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(17, 1341816038147709184),
+            name: 'surname',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(18, 8035152386456721052),
+            name: 'phone',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(19, 5489300185416120194),
+            name: 'walletId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(20, 8246463277541073127),
+            name: 'walletBalance',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(21, 7900608354373858174),
+            name: 'workOrder',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(22, 3263433173223413176),
+            name: 'vehicleNumber',
             type: 9,
             flags: 0)
       ],
@@ -220,7 +250,16 @@ obx_int.ModelDefinition getObjectBoxModel() {
         8176464469796457002,
         2847711518280737322,
         31710322854409287,
-        4401854897662631362
+        4401854897662631362,
+        2333836987821698992,
+        9202848570399426465,
+        8423579992317054344,
+        8385587943357634432,
+        308109077249199339,
+        1599458229937871682,
+        2896031385904289680,
+        2060513163330851168,
+        3565756125708468250
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -274,46 +313,90 @@ obx_int.ModelDefinition getObjectBoxModel() {
           object.id = id;
         },
         objectToFB: (UserProfileEntity object, fb.Builder fbb) {
-          final phoneNumberOffset = fbb.writeString(object.phoneNumber);
-          final firstNameOffset = object.firstName == null
+          final vehicleOffset =
+              object.vehicle == null ? null : fbb.writeString(object.vehicle!);
+          final earningsOffset = object.earnings == null
               ? null
-              : fbb.writeString(object.firstName!);
-          final lastNameOffset = object.lastName == null
+              : fbb.writeString(object.earnings!);
+          final outlayOffset =
+              object.outlay == null ? null : fbb.writeString(object.outlay!);
+          final loginOffset =
+              object.login == null ? null : fbb.writeString(object.login!);
+          final nameOffset =
+              object.name == null ? null : fbb.writeString(object.name!);
+          final surnameOffset =
+              object.surname == null ? null : fbb.writeString(object.surname!);
+          final phoneOffset =
+              object.phone == null ? null : fbb.writeString(object.phone!);
+          final walletIdOffset = object.walletId == null
               ? null
-              : fbb.writeString(object.lastName!);
-          final langOffset = fbb.writeString(object.lang);
-          fbb.startTable(8);
+              : fbb.writeString(object.walletId!);
+          final walletBalanceOffset = object.walletBalance == null
+              ? null
+              : fbb.writeString(object.walletBalance!);
+          final workOrderOffset = object.workOrder == null
+              ? null
+              : fbb.writeString(object.workOrder!);
+          final vehicleNumberOffset = object.vehicleNumber == null
+              ? null
+              : fbb.writeString(object.vehicleNumber!);
+          fbb.startTable(23);
           fbb.addInt64(0, object.id);
-          fbb.addOffset(1, phoneNumberOffset);
-          fbb.addOffset(3, firstNameOffset);
-          fbb.addOffset(4, lastNameOffset);
-          fbb.addInt64(5, object.cId);
-          fbb.addOffset(6, langOffset);
+          fbb.addOffset(10, vehicleOffset);
+          fbb.addOffset(12, earningsOffset);
+          fbb.addOffset(13, outlayOffset);
+          fbb.addOffset(14, loginOffset);
+          fbb.addOffset(15, nameOffset);
+          fbb.addOffset(16, surnameOffset);
+          fbb.addOffset(17, phoneOffset);
+          fbb.addOffset(18, walletIdOffset);
+          fbb.addOffset(19, walletBalanceOffset);
+          fbb.addOffset(20, workOrderOffset);
+          fbb.addOffset(21, vehicleNumberOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
         objectFromFB: (obx.Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final cIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0);
-          final phoneNumberParam =
+          final nameParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 34);
+          final surnameParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 36);
+          final phoneParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 38);
+          final loginParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 32);
+          final walletIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 40);
+          final walletBalanceParam =
               const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 6, '');
-          final firstNameParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 10);
-          final lastNameParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 12);
-          final langParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 16, '');
+                  .vTableGetNullable(buffer, rootOffset, 42);
+          final workOrderParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 44);
+          final vehicleParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 24);
+          final vehicleNumberParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 46);
+          final earningsParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 28);
+          final outlayParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 30);
           final idParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
           final object = UserProfileEntity(
-              cId: cIdParam,
-              phoneNumber: phoneNumberParam,
-              firstName: firstNameParam,
-              lastName: lastNameParam,
-              lang: langParam,
+              name: nameParam,
+              surname: surnameParam,
+              phone: phoneParam,
+              login: loginParam,
+              walletId: walletIdParam,
+              walletBalance: walletBalanceParam,
+              workOrder: workOrderParam,
+              vehicle: vehicleParam,
+              vehicleNumber: vehicleNumberParam,
+              earnings: earningsParam,
+              outlay: outlayParam,
               id: idParam);
 
           return object;
@@ -402,25 +485,49 @@ class UserProfileEntity_ {
   static final id =
       obx.QueryIntegerProperty<UserProfileEntity>(_entities[1].properties[0]);
 
-  /// See [UserProfileEntity.phoneNumber].
-  static final phoneNumber =
+  /// See [UserProfileEntity.vehicle].
+  static final vehicle =
       obx.QueryStringProperty<UserProfileEntity>(_entities[1].properties[1]);
 
-  /// See [UserProfileEntity.firstName].
-  static final firstName =
+  /// See [UserProfileEntity.earnings].
+  static final earnings =
       obx.QueryStringProperty<UserProfileEntity>(_entities[1].properties[2]);
 
-  /// See [UserProfileEntity.lastName].
-  static final lastName =
+  /// See [UserProfileEntity.outlay].
+  static final outlay =
       obx.QueryStringProperty<UserProfileEntity>(_entities[1].properties[3]);
 
-  /// See [UserProfileEntity.cId].
-  static final cId =
-      obx.QueryIntegerProperty<UserProfileEntity>(_entities[1].properties[4]);
+  /// See [UserProfileEntity.login].
+  static final login =
+      obx.QueryStringProperty<UserProfileEntity>(_entities[1].properties[4]);
 
-  /// See [UserProfileEntity.lang].
-  static final lang =
+  /// See [UserProfileEntity.name].
+  static final name =
       obx.QueryStringProperty<UserProfileEntity>(_entities[1].properties[5]);
+
+  /// See [UserProfileEntity.surname].
+  static final surname =
+      obx.QueryStringProperty<UserProfileEntity>(_entities[1].properties[6]);
+
+  /// See [UserProfileEntity.phone].
+  static final phone =
+      obx.QueryStringProperty<UserProfileEntity>(_entities[1].properties[7]);
+
+  /// See [UserProfileEntity.walletId].
+  static final walletId =
+      obx.QueryStringProperty<UserProfileEntity>(_entities[1].properties[8]);
+
+  /// See [UserProfileEntity.walletBalance].
+  static final walletBalance =
+      obx.QueryStringProperty<UserProfileEntity>(_entities[1].properties[9]);
+
+  /// See [UserProfileEntity.workOrder].
+  static final workOrder =
+      obx.QueryStringProperty<UserProfileEntity>(_entities[1].properties[10]);
+
+  /// See [UserProfileEntity.vehicleNumber].
+  static final vehicleNumber =
+      obx.QueryStringProperty<UserProfileEntity>(_entities[1].properties[11]);
 }
 
 /// [DrugSearchEntity] entity fields to define ObjectBox queries.

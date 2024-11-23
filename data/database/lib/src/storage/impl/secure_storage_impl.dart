@@ -8,14 +8,14 @@ class SecureStorageImpl implements SecureStorage {
   final FlutterSecureStorage flutterSecureStorage;
 
   @override
-  Future<String?> getPassword() {
-    return flutterSecureStorage.read(key: StorageEndpoints.password);
+  Future<String?> getToken() {
+    return flutterSecureStorage.read(key: StorageEndpoints.token);
   }
 
   @override
-  Future<void> savePassword(String value) {
+  Future<void> saveToken(String value) {
     return flutterSecureStorage.write(
-      key: StorageEndpoints.password,
+      key: StorageEndpoints.token,
       value: value,
     );
   }

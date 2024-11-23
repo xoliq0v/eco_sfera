@@ -10,7 +10,6 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i22;
 import 'package:core/core.dart' as _i24;
-import 'package:feature_home/src/pages/main/main_page.dart' as _i9;
 import 'package:feature_home/src/pages/auth/auth_screen.dart' as _i2;
 import 'package:feature_home/src/pages/auth/page/boarding_screen.dart' as _i3;
 import 'package:feature_home/src/pages/auth/page/choose_language.dart' as _i6;
@@ -22,6 +21,7 @@ import 'package:feature_home/src/pages/history/admissions_history_page.dart'
 import 'package:feature_home/src/pages/history/history_page.dart' as _i7;
 import 'package:feature_home/src/pages/home/presentation/home_screen.dart'
     as _i8;
+import 'package:feature_home/src/pages/main/main_page.dart' as _i9;
 import 'package:feature_home/src/pages/orders/presentation/orders_page.dart'
     as _i13;
 import 'package:feature_home/src/pages/polygon/polygon_screen.dart' as _i15;
@@ -72,7 +72,7 @@ abstract class $FeatureHomeModule extends _i22.AutoRouterModule {
     CategoryRoute.name: (routeData) {
       return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i5.CategoryPage(),
+        child: const _i5.CategoryPage(),
       );
     },
     ChooseLanguageRoute.name: (routeData) {
@@ -254,7 +254,7 @@ class CategoryRoute extends _i22.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.ChooseLanguageScreen]
+/// [_i6.ChooseLanguagePage]
 class ChooseLanguageRoute extends _i22.PageRouteInfo<void> {
   const ChooseLanguageRoute({List<_i22.PageRouteInfo>? children})
       : super(
@@ -471,7 +471,7 @@ class ReportRoute extends _i22.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i18.RoadMapScreen]
+/// [_i18.RoadMapPage]
 class RoadMapRoute extends _i22.PageRouteInfo<void> {
   const RoadMapRoute({List<_i22.PageRouteInfo>? children})
       : super(
