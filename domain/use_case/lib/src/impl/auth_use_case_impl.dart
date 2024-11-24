@@ -12,24 +12,24 @@ class AuthImpl implements AuthUseCase {
   Future<Result<String>> login({
     required String login,
     required String password,
-  }) {
-    return authRepository.login(login: login, password: password);
+  }) async {
+    try {
+      return await authRepository.login(login: login, password: password);
+    } catch (e) {
+      return Result.error(ResultError(reason: e.toString(),message: e.toString()));
+    }
   }
 }
 
 class LogoutImpl implements Logout {
   LogoutImpl({
-    required this.authRepository,
     required this.sessionRepository,
   });
 
-  final AuthRepository authRepository;
   final SessionRepository sessionRepository;
 
   @override
   Future<Result<bool>> logout() async {
-    final res = await authRepository.logout();
-    if (res.data ?? false) {
       try {
         await sessionRepository.closeSession();
         return Result.completed(true);
@@ -39,7 +39,5 @@ class LogoutImpl implements Logout {
           reason: 'CloseSession',
         ));
       }
-    }
-    return Result.error(res.error);
   }
 }

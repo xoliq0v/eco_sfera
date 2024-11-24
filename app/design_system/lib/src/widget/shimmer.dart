@@ -1,4 +1,3 @@
-import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -16,9 +15,12 @@ class ShimmerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDarkMode = theme.brightness == Brightness.dark;
+
     return Shimmer.fromColors(
-      baseColor: Colors.grey.shade200,
-      highlightColor: Colors.white,
+      baseColor: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade200,
+      highlightColor: isDarkMode ? Colors.grey.shade600 : Colors.white,
       loop: loop,
       period: const Duration(seconds: 2),
       enabled: enable,
@@ -29,7 +31,7 @@ class ShimmerView extends StatelessWidget {
 
 class ShimmerViewBox extends StatelessWidget {
   const ShimmerViewBox({
-    this.color = Colors.white,
+    this.color,
     this.width,
     this.height,
     this.radius = 16,
@@ -43,10 +45,13 @@ class ShimmerViewBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDarkMode = theme.brightness == Brightness.dark;
+
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(radius).r,
+        color: color ?? (isDarkMode ? Colors.grey.shade700 : Colors.white),
+        borderRadius: BorderRadius.circular(radius),
       ),
       child: SizedBox(width: width, height: height),
     );

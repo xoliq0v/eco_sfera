@@ -9,7 +9,9 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit(
-      this._authUseCase, this._saveToken, this._fetchUserProfile
+      this._authUseCase,
+      this._saveToken,
+      this._fetchUserProfile,
       ) : super(const AuthState.init());
 
   final AuthUseCase _authUseCase;
@@ -25,17 +27,24 @@ class AuthCubit extends Cubit<AuthState> {
     emit(const AuthState.loading());
     _login = login;
     _password = password;
-    final res = await _authUseCase.login(login: login,password: password);
-    if (res.data == true) {
-      emit(AuthState.error(res.error?.message ?? 'something is wrong'));
+
+    final result = await _authUseCase.login(login: login, password: password);
+
+    if (result.status == Status.error || result.data == null) {
+      emit(AuthState.error(result.error?.message ?? 'Something went wrong'));
       return;
     }
-    _saveToken.save(res.data!);
-    await _fetchUserProfile.fetch();
-    emit(const AuthState.success());
+
+    try {
+      await _saveToken.save(result.data!);
+      await _fetchUserProfile.fetch();
+      emit(const AuthState.success());
+    } catch (e) {
+      emit(AuthState.error(e.toString()));
+    }
   }
 
   void retry() {
-    login(login: _login,password: _password);
+    login(login: _login, password: _password);
   }
 }

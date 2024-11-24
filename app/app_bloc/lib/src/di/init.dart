@@ -25,6 +25,18 @@ abstract class AppBlocModule {
     return AuthCubit(authUseCase, saveSession, fetchUserProfile);
   }
 
+  ProfileCubit provideProfileCubit(
+    GetUserProfile getUserProfile,
+    FetchUserProfile fetchUserProfile,
+      GetToken getToken
+  ){
+    return ProfileCubit(fetchUserProfile: fetchUserProfile, getUserProfile: getUserProfile,getToken: getToken);
+  }
+
+  LogoutCubit provideLogOutCubit(Logout logout){
+    return LogoutCubit(logout);
+  }
+
 }
 
 @InjectableInit.microPackage()

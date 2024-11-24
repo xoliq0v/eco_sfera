@@ -16,14 +16,10 @@ class AuthScreen extends StatefulWidget implements AutoRouteWrapper {
     return MultiBlocProvider(
       providers: [
         BlocProvider<InternetConnectivityController>(
-          create: (context) {
-            return AppBlocHelper.getInternetConnectivityController();
-          },
+          create: (_) => AppBlocHelper.getInternetConnectivityController(),
         ),
         BlocProvider<AuthCubit>(
-          create: (context) {
-            return AppBlocHelper.getAuthCubit();
-          },
+          create: (_) => AppBlocHelper.getAuthCubit(),
         ),
       ],
       child: this,
@@ -32,10 +28,10 @@ class AuthScreen extends StatefulWidget implements AutoRouteWrapper {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  final ValueNotifier<bool> isLoading = ValueNotifier(false);
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
-  final authShakeKey = GlobalKey<ShakeWidgetState>();
+  final _isLoading = ValueNotifier<bool>(false);
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _authShakeKey = GlobalKey<ShakeWidgetState>();
   final _formKey = GlobalKey<FormState>();
 
   bool _isUsernameValid = false;
@@ -43,26 +39,34 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   void dispose() {
-    usernameController.dispose();
-    passwordController.dispose();
-    isLoading.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
+    _isLoading.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return MultiBlocListener(
       listeners: [
         BlocListener<AuthCubit, AuthState>(
           listener: (context, state) {
-            state.whenOrNull(
+            state.when(
               error: (error) {
-                isLoading.value = false;
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error)));
+                _isLoading.value = false;
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(error))
+                );
               },
               success: () {
-                isLoading.value = false;
-                navigateCategoryPage(context);
+                _isLoading.value = false;
+                NavigationUtils.getAuthNavigator().navigateCategoryPage();
+              },
+              init: () {},
+              loading: () {
+                _isLoading.value = true;
               },
             );
           },
@@ -71,106 +75,106 @@ class _AuthScreenState extends State<AuthScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         body: Material(
-          color: Theme.of(context).scaffoldBackgroundColor,
+          color: theme.scaffoldBackgroundColor,
           child: SafeArea(
             child: LayoutBuilder(
-              builder: (context, constraints) {
-                return SingleChildScrollView(
-                  padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom,
+              builder: (context, constraints) => SingleChildScrollView(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: constraints.maxHeight,
                   ),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: constraints.maxHeight,
-                    ),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: IconButton(
-                              onPressed: () {
-                                context.router.popForced();
+                  child: Form(
+                    key: _formKey,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 50),
+                            const Icon(
+                              Icons.recycling_outlined,
+                              color: AppColors.main,
+                              size: 110,
+                            ),
+                            Text(
+                              LocaleKeys.welcome.tr(context: context),
+                              style: theme.textTheme.displayMedium?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 30,
+                                color: theme.colorScheme.secondary,
+                              ),
+                            ),
+                            const SizedBox(height: 100),
+                            EcoTextField(
+                              key: const Key('username_field'),
+                              hintText: LocaleKeys.login.tr(context: context),
+                              autocorrect: false,
+                              radius: 20,
+                              controller: _usernameController,
+                              onChanged: (value) {
+                                setState(() {
+                                  _isUsernameValid = _validateUsername(value) == null;
+                                });
                               },
-                              icon: const Icon(Icons.keyboard_arrow_left, size: 40),
-                              padding: const EdgeInsets.all(5),
+                              validator: _validateUsername,
+                              validateOnChange: true,
                             ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Column(
-                              children: [
-                                50.verticalSpace,
-                                const Icon(
-                                  Icons.recycling_outlined,
-                                  color: AppColors.main,
-                                  size: 110,
-                                ),
-                                Text(
-                                  LocaleKeys.welcome.tr(context: context),
-                                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 30,
-                                    color: Theme.of(context).colorScheme.secondary,
-                                  ),
-                                ),
-                                100.verticalSpace,
-                                EcoTextField(
-                                  hintText: LocaleKeys.login.tr(context: context),
-                                  autocorrect: false,
-                                  radius: 20,
-                                  controller: usernameController,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _isUsernameValid = _validateUsername(value) == null;
-                                    });
-                                  },
-                                  validator: _validateUsername,
-                                  validateOnChange: true,
-                                ),
-                                15.verticalSpace,
-                                EcoTextField(
-                                  hintText: LocaleKeys.password.tr(context: context),
-                                  autocorrect: false,
-                                  radius: 20,
-                                  controller: passwordController,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _isPasswordValid = _validatePassword(value) == null;
-                                    });
-                                  },
-                                  // validator: _validatePassword,
-                                  validateOnChange: true,
-                                  obscureText: true,
-                                  iconColor: AppColors.greatFalls,
-                                ),
-                                30.verticalSpace,
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                                  child: ValueListenableBuilder(
-                                    builder: (BuildContext context, bool value, Widget? child) {
-                                      return EcoElevatedButton.loading(
-                                        onPressed: (_isUsernameValid) ? _auth : null,
-                                        loading: value,
-                                        child: Text(
-                                          LocaleKeys.enter.tr(context: context),
-                                          style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),
-                                        ),
-                                      );
-                                    },
-                                    valueListenable: isLoading,
-                                  ),
-                                ),
-                              ],
+                            const SizedBox(height: 15),
+                            EcoTextField(
+                              key: const Key('password_field'),
+                              hintText: LocaleKeys.password.tr(context: context),
+                              autocorrect: false,
+                              radius: 20,
+                              controller: _passwordController,
+                              onChanged: (value) {
+                                setState(() {
+                                  _isPasswordValid = _validatePassword(value) == null;
+                                });
+                              },
+                              validator: _validatePassword,
+                              validateOnChange: true,
+                              obscureText: true,
+                              iconColor: AppColors.greatFalls,
                             ),
-                          ),
-                        ],
+                            const SizedBox(height: 30),
+                            ValueListenableBuilder(
+                              valueListenable: _isLoading,
+                              builder: (context, bool isLoading, _) {
+                                return EcoElevatedButton.loading(
+                                  key: const Key('login_button'),
+                                  onPressed: (_isUsernameValid && _isPasswordValid)
+                                      ? () {
+                                    if (!_formKey.currentState!.validate()) {
+                                      _authShakeKey.currentState?.shake();
+                                      return;
+                                    }
+                                    context.read<AuthCubit>().login(
+                                      login: _usernameController.text,
+                                      password: _passwordController.text,
+                                    );
+                                  }
+                                      : null,
+                                  loading: isLoading,
+                                  child: Text(
+                                    LocaleKeys.enter.tr(context: context),
+                                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                );
-              },
+                ),
+              ),
             ),
           ),
         ),
@@ -205,23 +209,5 @@ class _AuthScreenState extends State<AuthScreen> {
       return LocaleKeys.passwordCannotContainSpaces.tr(context: context);
     }
     return null;
-  }
-
-  void _auth() {
-    if (!_formKey.currentState!.validate()) {
-      authShakeKey.currentState?.shake();
-      return;
-    }
-
-    isLoading.value = true;
-    final authCubit = context.read<AuthCubit>();
-    authCubit.login(
-      login: usernameController.text,
-      password: passwordController.text,
-    );
-  }
-
-  Future<void> navigateCategoryPage(BuildContext context) async {
-    return NavigationUtils.getAuthNavigator().navigateCategoryPage();
   }
 }

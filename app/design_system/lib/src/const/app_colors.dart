@@ -14,6 +14,7 @@ class AppColors {
   static const Color  cactusWater = Color.fromRGBO(205, 251, 226, 1.0);
   static const Color  bucolic = Color.fromRGBO(23, 104, 57, 1.0);
   static const Color  coalmine = Color.fromRGBO(30, 30, 30, 1.0);
+  static const Color  darkGray = Color.fromRGBO(74, 74, 74, 1);
 
   static const Color gray = Color.fromRGBO(245, 245, 245, 1);
   static const Color green = Color.fromRGBO(60, 196, 117, 1.0);

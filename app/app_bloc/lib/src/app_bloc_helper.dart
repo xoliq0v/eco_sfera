@@ -9,4 +9,16 @@ mixin AppBlocHelper {
   static AuthCubit getAuthCubit() {
     return GetIt.I.get<AuthCubit>();
   }
+
+  static ProfileCubit getProfileCubit(){
+    return GetIt.I.get<ProfileCubit>();
+  }
+
+  static LogoutCubit provideLogOutCubit(){
+    return GetIt.I.get<LogoutCubit>();
+  }
+
+  static LogoutCubit getLogoutCubit(){
+    return GetIt.I.get<LogoutCubit>();
+  }
 }

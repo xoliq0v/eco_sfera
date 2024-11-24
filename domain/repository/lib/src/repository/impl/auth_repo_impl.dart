@@ -13,13 +13,28 @@ class AuthRepoImpl extends AuthRepository{
   final ClientProvider clientProvider;
 
   @override
-  Future<Result<String>> login({required String login, required String password}) {
-    return toResult2(
-      authProvider.login(login: login,password: password),
-      fromSuccessResponse: (response) {
-        return response.data!;
-      },
-    );
+  Future<Result<String>> login({required String login, required String password}) async {
+    try {
+      final response = await authProvider.login(login: login, password: password);
+
+      if (!response.success || response.data == null) {
+        return Result.error(
+          ResultError(
+            message: response.error?.message ?? 'Invalid login or password',
+            reason: response.error?.reason ?? 'Authentication failed',
+          ),
+        );
+      }
+
+      return Result.completed(response.data);
+    } catch (e) {
+      return Result.error(
+        ResultError(
+          message: 'Authentication failed',
+          reason: e.toString(),
+        ),
+      );
+    }
   }
 
   @override
@@ -29,7 +44,5 @@ class AuthRepoImpl extends AuthRepository{
       fromSuccessResponse: (response) => response.data != null,
     );
   }
-
-
 
 }

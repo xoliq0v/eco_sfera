@@ -20,11 +20,11 @@ class AuthProviderImpl extends AuthProvider {
         AuthEndpoint.base,
         data: {
           "login": login,
-          "password": password
+          "password": password,
         },
       ),
       dataFromJson: (data) {
-        log('Login response data: ${data['token']}'); // Added logging
+        log('Login response data: $data');
         if (data is Map<String, dynamic>) {
           final token = data['token'];
           if (token != null) {
@@ -33,8 +33,13 @@ class AuthProviderImpl extends AuthProvider {
         }
         throw const FormatException('Invalid response structure');
       },
+      errorDataFromJson: (data) {
+        log('Error response data: $data');
+        if (data is Map<String, dynamic> && data.containsKey('message')) {
+          return data['message'] as String;
+        }
+        return 'Unknown error occurred';
+      },
     );
   }
-
-
 }

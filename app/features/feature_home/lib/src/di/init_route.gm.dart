@@ -147,7 +147,7 @@ abstract class $FeatureHomeModule extends _i22.AutoRouterModule {
     ProfileRoute.name: (routeData) {
       return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i16.ProfilePage(),
+        child: _i22.WrappedRoute(child: const _i16.ProfilePage()),
       );
     },
     ReportRoute.name: (routeData) {

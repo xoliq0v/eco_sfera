@@ -14,7 +14,7 @@ class ClientProviderImpl extends ClientProvider {
     return apiCall(
       authClient.get(ClientEndpoint.clientData),
       dataFromJson: (data) {
-        return ClientDataDTO.fromJson(data as Map<String, dynamic>);
+        return ClientDataDTO.fromJson(data[0] as Map<String, dynamic>);
       },
     );
   }

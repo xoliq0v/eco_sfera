@@ -12,13 +12,15 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 abstract class NetworkModule {
   @lazySingleton
   Dio provideDio(
-    BaseOptions baseOptions,
-    Alice alice,
-  ) {
+      AuthInterceptor authInterceptor,
+      BaseOptions baseOptions,
+      Alice alice,
+      ) {
     final dio = Dio(baseOptions);
     return dio
       ..interceptors.addAll(
         [
+          authInterceptor,
           if (!kReleaseMode)
             PrettyDioLogger(requestHeader: true, requestBody: true),
           alice.getDioInterceptor(),
@@ -29,10 +31,10 @@ abstract class NetworkModule {
   @lazySingleton
   @Named('auth_dio')
   Dio provideAuthDio(
-    AuthInterceptor authInterceptor,
-    Alice alice,
-    BaseOptions baseOptions,
-  ) {
+      AuthInterceptor authInterceptor,
+      Alice alice,
+      BaseOptions baseOptions,
+      ) {
     final dio = Dio(baseOptions);
     return dio
       ..interceptors.addAll(
@@ -55,9 +57,9 @@ abstract class NetworkModule {
 
   @lazySingleton
   AuthInterceptor provideAuthInterceptor(
-    SecureStorage secureStorage,
-    AppStorage appStorage,
-  ) {
+      SecureStorage secureStorage,
+      AppStorage appStorage,
+      ) {
     return AuthInterceptor(
       secureStorage: secureStorage,
     );

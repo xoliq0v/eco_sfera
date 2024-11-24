@@ -30,6 +30,10 @@ abstract class UseCaseModule {
     return GetUserProfileImpl(userRepository: userRepository);
   }
 
+  Logout provideLogout(SessionRepository sessionRepository){
+    return LogoutImpl(sessionRepository: sessionRepository);
+  }
+
 }
 
 @InjectableInit.microPackage()

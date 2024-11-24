@@ -9,7 +9,7 @@ class _Tablet extends StatelessWidget {
       color: Theme.of(context).colorScheme.secondary,
       child: CustomScrollView(
         slivers: [
-          const HeaderProfilePage().toBoxAdapter(),
+          // const HeaderProfilePage().toBoxAdapter(),
           SliverFillRemaining(
             hasScrollBody: true,
             child: _buildMainContent(context),

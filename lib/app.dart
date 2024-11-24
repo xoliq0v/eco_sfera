@@ -1,6 +1,3 @@
-// import 'package:alice/alice.dart';
-// import 'package:app_bloc/app_bloc.dart';
-import 'package:alice/alice.dart';
 import 'package:eco_sfera/di/injection.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
@@ -8,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:navigation/navigation.dart';
+import 'package:alice/alice.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -22,7 +20,6 @@ class _AppState extends State<App> {
 
   @override
   void initState() {
-    // Uncomment if using Alice for network debugging:
     _alice.setNavigatorKey(_appRouter.navigatorKey);
     super.initState();
   }

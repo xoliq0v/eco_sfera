@@ -29,13 +29,10 @@ class NetworkPackageModule extends _i1.MicroPackageModule {
               gh<_i5.AppStorage>(),
             ));
     gh.lazySingleton<_i3.Dio>(() => networkModule.provideDio(
+          gh<_i4.AuthInterceptor>(),
           gh<_i3.BaseOptions>(),
           gh<_i6.Alice>(),
         ));
-    gh.lazySingleton<_i7.AuthProvider>(
-        () => networkProvidersModule.provideAuthProvider(gh<_i3.Dio>()));
-    gh.lazySingleton<_i7.ClientProvider>(
-        () => networkProvidersModule.provideClientProvider(gh<_i3.Dio>()));
     gh.lazySingleton<_i3.Dio>(
       () => networkModule.provideAuthDio(
         gh<_i4.AuthInterceptor>(),
@@ -44,6 +41,10 @@ class NetworkPackageModule extends _i1.MicroPackageModule {
       ),
       instanceName: 'auth_dio',
     );
+    gh.lazySingleton<_i7.AuthProvider>(
+        () => networkProvidersModule.provideAuthProvider(gh<_i3.Dio>()));
+    gh.lazySingleton<_i7.ClientProvider>(
+        () => networkProvidersModule.provideClientProvider(gh<_i3.Dio>()));
   }
 }
 

@@ -36,9 +36,52 @@ abstract class BaseProvider {
             ),
           );
         case DioExceptionType.badResponse:
+          log('BAD_RESPONSE');
+          final errorData = e.response?.data;
+          if(errorData != null){
+            try{
+              final errorResponse = ApiResponse.fromJson(
+                errorData as Map<String, dynamic>,
+                    (data) => errorDataFromJson?.call(data),
+              );
+
+              log('BAD RESPONSE: ${errorResponse.error?.message}');
+
+              return ApiResponse<T>(
+                errorResponse.data,
+                success: errorResponse.success,
+                error: errorResponse.error,
+              );
+            }catch (ee) {
+              log(
+                'Error data DioErrorType.badResponse catch:'
+                    '$e ${e.response?.data} ${e.error} ${e.stackTrace}',
+              );
+              log(
+                'Error data DioErrorType.unknown catch: $ee',
+              );
+              return ApiResponse(
+                null,
+                success: false,
+                error: ApiResponseError(
+                  reason: 'Error Data parse is bad',
+                  message: 'Error code: ${e.response?.statusCode}',
+                ),
+              );
+            }
+          }
+          return ApiResponse(
+            null,
+            success: false,
+            error: ApiResponseError(
+              reason: 'Data is null',
+              message: 'Error code: ${e.response?.statusCode}',
+            ),
+          );
         case DioExceptionType.unknown:
           final errorData = e.response?.data;
           if (errorData != null) {
+            log(e.response?.data['message'].toString()??'NULL');
             log(
               'Error data DioErrorType.unknown data not null:'
                   '$e ${e.response?.data} ${e.error} ${e.stackTrace}',

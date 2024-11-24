@@ -1,6 +1,5 @@
 import 'package:database/database.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 
 class AuthInterceptor extends QueuedInterceptor {
   AuthInterceptor({
@@ -18,9 +17,9 @@ class AuthInterceptor extends QueuedInterceptor {
     if (token == null) {
       return handler.next(options);
     }
-    debugPrint('TOKEN: $token');
+    print('jasco: $token');
     options.headers.addAll({
-      'Authorization': 'Basic $token',
+      'Authorization': 'Bearer $token',
     });
     super.onRequest(options, handler);
   }
