@@ -14,6 +14,7 @@ dependencies:
     path: ../yandex-mapkit-lite-flutter
   flutter:
     sdk: flutter
+  geolocator: 11.0.0
 #  yandex_maps_mapkit_lite: ^4.8.1
 
 dev_dependencies:

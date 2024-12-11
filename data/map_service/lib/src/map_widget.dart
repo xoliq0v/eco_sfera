@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yandex_mapkit_lite/yandex_mapkit_lite.dart';
 
 class MapWidget extends StatelessWidget {
-  final List<MapObject> mapObjects;
+  final List<MapObject>? mapObjects;
 
   final MapCreatedCallback? onControllerCreated;
 
@@ -15,7 +15,7 @@ class MapWidget extends StatelessWidget {
   final bool allowUserInteractions;
 
   const MapWidget({
-    required this.mapObjects,
+    this.mapObjects,
     this.onControllerCreated,
     this.onTrafficChanged,
     this.onUserLocationUpdated,
@@ -33,7 +33,7 @@ class MapWidget extends StatelessWidget {
       zoomGesturesEnabled: allowUserInteractions,
       fastTapEnabled: true,
       onMapCreated: onControllerCreated,
-      mapObjects: mapObjects,
+      mapObjects: mapObjects ?? [],
       onTrafficChanged: onTrafficChanged,
       onUserLocationAdded: onUserLocationUpdated,
       onCameraPositionChanged: onCameraPositionChanged,

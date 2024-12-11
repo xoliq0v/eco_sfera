@@ -45,6 +45,14 @@ class NetworkPackageModule extends _i1.MicroPackageModule {
         () => networkProvidersModule.provideAuthProvider(gh<_i3.Dio>()));
     gh.lazySingleton<_i7.ClientProvider>(
         () => networkProvidersModule.provideClientProvider(gh<_i3.Dio>()));
+    gh.lazySingleton<_i7.CustomerProvider>(
+        () => networkProvidersModule.provideCustomerProvider(gh<_i3.Dio>()));
+    gh.lazySingleton<_i7.PartnerProvider>(
+        () => networkProvidersModule.providePartnerProvider(gh<_i3.Dio>()));
+    gh.lazySingleton<_i7.TrashProvider>(
+        () => networkProvidersModule.provideTrashProvider(gh<_i3.Dio>()));
+    gh.lazySingleton<_i7.RouteProvider>(
+        () => networkProvidersModule.provideRouteProvider(gh<_i3.Dio>()));
   }
 }
 

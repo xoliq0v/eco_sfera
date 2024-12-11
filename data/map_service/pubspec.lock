@@ -15,7 +15,7 @@ packages:
     source: sdk
     version: "0.3.2"
   alice:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../../domain/alice"
       relative: true
@@ -253,7 +253,7 @@ packages:
     source: hosted
     version: "2.3.7"
   database:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../database"
       relative: true
@@ -528,7 +528,7 @@ packages:
     source: hosted
     version: "3.2.0"
   geolocator:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: geolocator
       sha256: "694ec58afe97787b5b72b8a0ab78c1a9244811c3c10e72c4362ef3c0ceb005cd"
@@ -832,7 +832,7 @@ packages:
     source: hosted
     version: "1.0.6"
   network:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../network"
       relative: true

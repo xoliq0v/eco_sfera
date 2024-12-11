@@ -1,2 +1,9 @@
 export 'src/location.dart';
 export 'src/user.dart';
+export 'src/base_paginated_response.dart';
+export 'src/partner.dart';
+export 'src/customer.dart';
+export 'src/route.dart';
+export 'src/trash.dart';
+export 'src/customer_get.dart';
+export 'src/requests/customer_post_request.dart';

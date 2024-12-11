@@ -34,13 +34,13 @@ class _PolygonScreenState extends State<PolygonScreen> {
 
           20.verticalSpace,
 
-          EcoDropdownMenu(
-            topText: LocaleKeys.landfillOperator.tr(context: context),
-            onChanged: (value){},
-            items: const [
-              DropdownMenuEntry(value: 'value', label: 'label'),
-            ], initialSelection: '',
-          ),
+          // EcoDropdownMenu(
+          //   topText: LocaleKeys.landfillOperator.tr(context: context),
+          //   onChanged: (value){},
+          //   items: const [
+          //     DropdownMenuEntry(value: 'value', label: 'label'),
+          //   ], initialSelection: '',
+          // ),
 
           20.verticalSpace,
 

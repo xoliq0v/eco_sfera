@@ -11,10 +11,10 @@ class ClientDataDTO {
     required this.phone,
     required this.login,
     required this.walletId,
-    required this.walletBalance,
-    required this.workOrder,
+    required this.wallet_balance,
+    required this.vehicle_mumber,
     required this.vehicle,
-    required this.vehicleNumber,
+    required this.work_order,
     required this.earnings,
     required this.outlay,
   });
@@ -29,10 +29,10 @@ class ClientDataDTO {
   final String? phone;
   final String? login;
   final String? walletId;
-  final String? walletBalance;
-  final String? vehicleNumber;
+  final String? wallet_balance;
+  final String? vehicle_mumber;
   final String? vehicle;
-  final String? workOrder;
+  final String? work_order;
   final String? earnings;
   final String? outlay;
 }

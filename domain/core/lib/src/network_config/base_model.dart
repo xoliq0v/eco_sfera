@@ -8,6 +8,7 @@ class ApiResponse<T> {
     this.data, {
     required this.success,
     this.error,
+    this.message,
   });
 
   factory ApiResponse.fromJson(
@@ -21,4 +22,5 @@ class ApiResponse<T> {
   @JsonKey(defaultValue: false)
   bool success;
   final ApiResponseError? error;
+  final String? message;
 }

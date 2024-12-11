@@ -1,6 +1,17 @@
 export 'src/di/init.module.dart';
 export 'src/dto/auth_dto.dart';
 export 'src/dto/client_data_dto.dart';
+export 'src/dto/customer_dto.dart';
+export 'src/dto/pageable_content_dto.dart';
+export 'src/dto/partner_dto.dart';
+export 'src/dto/requests/customer_get_request.dart';
+export 'src/dto/requests/customer_post_dto.dart';
+export 'src/dto/route_dto.dart';
+export 'src/dto/trash_dto.dart';
 export 'src/provider/auth_provider.dart';
 export 'src/provider/base_provider.dart';
 export 'src/provider/client_provider.dart';
+export 'src/provider/customer_provider.dart';
+export 'src/provider/partner_provider.dart';
+export 'src/provider/route_provider.dart';
+export 'src/provider/trash_provider.dart';

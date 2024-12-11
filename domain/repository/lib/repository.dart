@@ -4,3 +4,5 @@ export 'src/repository/auth_repo.dart';
 export 'src/repository/session_repo.dart';
 export 'src/repository/user_repo.dart';
 export 'src/di/init.module.dart';
+export 'src/mapping/requests/customer_mapping.dart';
+export 'src/mapping/pageable_content_mapping.dart';

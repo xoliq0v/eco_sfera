@@ -1,5 +1,20 @@
-abstract class CheckLocationPermission{
-  Future<bool> checkPermissionWithoutRequest();
+import 'package:core/core.dart';
+import 'package:model/model.dart';
 
-  Future<bool> checkPermission();
+abstract class CheckPermissionWithoutRequestUseCase{
+
+  Future<bool> check();
+
+}
+
+abstract class CheckPermissionUseCase {
+
+  Future<bool> check();
+
+}
+
+abstract class GetCurrentLocationUseCase {
+
+  Future<Result<LongLat>> get();
+
 }

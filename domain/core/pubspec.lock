@@ -254,7 +254,7 @@ packages:
     source: hosted
     version: "2.3.7"
   database:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../../data/database"
       relative: true
@@ -833,7 +833,7 @@ packages:
     source: hosted
     version: "1.0.6"
   network:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../../data/network"
       relative: true

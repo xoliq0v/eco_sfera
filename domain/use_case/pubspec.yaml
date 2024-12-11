@@ -8,6 +8,7 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  app_settings: 5.1.1
   core:
     path: ../core
   repository:

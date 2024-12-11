@@ -1,5 +1,6 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
+import 'package:map_service/map_service.dart';
 
 class AdmissionSheet {
   static void show(BuildContext context) {
@@ -89,7 +90,7 @@ class _MapWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 5),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
-          child: MapWidget(onControllerCreated: (MapWindow ) {  }, mapObjects: [],),
+          child: MapWidget(),
         ),
       ),
     );
