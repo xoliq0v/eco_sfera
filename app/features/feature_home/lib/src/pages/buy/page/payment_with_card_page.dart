@@ -31,6 +31,7 @@ class _PaymentWithCardPageState extends State<PaymentWithCardPage> {
   void initState() {
     super.initState();
     amountController = TextEditingController();
+    amountController.text = "50 000";
     cardNumberController = TextEditingController();
     cardNumberController.addListener(_onCardNumberChanged);
   }
@@ -74,41 +75,41 @@ class _PaymentWithCardPageState extends State<PaymentWithCardPage> {
     return Column(
       children: [
         40.verticalSpace,
+        // EcoTextField(
+        //   topRightText: LocaleKeys.recipientsCardNumber.tr(context: context),
+        //   controller: cardNumberController,
+        //   svgSuffixIcon: AppIcons.scan,
+        //   hintText: 'xxxx  xxxx  xxxx  xxxx',
+        //   svgSuffixIconPressed: () async{
+        //     // var cardDetails = await CardScanner.scanCard();
+        //     // if(cardDetails!=null){
+        //     //   cardNumberController.text = cardDetails.cardNumber;
+        //     // }
+        //   },
+        //   keyboardType: TextInputType.number,
+        //   inputFormatters: [
+        //     FilteringTextInputFormatter.digitsOnly,
+        //     LengthLimitingTextInputFormatter(16),
+        //     // CreditCardFormatter(),
+        //   ],
+        //   validator: (value) {
+        //     if (value == null || value.isEmpty) {
+        //       return 'Please enter a card number';
+        //     }
+        //     if (value.replaceAll(RegExp(r'\s+\b|\b\s'), '').length < 16) {
+        //       return 'Please enter a valid 16-digit card number';
+        //     }
+        //     return null;
+        //   },
+        //   onChanged: (value) {
+        //     if (value != null) {
+        //     //   onChanged!(value.replaceAll(RegExp(r'\s+\b|\b\s'), ''));
+        //       value.replaceAll(RegExp(r'\s+\b|\b\s'), '');
+        //     }
+        //   },
+        // ),
         EcoTextField(
-          topRightText: LocaleKeys.recipientsCardNumber.tr(context: context),
-          controller: cardNumberController,
-          svgSuffixIcon: AppIcons.scan,
-          hintText: 'xxxx  xxxx  xxxx  xxxx',
-          svgSuffixIconPressed: () async{
-            // var cardDetails = await CardScanner.scanCard();
-            // if(cardDetails!=null){
-            //   cardNumberController.text = cardDetails.cardNumber;
-            // }
-          },
-          keyboardType: TextInputType.number,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-            LengthLimitingTextInputFormatter(16),
-            // CreditCardFormatter(),
-          ],
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter a card number';
-            }
-            if (value.replaceAll(RegExp(r'\s+\b|\b\s'), '').length < 16) {
-              return 'Please enter a valid 16-digit card number';
-            }
-            return null;
-          },
-          onChanged: (value) {
-            if (value != null) {
-            //   onChanged!(value.replaceAll(RegExp(r'\s+\b|\b\s'), ''));
-              value.replaceAll(RegExp(r'\s+\b|\b\s'), '');
-            }
-          },
-        ),
-        20.verticalSpace,
-        EcoTextField(
+          readOnly: true,
           topRightText: LocaleKeys.amount.tr(context: context),
           controller: amountController,
           keyboardType: TextInputType.number,

@@ -12,15 +12,15 @@ class AuthProviderImpl extends AuthProvider {
 
   @override
   Future<ApiResponse<String>> login({
-    required String login,
-    required String password,
+    required AuthDTO auth,
   }) {
     return apiCall(
       apiClient.post(
         AuthEndpoint.base,
         data: {
-          "login": login,
-          "password": password,
+          'login': auth.login,
+          'password': auth.password,
+          'device_token': auth.deviceToken,
         },
       ),
       dataFromJson: (data) {

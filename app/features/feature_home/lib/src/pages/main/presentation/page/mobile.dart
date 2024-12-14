@@ -2,6 +2,7 @@
 part of '../../main_page.dart';
 
 class _Mobile extends StatefulWidget {
+  /// This params from first app's version ui!
   final List<PageRouteInfo<dynamic>> pages;
   final List<String> icons;
   final List<String> routes;
@@ -92,7 +93,7 @@ class _ViewState extends State<_View> with TickerProviderStateMixin {
           tabSelectedColor: AppColors.cactusWater,
           tabIconSelectedColor: AppColors.main,
           onTabItemSelected: (int index){
-            if (index == 4) {
+            if (index == 3) {
               motionTabBarController.index = lastIndex;
               navigateProfilePage();
             } else {

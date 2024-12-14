@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:core/core.dart';
 import 'package:repository/repository.dart';
 import 'package:use_case/src/impl/auth_use_case_impl.dart';
+import 'package:use_case/src/impl/order_use_case_impl.dart';
 import 'package:use_case/src/impl/session_use_case_impl.dart';
 import 'package:use_case/use_case.dart';
 
@@ -32,6 +33,10 @@ abstract class UseCaseModule {
 
   Logout provideLogout(SessionRepository sessionRepository){
     return LogoutImpl(sessionRepository: sessionRepository);
+  }
+
+  GetOrder provideGetOrder(OrderRepo orderRepo){
+    return GetOrderImpl(orderRepo: orderRepo);
   }
 
 }

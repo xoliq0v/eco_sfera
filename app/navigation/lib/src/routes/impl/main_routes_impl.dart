@@ -20,7 +20,7 @@ class MainRoutesImpl extends MainRoutes {
 
   @override
   PageRouteInfo getPaymentPage() {
-    return const BuyRoute();
+    return BuyRoute();
   }
 
   @override

@@ -5,12 +5,15 @@ import 'package:network/src/provider/customer_provider.dart';
 import 'package:network/src/provider/impl/auth_provider_impl.dart';
 import 'package:network/src/provider/impl/client_provider_impl.dart';
 import 'package:network/src/provider/impl/customer_dto_provider_impl.dart';
+import 'package:network/src/provider/impl/order_provider_impl.dart';
 import 'package:network/src/provider/impl/partner_provider_impl.dart';
 import 'package:network/src/provider/impl/route_provider_impl.dart';
 import 'package:network/src/provider/impl/trash_provider_impl.dart';
 import 'package:network/src/provider/partner_provider.dart';
 import 'package:network/src/provider/route_provider.dart';
 import 'package:network/src/provider/trash_provider.dart';
+
+import '../provider/orders_provider.dart';
 
 @module
 abstract class NetworkProvidersModule {
@@ -44,6 +47,11 @@ abstract class NetworkProvidersModule {
   @lazySingleton
   RouteProvider provideRouteProvider(Dio apiClient){
     return RouteProviderImpl(apiClient: apiClient);
+  }
+
+  @lazySingleton
+  OrderProvider provideOrderProvider(Dio apiClient){
+    return OrderProviderImpl(apiClient: apiClient);
   }
 
 }

@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/services.dart' as services;
 import 'package:flutter/widgets.dart';
@@ -43,5 +44,13 @@ extension StringExtDesign on String {
     final image = rasterPicture.toImageSync(width, height);
     final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     return byteData!.buffer.asUint8List();
+  }
+
+  String toKm(BuildContext context){
+    return switch (context.locale.currentLanguage()) {
+        AppLanguages.ru => '${this} км',
+        AppLanguages.uz => '${this} km',
+        AppLanguages.en => '${this} km',
+    };
   }
 }

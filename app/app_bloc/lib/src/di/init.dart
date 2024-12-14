@@ -2,6 +2,7 @@
 import 'dart:async';
 
 import 'package:app_bloc/app_bloc.dart';
+import 'package:app_bloc/src/bloc/order/order_cubit.dart';
 import 'package:core/core.dart';
 import 'package:use_case/use_case.dart';
 
@@ -35,6 +36,10 @@ abstract class AppBlocModule {
 
   LogoutCubit provideLogOutCubit(Logout logout){
     return LogoutCubit(logout);
+  }
+
+  OrderCubit provideOrderCubit(GetOrder getOrder){
+    return OrderCubit(getOrder);
   }
 
 }

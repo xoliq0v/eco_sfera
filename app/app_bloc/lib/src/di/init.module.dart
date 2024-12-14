@@ -29,6 +29,8 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
         ));
     gh.factory<_i3.LogoutCubit>(
         () => appBlocModule.provideLogOutCubit(gh<_i5.Logout>()));
+    gh.factory<_i3.OrderCubit>(
+        () => appBlocModule.provideOrderCubit(gh<_i5.GetOrder>()));
     gh.factory<_i3.ProfileCubit>(() => appBlocModule.provideProfileCubit(
           gh<_i5.GetUserProfile>(),
           gh<_i5.FetchUserProfile>(),

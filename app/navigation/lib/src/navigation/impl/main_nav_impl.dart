@@ -71,5 +71,10 @@ class MainNavigationImpl extends MainNavigation {
     return appRouter.navigate(const SettingsRoute());
   }
 
+  @override
+  Future<void> navigateBuyPage() {
+    return appRouter.push(BuyRoute());
+  }
+
 
 }

@@ -53,6 +53,8 @@ class NetworkPackageModule extends _i1.MicroPackageModule {
         () => networkProvidersModule.provideTrashProvider(gh<_i3.Dio>()));
     gh.lazySingleton<_i7.RouteProvider>(
         () => networkProvidersModule.provideRouteProvider(gh<_i3.Dio>()));
+    gh.lazySingleton<_i7.OrderProvider>(
+        () => networkProvidersModule.provideOrderProvider(gh<_i3.Dio>()));
   }
 }
 

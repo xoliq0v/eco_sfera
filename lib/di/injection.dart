@@ -2,6 +2,7 @@ import 'package:app_bloc/app_bloc.dart';
 import 'package:eco_sfera/di/injection.config.dart';
 import 'package:core/core.dart';
 import 'package:database/database.dart';
+import 'package:firebase_eco/firebase_eco.dart';
 import 'package:map_service/map_service.dart';
 import 'package:navigation/navigation.dart';
 import 'package:network/network.dart';
@@ -17,6 +18,7 @@ final getIt = GetIt.instance;
     ExternalModule(DatabasePackageModule),
     ExternalModule(NetworkPackageModule),
     ExternalModule(MapServicePackageModule),
+    ExternalModule(FirebaseEcoPackageModule),
   ],
   externalPackageModulesAfter: [
     ExternalModule(RepositoryPackageModule),

@@ -4,6 +4,7 @@ abstract class AuthUseCase {
   Future<Result<String>> login({
     required String login,
     required String password,
+    required String deviceToken
   });
 }
 

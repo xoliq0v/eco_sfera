@@ -112,5 +112,10 @@ abstract class  LocaleKeys {
   static const waitMore = 'waitMore';
   static const noInternetConnection = 'noInternetConnection';
   static const tryAgain = 'tryAgain';
+  static const filter = 'filter';
+  static const cancel = 'cancel';
+  static const showAll = 'showAll';
+  static const showNearbyPeople = 'showNearbyPeople';
+  static const showOrders = 'showOrders';
 
 }

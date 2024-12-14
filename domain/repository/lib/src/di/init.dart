@@ -5,6 +5,7 @@ import 'package:network/network.dart';
 import 'package:database/database.dart';
 import 'package:repository/repository.dart';
 import 'package:repository/src/repository/impl/auth_repo_impl.dart';
+import 'package:repository/src/repository/impl/order_repo_impl.dart';
 import 'package:repository/src/repository/impl/session_repo_impl.dart';
 import 'package:repository/src/repository/impl/user_repo_impl.dart';
 
@@ -40,6 +41,13 @@ abstract class RepositoryModule {
       MyObjectBox appDatabase,
       ){
     return SessionRepositoryImpl(appDatabase: appDatabase, appStorage: appStorage, secureStorage: secureStorage);
+  }
+  
+  @lazySingleton
+  OrderRepo provideOrderRepository(
+      OrderProvider orderProvider
+      ){
+    return OrderRepoImpl(orderProvider: orderProvider);
   }
 }
 

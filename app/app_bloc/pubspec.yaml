@@ -13,6 +13,10 @@ dependencies:
     path: ../../domain/core
   use_case:
     path: ../../domain/use_case
+  model:
+    path: ../../domain/model
+  firebase_eco:
+    path: ../../data/firebase_eco
   flutter_bloc: 8.1.5
   flutter:
     sdk: flutter

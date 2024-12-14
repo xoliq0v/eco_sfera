@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     if (token != null && token.isNotEmpty) {
       // If token exists, navigate to the main page
-      navigateToMainPage(context);
+      navigateMainPage(context);
     } else {
       // If no token, check connectivity and proceed as before
       isFinished = true;
@@ -105,8 +105,19 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-  Future<void> navigateToMainPage(BuildContext context) async {
-    await NavigationUtils.getAuthNavigator().navigateCategoryPage();
+  Future<void> navigateMainPage(BuildContext context) async{
+    return await NavigationUtils.getMainNavigator().navigateMainPage(pages: RouteUtils.getTrashRoutes(), icons: [
+      AppIcons.menu02,
+      AppIcons.buy,
+      AppIcons.historySvg,
+      AppIcons.profileSvg
+    ], routes: [
+      LocaleKeys.orders.tr(context: context),
+      LocaleKeys.buy.tr(context: context),
+      LocaleKeys.history.tr(context: context),
+      LocaleKeys.profile.tr(context: context),
+      // LocaleKeys.profile.tr(context: context)
+    ]);
   }
 
   Future<void> navigateChooseLangPage(BuildContext context) async {

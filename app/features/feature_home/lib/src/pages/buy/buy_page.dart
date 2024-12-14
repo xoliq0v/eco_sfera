@@ -444,7 +444,8 @@ class CustomerService {
 
 @RoutePage()
 class BuyPage extends StatefulWidget {
-  const BuyPage({super.key});
+  final String? name;
+  const BuyPage({super.key, this.name});
 
   @override
   State<BuyPage> createState() => _BuyPageState();
@@ -521,20 +522,20 @@ class _BuyPageState extends State<BuyPage> {
               child: EcoDropdownMenu(
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 topText: LocaleKeys.customer.tr(context: context),
-                initialSelection: _selectedCustomer ?? '',
-                loadItems: () async {
+                initialSelection: _selectedCustomer ?? widget.name,
+                loadItems: widget.name == null ? () async {
                   print('Loading customers...'); // Add this debug print
                   await Future.delayed(Duration(seconds: 1));
                   final customers = await CustomerService.fetchCustomers();
                   print('Fetched customers: $customers'); // Add this debug print
                   return customers;
-                },
+                } : null ,
                 onChanged: (value) {
                   setState(() {
                     _selectedCustomer = value;
                   });
                 },
-                onAddCustomer: () async {
+                onAddCustomer: widget.name == null ? () async {
                   // Navigate to AddingPage and wait for result
                   final result = await Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => const AddingPage()),
@@ -548,7 +549,7 @@ class _BuyPageState extends State<BuyPage> {
                       _selectedCustomer = result;
                     });
                   }
-                },
+                } : null,
               ),
             ),
 
@@ -709,7 +710,7 @@ class _BuyPageState extends State<BuyPage> {
                         borderRadius: 40,
                         onPressed: (){
                           // context.router.navigate(const PaymentRoute());
-                          // navigatePaymentPage();
+                          navigatePaymentPage();
                         },
                         child: Text(LocaleKeys.acceptance.tr(),style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),)
                     )
@@ -727,6 +728,11 @@ class _BuyPageState extends State<BuyPage> {
       ),
     );
   }
+
+  Future<void> navigatePaymentPage() async{
+    return NavigationUtils.getMainNavigator().navigatePaymentPage();
+  }
+
 }
 
 class AddingPage extends StatefulWidget {

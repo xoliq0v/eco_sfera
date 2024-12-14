@@ -42,6 +42,7 @@ class AppRouter extends _$AppRouter {
       AutoRoute(page: MapRouteRoute.page,
         type: const RouteType.cupertino(),
       ),
+      AutoRoute(page: BuyRoute.page,),
     ];
   }
 

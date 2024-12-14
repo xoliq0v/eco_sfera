@@ -30,6 +30,8 @@ abstract class MainNavigation {
 
   Future<void> navigateSettingsPage();
 
+  Future<void> navigateBuyPage();
+
   // Future<void> navigateProfilePage();
   //
   // Future<void> navigateAdmissionHistoryPage();

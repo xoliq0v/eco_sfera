@@ -8,6 +8,9 @@ class AppIcons {
 
   static const String boarding = '$_assetsImagesPath/boarding.jpg';
   static const String buying = '$_assetsImagesPath/buying.png';
+  static const String buy = '$_assetsIconsPath/buy.svg';
+  static const String historySvg = '$_assetsIconsPath/history.svg';
+  static const String profileSvg = '$_assetsIconsPath/profile.svg';
   static const String partners = '$_assetsImagesPath/customers.png';
   static const String history = '$_assetsImagesPath/history.png';
   static const String polygon = '$_assetsImagesPath/layer.png';
@@ -20,6 +23,8 @@ class AppIcons {
   static const String appIcon = '$_assetsImagesPath/app_icon.png';
 
   static const String frameBlue = '$_assetsIconsPath/frame_blue.png';
+  static const String search = '$_assetsIconsPath/search.svg';
+  static const String filter = '$_assetsIconsPath/filter.svg';
   static const String frameGreen = '$_assetsIconsPath/frame_green.png';
   static const String disconnect = '$_assetsIconsPath/disconnect.png';
   static const String plus = '$_assetsIconsPath/plus.png';

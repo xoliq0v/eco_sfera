@@ -1,14 +1,14 @@
 
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-
-import '../../data/models/order.dart';
+import 'package:model/model.dart';
 
 
 class OrderItem extends StatelessWidget {
-  final Order order;
+  final OrderModel order;
+  final bool isNew;
   final Function()? onTap;
-  const OrderItem({super.key, required this.order,this.onTap});
+  const OrderItem({super.key, required this.order,this.onTap, this.isNew = false});
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +16,8 @@ class OrderItem extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.only(
-          right: 20,
-          left: 20,
+          right: 10,
+          left: 10,
           top: 15,
         ),
         child: SizedBox(
@@ -31,7 +31,7 @@ class OrderItem extends StatelessWidget {
                       blurRadius: 1
                   )
                 ],
-                color: Theme.of(context).colorScheme.surface,
+                color: Theme.of(context).colorScheme.background,
                 borderRadius: BorderRadius.circular(25)
             ),
             child: Column(
@@ -52,16 +52,17 @@ class OrderItem extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      order.title,
+                                      order.userId,
                                       overflow: TextOverflow.ellipsis,
                                       style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                                           fontWeight: FontWeight.w400,
-                                          fontSize: 20
+                                          fontSize: 20,
+                                        color: isNew ? AppColors.main : context.colorScheme.primary
                                       ),
                                     ),
                                     Flexible(
                                         child: Text(
-                                          order.description,
+                                          order.userId,
                                           overflow: TextOverflow.ellipsis,
                                           style: Theme.of(context).textTheme.headlineMedium,
                                         )
@@ -87,8 +88,8 @@ class OrderItem extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(order.date,style: Theme.of(context).textTheme.headlineMedium,),
-                      Text(order.distance,style: Theme.of(context).textTheme.headlineMedium,),
+                      Text(order.date.toString(),style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : context.colorScheme.primary),),
+                      Text(order.locations[0].longitude,style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : context.colorScheme.primary),),
                     ],
                   ),
                 )

@@ -109,5 +109,10 @@
     "stop": "Stop",
     "waitMore": "Wait more",
     "noInternetConnection": "No internet connection...",
-    "tryAgain": "Try again"
+    "tryAgain": "Try again",
+    "filter": "Filter",
+    "cancel": "Cancel",
+    "showAll": "Show all",
+    "showNearbyPeople": "Show nearby people",
+    "showOrders": "Show {} orders"
 }

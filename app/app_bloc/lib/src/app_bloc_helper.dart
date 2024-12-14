@@ -1,4 +1,5 @@
 import 'package:app_bloc/app_bloc.dart';
+import 'package:app_bloc/src/bloc/order/order_cubit.dart';
 import 'package:core/core.dart';
 
 mixin AppBlocHelper {
@@ -21,4 +22,9 @@ mixin AppBlocHelper {
   static LogoutCubit getLogoutCubit(){
     return GetIt.I.get<LogoutCubit>();
   }
+
+  static OrderCubit getOrderCubit(){
+    return GetIt.I.get<OrderCubit>();
+  }
+
 }

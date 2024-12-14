@@ -7,7 +7,7 @@ mixin ClientEndpoint {
   static const _basePath = 'api/employee';
 
   static String clientData = '$_basePath/data';
-  static String logout = 'logout';
+  static String logout = '$_basePath/logout';
 
 }
 
@@ -36,4 +36,12 @@ mixin RouteEndpoint {
   static const _basePath = 'api/routes';
 
   static String routes = _basePath;
+}
+
+mixin OrderEndpoint {
+
+  static const _basePath = 'api/bot-orders';
+
+  static String orders = _basePath;
+
 }

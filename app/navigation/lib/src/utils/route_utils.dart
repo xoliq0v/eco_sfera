@@ -4,10 +4,10 @@ mixin RouteUtils {
   static List<PageRouteInfo> getTrashRoutes() {
     final mainRoutes = GetIt.I.get<MainRoutes>();
     return [
-      mainRoutes.getHomePage(),
-      mainRoutes.getRoadMapPage(),
+      mainRoutes.getOrderPage(),
       mainRoutes.getPaymentPage(),
       mainRoutes.getConfirmedHistoryPage(),
+      // mainRoutes.getConfirmedHistoryPage(),
     ];
   }
   static List<PageRouteInfo> getSecondaryRoutes() {

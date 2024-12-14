@@ -28,6 +28,7 @@ class EcoTextField extends StatefulWidget {
   final Function()? svgSuffixIconPressed;
   final List<TextInputFormatter>? inputFormatters;
   final Function(String? value)? onChanged;
+  final bool readOnly;
 
   const EcoTextField({
     super.key,
@@ -52,7 +53,8 @@ class EcoTextField extends StatefulWidget {
     this.svgSuffixIcon,
     this.svgSuffixIconPressed,
     this.inputFormatters,
-    this.onChanged
+    this.onChanged,
+    this.readOnly = false
   });
 
   @override
@@ -112,6 +114,7 @@ class _EcoTextFieldState extends State<EcoTextField> {
                   child: TextFormField(
                     autocorrect: widget.autocorrect,
                     controller: widget.controller,
+                    readOnly: widget.readOnly,
                     keyboardType: widget.keyboardType,
                     obscureText: _isObscured,
                     textInputAction: widget.textInputAction,

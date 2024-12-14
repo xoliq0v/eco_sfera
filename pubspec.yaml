@@ -28,6 +28,8 @@ dependencies:
     path: app/navigation
   network:
     path: data/network
+  firebase_eco:
+    path: data/firebase_eco
   repository:
     path: domain/repository
   use_case:

@@ -43,12 +43,7 @@ class _AdmissionsHistoryPageState extends State<AdmissionsHistoryPage> {
               itemCount: 3,
               padding: const EdgeInsets.all(16),
               itemBuilder: (context, index) {
-                return OrderItem(
-                  order: list[0],
-                  onTap: () {
-                    AdmissionSheet.show(context);
-                  },
-                );
+                return SizedBox();
               },
             );
           }
@@ -59,12 +54,7 @@ class _AdmissionsHistoryPageState extends State<AdmissionsHistoryPage> {
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 16),
-                child: OrderItem(
-                  order: list[0],
-                  onTap: () {
-                    AdmissionSheet.show(context);
-                  },
-                ),
+                child: SizedBox(),
               );
             },
           );

@@ -66,9 +66,14 @@ abstract class $FeatureHomeModule extends _i23.AutoRouterModule {
       );
     },
     BuyRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<BuyRouteArgs>(orElse: () => const BuyRouteArgs());
       return _i23.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.BuyPage(),
+        child: _i4.BuyPage(
+          key: args.key,
+          name: args.name,
+        ),
       );
     },
     CategoryRoute.name: (routeData) {
@@ -127,11 +132,9 @@ abstract class $FeatureHomeModule extends _i23.AutoRouterModule {
       );
     },
     OrdersRoute.name: (routeData) {
-      final args = routeData.argsAs<OrdersRouteArgs>(
-          orElse: () => const OrdersRouteArgs());
       return _i23.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i13.OrdersPage(key: args.key),
+        child: _i23.WrappedRoute(child: const _i13.OrdersPage()),
       );
     },
     PartnersRoute.name: (routeData) {
@@ -235,16 +238,40 @@ class BoardingRoute extends _i23.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.BuyPage]
-class BuyRoute extends _i23.PageRouteInfo<void> {
-  const BuyRoute({List<_i23.PageRouteInfo>? children})
-      : super(
+class BuyRoute extends _i23.PageRouteInfo<BuyRouteArgs> {
+  BuyRoute({
+    _i24.Key? key,
+    String? name,
+    List<_i23.PageRouteInfo>? children,
+  }) : super(
           BuyRoute.name,
+          args: BuyRouteArgs(
+            key: key,
+            name: name,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'BuyRoute';
 
-  static const _i23.PageInfo<void> page = _i23.PageInfo<void>(name);
+  static const _i23.PageInfo<BuyRouteArgs> page =
+      _i23.PageInfo<BuyRouteArgs>(name);
+}
+
+class BuyRouteArgs {
+  const BuyRouteArgs({
+    this.key,
+    this.name,
+  });
+
+  final _i24.Key? key;
+
+  final String? name;
+
+  @override
+  String toString() {
+    return 'BuyRouteArgs{key: $key, name: $name}';
+  }
 }
 
 /// generated route for
@@ -395,31 +422,16 @@ class OrderCardRoute extends _i23.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i13.OrdersPage]
-class OrdersRoute extends _i23.PageRouteInfo<OrdersRouteArgs> {
-  OrdersRoute({
-    _i24.Key? key,
-    List<_i23.PageRouteInfo>? children,
-  }) : super(
+class OrdersRoute extends _i23.PageRouteInfo<void> {
+  const OrdersRoute({List<_i23.PageRouteInfo>? children})
+      : super(
           OrdersRoute.name,
-          args: OrdersRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'OrdersRoute';
 
-  static const _i23.PageInfo<OrdersRouteArgs> page =
-      _i23.PageInfo<OrdersRouteArgs>(name);
-}
-
-class OrdersRouteArgs {
-  const OrdersRouteArgs({this.key});
-
-  final _i24.Key? key;
-
-  @override
-  String toString() {
-    return 'OrdersRouteArgs{key: $key}';
-  }
+  static const _i23.PageInfo<void> page = _i23.PageInfo<void>(name);
 }
 
 /// generated route for

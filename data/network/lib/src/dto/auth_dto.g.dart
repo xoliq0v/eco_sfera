@@ -9,9 +9,11 @@ part of 'auth_dto.dart';
 AuthDTO _$AuthDTOFromJson(Map<String, dynamic> json) => AuthDTO(
       login: json['login'] as String,
       password: json['password'] as String,
+      deviceToken: json['device_token'] as String,
     );
 
 Map<String, dynamic> _$AuthDTOToJson(AuthDTO instance) => <String, dynamic>{
       'login': instance.login,
       'password': instance.password,
+      'device_token': instance.deviceToken,
     };

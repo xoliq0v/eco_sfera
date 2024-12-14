@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EcoDropdownMenu extends StatefulWidget {
-  final Future<List<String>> Function() loadItems;
+  final Future<List<String>> Function()? loadItems;
   final String? initialSelection;
   final Function(String?) onChanged;
   final Function()? onAddCustomer;
@@ -11,7 +11,7 @@ class EcoDropdownMenu extends StatefulWidget {
 
   const EcoDropdownMenu({
     super.key,
-    required this.loadItems,
+    this.loadItems,
     this.initialSelection,
     required this.onChanged,
     this.onAddCustomer,
@@ -43,7 +43,7 @@ class _EcoDropdownMenuState extends State<EcoDropdownMenu> {
     });
 
     try {
-      final rawItems = await widget.loadItems();
+      final rawItems = await widget.loadItems!();
 
       // If list is null or empty, do not show dropdown
       if (rawItems.isEmpty) {

@@ -109,5 +109,10 @@
     "stop": "To'xtatish",
     "waitMore": "Davom etish",
     "noInternetConnection": "Internet aloqasi yo'q...",
-    "tryAgain": "Qayta urinib ko'ring"
+    "tryAgain": "Qayta urinib ko'ring",
+    "filter": "Filter",
+    "cancel": "Bekor qilish",
+    "showAll": "Barchasini ko’rsatish",
+    "showNearbyPeople": "Yaqin atrofdgilarni ko’rsatish",
+    "showOrders": "{} ta buyurtmani ko’rsatish"
 }

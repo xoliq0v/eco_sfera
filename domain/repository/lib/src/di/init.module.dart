@@ -28,6 +28,8 @@ class RepositoryPackageModule extends _i526.MicroPackageModule {
               gh<_i372.AuthProvider>(),
               gh<_i372.ClientProvider>(),
             ));
+    gh.lazySingleton<_i585.OrderRepo>(() =>
+        repositoryModule.provideOrderRepository(gh<_i372.OrderProvider>()));
     gh.lazySingleton<_i585.UserRepository>(
         () => repositoryModule.provideUserRepository(
               gh<_i372.ClientProvider>(),
