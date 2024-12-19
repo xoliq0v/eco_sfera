@@ -30,7 +30,9 @@ abstract class MainNavigation {
 
   Future<void> navigateSettingsPage();
 
-  Future<void> navigateBuyPage();
+  Future<void> navigateBuyPage(Map<String,int>? params);
+
+  Future<void> navigateAddCustomerPage();
 
   // Future<void> navigateProfilePage();
   //

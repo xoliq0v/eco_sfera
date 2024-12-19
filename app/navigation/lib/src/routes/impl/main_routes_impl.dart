@@ -28,4 +28,9 @@ class MainRoutesImpl extends MainRoutes {
     return const RoadMapRoute();
   }
 
+  @override
+  PageRouteInfo goAddCustomerPage() {
+    return const AddCustomerRoute();
+  }
+
 }

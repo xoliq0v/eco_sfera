@@ -1,19 +1,17 @@
 import 'package:core/core.dart';
 import 'package:dio/dio.dart';
 import 'package:network/network.dart';
-import 'package:network/src/provider/customer_provider.dart';
 import 'package:network/src/provider/impl/auth_provider_impl.dart';
+import 'package:network/src/provider/impl/buy_provider_impl.dart';
 import 'package:network/src/provider/impl/client_provider_impl.dart';
-import 'package:network/src/provider/impl/customer_dto_provider_impl.dart';
+import 'package:network/src/provider/impl/customer_provider_impl.dart';
+import 'package:network/src/provider/impl/history_provider_impl.dart';
 import 'package:network/src/provider/impl/order_provider_impl.dart';
 import 'package:network/src/provider/impl/partner_provider_impl.dart';
 import 'package:network/src/provider/impl/route_provider_impl.dart';
 import 'package:network/src/provider/impl/trash_provider_impl.dart';
-import 'package:network/src/provider/partner_provider.dart';
-import 'package:network/src/provider/route_provider.dart';
-import 'package:network/src/provider/trash_provider.dart';
 
-import '../provider/orders_provider.dart';
+import '../provider/history_provider.dart';
 
 @module
 abstract class NetworkProvidersModule {
@@ -38,7 +36,6 @@ abstract class NetworkProvidersModule {
     return PartnerProviderImpl(apiClient: apiClient);
   }
 
-
   @lazySingleton
   TrashProvider provideTrashProvider(Dio apiClient){
     return TrashProviderImpl(apiClient: apiClient);
@@ -54,4 +51,13 @@ abstract class NetworkProvidersModule {
     return OrderProviderImpl(apiClient: apiClient);
   }
 
+  @lazySingleton
+  BuyProvider provideBuyProvider(Dio apiClient){
+    return BuyProviderImpl(apiClient: apiClient);
+  }
+
+  @lazySingleton
+  HistoryProvider provideHistoryProvider(Dio apiClient){
+    return HistoryProviderImpl(apiClient: apiClient);
+  }
 }

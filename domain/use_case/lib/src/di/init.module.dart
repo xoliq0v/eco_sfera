@@ -17,6 +17,8 @@ class UseCasePackageModule extends _i526.MicroPackageModule {
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
     final useCaseModule = _$UseCaseModule();
+    gh.factory<_i987.FetchHistory>(
+        () => useCaseModule.provideFetchHistory(gh<_i585.HistoryRepo>()));
     gh.factory<_i987.FetchUserProfile>(() =>
         useCaseModule.provideFetchUserProfile(gh<_i585.UserRepository>()));
     gh.factory<_i987.GetUserProfile>(
@@ -31,6 +33,15 @@ class UseCasePackageModule extends _i526.MicroPackageModule {
         () => _i627.AuthImpl(authRepository: gh<_i585.AuthRepository>()));
     gh.factory<_i987.AuthUseCase>(
         () => useCaseModule.provideAuthUseCase(gh<_i585.AuthRepository>()));
+    gh.factory<_i987.GetCustomer>(
+        () => useCaseModule.provideGetCustomer(gh<_i585.CustomerRepository>()));
+    gh.factory<_i987.PostCustomer>(() =>
+        useCaseModule.providePostCustomer(gh<_i585.CustomerRepository>()));
+    gh.factory<_i987.Buy>(() => useCaseModule.provideBuy(gh<_i585.BuyRepo>()));
+    gh.factory<_i987.FetchBuyPageParams>(
+        () => useCaseModule.provideBuyPageParams(gh<_i585.BuyRepo>()));
+    gh.factory<_i987.GetLocation>(
+        () => useCaseModule.provideGetLocation(gh<_i585.LocationRepository>()));
     gh.factory<_i987.GetOrder>(
         () => useCaseModule.provideGetOrder(gh<_i585.OrderRepo>()));
   }

@@ -43,6 +43,7 @@ class AppRouter extends _$AppRouter {
         type: const RouteType.cupertino(),
       ),
       AutoRoute(page: BuyRoute.page,),
+      AutoRoute(page: AddCustomerRoute.page,),
     ];
   }
 

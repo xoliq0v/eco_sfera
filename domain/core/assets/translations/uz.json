@@ -114,5 +114,11 @@
     "cancel": "Bekor qilish",
     "showAll": "Barchasini ko’rsatish",
     "showNearbyPeople": "Yaqin atrofdgilarni ko’rsatish",
-    "showOrders": "{} ta buyurtmani ko’rsatish"
+    "showOrders": "{} ta buyurtmani ko’rsatish",
+    "updateApp": "Iltimos, ilovani yangilang!",
+    "noOrdersAvailable": "Buyurtmalar mavjud emas \uD83D\uDE14",
+    "orderAddress": "{} \n {}",
+    "locationPermission": "Joylashuv ruxsati",
+    "locationAccessIsRequired": "Joylashuvga ruxsat talab qilinadi",
+    "openSettings": "Sozlamalarni oching"
 }

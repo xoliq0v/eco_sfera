@@ -6,27 +6,30 @@ import 'package:map_service/map_service.dart';
 import 'package:navigation/navigation.dart';
 
 class OrderSheet {
-  static void show(BuildContext context) {
+  static void show(BuildContext context,Coords coords,Map<String,String> user,Map<String,int> params) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       elevation: 0,
       backgroundColor: Colors.transparent,
       barrierColor: Colors.grey.withOpacity(0.85),
-      builder: (context) => const _OrderSheetContent(),
+      builder: (context) => _OrderSheetContent(coords: coords,user: user,params: params,),
     );
   }
 }
 
 class _OrderSheetContent extends StatelessWidget {
-  const _OrderSheetContent({super.key});
+  final Coords coords;
+  final Map<String,String> user;
+  final Map<String,int> params;
+  const _OrderSheetContent({super.key,required this.coords,required this.user,required this.params});
 
   @override
   Widget build(BuildContext context) {
     return IntrinsicHeight(
       child: Column(
         children: [
-          _SheetBody(),
+          _SheetBody(coords: coords,user: user,params: params,),
         ],
       ),
     );
@@ -34,11 +37,15 @@ class _OrderSheetContent extends StatelessWidget {
 }
 
 class _SheetBody extends StatelessWidget {
+  _SheetBody({required this.coords,required this.user,required this.params});
+  late Coords coords;
+
+  final Map<String,String> user;
+  final Map<String,int> params;
 
   openMapsSheet(context) async {
     try {
-      final coords = Coords(37.759392, -122.5107336);
-      final title = "Ocean Beach";
+      final title = LocaleKeys.orderAddress.tr(context: context,args: [user.keys.first,user.values.first]);
       final availableMaps = await MapLauncher.installedMaps;
 
       showModalBottomSheet(
@@ -108,7 +115,7 @@ class _SheetBody extends StatelessWidget {
                   bottom: 60
                 ),
                 child: EcoMaterialButton(onPressed: () async{
-                  await NavigationUtils.getMainNavigator().navigateBuyPage();
+                  await NavigationUtils.getMainNavigator().navigateBuyPage(params);
                 }, child: Text(LocaleKeys.buy.tr(context: context))),
               ),
             ],
@@ -118,42 +125,4 @@ class _SheetBody extends StatelessWidget {
     );
   }
 
-}
-
-class _MapWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      height: 150,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: MapWidget(),
-        ),
-      ),
-    );
-  }
-}
-
-class _ItemRow extends StatelessWidget {
-  final String title;
-  final String value;
-
-  const _ItemRow({required this.title, required this.value});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(title,),
-          Text(value),
-        ],
-      ),
-    );
-  }
 }

@@ -6,7 +6,7 @@ extension CustomerDTOExt on CustomerDto {
     return Customer(
         id: id,
         name: name,
-        surname: surname,
+        // surname: surname,
     );
   }
 }

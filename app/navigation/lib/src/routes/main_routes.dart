@@ -12,4 +12,6 @@ abstract class MainRoutes{
 
   PageRouteInfo getRoadMapPage();
 
+  PageRouteInfo goAddCustomerPage();
+
 }

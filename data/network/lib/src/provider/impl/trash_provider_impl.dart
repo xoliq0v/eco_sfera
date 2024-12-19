@@ -10,11 +10,13 @@ class TrashProviderImpl extends TrashProvider {
   final Dio apiClient;
 
   @override
-  Future<ApiResponse<TrashDto>> fetchTrashes() {
+  Future<ApiResponse<List<TrashDto>>> fetchTrashes() {
     return apiCall(
       apiClient.get(TrashEndpoint.trashes),
      dataFromJson: (data){
-        return TrashDto.fromJson(data as Map<String, dynamic>);
+        return (data as List<dynamic>).map((json){
+          return TrashDto.fromJson(json as Map<String, dynamic>);
+        }).toList();
      }
     );
   }

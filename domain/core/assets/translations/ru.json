@@ -114,5 +114,11 @@
     "cancel": "Отмена",
     "showAll": "Показать все",
     "showNearbyPeople": "Показать людей поблизости",
-    "showOrders": "Показать {} заказов"
+    "showOrders": "Показать {} заказов",
+    "updateApp": "Пожалуйста, обновите приложение!",
+    "noOrdersAvailable": "Заказов нет \uD83D\uDE14",
+    "orderAddress": "{} \n {}",
+    "locationPermission": "Разрешение на местоположение",
+    "locationAccessIsRequired": "Требуется доступ к местоположению.",
+    "openSettings": "Открыть настройки"
 }

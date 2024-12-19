@@ -54,3 +54,28 @@ extension StringExtDesign on String {
     };
   }
 }
+
+extension UzbekPhoneNumberFormatter on String {
+  String formatUzbekPhoneNumberMap() {
+    // Remove any non-digit characters (like spaces, dashes, etc.)
+    String digits = this.replaceAll(RegExp(r'\D'), '');
+
+    // Check if it's a valid length for an Uzbek phone number
+    if (digits.length == 12 && digits.startsWith('998')) {
+      return '(${digits.substring(3, 5)}) ${digits.substring(5, 8)}-${digits.substring(8)}';
+    } else {
+      return 'Invalid number';
+    }
+  }
+  String formatUzbekPhoneNumber() {
+    // Remove any non-digit characters (like spaces, dashes, etc.)
+    String digits = this.replaceAll(RegExp(r'\D'), '');
+
+    // Check if it's a valid length for an Uzbek phone number
+    if (digits.length == 12 && digits.startsWith('998')) {
+      return '+998 (${digits.substring(3, 5)}) ${digits.substring(5, 8)}-${digits.substring(8)}';
+    } else {
+      return 'Invalid number';
+    }
+  }
+}

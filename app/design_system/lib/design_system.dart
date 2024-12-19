@@ -45,6 +45,7 @@ export 'src/widget/state_views/error_view.dart';
 export 'src/widget/state_views/info_view.dart';
 export 'src/widget/text_field/main_text_field.dart';
 export 'src/widget/text_field/pin_put_field.dart';
+export 'src/widget/text_field/phone_number_field.dart';
 export 'src/widget/yellow_price_box.dart';
 export 'src/custom_painter.dart';
 export 'src/widget/button/eco_button.dart';

@@ -2,6 +2,10 @@
 import 'dart:async';
 
 import 'package:app_bloc/app_bloc.dart';
+import 'package:app_bloc/src/bloc/buy/buy_cubit.dart';
+import 'package:app_bloc/src/bloc/customer/customer_cubit.dart';
+import 'package:app_bloc/src/bloc/customer/post_customer_cubit.dart';
+import 'package:app_bloc/src/bloc/history/history_pagination_cubit.dart';
 import 'package:app_bloc/src/bloc/order/order_cubit.dart';
 import 'package:core/core.dart';
 import 'package:use_case/use_case.dart';
@@ -42,6 +46,31 @@ abstract class AppBlocModule {
     return OrderCubit(getOrder);
   }
 
+  PostCustomerCubit providePostCustomerCubit(PostCustomer postCustomer){
+    return PostCustomerCubit(postCustomer);
+  }
+
+  CustomerCubit provideCustomerCubit(GetCustomer getCustomer){
+    return CustomerCubit(getCustomer);
+  }
+
+  CustomerPaginationCubit provideCustomerPaginationCubit(GetCustomer getCustomer){
+    return CustomerPaginationCubit(initialPageSize: 5,getCustomer);
+  }
+
+  LocationServiceCubit provideLocationCubit(GetLocation _getLocation){
+    return LocationServiceCubit(_getLocation);
+  }
+
+  BuyCubit provideBuyCubit(Buy _buy,FetchBuyPageParams _fetchBuyPageParams){
+    return BuyCubit(_buy, _fetchBuyPageParams);
+  }
+
+  HistoryPaginationCubit provideHistoryPaginationCubit(
+      FetchHistory _fetchHistory
+      ){
+    return HistoryPaginationCubit(_fetchHistory, initialPageSize: 5);
+  }
 }
 
 @InjectableInit.microPackage()

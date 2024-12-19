@@ -45,3 +45,19 @@ mixin OrderEndpoint {
   static String orders = _basePath;
 
 }
+
+mixin BuyEndpoint {
+
+  static const _basePath = 'api/order';
+
+  static String buy = _basePath;
+
+}
+
+mixin HistoryEndpoint{
+
+  static const _basePath = 'api/order-history';
+
+  static String history = _basePath;
+
+}

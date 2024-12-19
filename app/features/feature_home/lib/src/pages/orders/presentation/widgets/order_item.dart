@@ -52,7 +52,7 @@ class OrderItem extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      order.userId,
+                                      order.orderUser.name,
                                       overflow: TextOverflow.ellipsis,
                                       style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                                           fontWeight: FontWeight.w400,
@@ -62,7 +62,7 @@ class OrderItem extends StatelessWidget {
                                     ),
                                     Flexible(
                                         child: Text(
-                                          order.userId,
+                                          order.orderUser.phoneNumber.formatUzbekPhoneNumber(),
                                           overflow: TextOverflow.ellipsis,
                                           style: Theme.of(context).textTheme.headlineMedium,
                                         )
@@ -88,8 +88,8 @@ class OrderItem extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(order.date.toString(),style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : context.colorScheme.primary),),
-                      Text(order.locations[0].longitude,style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : context.colorScheme.primary),),
+                      Text('${order.date.hour}:${order.date.minute}',style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : context.colorScheme.primary),),
+                      Text(order.distance!.toInt().toString().toKm(context),style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : context.colorScheme.primary),),
                     ],
                   ),
                 )

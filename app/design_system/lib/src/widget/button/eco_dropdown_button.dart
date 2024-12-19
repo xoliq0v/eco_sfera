@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 
 class EcoDropdownMenu extends StatefulWidget {
-  final Future<List<String>> Function()? loadItems;
+  final List<String>? items;
+  final bool isLoading;
   final String? initialSelection;
-  final Function(String?) onChanged;
+  final Function(String?)? onChanged;
   final Function()? onAddCustomer;
   final String? topText;
   final EdgeInsetsGeometry? padding;
   final double? width;
+  final String? placeholderText; // New placeholder text parameter
 
   const EcoDropdownMenu({
     super.key,
-    this.loadItems,
+    this.items,
+    this.isLoading = false,
     this.initialSelection,
-    required this.onChanged,
+    this.onChanged,
     this.onAddCustomer,
     this.topText,
     this.padding,
-    this.width
+    this.width,
+    this.placeholderText, // Added placeholder parameter
   });
 
   @override
@@ -25,57 +29,42 @@ class EcoDropdownMenu extends StatefulWidget {
 }
 
 class _EcoDropdownMenuState extends State<EcoDropdownMenu> {
-  List<DropdownMenuEntry<String>> _items = [];
-  bool _isLoading = false;
-  bool _isVisible = false;
-  final _dropdownController = SearchController();
+  List<DropdownMenuEntry<String>> _dropdownEntries = [];
+  String? _selectedValue;
+
+  @override
+  void didUpdateWidget(covariant EcoDropdownMenu oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    // Update dropdown entries when items change
+    if (widget.items != oldWidget.items) {
+      _updateDropdownEntries();
+    }
+
+    // Update selected value if initialSelection changes
+    if (widget.initialSelection != oldWidget.initialSelection) {
+      setState(() {
+        _selectedValue = widget.initialSelection;
+      });
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    _loadItems();
+    _updateDropdownEntries();
+    // Set initial selection
+    _selectedValue = widget.initialSelection;
   }
 
-  Future<void> _loadItems() async {
-    setState(() {
-      _isLoading = true;
-      _isVisible = false;
-    });
-
-    try {
-      final rawItems = await widget.loadItems!();
-
-      // If list is null or empty, do not show dropdown
-      if (rawItems.isEmpty) {
-        setState(() {
-          _items = [];
-          _isLoading = false;
-          _isVisible = false;
-        });
-        return;
-      }
-
-      // Combine items with loaded items
-      final loadedItems = rawItems.map((item) =>
+  void _updateDropdownEntries() {
+    // Convert items to dropdown entries if available
+    if (widget.items != null) {
+      _dropdownEntries = widget.items!.map((item) =>
           DropdownMenuEntry<String>(value: item, label: item)
       ).toList();
-
-      setState(() {
-        _items = loadedItems;
-        _isLoading = false;
-        _isVisible = true;
-      });
-
-    } catch (e) {
-      setState(() {
-        _items = [];
-        _isLoading = false;
-        _isVisible = false;
-      });
-
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error loading items: $e'))
-      );
+    } else {
+      _dropdownEntries = [];
     }
   }
 
@@ -97,24 +86,29 @@ class _EcoDropdownMenuState extends State<EcoDropdownMenu> {
               ),
             ),
           DropdownMenu<String>(
-            controller: _dropdownController,
+            initialSelection: _selectedValue,
             width: widget.width ?? MediaQuery.sizeOf(context).width * 0.9,
+            enabled: widget.onChanged != null,
+            hintText: widget.placeholderText, // Add placeholder text
             onSelected: (String? selected) {
-              // If no selection is made, do nothing
-              if (selected == null) return;
-              // Normal selection handling
-              widget.onChanged(selected);
+              // If no selection is made or onChanged is null, do nothing
+              if (selected == null || widget.onChanged == null) return;
+
+              // Update local state
+              setState(() {
+                _selectedValue = selected;
+              });
+
+              // Call onChanged callback
+              widget.onChanged!(selected);
             },
             leadingIcon: widget.onAddCustomer != null ? IconButton(
               icon: const Icon(Icons.add_circle_outline),
-              onPressed: () {
-                // Close dropdown and trigger add customer
-                // _dropdownController.close();
-                widget.onAddCustomer!();
-              },
-            ) : SizedBox.shrink(),
+              onPressed: widget.onAddCustomer,
+            ) : null,
             dropdownMenuEntries: [
-              if (_isLoading)
+              // Show loading indicator if isLoading is true
+              if (widget.isLoading)
                 DropdownMenuEntry(
                     value: 'loading',
                     label: 'Loading...',
@@ -127,13 +121,15 @@ class _EcoDropdownMenuState extends State<EcoDropdownMenu> {
                         )
                     )
                 )
+              // Otherwise, show the actual items
               else
-                ..._items,
+                ..._dropdownEntries,
             ],
             menuStyle: MenuStyle(
               backgroundColor: MaterialStateProperty.all(colorScheme.background),
             ),
             inputDecorationTheme: InputDecorationTheme(
+                hintStyle: TextStyle(color: colorScheme.onSurface.withOpacity(0.5)),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                     borderSide: BorderSide(

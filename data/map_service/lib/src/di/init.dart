@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:core/core.dart';
+import 'package:map_service/map_service.dart';
 import 'package:map_service/src/geocoding.dart';
 import 'package:map_service/src/geolocator.dart';
 import 'package:map_service/src/impl/geocoding_impl.dart';
 import 'package:map_service/src/impl/geolocator_impl.dart';
+import 'package:map_service/src/impl/location_service_impl.dart';
 import 'package:yandex_mapkit_lite/yandex_mapkit_lite.dart';
 
 @module
@@ -20,6 +22,10 @@ abstract class MapServiceModule {
 
   AppGeocoding provideAppGeocoding(YandexGeocoder yandexGeocoder) {
     return AppGeocodingImpl(yandexGeocoder: yandexGeocoder);
+  }
+
+  LocationService provideLocationService(){
+    return LocationServiceImpl();
   }
 }
 

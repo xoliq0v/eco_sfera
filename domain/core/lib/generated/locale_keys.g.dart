@@ -117,5 +117,11 @@ abstract class  LocaleKeys {
   static const showAll = 'showAll';
   static const showNearbyPeople = 'showNearbyPeople';
   static const showOrders = 'showOrders';
+  static const updateApp = 'updateApp';
+  static const noOrdersAvailable = 'noOrdersAvailable';
+  static const orderAddress = 'orderAddress';
+  static const locationPermission = 'locationPermission';
+  static const locationAccessIsRequired = 'locationAccessIsRequired';
+  static const openSettings = 'openSettings';
 
 }

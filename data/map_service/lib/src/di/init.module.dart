@@ -8,20 +8,21 @@ import 'dart:async' as _i687;
 
 import 'package:core/core.dart' as _i494;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:map_service/map_service.dart' as _i200;
 import 'package:map_service/src/di/init.dart' as _i907;
-import 'package:map_service/src/geocoding.dart' as _i775;
-import 'package:map_service/src/geolocator.dart' as _i786;
 
 class MapServicePackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
     final mapServiceModule = _$MapServiceModule();
-    gh.factory<_i786.AppGeolocation>(
+    gh.factory<_i200.AppGeolocation>(
         () => mapServiceModule.provideAppGeolocation());
+    gh.factory<_i200.LocationService>(
+        () => mapServiceModule.provideLocationService());
     gh.lazySingleton<_i494.YandexGeocoder>(
         () => mapServiceModule.provideYandexGeocoder());
-    gh.factory<_i775.AppGeocoding>(
+    gh.factory<_i200.AppGeocoding>(
         () => mapServiceModule.provideAppGeocoding(gh<_i494.YandexGeocoder>()));
   }
 }

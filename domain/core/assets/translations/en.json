@@ -114,5 +114,11 @@
     "cancel": "Cancel",
     "showAll": "Show all",
     "showNearbyPeople": "Show nearby people",
-    "showOrders": "Show {} orders"
+    "showOrders": "Show {} orders",
+    "updateApp": "Please update app!",
+    "noOrdersAvailable": "No orders available \uD83D\uDE14",
+    "orderAddress": "{} \n {}",
+    "locationPermission": "Location permission",
+    "locationAccessIsRequired": "Location access is required",
+    "openSettings": "Open settings"
 }

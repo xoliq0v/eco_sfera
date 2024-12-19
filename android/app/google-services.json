@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "7346981580",
+    "project_id": "eco-sfera-bfe89",
+    "storage_bucket": "eco-sfera-bfe89.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:7346981580:android:e82266421c1c065e2d9069",
+        "android_client_info": {
+          "package_name": "com.aladdin.eco_sfera"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5FTsluIXl5cnAsYYHSRMEjSRdEzopLPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

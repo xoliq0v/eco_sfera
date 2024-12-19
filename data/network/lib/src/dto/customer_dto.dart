@@ -8,7 +8,7 @@ class CustomerDto {
   CustomerDto({
     required this.id,
     required this.name,
-    required this.surname,
+    // required this.surname,
   });
 
   factory CustomerDto.fromJson(Map<String, dynamic> json){
@@ -17,6 +17,6 @@ class CustomerDto {
 
   final int id;
   final String name;
-  final String surname;
+  // final String surname;
 
 }

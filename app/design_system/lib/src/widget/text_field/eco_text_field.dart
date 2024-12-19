@@ -10,7 +10,7 @@ class EcoTextField extends StatefulWidget {
   final TextEditingController? controller;
   final TextInputType keyboardType;
   final bool obscureText;
-  final IconData? prefixIcon;
+  final Widget? prefixIcon;
   final IconData? suffixIcon;
   final TextInputAction textInputAction;
   final String? Function(String?)? validator;
@@ -105,7 +105,7 @@ class _EcoTextFieldState extends State<EcoTextField> {
 
               SizedBox(
                 width: fieldWidth,
-                height: fieldHeight,
+                height: fieldHeight + 20,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(widget.radius!),
@@ -132,7 +132,7 @@ class _EcoTextFieldState extends State<EcoTextField> {
                     decoration: InputDecoration(
                       hintText: widget.hintText,
                       hintStyle: TextStyle(color: colorScheme.onSurface.withOpacity(0.5), fontSize: fontSize),
-                      prefixIcon: widget.prefixIcon != null ? Icon(widget.prefixIcon, size: iconSize, color: widget.iconColor) : null,
+                      prefixIcon: widget.prefixIcon ?? null,
                       suffixIcon: Row(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.end,
