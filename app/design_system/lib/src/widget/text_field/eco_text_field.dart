@@ -85,7 +85,6 @@ class _EcoTextFieldState extends State<EcoTextField> {
       builder: (BuildContext context, BoxConstraints constraints) {
         final bool isTablet = MediaQuery.sizeOf(context).shortestSide >= 600;
         final double maxWidth = MediaQuery.sizeOf(context).width * (isTablet ? 0.6 : 0.9);
-        final double horizontalPadding = isTablet ? 20 : 16;
 
         final double fontSize = isTablet ? 16 : 14;
         final double iconSize = isTablet ? 24 : 20;
@@ -93,7 +92,7 @@ class _EcoTextFieldState extends State<EcoTextField> {
         final double fieldWidth = widget.width ?? maxWidth;
 
         return Padding(
-          padding: widget.padding ?? EdgeInsets.symmetric(horizontal: horizontalPadding),
+          padding: widget.padding ?? EdgeInsets.symmetric(horizontal: 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

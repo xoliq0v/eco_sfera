@@ -11,7 +11,6 @@ import 'package:network/src/provider/impl/partner_provider_impl.dart';
 import 'package:network/src/provider/impl/route_provider_impl.dart';
 import 'package:network/src/provider/impl/trash_provider_impl.dart';
 
-import '../provider/history_provider.dart';
 
 @module
 abstract class NetworkProvidersModule {

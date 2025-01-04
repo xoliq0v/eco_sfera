@@ -7,15 +7,17 @@ mixin RouteUtils {
       mainRoutes.getOrderPage(),
       mainRoutes.getPaymentPage(),
       mainRoutes.getConfirmedHistoryPage(),
+      mainRoutes.getPartnersPage(),
+      mainRoutes.getReportPage()
       // mainRoutes.getConfirmedHistoryPage(),
     ];
   }
-  static List<PageRouteInfo> getSecondaryRoutes() {
+  static List<PageRouteInfo> getPartnerRoutes() {
     final mainRoutes = GetIt.I.get<MainRoutes>();
     return [
-      mainRoutes.getHomePage(),
       mainRoutes.getOrderPage(),
-      mainRoutes.getPaymentPage(),
+      mainRoutes.getPresentationPage(),
+      mainRoutes.getProfilePage(),
       mainRoutes.getConfirmedHistoryPage(),
     ];
   }

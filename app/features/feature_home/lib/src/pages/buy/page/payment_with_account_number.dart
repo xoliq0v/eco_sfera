@@ -2,9 +2,11 @@
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
+import 'package:model/model.dart';
 
 class PaymentWithAccountNumber extends StatefulWidget {
-  const PaymentWithAccountNumber({super.key});
+  final BuyModel params;
+  const PaymentWithAccountNumber({super.key,required this.params});
 
   @override
   State<PaymentWithAccountNumber> createState() => _PaymentWithAccountNumberState();
@@ -19,6 +21,7 @@ class _PaymentWithAccountNumberState extends State<PaymentWithAccountNumber> {
   void initState() {
     accountNumberController = TextEditingController();
     amountController = TextEditingController();
+    amountController.text = widget.params.totalPrice.toInt().sumFormat();
     super.initState();
   }
 
@@ -43,6 +46,7 @@ class _PaymentWithAccountNumberState extends State<PaymentWithAccountNumber> {
         EcoTextField(
           topRightText: LocaleKeys.amount.tr(context: context),
           controller: amountController,
+          readOnly: true,
         ),
         20.verticalSpace,
         EcoButton.min(

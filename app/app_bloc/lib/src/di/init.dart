@@ -6,7 +6,9 @@ import 'package:app_bloc/src/bloc/buy/buy_cubit.dart';
 import 'package:app_bloc/src/bloc/customer/customer_cubit.dart';
 import 'package:app_bloc/src/bloc/customer/post_customer_cubit.dart';
 import 'package:app_bloc/src/bloc/history/history_pagination_cubit.dart';
+import 'package:app_bloc/src/bloc/order/handler.dart';
 import 'package:app_bloc/src/bloc/order/order_cubit.dart';
+import 'package:app_bloc/src/bloc/theme/theme_cubit.dart';
 import 'package:core/core.dart';
 import 'package:use_case/use_case.dart';
 
@@ -26,8 +28,9 @@ abstract class AppBlocModule {
   AuthCubit provideAuthCubit(
       AuthUseCase authUseCase,
       SaveToken saveSession,
+      SaveType saveType,
       FetchUserProfile fetchUserProfile,){
-    return AuthCubit(authUseCase, saveSession, fetchUserProfile);
+    return AuthCubit(authUseCase, saveSession, saveType, fetchUserProfile);
   }
 
   ProfileCubit provideProfileCubit(
@@ -70,6 +73,14 @@ abstract class AppBlocModule {
       FetchHistory _fetchHistory
       ){
     return HistoryPaginationCubit(_fetchHistory, initialPageSize: 5);
+  }
+
+  ThemeChangerCubit provideThemeChangCubit(){
+    return ThemeChangerCubit();
+  }
+
+  FCMHandler provideHandler(){
+    return FCMHandler();
   }
 }
 

@@ -20,13 +20,16 @@ class PostCustomerCubit extends Cubit<PostCustomerState>{
 
     final res = await _postCustomer.post(model: model);
 
-    switch (res.status) {
-      case Status.completed:
-        emit(PostCustomerState.success(res: res.data ?? false));
-      case Status.error:
-        emit(PostCustomerState.error(res.error?.message ?? ''));
+    try{
+      switch (res.status) {
+        case Status.completed:
+          emit(PostCustomerState.success(customer: res.data!));
+        case Status.error:
+          emit(PostCustomerState.error(res.error?.message ?? ''));
+      }
+    }catch(e){
+      emit(PostCustomerState.error(e.toString()));
     }
-
   }
 
 }

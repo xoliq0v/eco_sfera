@@ -11,7 +11,7 @@ class AuthProviderImpl extends AuthProvider {
   final Dio apiClient;
 
   @override
-  Future<ApiResponse<String>> login({
+  Future<ApiResponse<AuthResDTO>> login({
     required AuthDTO auth,
   }) {
     return apiCall(
@@ -26,19 +26,16 @@ class AuthProviderImpl extends AuthProvider {
       dataFromJson: (data) {
         log('Login response data: $data');
         if (data is Map<String, dynamic>) {
-          final token = data['token'];
-          if (token != null) {
-            return token.toString();
-          }
+          return AuthResDTO.fromJson(data);
         }
         throw const FormatException('Invalid response structure');
       },
       errorDataFromJson: (data) {
         log('Error response data: $data');
         if (data is Map<String, dynamic> && data.containsKey('message')) {
-          return data['message'] as String;
+          throw data['message'] as String;
         }
-        return 'Unknown error occurred';
+        throw 'Unknown error occurred';
       },
     );
   }

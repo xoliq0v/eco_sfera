@@ -1,5 +1,5 @@
-import 'package:database/database.dart';
-import 'package:database/src/endpoints/endpoints.dart';
+import '../../../database.dart';
+import '../../endpoints/endpoints.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppStorageImpl implements AppStorage {
@@ -21,4 +21,17 @@ class AppStorageImpl implements AppStorage {
   Future<bool> closeSession() {
     return sharedPreferences.clear();
   }
+
+
+
+  @override
+  Future<bool> saveType(String value) {
+    return sharedPreferences.setString(StorageEndpoints.TYPE, value);
+  }
+
+  @override
+  String? getType() {
+    return sharedPreferences.getString(StorageEndpoints.TYPE);
+  }
+
 }

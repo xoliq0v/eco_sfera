@@ -18,6 +18,8 @@ dependencies:
     path: ../../data/network
   database:
     path: ../../data/database
+  firebase_eco:
+    path: ../../data/firebase_eco
   flutter:
     sdk: flutter
 

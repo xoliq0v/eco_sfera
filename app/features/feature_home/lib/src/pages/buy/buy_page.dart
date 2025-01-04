@@ -1,13 +1,17 @@
 
+import 'dart:developer';
+
 import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:model/model.dart';
 import 'package:navigation/navigation.dart';
 
 @RoutePage()
 class BuyPage extends StatefulWidget implements AutoRouteWrapper {
-  final Map<String,int>? param;
+  final OrderModel? param;
   const BuyPage({super.key, this.param});
 
   @override
@@ -33,6 +37,38 @@ class BuyPage extends StatefulWidget implements AutoRouteWrapper {
 }
 
 class _BuyPageState extends State<BuyPage> {
+
+  late BuyModel param;
+
+  String dropDownSelection = '';
+
+  final Map<int, double> _values = {};
+  double _totalKg = 0;
+  double _totalSum = 0;
+
+  void _updateTotals(List<TrashParamModel> params) {
+    double totalKg = 0;
+    double totalSum = 0;
+
+    _values.forEach((index, kg) {
+      totalKg += kg;
+      if (index < params.length) {
+        double pricePerKg = params[index].price?.toDouble() ?? 0;
+        totalSum += kg * pricePerKg;
+      }
+    });
+
+    setState(() {
+      _totalKg = totalKg;
+      _totalSum = totalSum;
+    });
+  }
+
+  void _handleTextChange(int index, String value, List<TrashParamModel> params) {
+    double? parsedValue = double.tryParse(value);
+    _values[index] = parsedValue ?? 0;
+    _updateTotals(params);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,10 +113,13 @@ class _BuyPageState extends State<BuyPage> {
                       child: 20.verticalSpace,
                     ),
                     SliverToBoxAdapter(
-                      child: EcoTextField(
-                        topRightText: LocaleKeys.responsibleEmployee.tr(context: context),
-                        width: double.maxFinite,
-                        radius: 10,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: EcoTextField(
+                          topRightText: LocaleKeys.responsibleEmployee.tr(context: context),
+                          width: double.maxFinite,
+                          radius: 10,
+                        ),
                       ),
                     ),
                     SliverToBoxAdapter(
@@ -95,16 +134,24 @@ class _BuyPageState extends State<BuyPage> {
                             child: widget.param == null ? EcoDropdownMenu(
                               padding: const EdgeInsets.only(left: 16),
                               topText: LocaleKeys.customer.tr(context: context),
-                              initialSelection: params.params.toString(),
+                              initialSelection: dropDownSelection,
                               isLoading: state.isLoadingShimmer,
                               items: state.customers.map((value){ return value.name; }).toList(),
                               onChanged: (value){},
-                              onAddCustomer:  () {
-                                NavigationUtils.getMainNavigator().navigateAddCustomerPage();
+                              onAddCustomer:  () async{
+                                final result = await NavigationUtils.getMainNavigator().navigateAddCustomerPage();
+                                if(result != null){
+                                  setState(() {
+                                    state.customers.add(Customer(id: int.parse(result.id.toString()), name: result.name.toString()));
+                                    dropDownSelection = result.name.toString();
+                                  });
+                                }else{
+                                  log("NULL");
+                                }
                               },
                             ) : EcoDropdownMenu(
                                 padding: const EdgeInsets.only(left: 16),
-                                placeholderText: widget.param!.keys.first,
+                                placeholderText: widget.param!.orderUser.name,
                                 onChanged:  null
                             ),
                           );
@@ -116,9 +163,8 @@ class _BuyPageState extends State<BuyPage> {
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
                             (BuildContext context, int index) {
-                          // Null check to prevent potential runtime errors
                           if (params.params == null || index >= params.params.length) {
-                            return null; // Return null if index is out of bounds
+                            return null;
                           }
 
                           return Padding(
@@ -130,10 +176,13 @@ class _BuyPageState extends State<BuyPage> {
                                 Expanded(
                                   flex: 2,
                                   child: EcoTextField(
-                                    // Use a unique key for each TextField
                                     key: Key('param_textfield_$index'),
-                                    // Null-safe access to key
                                     topRightText: params.params[index].key ?? '',
+                                    keyboardType: TextInputType.numberWithOptions(decimal: true),
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+                                    ],
+                                    onChanged: (value) => _handleTextChange(index, value ?? '0', params.params),
                                   ),
                                 ),
                                 Flexible(
@@ -149,7 +198,6 @@ class _BuyPageState extends State<BuyPage> {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Text(
-                                      // Null-safe conversion to string
                                       '${params.params[index].price ?? 0} sum',
                                     ),
                                   ),
@@ -158,7 +206,7 @@ class _BuyPageState extends State<BuyPage> {
                             ),
                           );
                         },
-                        childCount: params.params?.length ?? 0, // Null-safe length
+                        childCount: params.params.length,
                       ),
                     ),
                     SliverToBoxAdapter(
@@ -173,10 +221,16 @@ class _BuyPageState extends State<BuyPage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Jami  0 kg',style: Theme.of(context).textTheme.headlineSmall,),
-                                Text('0 sum',style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                                    fontSize: 18
-                                ),)
+                                Text(
+                                  'Jami  ${ widget.param == null ? _totalKg.toStringAsFixed(2) : widget.param?.totalKg} kg',
+                                  style: Theme.of(context).textTheme.headlineSmall,
+                                ),
+                                Text(
+                                  '${widget.param == null ? _totalSum.toInt().sumFormat()  : (double.tryParse(widget.param?.totalPrice ?? '0')?.toInt() ?? 0).sumFormat()} sum',
+                                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                                      fontSize: 18
+                                  ),
+                                )
                               ],
                             ),
                             EcoButton(
@@ -185,8 +239,9 @@ class _BuyPageState extends State<BuyPage> {
                                 height: 65,
                                 borderRadius: 40,
                                 onPressed: (){
-                                  // context.router.navigate(const PaymentRoute());
-                                  navigatePaymentPage();
+                                  navigatePaymentPage(
+                                    BuyModel(employee: 'employee', customerId: 1, paperKg: 1, paperPrice: 1, plasticKg: 1, plasticPrice: 1, plasticBottleKg: 1, plasticBottlePrice: 1, cartonKg: 1, cartonPrice: 1, totalKg: 1, totalPrice: widget.param == null ? _totalSum : double.parse(widget.param?.totalPrice ?? '0'), type: 'type')
+                                  );
                                 },
                                 child: Text(LocaleKeys.acceptance.tr(),style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),)
                             )
@@ -213,7 +268,7 @@ class _BuyPageState extends State<BuyPage> {
     );
   }
 
-  Future<void> navigatePaymentPage() async{
-    return NavigationUtils.getMainNavigator().navigatePaymentPage();
+  Future<void> navigatePaymentPage(BuyModel param) async{
+    return NavigationUtils.getMainNavigator().navigatePaymentPage(param);
   }
 }

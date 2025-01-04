@@ -12,6 +12,6 @@ abstract class GetCustomer {
 
 abstract class PostCustomer {
 
-  Future<Result<bool>> post({required CustomerPostModel model});
+  Future<Result<CustomerResponseModel>> post({required CustomerPostModel model});
 
 }

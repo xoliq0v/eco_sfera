@@ -33,4 +33,24 @@ class MainRoutesImpl extends MainRoutes {
     return const AddCustomerRoute();
   }
 
+  @override
+  PageRouteInfo getPartnersPage() {
+    return const PartnersRoute();
+  }
+
+  @override
+  PageRouteInfo getReportPage() {
+    return const ReportRoute();
+  }
+
+  @override
+  PageRouteInfo getPresentationPage() {
+    return const PresentationRoute();
+  }
+
+  @override
+  PageRouteInfo getProfilePage() {
+    return const ProfileRoute();
+  }
+
 }

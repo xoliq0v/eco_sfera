@@ -3,10 +3,13 @@ import 'package:core/generated/locale_keys.g.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:map_service/map_service.dart';
+import 'package:model/model.dart';
 import 'package:navigation/navigation.dart';
 
+import '../expandble_text.dart';
+
 class OrderSheet {
-  static void show(BuildContext context,Coords coords,Map<String,String> user,Map<String,int> params) {
+  static void show(BuildContext context,Coords coords,Map<String,String> user,OrderModel params) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -21,7 +24,7 @@ class OrderSheet {
 class _OrderSheetContent extends StatelessWidget {
   final Coords coords;
   final Map<String,String> user;
-  final Map<String,int> params;
+  final OrderModel params;
   const _OrderSheetContent({super.key,required this.coords,required this.user,required this.params});
 
   @override
@@ -41,14 +44,14 @@ class _SheetBody extends StatelessWidget {
   late Coords coords;
 
   final Map<String,String> user;
-  final Map<String,int> params;
+  final OrderModel params;
 
-  openMapsSheet(context) async {
+  void openMapsSheet(BuildContext context) async {
     try {
       final title = LocaleKeys.orderAddress.tr(context: context,args: [user.keys.first,user.values.first]);
       final availableMaps = await MapLauncher.installedMaps;
 
-      showModalBottomSheet(
+      return showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
           return SafeArea(
@@ -94,31 +97,64 @@ class _SheetBody extends StatelessWidget {
             color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 25,
-                    right: 25,
-                    top: 30,
-                  bottom: 10
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 15,
+              horizontal: 20,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                5.verticalSpace,
+                Text('2 km · 6 daq',style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                  fontSize: 35
+                ),),
+                5.verticalSpace,
+                Text(
+                  'Roderick Usher  +998 71 234 56 78',
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                  ),
                 ),
-                child: EcoMaterialButton(onPressed: () async{
-                  openMapsSheet(context);
-                }, child: Text(LocaleKeys.address.tr(context: context))),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 25,
-                  right: 25,
-                  bottom: 60
+                30.verticalSpace,
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _Box(icon: AppIcons.box,title: LocaleKeys.payment.tr(context: context),value: 'Qog’oz'),
+                    _Box(icon: AppIcons.weight,title: LocaleKeys.payment.tr(context: context),value: '15 kg'),
+                  ],
                 ),
-                child: EcoMaterialButton(onPressed: () async{
-                  await NavigationUtils.getMainNavigator().navigateBuyPage(params);
-                }, child: Text(LocaleKeys.buy.tr(context: context))),
-              ),
-            ],
+
+                35.verticalSpace,
+
+                ExpandableText(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget'
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget'
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget'),
+
+                30.verticalSpace,
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: EcoMaterialButton(color: context.colorScheme.surface, onPressed: () async{
+                        await context.router.pop();
+                      }, child: Text(LocaleKeys.cancel.tr(context: context))),
+                    ),
+                    10.horizontalSpace,
+                    Expanded(
+                      child: EcoMaterialButton(onPressed: () async{
+                        // openMapsSheet(context);
+                        await NavigationUtils.getMainNavigator().navigateBuyPage(params);
+                      }, child: Text(LocaleKeys.buy.tr(context: context))),
+                    ),
+                  ],
+                ),
+
+
+              ],
+            ),
           ),
         ),
       ),
@@ -126,3 +162,36 @@ class _SheetBody extends StatelessWidget {
   }
 
 }
+
+class _Box extends StatelessWidget {
+  final String icon;
+  final String title;
+  final String value;
+  const _Box({super.key,required this.icon,required this.title,required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SvgPicture.asset(icon,height: 30,width: 30,),
+        5.horizontalSpace,
+        Column(
+          children: [
+            Text(title,style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
+            ),),
+            2.verticalSpace,
+            Text(value,style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.w700,
+              fontSize: 17,
+              color: context.colorScheme.primary
+            ),),
+          ],
+        )
+      ],
+    );
+  }
+}
+
+

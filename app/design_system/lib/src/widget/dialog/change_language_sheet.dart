@@ -43,65 +43,68 @@ class _ChangeLanguageContentState extends State<_ChangeLanguageContent> {
   @override
   void initState() {
     super.initState();
-    _selectedLanguage = ChangeLanguageSheet.getLanguageFromCode(context.currentLocale());
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _selectedLanguage = ChangeLanguageSheet.getLanguageFromCode(context.currentLocale());
+  }
+
+
+  @override
   Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Column(
-        children: [
-          Container(
-            width: 70,
-            height: 4,
-            decoration: BoxDecoration(
-              color: Theme.of(context).scaffoldBackgroundColor,
-              borderRadius: BorderRadius.circular(250),
-            ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Container(
+          width: 70,
+          height: 4,
+          decoration: BoxDecoration(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            borderRadius: BorderRadius.circular(250),
           ),
-          10.verticalSpace,
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.background,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  10.verticalSpace,
-                  Align(
-                    child: Text(
-                      LocaleKeys.selectALanguage.tr(context: context),
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  20.verticalSpace,
-                  ..._buildLanguageOptions(),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
-                      child: EcoButton(
-                        width: double.infinity,
-                        height: 60,
-                        borderRadius: 30,
-                        onPressed: () async => await _changeLanguage(context),
-                        child: Text(LocaleKeys.select.tr(context: context),
-                          style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+        ),
+        10.verticalSpace,
+        Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.background,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
           ),
-        ],
-      ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              20.verticalSpace,
+              Align(
+                child: Text(
+                  LocaleKeys.selectALanguage.tr(context: context),
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              20.verticalSpace,
+              ..._buildLanguageOptions(),
+              Align(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
+                  child: EcoButton(
+                    width: double.infinity,
+                    height: 60,
+                    borderRadius: 30,
+                    onPressed: () async => await _changeLanguage(context),
+                    child: Text(LocaleKeys.select.tr(context: context),
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -119,6 +122,6 @@ class _ChangeLanguageContentState extends State<_ChangeLanguageContent> {
   Future<void> _changeLanguage(BuildContext context) async {
     final languageCode = ChangeLanguageSheet._languageCodes[_selectedLanguage] ?? 'en';
     context.changeCurrentLanguage(languageCode);
-    context.router.back();
+    context.router.pop();
   }
 }

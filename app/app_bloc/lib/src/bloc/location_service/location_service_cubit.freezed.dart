@@ -21,7 +21,7 @@ mixin _$LocationServiceState {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(LocationEntity location) success,
-    required TResult Function(String error) error,
+    required TResult Function(dynamic error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +29,7 @@ mixin _$LocationServiceState {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(LocationEntity location)? success,
-    TResult? Function(String error)? error,
+    TResult? Function(dynamic error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +37,7 @@ mixin _$LocationServiceState {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(LocationEntity location)? success,
-    TResult Function(String error)? error,
+    TResult Function(dynamic error)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,7 +127,7 @@ class _$InitImpl implements _Init {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(LocationEntity location) success,
-    required TResult Function(String error) error,
+    required TResult Function(dynamic error) error,
   }) {
     return init();
   }
@@ -138,7 +138,7 @@ class _$InitImpl implements _Init {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(LocationEntity location)? success,
-    TResult? Function(String error)? error,
+    TResult? Function(dynamic error)? error,
   }) {
     return init?.call();
   }
@@ -149,7 +149,7 @@ class _$InitImpl implements _Init {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(LocationEntity location)? success,
-    TResult Function(String error)? error,
+    TResult Function(dynamic error)? error,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -241,7 +241,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(LocationEntity location) success,
-    required TResult Function(String error) error,
+    required TResult Function(dynamic error) error,
   }) {
     return loading();
   }
@@ -252,7 +252,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(LocationEntity location)? success,
-    TResult? Function(String error)? error,
+    TResult? Function(dynamic error)? error,
   }) {
     return loading?.call();
   }
@@ -263,7 +263,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(LocationEntity location)? success,
-    TResult Function(String error)? error,
+    TResult Function(dynamic error)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -382,7 +382,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(LocationEntity location) success,
-    required TResult Function(String error) error,
+    required TResult Function(dynamic error) error,
   }) {
     return success(location);
   }
@@ -393,7 +393,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(LocationEntity location)? success,
-    TResult? Function(String error)? error,
+    TResult? Function(dynamic error)? error,
   }) {
     return success?.call(location);
   }
@@ -404,7 +404,7 @@ class _$SuccessImpl implements _Success {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(LocationEntity location)? success,
-    TResult Function(String error)? error,
+    TResult Function(dynamic error)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -466,7 +466,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
           _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
       __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String error});
+  $Res call({dynamic error});
 }
 
 /// @nodoc
@@ -480,13 +480,13 @@ class __$$ErrorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = null,
+    Object? error = freezed,
   }) {
     return _then(_$ErrorImpl(
-      null == error
+      freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String,
+              as dynamic,
     ));
   }
 }
@@ -497,7 +497,7 @@ class _$ErrorImpl implements _Error {
   const _$ErrorImpl(this.error);
 
   @override
-  final String error;
+  final dynamic error;
 
   @override
   String toString() {
@@ -509,11 +509,12 @@ class _$ErrorImpl implements _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorImpl &&
-            (identical(other.error, error) || other.error == error));
+            const DeepCollectionEquality().equals(other.error, error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
   @override
@@ -527,7 +528,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(LocationEntity location) success,
-    required TResult Function(String error) error,
+    required TResult Function(dynamic error) error,
   }) {
     return error(this.error);
   }
@@ -538,7 +539,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(LocationEntity location)? success,
-    TResult? Function(String error)? error,
+    TResult? Function(dynamic error)? error,
   }) {
     return error?.call(this.error);
   }
@@ -549,7 +550,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(LocationEntity location)? success,
-    TResult Function(String error)? error,
+    TResult Function(dynamic error)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -597,9 +598,9 @@ class _$ErrorImpl implements _Error {
 }
 
 abstract class _Error implements LocationServiceState {
-  const factory _Error(final String error) = _$ErrorImpl;
+  const factory _Error(final dynamic error) = _$ErrorImpl;
 
-  String get error;
+  dynamic get error;
   @JsonKey(ignore: true)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;

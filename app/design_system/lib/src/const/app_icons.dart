@@ -10,7 +10,7 @@ class AppIcons {
   static const String buying = '$_assetsImagesPath/buying.png';
   static const String buy = '$_assetsIconsPath/buy.svg';
   static const String historySvg = '$_assetsIconsPath/history.svg';
-  static const String profileSvg = '$_assetsIconsPath/profile.svg';
+  static const String partnersSvg = '$_assetsIconsPath/profile.svg';
   static const String partners = '$_assetsImagesPath/customers.png';
   static const String history = '$_assetsImagesPath/history.png';
   static const String polygon = '$_assetsImagesPath/layer.png';
@@ -51,6 +51,10 @@ class AppIcons {
   static const scheduleIcon = '$_assetsIconsPath/schedule.svg';
   static const settingsIcon = '$_assetsIconsPath/settings.svg';
   static const uzbekistanIcon = '$_assetsIconsPath/uzbekistan.svg';
+  static const weight = '$_assetsIconsPath/weight.svg';
+  static const box = '$_assetsIconsPath/box.svg';
+  static const reportSvg = '$_assetsIconsPath/reports.svg';
+  // static const partnersSvg = '$_assetsIconsPath/partners.svg';
 
   static const favouriteTabBar = '$_assetsTabBarPath/favourite.svg';
   static const favouriteFillTabBar = '$_assetsTabBarPath/favourite_Fill.svg';

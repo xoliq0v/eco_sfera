@@ -3,7 +3,7 @@ import 'package:network/network.dart';
 import 'package:network/src/provider/base_provider.dart';
 
 abstract class AuthProvider extends BaseProvider {
-  Future<ApiResponse<String>> login({
+  Future<ApiResponse<AuthResDTO>> login({
     required AuthDTO auth,
   });
 }

@@ -6,6 +6,6 @@ abstract class CustomerRepository extends BaseRepository {
 
   Future<Result<BasePaginatedResponse<Customer>?>> fetchCustomers(CustomerGetModel request);
 
-  Future<Result<bool>> postCustomer(CustomerPostModel customer);
+  Future<Result<CustomerResponseModel>> postCustomer(CustomerPostModel customer);
 
 }

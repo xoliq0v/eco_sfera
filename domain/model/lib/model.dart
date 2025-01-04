@@ -15,3 +15,5 @@ export 'src/order_location.dart';
 export 'src/buy_model.dart';
 export 'src/buy_page_prams_model.dart';
 export 'src/trash_param_model.dart';
+export 'src/customer_response.dart';
+export 'src/auth_result.dart';

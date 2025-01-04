@@ -14,4 +14,13 @@ abstract class MainRoutes{
 
   PageRouteInfo goAddCustomerPage();
 
+  PageRouteInfo getPartnersPage();
+
+  PageRouteInfo getReportPage();
+
+  PageRouteInfo getPresentationPage();
+
+  PageRouteInfo getProfilePage();
+
+
 }

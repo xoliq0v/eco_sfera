@@ -1,3 +1,4 @@
+import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         value: nightMode.value,
                         onChanged: (value){
                           nightMode.value = value;
-                          // context.read<ThemeCubit>().setThemeMode(value == true ? ThemeMode.dark : ThemeMode.light);
+                          context.read<ThemeChangerCubit>().toggleTheme();
                         }
                     );
                   }

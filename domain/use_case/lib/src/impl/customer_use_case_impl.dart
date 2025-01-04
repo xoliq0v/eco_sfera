@@ -25,7 +25,7 @@ class PostCustomerImpl implements PostCustomer {
   final CustomerRepository customerRepository;
 
   @override
-  Future<Result<bool>> post({required CustomerPostModel model}) {
+  Future<Result<CustomerResponseModel>> post({required CustomerPostModel model}) {
     return customerRepository.postCustomer(model);
   }
 

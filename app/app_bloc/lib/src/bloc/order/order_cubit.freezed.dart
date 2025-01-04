@@ -20,7 +20,9 @@ mixin _$OrderState {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(List<OrderModel> orders) success,
+    required TResult Function(
+            List<OrderModel> orders, LocationEntity? currentLocation)
+        success,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +30,8 @@ mixin _$OrderState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(List<OrderModel> orders)? success,
+    TResult? Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+        success,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +39,8 @@ mixin _$OrderState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<OrderModel> orders)? success,
+    TResult Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+        success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -125,7 +129,9 @@ class _$InitImpl implements _Init {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(List<OrderModel> orders) success,
+    required TResult Function(
+            List<OrderModel> orders, LocationEntity? currentLocation)
+        success,
     required TResult Function(String error) error,
   }) {
     return init();
@@ -136,7 +142,8 @@ class _$InitImpl implements _Init {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(List<OrderModel> orders)? success,
+    TResult? Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+        success,
     TResult? Function(String error)? error,
   }) {
     return init?.call();
@@ -147,7 +154,8 @@ class _$InitImpl implements _Init {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<OrderModel> orders)? success,
+    TResult Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+        success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -239,7 +247,9 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(List<OrderModel> orders) success,
+    required TResult Function(
+            List<OrderModel> orders, LocationEntity? currentLocation)
+        success,
     required TResult Function(String error) error,
   }) {
     return loading();
@@ -250,7 +260,8 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(List<OrderModel> orders)? success,
+    TResult? Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+        success,
     TResult? Function(String error)? error,
   }) {
     return loading?.call();
@@ -261,7 +272,8 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<OrderModel> orders)? success,
+    TResult Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+        success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -319,7 +331,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<OrderModel> orders});
+  $Res call({List<OrderModel> orders, LocationEntity? currentLocation});
 }
 
 /// @nodoc
@@ -334,12 +346,17 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? orders = null,
+    Object? currentLocation = freezed,
   }) {
     return _then(_$SuccessImpl(
       null == orders
           ? _value._orders
           : orders // ignore: cast_nullable_to_non_nullable
               as List<OrderModel>,
+      currentLocation: freezed == currentLocation
+          ? _value.currentLocation
+          : currentLocation // ignore: cast_nullable_to_non_nullable
+              as LocationEntity?,
     ));
   }
 }
@@ -347,7 +364,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(final List<OrderModel> orders) : _orders = orders;
+  const _$SuccessImpl(final List<OrderModel> orders, {this.currentLocation})
+      : _orders = orders;
 
   final List<OrderModel> _orders;
   @override
@@ -358,8 +376,11 @@ class _$SuccessImpl implements _Success {
   }
 
   @override
+  final LocationEntity? currentLocation;
+
+  @override
   String toString() {
-    return 'OrderState.success(orders: $orders)';
+    return 'OrderState.success(orders: $orders, currentLocation: $currentLocation)';
   }
 
   @override
@@ -367,12 +388,14 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            const DeepCollectionEquality().equals(other._orders, _orders));
+            const DeepCollectionEquality().equals(other._orders, _orders) &&
+            (identical(other.currentLocation, currentLocation) ||
+                other.currentLocation == currentLocation));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_orders));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_orders), currentLocation);
 
   @JsonKey(ignore: true)
   @override
@@ -385,10 +408,12 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(List<OrderModel> orders) success,
+    required TResult Function(
+            List<OrderModel> orders, LocationEntity? currentLocation)
+        success,
     required TResult Function(String error) error,
   }) {
-    return success(orders);
+    return success(orders, currentLocation);
   }
 
   @override
@@ -396,10 +421,11 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(List<OrderModel> orders)? success,
+    TResult? Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+        success,
     TResult? Function(String error)? error,
   }) {
-    return success?.call(orders);
+    return success?.call(orders, currentLocation);
   }
 
   @override
@@ -407,12 +433,13 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<OrderModel> orders)? success,
+    TResult Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+        success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(orders);
+      return success(orders, currentLocation);
     }
     return orElse();
   }
@@ -456,9 +483,11 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements OrderState {
-  const factory _Success(final List<OrderModel> orders) = _$SuccessImpl;
+  const factory _Success(final List<OrderModel> orders,
+      {final LocationEntity? currentLocation}) = _$SuccessImpl;
 
   List<OrderModel> get orders;
+  LocationEntity? get currentLocation;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -530,7 +559,9 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(List<OrderModel> orders) success,
+    required TResult Function(
+            List<OrderModel> orders, LocationEntity? currentLocation)
+        success,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -541,7 +572,8 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(List<OrderModel> orders)? success,
+    TResult? Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+        success,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -552,7 +584,8 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<OrderModel> orders)? success,
+    TResult Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+        success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {

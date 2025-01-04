@@ -14,3 +14,4 @@ export 'src/bloc/customer/customer_pagination_cubit.dart';
 export 'src/bloc/customer/customer_cubit.dart';
 export 'src/bloc/location_service/location_service_cubit.dart';
 export 'src/bloc/buy/buy_cubit.dart';
+export 'src/bloc/theme/theme_cubit.dart';

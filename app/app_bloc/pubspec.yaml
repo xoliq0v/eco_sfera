@@ -17,6 +17,10 @@ dependencies:
     path: ../../domain/model
   firebase_eco:
     path: ../../data/firebase_eco
+  design_system:
+    path: ../design_system
+  repository:
+    path: ../../domain/repository
   flutter_bloc: 8.1.5
   flutter:
     sdk: flutter

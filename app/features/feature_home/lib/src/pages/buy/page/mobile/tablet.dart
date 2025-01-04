@@ -74,8 +74,8 @@ class Tablet extends State<_Tablet> with SingleTickerProviderStateMixin {
           controller: pageController,
           physics: const NeverScrollableScrollPhysics(),
           children: const [
-            PaymentWithCardPage(),
-            PaymentWithAccountNumber(),
+            // PaymentWithCardPage(),
+            // PaymentWithAccountNumber(),
           ],
         )
     );

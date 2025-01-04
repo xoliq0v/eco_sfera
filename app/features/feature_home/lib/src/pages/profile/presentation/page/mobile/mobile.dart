@@ -309,8 +309,12 @@ class _ProfileWidget extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(horizontal: 20),
                                 child: EcoElevatedButton.loading(
                                     loading: isLoading,
-                                    onPressed: (){
-                                      _logout(context);
+                                    onPressed: ()async{
+                                      await LogOutDialog.showLogoutDialog(context).then((value){
+                                        if(value ?? false){
+                                          _logout(context);
+                                        }
+                                      });
                                     }, child: Text(LocaleKeys.exit.tr(context: context))
                                 ),
                               );

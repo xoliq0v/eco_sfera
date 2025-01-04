@@ -21,29 +21,58 @@ class _MobileState extends State<_Mobile> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-        slivers: [
-          MySliverAppBar(
-            toolbarHeight: 64.h,
-            flexibleSpace: FlexibleSpaceBar(
-              titlePadding: EdgeInsets.symmetric(
-                vertical: 8.h,
-                horizontal: 16.w,
-              ),
-              title: MainTextField.withClear(
-                label: LocaleKeys.partners.tr(context: context),
-                height: 48.h,
-                controller: searchController,
-                onTapOutsideUnFocus: true,
-              ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(LocaleKeys.partners.tr(context: context)),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: TextField(
+                    // hintText: LocaleKeys.name.tr(context: context),
+                    onChanged: (value) {
+                      // _searchOrders(value);
+                    },
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    FilterSheet.show(context);
+                  },
+                  icon: SvgPicture.asset(AppIcons.filter),
+                ),
+              ],
             ),
           ),
-          10.verticalSpace.toBoxAdapter(),
-          _SearchField(controller: searchController).toBoxAdapter(),
-          const _Loading(),
-          // _Body(),
-          const _BottomLoading(),
+          Expanded(
+              child: ListView.builder(
+                controller: scrollController,
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 15),
+                    child: PartnerItem(
+                      title: 'Eko Sfera MChJ',
+                      caption: 'caption',
+                      distance: 'distance',
+                      isNew: false,
+                      onTap: () {
+                        // _navigateToDetail();
+                      },
+                    ),
+                  );
+                },
+              )
+          ),
         ],
+      ),
     );
   }
 }
+

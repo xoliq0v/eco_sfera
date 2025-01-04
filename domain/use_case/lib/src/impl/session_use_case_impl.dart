@@ -1,3 +1,4 @@
+import 'package:model/model.dart';
 import 'package:use_case/src/session_use_case.dart';
 import 'package:repository/repository.dart';
 
@@ -19,4 +20,21 @@ class SaveTokenImpl extends SaveToken {
   Future<void> save(String value) {
     return sessionRepository.saveToken(value);
   }
+}
+
+class SaveTypeImpl extends SaveType {
+  SaveTypeImpl({required this.sessionRepository});
+
+  final SessionRepository sessionRepository;
+
+  @override
+  Future<void> save(AuthType value) {
+    return sessionRepository.saveType(value);
+  }
+
+  @override
+  Future<AuthType> get() async{
+    return sessionRepository.getType();
+  }
+
 }

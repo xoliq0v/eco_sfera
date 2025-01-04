@@ -102,7 +102,7 @@ class _Mobile extends StatelessWidget {
                     minWidth: double.maxFinite,
                     onPressed: () {
                       // context.router.navigate(NavigationRoute(params: firstParam(l10n)),);
-                      navigateTrashMainPage(context);
+                      // navigateTrashMainPage(context);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -120,7 +120,7 @@ class _Mobile extends StatelessWidget {
                     onPressed: () {
                       // context.router.navigate(NavigationRoute(
                       //   params: MainNavigationImpl));
-                      navigateSecondaryMainPage(context);
+                      // navigateSecondaryMainPage(context);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -141,34 +141,34 @@ class _Mobile extends StatelessWidget {
     );
   }
 
-  Future<void> navigateTrashMainPage(BuildContext context) async{
-    return await NavigationUtils.getMainNavigator().navigateMainPage(pages: RouteUtils.getTrashRoutes(), icons: [
-      AppIcons.home03,
-      AppIcons.activity,
-      AppIcons.home01,
-      AppIcons.file01
-    ], routes: [
-      LocaleKeys.home.tr(context: context),
-      LocaleKeys.roadMap.tr(context: context),
-      LocaleKeys.payment.tr(context: context),
-      LocaleKeys.history.tr(context: context),
-      // LocaleKeys.profile.tr(context: context)
-    ]);
-  }
-
-  Future<void> navigateSecondaryMainPage(BuildContext context) async{
-    return await NavigationUtils.getMainNavigator().navigateMainPage(pages: RouteUtils.getSecondaryRoutes(), icons: [
-      AppIcons.home03,
-      AppIcons.menu02,
-      AppIcons.coinsRotate,
-      AppIcons.clockForward,
-      AppIcons.userProfile02
-    ], routes: [
-      LocaleKeys.home.tr(context: context),
-      LocaleKeys.menu.tr(context: context),
-      LocaleKeys.payment.tr(context: context),
-      LocaleKeys.history.tr(context: context),
-      LocaleKeys.profile.tr(context: context)
-    ]);
-  }
+  // Future<void> navigateTrashMainPage(BuildContext context) async{
+  //   return await NavigationUtils.getMainNavigator().navigateMainPage(pages: RouteUtils.getTrashRoutes(), icons: [
+  //     AppIcons.home03,
+  //     AppIcons.activity,
+  //     AppIcons.home01,
+  //     AppIcons.file01
+  //   ], routes: [
+  //     LocaleKeys.home.tr(context: context),
+  //     LocaleKeys.roadMap.tr(context: context),
+  //     LocaleKeys.payment.tr(context: context),
+  //     LocaleKeys.history.tr(context: context),
+  //     // LocaleKeys.profile.tr(context: context)
+  //   ]);
+  // }
+  //
+  // Future<void> navigateSecondaryMainPage(BuildContext context) async{
+  //   return await NavigationUtils.getMainNavigator().navigateMainPage(pages: RouteUtils.getPartnerRoutes(), icons: [
+  //     AppIcons.home03,
+  //     AppIcons.menu02,
+  //     AppIcons.coinsRotate,
+  //     AppIcons.clockForward,
+  //     AppIcons.userProfile02
+  //   ], routes: [
+  //     LocaleKeys.home.tr(context: context),
+  //     LocaleKeys.menu.tr(context: context),
+  //     LocaleKeys.payment.tr(context: context),
+  //     LocaleKeys.history.tr(context: context),
+  //     LocaleKeys.profile.tr(context: context)
+  //   ]);
+  // }
 }

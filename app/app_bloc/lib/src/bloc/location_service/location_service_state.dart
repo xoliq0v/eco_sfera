@@ -10,6 +10,6 @@ sealed class LocationServiceState with _$LocationServiceState {
 
   const factory LocationServiceState.success(LocationEntity location) = _Success;
 
-  const factory LocationServiceState.error(String error) = _Error;
+  const factory LocationServiceState.error(dynamic error) = _Error;
 
 }

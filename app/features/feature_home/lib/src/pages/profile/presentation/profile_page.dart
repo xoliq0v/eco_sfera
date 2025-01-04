@@ -37,6 +37,11 @@ class ProfilePage extends StatelessWidget implements AutoRouteWrapper {
             return AppBlocHelper.getLogoutCubit();
           },
         ),
+        BlocProvider<ThemeChangerCubit>(
+          create: (context) {
+            return AppBlocHelper.getThemeChangeCubit();
+          },
+        ),
       ],
       child: this,
     );

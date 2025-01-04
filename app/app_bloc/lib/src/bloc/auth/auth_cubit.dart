@@ -1,6 +1,9 @@
+import 'dart:developer';
 import 'dart:io';
 
-import 'package:app_bloc/app_bloc.dart';
+import 'package:model/model.dart';
+
+import '../../../app_bloc.dart';
 import 'package:core/core.dart';
 import 'package:firebase_eco/firebase_eco.dart';
 import 'package:use_case/use_case.dart';
@@ -12,11 +15,13 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit(
       this._authUseCase,
       this._saveToken,
+      this._saveType,
       this._fetchUserProfile,
       ) : super(const AuthState.init());
 
   final AuthUseCase _authUseCase;
   final SaveToken _saveToken;
+  final SaveType _saveType;
   final FetchUserProfile _fetchUserProfile;
   String _login = '';
   String _password = '';
@@ -45,9 +50,11 @@ class AuthCubit extends Cubit<AuthState> {
     }
 
     try {
-      await _saveToken.save(result.data!);
+      log('Login response data: ${result.data!.type}');
+      await _saveToken.save(result.data!.token!);
+      await _saveType.save(result.data!.type!);
       await _fetchUserProfile.fetch();
-      emit(const AuthState.success());
+      emit(AuthState.success(result.data!.type!));
     } catch (e) {
       emit(AuthState.error(e.toString()));
     }
@@ -56,4 +63,9 @@ class AuthCubit extends Cubit<AuthState> {
   void retry() {
     login(login: _login, password: _password);
   }
+
+  Future<AuthType> getType() async{
+    return await _saveType.get();
+  }
+
 }

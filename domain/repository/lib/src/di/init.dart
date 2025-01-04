@@ -7,7 +7,6 @@ import 'package:database/database.dart';
 import 'package:repository/repository.dart';
 import 'package:repository/src/repository/impl/auth_repo_impl.dart';
 import 'package:repository/src/repository/impl/buy_repo_impl.dart';
-import 'package:repository/src/repository/impl/customer_repo_impl.dart';
 import 'package:repository/src/repository/impl/history_repo_impl.dart';
 import 'package:repository/src/repository/impl/location_repo_impl.dart';
 import 'package:repository/src/repository/impl/order_repo_impl.dart';
@@ -15,6 +14,7 @@ import 'package:repository/src/repository/impl/session_repo_impl.dart';
 import 'package:repository/src/repository/impl/user_repo_impl.dart';
 
 import '../repository/history_repo.dart';
+import '../repository/impl/customer_repo_impl.dart';
 
 @module
 abstract class RepositoryModule {

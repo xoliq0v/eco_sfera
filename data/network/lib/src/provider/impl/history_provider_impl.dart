@@ -14,6 +14,11 @@ class HistoryProviderImpl extends HistoryProvider {
     return apiCall(
         apiClient.get(
           '${HistoryEndpoint.history}?page=${page}&per_page=${size}',
+          options: Options(
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          )
         ),
         dataFromJson: (json){
           if (json is List) {

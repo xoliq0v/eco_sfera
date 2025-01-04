@@ -24,15 +24,26 @@ class AppRouter extends _$AppRouter {
 
       AutoRoute(
         page: MainRoute.page,
-        type: const RouteType.cupertino(),
         children: [
-          AutoRoute(page: HomeRoute.page,),
-          AutoRoute(page: BuyRoute.page,),
-          AutoRoute(page: OrdersRoute.page,),
-          AutoRoute(page: RoadMapRoute.page,),
-          AutoRoute(page: AdmissionsHistoryRoute.page),
+          CustomRoute(page: HomeRoute.page),
+          CustomRoute(page: BuyRoute.page,),
+          CustomRoute(page: OrdersRoute.page,),
+          CustomRoute(page: RoadMapRoute.page,),
+          AutoRoute(
+              page: AdmissionsHistoryRoute.page,
+            children: [
+              AutoRoute(page: ActiveRoute.page),
+              AutoRoute(page: CompleteRoute.page),
+            ]
+          ),
+          AutoRoute(page: PartnersRoute.page,),
+          AutoRoute(page: ReportRoute.page,),
+          AutoRoute(page: PresentationRoute.page,),
+          AutoRoute(page: ProfileRoute.page,),
         ]
       ),
+      AutoRoute(page: PriceChangerRoute.page,),
+      AutoRoute(page: AddCustomerRoute.page,),
       AutoRoute(page: ProfileRoute.page,),
       AutoRoute(page: PaymentRoute.page),
       AutoRoute(page: SettingsRoute.page),

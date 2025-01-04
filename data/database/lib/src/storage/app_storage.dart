@@ -4,4 +4,8 @@ abstract class AppStorage {
   String? getPhoneNumber();
 
   Future<bool> closeSession();
+
+  Future<bool> saveType(String value);
+
+  String? getType();
 }

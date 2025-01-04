@@ -25,58 +25,57 @@ class AddCustomerPage extends StatefulWidget implements AutoRouteWrapper {
 
 class _AddingPageState extends State<AddCustomerPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  late CustomerPostModel _customer;
 
   TextEditingController name = TextEditingController();
   TextEditingController surname = TextEditingController();
   TextEditingController father = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController address = TextEditingController();
-  String gender = 'Male';
+  String gender = 'male';
   ValueNotifier<DateTime> birthDate = ValueNotifier(DateTime(2007));
 
   ValueNotifier<bool> loading = ValueNotifier(false);
 
-  List<String> items = ['Male', 'Female'];
+  List<String> items = ['male', 'female'];
 
-  // Validation methods
   String? _validateName(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Name is required';
+      return LocaleKeys.nameRequired.tr(context: context);
     }
     if (value.length < 2) {
-      return 'Name must be at least 2 characters long';
+      return LocaleKeys.nameLength.tr(context: context);
     }
     if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(value)) {
-      return 'Name can only contain letters and spaces';
+      return LocaleKeys.nameLettersOnly.tr(context: context);
     }
     return null;
   }
 
   String? _validateSurname(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Surname is required';
+      return LocaleKeys.surnameRequired.tr(context: context);
     }
     if (value.length < 2) {
-      return 'Surname must be at least 2 characters long';
+      return LocaleKeys.surnameLength.tr(context: context);
     }
     if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(value)) {
-      return 'Surname can only contain letters and spaces';
+      return LocaleKeys.surnameLettersOnly.tr(context: context);
     }
     return null;
   }
 
   String? _validateAddress(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Address is required';
+      return LocaleKeys.addressRequired.tr(context: context);
     }
     if (value.length < 5) {
-      return 'Address must be at least 5 characters long';
+      return LocaleKeys.addressLength.tr(context: context);
     }
     return null;
   }
 
   bool _validateAge(DateTime selectedDate) {
-    // Validate age (at least 18 years old)
     final now = DateTime.now();
     final age = now.year - selectedDate.year;
     final monthDiff = now.month - selectedDate.month;
@@ -89,27 +88,26 @@ class _AddingPageState extends State<AddCustomerPage> {
   }
 
   void _submitForm() {
-    // Validate the form
     if (_formKey.currentState!.validate()) {
-      // Additional age validation
       if (!_validateAge(birthDate.value)) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('You must be at least 18 years old')),
+          SnackBar(content: Text(LocaleKeys.ageRestriction.tr(context: context))),
         );
         return;
       }
 
-      // If all validations pass, post the customer
+      _customer = CustomerPostModel(
+          name: name.text,
+          surname: surname.text,
+          middleName: father.text,
+          phone: phone.text,
+          birthDay: '${birthDate.value.day}/${birthDate.value.month}/${birthDate.value.year}',
+          gender: gender,
+          address: address.text
+      );
+
       context.read<PostCustomerCubit>().post(
-          CustomerPostModel(
-              name: name.text,
-              surname: surname.text,
-              middleName: father.text,
-              phone: phone.text,
-              birthDay: '${birthDate.value.day}/${birthDate.value.month}/${birthDate.value.year}',
-              gender: gender,
-              address: address.text
-          )
+          _customer
       );
     }
   }
@@ -118,7 +116,7 @@ class _AddingPageState extends State<AddCustomerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Customer add'),
+        title: Text(LocaleKeys.customerAdd.tr(context: context)),
       ),
       body: SafeArea(
         child: Form(
@@ -126,15 +124,16 @@ class _AddingPageState extends State<AddCustomerPage> {
           autovalidateMode: AutovalidateMode.disabled,
           child: CustomScrollView(
             slivers: [
-              // Gender Dropdown
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 15),
+                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                   child: EcoDropdownMenu(
-                    topText: 'Gender',
-                    initialSelection: items[0],
-                    items:  items,
-                    onChanged: (value){
+                    topText: LocaleKeys.gender.tr(context: context),
+                    initialSelection: items[0].tr(context: context),
+                    items: items.map((value){
+                      return value.tr(context: context);
+                    }).toList(),
+                    onChanged: (value) {
                       if(value == null) return;
                       gender = value;
                     },
@@ -142,14 +141,13 @@ class _AddingPageState extends State<AddCustomerPage> {
                 ),
               ),
 
-              // Name TextField with Validation
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
                   child: EcoTextField(
                     controller: name,
-                    topRightText: 'Name',
-                    hintText: 'Enter your name',
+                    topRightText: LocaleKeys.name.tr(context: context),
+                    hintText: LocaleKeys.enterName.tr(context: context),
                     width: double.maxFinite,
                     radius: 10,
                     validator: _validateName,
@@ -157,14 +155,13 @@ class _AddingPageState extends State<AddCustomerPage> {
                 ),
               ),
 
-              // Surname TextField with Validation
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
                   child: EcoTextField(
                     controller: surname,
-                    topRightText: 'Surname',
-                    hintText: 'Enter your surname',
+                    topRightText: LocaleKeys.surname.tr(context: context),
+                    hintText: LocaleKeys.enterSurname.tr(context: context),
                     width: double.maxFinite,
                     radius: 10,
                     validator: _validateSurname,
@@ -172,37 +169,34 @@ class _AddingPageState extends State<AddCustomerPage> {
                 ),
               ),
 
-              // Father Name TextField (optional, so no strict validation)
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
                   child: EcoTextField(
                     controller: father,
-                    topRightText: 'Father Name (Optional)',
-                    hintText: 'Enter your father\'s name',
+                    topRightText: '${LocaleKeys.fatherName.tr(context: context)} (${LocaleKeys.optional.tr(context: context)})',
+                    hintText: LocaleKeys.enterFatherName.tr(context: context),
                     width: double.maxFinite,
                     radius: 10,
                   ),
                 ),
               ),
 
-              // Phone Number TextField with Validation
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
                   child: EcoTextField(
                     controller: phone,
-                    topRightText: 'Phone Number',
+                    topRightText: LocaleKeys.phoneNumber.tr(context: context),
                     width: double.maxFinite,
                     radius: 10,
                   ),
                 ),
               ),
 
-              // Birthday Date Picker
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 15),
+                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                   child: GestureDetector(
                     onTap: () async {
                       final value = await showDatePicker(
@@ -213,7 +207,6 @@ class _AddingPageState extends State<AddCustomerPage> {
                       );
 
                       if(value == null) return;
-
                       birthDate.value = value;
                     },
                     child: Container(
@@ -237,14 +230,13 @@ class _AddingPageState extends State<AddCustomerPage> {
                 ),
               ),
 
-              // Home Address TextField with Validation
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                   child: EcoTextField(
                     controller: address,
-                    topRightText: 'Home Address',
-                    hintText: 'Enter your home address',
+                    topRightText: LocaleKeys.homeAddress.tr(context: context),
+                    hintText: LocaleKeys.enterHomeAddress.tr(context: context),
                     width: double.maxFinite,
                     radius: 10,
                     validator: _validateAddress,
@@ -252,7 +244,6 @@ class _AddingPageState extends State<AddCustomerPage> {
                 ),
               ),
 
-              // Submit Button with Validation
               BlocConsumer<PostCustomerCubit, PostCustomerState>(
                 listener: (context, state) {
                   state.mapOrNull(
@@ -261,11 +252,13 @@ class _AddingPageState extends State<AddCustomerPage> {
                       },
                       success: (value) {
                         loading.value = false;
-                        context.back();
+                        AutoRouter.of(context).pop(value.customer);
                       },
-                    error: (error){
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error.error)));
-                    }
+                      error: (error) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(error.error))
+                        );
+                      }
                   );
                 },
                 builder: (context, state) {
@@ -274,7 +267,7 @@ class _AddingPageState extends State<AddCustomerPage> {
                     child: EcoElevatedButton.loading(
                         loading: state == PostCustomerState.loading(),
                         onPressed: _submitForm,
-                        child: Text('Add customer')
+                        child: Text(LocaleKeys.addCustomer.tr(context: context))
                     ),
                   );
                 },
@@ -284,5 +277,15 @@ class _AddingPageState extends State<AddCustomerPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    name.dispose();
+    surname.dispose();
+    father.dispose();
+    phone.dispose();
+    address.dispose();
+    super.dispose();
   }
 }

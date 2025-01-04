@@ -4,7 +4,7 @@ import 'package:repository/repository.dart';
 
 abstract class AuthRepository extends BaseRepository {
 
-  Future<Result<String>> login({
+  Future<Result<AuthResult>> login({
     required AuthModel auth,
   });
 

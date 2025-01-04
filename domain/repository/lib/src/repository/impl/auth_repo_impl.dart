@@ -1,9 +1,10 @@
+import 'dart:developer';
+
 import 'package:model/model.dart';
 import 'package:network/network.dart';
 import 'package:core/src/network_config/result_mapping.dart';
-import 'package:repository/repository.dart';
-import 'package:repository/src/di/init.dart';
-import 'package:repository/src/repository/auth_repo.dart';
+import '../../../repository.dart';
+import '../../mapping/auth_res_mapping.dart';
 
 
 class AuthRepoImpl extends AuthRepository{
@@ -16,7 +17,7 @@ class AuthRepoImpl extends AuthRepository{
   final ClientProvider clientProvider;
 
   @override
-  Future<Result<String>> login({required AuthModel auth,}) async {
+  Future<Result<AuthResult>> login({required AuthModel auth,}) async {
     try {
       final response = await authProvider.login(auth: auth.toAuthDto());
 
@@ -29,7 +30,11 @@ class AuthRepoImpl extends AuthRepository{
         );
       }
 
-      return Result.completed(response.data);
+      log('Login response data: ${response.data?.type}');
+
+      return Result.completed(
+        response.data?.toModel(),
+      );
     } catch (e) {
       return Result.error(
         ResultError(

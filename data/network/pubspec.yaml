@@ -14,6 +14,8 @@ dependencies:
     path: ../../domain/core
   database:
     path: ../database
+  firebase_eco:
+    path: ../firebase_eco
 
   dio: 5.5.0+1
 

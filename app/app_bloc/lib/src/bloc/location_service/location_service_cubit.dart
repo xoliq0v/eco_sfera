@@ -10,9 +10,7 @@ class LocationServiceCubit extends Cubit<LocationServiceState>{
 
   LocationServiceCubit(
       this._getLocation
-      ):super(LocationServiceState.init()){
-    getLocation();
-  }
+      ):super(LocationServiceState.init());
 
   final GetLocation _getLocation;
 
@@ -28,9 +26,13 @@ class LocationServiceCubit extends Cubit<LocationServiceState>{
 
     }catch(e){
 
-      emit(LocationServiceState.error('Error: $e'));
+      emit(LocationServiceState.error(e));
 
     }
 
+  }
+
+  Future<void> init() async{
+    emit(LocationServiceState.init());
   }
 }

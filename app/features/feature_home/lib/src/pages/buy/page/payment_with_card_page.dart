@@ -5,9 +5,11 @@ import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:model/model.dart';
 
 class PaymentWithCardPage extends StatefulWidget {
-  const PaymentWithCardPage({super.key});
+  final BuyModel params;
+  const PaymentWithCardPage({super.key,required this.params});
 
   @override
   State<PaymentWithCardPage> createState() => _PaymentWithCardPageState();
@@ -31,7 +33,7 @@ class _PaymentWithCardPageState extends State<PaymentWithCardPage> {
   void initState() {
     super.initState();
     amountController = TextEditingController();
-    amountController.text = "50 000";
+    amountController.text = widget.params.totalPrice.toInt().sumFormat();
     cardNumberController = TextEditingController();
     cardNumberController.addListener(_onCardNumberChanged);
   }

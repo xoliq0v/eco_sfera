@@ -20,7 +20,7 @@ mixin _$PostCustomerState {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(bool res) success,
+    required TResult Function(CustomerResponseModel customer) success,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$PostCustomerState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(bool res)? success,
+    TResult? Function(CustomerResponseModel customer)? success,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$PostCustomerState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(bool res)? success,
+    TResult Function(CustomerResponseModel customer)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -125,7 +125,7 @@ class _$InitImpl implements _Init {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(bool res) success,
+    required TResult Function(CustomerResponseModel customer) success,
     required TResult Function(String error) error,
   }) {
     return init();
@@ -136,7 +136,7 @@ class _$InitImpl implements _Init {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(bool res)? success,
+    TResult? Function(CustomerResponseModel customer)? success,
     TResult? Function(String error)? error,
   }) {
     return init?.call();
@@ -147,7 +147,7 @@ class _$InitImpl implements _Init {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(bool res)? success,
+    TResult Function(CustomerResponseModel customer)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -239,7 +239,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(bool res) success,
+    required TResult Function(CustomerResponseModel customer) success,
     required TResult Function(String error) error,
   }) {
     return loading();
@@ -250,7 +250,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(bool res)? success,
+    TResult? Function(CustomerResponseModel customer)? success,
     TResult? Function(String error)? error,
   }) {
     return loading?.call();
@@ -261,7 +261,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(bool res)? success,
+    TResult Function(CustomerResponseModel customer)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -319,7 +319,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({bool res});
+  $Res call({CustomerResponseModel customer});
 }
 
 /// @nodoc
@@ -333,13 +333,13 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? res = null,
+    Object? customer = null,
   }) {
     return _then(_$SuccessImpl(
-      res: null == res
-          ? _value.res
-          : res // ignore: cast_nullable_to_non_nullable
-              as bool,
+      customer: null == customer
+          ? _value.customer
+          : customer // ignore: cast_nullable_to_non_nullable
+              as CustomerResponseModel,
     ));
   }
 }
@@ -347,14 +347,14 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl({required this.res});
+  const _$SuccessImpl({required this.customer});
 
   @override
-  final bool res;
+  final CustomerResponseModel customer;
 
   @override
   String toString() {
-    return 'PostCustomerState.success(res: $res)';
+    return 'PostCustomerState.success(customer: $customer)';
   }
 
   @override
@@ -362,11 +362,12 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.res, res) || other.res == res));
+            (identical(other.customer, customer) ||
+                other.customer == customer));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, res);
+  int get hashCode => Object.hash(runtimeType, customer);
 
   @JsonKey(ignore: true)
   @override
@@ -379,10 +380,10 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(bool res) success,
+    required TResult Function(CustomerResponseModel customer) success,
     required TResult Function(String error) error,
   }) {
-    return success(res);
+    return success(customer);
   }
 
   @override
@@ -390,10 +391,10 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(bool res)? success,
+    TResult? Function(CustomerResponseModel customer)? success,
     TResult? Function(String error)? error,
   }) {
-    return success?.call(res);
+    return success?.call(customer);
   }
 
   @override
@@ -401,12 +402,12 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(bool res)? success,
+    TResult Function(CustomerResponseModel customer)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(res);
+      return success(customer);
     }
     return orElse();
   }
@@ -450,9 +451,10 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements PostCustomerState {
-  const factory _Success({required final bool res}) = _$SuccessImpl;
+  const factory _Success({required final CustomerResponseModel customer}) =
+      _$SuccessImpl;
 
-  bool get res;
+  CustomerResponseModel get customer;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -524,7 +526,7 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(bool res) success,
+    required TResult Function(CustomerResponseModel customer) success,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -535,7 +537,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(bool res)? success,
+    TResult? Function(CustomerResponseModel customer)? success,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -546,7 +548,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(bool res)? success,
+    TResult Function(CustomerResponseModel customer)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {

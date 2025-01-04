@@ -16,6 +16,8 @@ dependencies:
     path: ../../app/features/feature_home
   design_system:
     path: ../../app/design_system
+  model:
+    path: ../../domain/model
   flutter:
     sdk: flutter
 

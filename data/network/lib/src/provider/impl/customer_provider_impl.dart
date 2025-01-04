@@ -50,14 +50,15 @@ class CustomerProviderImpl extends CustomerProvider {
 
 
   @override
-  Future<ApiResponse<bool>> postCustomer(CustomerPostDTO request) {
+  Future<ApiResponse<CustomerResponseDto>> postCustomer(CustomerPostDTO request) {
     return apiCall(
         apiClient.post(
             CustomerEndpoint.customers,
             data: request.toJson(),
         ),
         dataFromJson: (data){
-          return data != null;
+          log('DATA ${data['user']}');
+          return CustomerResponseDto.fromJson(data['user'] as Map<String,dynamic>);
         },
     );
   }

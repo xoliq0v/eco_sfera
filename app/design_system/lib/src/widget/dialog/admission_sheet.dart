@@ -34,7 +34,7 @@ class _SheetBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 450,
+      height: 300,
       width: double.maxFinite,
       child: DecoratedBox(
         decoration: BoxDecoration(
@@ -44,8 +44,6 @@ class _SheetBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            5.verticalSpace,
-            _MapWidget(),
             const Padding(
               padding: EdgeInsets.all(18.0),
               child: Text('13.08.2024  11:01'),

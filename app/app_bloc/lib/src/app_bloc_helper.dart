@@ -1,5 +1,4 @@
 import 'package:app_bloc/app_bloc.dart';
-import 'package:app_bloc/src/bloc/history/history_pagination_cubit.dart';
 import 'package:core/core.dart';
 
 mixin AppBlocHelper {
@@ -49,5 +48,9 @@ mixin AppBlocHelper {
 
   static HistoryPaginationCubit getHistoryCubit(){
     return GetIt.I.get<HistoryPaginationCubit>();
+  }
+
+  static ThemeChangerCubit getThemeChangeCubit(){
+    return GetIt.I.get<ThemeChangerCubit>();
   }
 }

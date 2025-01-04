@@ -8,7 +8,7 @@ sealed class AuthState with _$AuthState {
 
   const factory AuthState.loading() = _Loading;
 
-  const factory AuthState.success() = _Success;
+  const factory AuthState.success(AuthType type) = _Success;
 
   const factory AuthState.error(String error) = _Error;
 

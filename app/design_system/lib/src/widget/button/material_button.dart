@@ -8,7 +8,7 @@ class EcoMaterialButton extends MaterialButton {
     super.color = AppColors.green,
     super.disabledColor = AppColors.gray,
     super.minWidth = 500,
-    double radius = 16,
+    double radius = 40,
     super.key,
     super.elevation = 0,
     EdgeInsetsGeometry? padding,
@@ -16,7 +16,7 @@ class EcoMaterialButton extends MaterialButton {
           height: 0,
           padding: padding ??
               EdgeInsets.symmetric(
-                vertical: 16.h,
+                vertical: 25.h,
                 horizontal: 8.w,
               ),
           shape: RoundedRectangleBorder(

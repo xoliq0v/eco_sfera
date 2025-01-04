@@ -6,16 +6,18 @@ import 'package:feature_home/src/pages/buy/page/payment_with_account_number.dart
 import 'package:feature_home/src/pages/buy/page/payment_with_card_page.dart';
 import 'package:feature_home/src/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:model/model.dart';
 
 part 'mobile/mobile.dart';
 part 'mobile/tablet.dart';
 
 @RoutePage()
 class PaymentPage extends StatelessWidget {
-  const PaymentPage({super.key});
+  final BuyModel params;
+  const PaymentPage({super.key,required this.params});
 
   @override
   Widget build(BuildContext context) {
-    return const Responsive(mobile: _Mobile(), tablet: _Tablet());
+    return  Responsive(mobile: _Mobile(params: params,), tablet: _Tablet());
   }
 }

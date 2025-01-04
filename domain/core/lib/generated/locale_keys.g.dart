@@ -123,5 +123,31 @@ abstract class  LocaleKeys {
   static const locationPermission = 'locationPermission';
   static const locationAccessIsRequired = 'locationAccessIsRequired';
   static const openSettings = 'openSettings';
+  static const customerAdd = 'customerAdd';
+  static const gender = 'gender';
+  static const name = 'name';
+  static const surname = 'surname';
+  static const fatherName = 'fatherName';
+  static const birthDate = 'birthDate';
+  static const homeAddress = 'homeAddress';
+  static const addCustomer = 'addCustomer';
+  static const enterName = 'enterName';
+  static const enterSurname = 'enterSurname';
+  static const enterFatherName = 'enterFatherName';
+  static const enterHomeAddress = 'enterHomeAddress';
+  static const optional = 'optional';
+  static const nameRequired = 'nameRequired';
+  static const nameLength = 'nameLength';
+  static const nameLettersOnly = 'nameLettersOnly';
+  static const surnameRequired = 'surnameRequired';
+  static const surnameLength = 'surnameLength';
+  static const surnameLettersOnly = 'surnameLettersOnly';
+  static const addressRequired = 'addressRequired';
+  static const addressLength = 'addressLength';
+  static const ageRestriction = 'ageRestriction';
+  static const logoutContent = 'logoutContent';
+  static const logout = 'logout';
+  static const cash = 'cash';
+  static const getOrder = 'getOrder';
 
 }

@@ -1,12 +1,11 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:model/model.dart';
 
 abstract class MainNavigation {
 
   Future<void> navigateMainPage({
-    required List<PageRouteInfo<dynamic>> pages,
-    required List<String> icons,
-    required List<String> routes
+    AuthType type
   });
 
   Future<void> navigateAuthPage();
@@ -18,7 +17,7 @@ abstract class MainNavigation {
 
   Future<void> navigateProfilePage();
 
-  Future<void> navigatePaymentPage();
+  Future<void> navigatePaymentPage(BuyModel param);
 
   Future<void> navigateOrderCardPage();
 
@@ -30,9 +29,13 @@ abstract class MainNavigation {
 
   Future<void> navigateSettingsPage();
 
-  Future<void> navigateBuyPage(Map<String,int>? params);
+  Future<void> navigateBuyPage(OrderModel params);
 
-  Future<void> navigateAddCustomerPage();
+  Future<dynamic> navigateAddCustomerPage();
+
+  Future<void> navigatePriceChangerPage(String title);
+
+  Future<void> navigateAddCommentPage();
 
   // Future<void> navigateProfilePage();
   //

@@ -7,8 +7,9 @@
 import 'dart:async' as _i2;
 
 import 'package:app_bloc/app_bloc.dart' as _i3;
-import 'package:app_bloc/src/di/init.dart' as _i6;
-import 'package:core/core.dart' as _i4;
+import 'package:app_bloc/src/bloc/order/handler.dart' as _i4;
+import 'package:app_bloc/src/di/init.dart' as _i7;
+import 'package:core/core.dart' as _i6;
 import 'package:injectable/injectable.dart' as _i1;
 import 'package:use_case/use_case.dart' as _i5;
 
@@ -17,16 +18,20 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
   @override
   _i2.FutureOr<void> init(_i1.GetItHelper gh) {
     final appBlocModule = _$AppBlocModule();
-    gh.factory<_i3.InternetConnectivityController>(
-        () => appBlocModule.provideInternetConnectivityController(
-              gh<_i4.Connectivity>(),
-              gh<_i4.InternetConnectionChecker>(),
-            ));
+    gh.factory<_i3.ThemeChangerCubit>(
+        () => appBlocModule.provideThemeChangCubit());
+    gh.factory<_i4.FCMHandler>(() => appBlocModule.provideHandler());
     gh.factory<_i3.AuthCubit>(() => appBlocModule.provideAuthCubit(
           gh<_i5.AuthUseCase>(),
           gh<_i5.SaveToken>(),
+          gh<_i5.SaveType>(),
           gh<_i5.FetchUserProfile>(),
         ));
+    gh.factory<_i3.InternetConnectivityController>(
+        () => appBlocModule.provideInternetConnectivityController(
+              gh<_i6.Connectivity>(),
+              gh<_i6.InternetConnectionChecker>(),
+            ));
     gh.factory<_i3.LogoutCubit>(
         () => appBlocModule.provideLogOutCubit(gh<_i5.Logout>()));
     gh.factory<_i3.PostCustomerCubit>(
@@ -53,4 +58,4 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
   }
 }
 
-class _$AppBlocModule extends _i6.AppBlocModule {}
+class _$AppBlocModule extends _i7.AppBlocModule {}

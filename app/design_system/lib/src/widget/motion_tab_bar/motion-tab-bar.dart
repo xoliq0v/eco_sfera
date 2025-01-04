@@ -61,7 +61,7 @@ class _MotionTabBarState extends State<MotionTabBar> with TickerProviderStateMix
   get index => labels.indexOf(selectedTab);
   get position {
     double pace = 2 / (labels.length - 1);
-    return (pace * index) - 1;
+    return (pace * num.parse(index.toString())) - 1;
   }
 
   double fabIconAlpha = 1;
@@ -81,15 +81,15 @@ class _MotionTabBarState extends State<MotionTabBar> with TickerProviderStateMix
           activeSvgIconPath = widget.svgIconPaths![index];
           selectedTab = widget.labels[index];
         });
-        _initAnimationAndStart(_positionAnimation.value, position);
+        _initAnimationAndStart(_positionAnimation.value, double.parse(position.toString()));
       };
     }
 
     labels = widget.labels;
     svgIcons = Map.fromIterable(
       labels,
-      key: (label) => label,
-      value: (label) => widget.svgIconPaths![labels.indexOf(label)],
+      key: (label) => label.toString(),
+      value: (label) => widget.svgIconPaths![labels.indexOf(label.toString())],
     );
 
     selectedTab = widget.initialSelectedTab;
@@ -109,7 +109,7 @@ class _MotionTabBarState extends State<MotionTabBar> with TickerProviderStateMix
       vsync: this,
     );
 
-    _positionTween = Tween<double>(begin: position, end: 1);
+    _positionTween = Tween<double>(begin: double.parse(position.toString()), end: 1);
 
     _positionAnimation = _positionTween.animate(CurvedAnimation(parent: _animationController, curve: Curves.easeOut))
       ..addListener(() {
@@ -183,7 +183,7 @@ class _MotionTabBarState extends State<MotionTabBar> with TickerProviderStateMix
                   heightFactor: 0,
                   alignment: Alignment(_positionAnimation.value, 0),
                   child: FractionallySizedBox(
-                    widthFactor: 1 / tabAmount,
+                    widthFactor: 1 / num.parse(tabAmount.toString()),
                     child: Stack(
                       alignment: Alignment.center,
                       children: <Widget>[
@@ -281,7 +281,7 @@ class _MotionTabBarState extends State<MotionTabBar> with TickerProviderStateMix
             selectedTab = tabLabel;
             widget.onTabItemSelected!(index);
           });
-          _initAnimationAndStart(_positionAnimation.value, position);
+          _initAnimationAndStart(_positionAnimation.value, double.parse(position.toString()));
         },
       );
     }).toList();

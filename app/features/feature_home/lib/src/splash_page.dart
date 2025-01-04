@@ -14,8 +14,15 @@ class SplashScreen extends StatefulWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return BlocProvider<InternetConnectivityController>(
-      create: (context) => AppBlocHelper.getInternetConnectivityController(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<InternetConnectivityController>(
+          create: (_) => AppBlocHelper.getInternetConnectivityController(),
+        ),
+        BlocProvider<AuthCubit>(
+          create: (_) => AppBlocHelper.getAuthCubit(),
+        ),
+      ],
       child: this,
     );
   }
@@ -41,7 +48,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
     if (token != null && token.isNotEmpty) {
       // If token exists, navigate to the main page
-      navigateMainPage(context);
+      /// navigateMainPage(context);
+      await navigateToPartnerApp();
     } else {
       // If no token, check connectivity and proceed as before
       isFinished = true;
@@ -106,18 +114,14 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> navigateMainPage(BuildContext context) async{
-    return await NavigationUtils.getMainNavigator().navigateMainPage(pages: RouteUtils.getTrashRoutes(), icons: [
-      AppIcons.menu02,
-      AppIcons.buy,
-      AppIcons.historySvg,
-      AppIcons.profileSvg
-    ], routes: [
-      LocaleKeys.orders.tr(context: context),
-      LocaleKeys.buy.tr(context: context),
-      LocaleKeys.history.tr(context: context),
-      LocaleKeys.profile.tr(context: context),
-      // LocaleKeys.profile.tr(context: context)
-    ]);
+    final type = await context.read<AuthCubit>().getType();
+    return await NavigationUtils.getMainNavigator().navigateMainPage(
+      type: type,
+    );
+  }
+
+  Future<void> navigateToPartnerApp() async{
+    return await NavigationUtils.getMainNavigator().navigateMainPage();
   }
 
   Future<void> navigateChooseLangPage(BuildContext context) async {

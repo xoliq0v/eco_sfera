@@ -72,14 +72,14 @@ class _Tablet extends StatelessWidget {
                           context: context,
                           icon: AppIcons.trash02,
                           title: LocaleKeys.waste.tr(context: context),
-                          onPressed: () => navigateTrashMainPage(context),
+                          onPressed: () => {},
                         ),
                         5.verticalSpace,
                         _buildEcoButton(
                           context: context,
                           icon: AppIcons.iconParkRecycling,
                           title: LocaleKeys.secondary.tr(context: context),
-                          onPressed: () => navigateSecondaryMainPage(context),
+                          onPressed: () => {},
                         ),
                       ],
                     ),
@@ -140,41 +140,41 @@ class _Tablet extends StatelessWidget {
     );
   }
 
-  Future<void> navigateTrashMainPage(BuildContext context) async {
-    return await NavigationUtils.getMainNavigator().navigateMainPage(
-      pages: RouteUtils.getTrashRoutes(),
-      icons: [
-        AppIcons.home03,
-        AppIcons.activity,
-        AppIcons.home01,
-        AppIcons.file01
-      ],
-      routes: [
-        LocaleKeys.home.tr(context: context),
-        LocaleKeys.roadMap.tr(context: context),
-        LocaleKeys.payment.tr(context: context),
-        LocaleKeys.history.tr(context: context),
-      ],
-    );
-  }
-
-  Future<void> navigateSecondaryMainPage(BuildContext context) async {
-    return await NavigationUtils.getMainNavigator().navigateMainPage(
-      pages: RouteUtils.getSecondaryRoutes(),
-      icons: [
-        AppIcons.home03,
-        AppIcons.menu02,
-        AppIcons.coinsRotate,
-        AppIcons.clockForward,
-        AppIcons.userProfile02
-      ],
-      routes: [
-        LocaleKeys.home.tr(context: context),
-        LocaleKeys.menu.tr(context: context),
-        LocaleKeys.payment.tr(context: context),
-        LocaleKeys.history.tr(context: context),
-        LocaleKeys.profile.tr(context: context)
-      ],
-    );
-  }
+  // Future<void> navigateTrashMainPage(BuildContext context) async {
+  //   return await NavigationUtils.getMainNavigator().navigateMainPage(
+  //     pages: RouteUtils.getTrashRoutes(),
+  //     icons: [
+  //       AppIcons.home03,
+  //       AppIcons.activity,
+  //       AppIcons.home01,
+  //       AppIcons.file01
+  //     ],
+  //     routes: [
+  //       LocaleKeys.home.tr(context: context),
+  //       LocaleKeys.roadMap.tr(context: context),
+  //       LocaleKeys.payment.tr(context: context),
+  //       LocaleKeys.history.tr(context: context),
+  //     ],
+  //   );
+  // }
+  //
+  // Future<void> navigateSecondaryMainPage(BuildContext context) async {
+  //   return await NavigationUtils.getMainNavigator().navigateMainPage(
+  //     pages: RouteUtils.getPartnerRoutes(),
+  //     icons: [
+  //       AppIcons.home03,
+  //       AppIcons.menu02,
+  //       AppIcons.coinsRotate,
+  //       AppIcons.clockForward,
+  //       AppIcons.userProfile02
+  //     ],
+  //     routes: [
+  //       LocaleKeys.home.tr(context: context),
+  //       LocaleKeys.menu.tr(context: context),
+  //       LocaleKeys.payment.tr(context: context),
+  //       LocaleKeys.history.tr(context: context),
+  //       LocaleKeys.profile.tr(context: context)
+  //     ],
+  //   );
+  // }
 }

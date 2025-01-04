@@ -2,6 +2,7 @@ import 'package:core/core.dart';
 import 'package:app_bloc/app_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:design_system/design_system.dart';
+import 'package:model/model.dart';
 import 'package:navigation/navigation.dart';
 
 @RoutePage()
@@ -60,9 +61,9 @@ class _AuthScreenState extends State<AuthScreen> {
                     SnackBar(content: Text(error))
                 );
               },
-              success: () {
+              success: (AuthType type) {
                 _isLoading.value = false;
-                NavigationUtils.getAuthNavigator().navigateCategoryPage();
+                navigateMainPage(context,type);
               },
               init: () {},
               loading: () {
@@ -209,5 +210,9 @@ class _AuthScreenState extends State<AuthScreen> {
       return LocaleKeys.passwordCannotContainSpaces.tr(context: context);
     }
     return null;
+  }
+
+  Future<void> navigateMainPage(BuildContext context,AuthType type) async{
+    return await NavigationUtils.getMainNavigator().navigateMainPage(type: type);
   }
 }

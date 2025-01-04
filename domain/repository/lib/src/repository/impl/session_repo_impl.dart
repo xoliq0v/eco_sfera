@@ -1,4 +1,5 @@
 import 'package:database/database.dart';
+import 'package:model/src/auth_result.dart';
 import 'package:repository/repository.dart';
 
 class SessionRepositoryImpl extends SessionRepository {
@@ -30,6 +31,16 @@ class SessionRepositoryImpl extends SessionRepository {
   @override
   Future<void> saveToken(String value) {
     return secureStorage.saveToken(value);
+  }
+
+  @override
+  Future<void> saveType(AuthType value) {
+    return appStorage.saveType(value == AuthType.driver ? 'driver' : 'partner');
+  }
+
+  @override
+  AuthType getType() {
+    return appStorage.getType() == 'driver' ? AuthType.driver : AuthType.partner;
   }
 
 }

@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:navigation/src/app_router.dart';
-import 'package:navigation/src/navigation/main_navigation.dart';
+import 'package:model/model.dart';
+import '../../../navigation.dart';
 
 class MainNavigationImpl extends MainNavigation {
   MainNavigationImpl({required this.appRouter});
@@ -16,8 +18,38 @@ class MainNavigationImpl extends MainNavigation {
   }
 
   @override
-  Future<void> navigateMainPage({required List<PageRouteInfo<dynamic>> pages, required List<String> icons, required List<String> routes}) {
-    return appRouter.navigate(MainRoute(pages: pages, icons: icons, routes: routes));
+  Future<void> navigateMainPage({AuthType? type}) async{
+    log('navigateMainPage type: $type');
+    if(type == AuthType.driver) {
+      return await appRouter.replaceAll([MainRoute(pages: RouteUtils.getTrashRoutes(), icons: [
+        AppIcons.menu02,
+        AppIcons.buy,
+        AppIcons.historySvg,
+        AppIcons.partnersSvg,
+        AppIcons.reportSvg,
+      ], routes: [
+        LocaleKeys.orders,
+        LocaleKeys.buy,
+        LocaleKeys.history,
+        LocaleKeys.profile,
+        LocaleKeys.reports,
+        // LocaleKeys.profile.tr(context: context)
+      ])]);
+    } else {
+      return await appRouter.replaceAll([MainRoute(pages: RouteUtils.getPartnerRoutes(), icons: [
+        AppIcons.home01,
+        AppIcons.menu02,
+        AppIcons.userProfile02,
+        AppIcons.historySvg,
+      ], routes: [
+        LocaleKeys.home,
+        LocaleKeys.buy,
+        LocaleKeys.profile,
+        LocaleKeys.history
+        // LocaleKeys.profile.tr(context: context)
+      ])]);
+    }
+
   }
 
   @override
@@ -38,12 +70,12 @@ class MainNavigationImpl extends MainNavigation {
 
   @override
   Future<void> navigateProfilePage() {
-    return appRouter.navigate(const ProfileRoute());
+    return appRouter.push(const ProfileRoute());
   }
 
   @override
-  Future<void> navigatePaymentPage() {
-    return appRouter.navigate(const PaymentRoute());
+  Future<void> navigatePaymentPage(BuyModel param) {
+    return appRouter.navigate(PaymentRoute(params: param));
   }
 
   @override
@@ -72,12 +104,22 @@ class MainNavigationImpl extends MainNavigation {
   }
 
   @override
-  Future<void> navigateBuyPage(Map<String,int>? params) {
+  Future<void> navigateBuyPage(OrderModel params) {
     return appRouter.push(BuyRoute(param: params));
   }
 
   @override
-  Future<void> navigateAddCustomerPage() {
-    return appRouter.navigate(const AddCustomerRoute());
+  Future<dynamic> navigateAddCustomerPage() async{
+    return await appRouter.push<dynamic>(const AddCustomerRoute());
+  }
+
+  @override
+  Future<void> navigatePriceChangerPage(String title) {
+    return appRouter.push(PriceChangerRoute(title: title));
+  }
+
+  @override
+  Future<void> navigateAddCommentPage() {
+    return appRouter.navigate(const AddCommentRoute());
   }
 }

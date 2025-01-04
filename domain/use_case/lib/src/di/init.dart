@@ -67,6 +67,10 @@ abstract class UseCaseModule {
   FetchHistory provideFetchHistory(HistoryRepo historyRepo){
     return FetchHistoryImpl(historyRepo: historyRepo);
   }
+
+  SaveType provideSaveType(SessionRepository sessionRepository){
+    return SaveTypeImpl(sessionRepository: sessionRepository);
+  }
 }
 
 @InjectableInit.microPackage()

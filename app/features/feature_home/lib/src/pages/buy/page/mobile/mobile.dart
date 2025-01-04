@@ -2,7 +2,8 @@
 part of '../payment_page.dart';
 
 class _Mobile extends StatefulWidget {
-  const _Mobile({super.key});
+  final BuyModel params;
+  const _Mobile({super.key,required this.params});
 
   @override
   State<_Mobile> createState() => Mobile();
@@ -34,31 +35,31 @@ class Mobile extends State<_Mobile> with SingleTickerProviderStateMixin {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text(LocaleKeys.payment.tr(context: context)),
-          bottom: TabBar(
-            controller: tabController,
-            indicatorColor: colorScheme.secondary,
-            indicatorSize: TabBarIndicatorSize.tab,
-            padding: const EdgeInsets.only(left: 15,right: 15),
-            dividerColor: colorScheme.surface,
-            unselectedLabelColor: Colors.grey,
-            onTap: (int? pos){
-              FocusScope.of(context).unfocus();
-              if(pos!=null){
-                pageController.animateToPage(pos,duration: const Duration(milliseconds: 200),curve: Curves.linear);
-              }
-            },
-            tabs: [
-              Tab(text: LocaleKeys.card.tr(context: context),),
-              Tab(text: LocaleKeys.accountNumber.tr(context: context),),
-            ],
-          ),
+          // bottom: TabBar(
+          //   controller: tabController,
+          //   indicatorColor: colorScheme.secondary,
+          //   indicatorSize: TabBarIndicatorSize.tab,
+          //   padding: const EdgeInsets.only(left: 15,right: 15),
+          //   dividerColor: colorScheme.surface,
+          //   unselectedLabelColor: Colors.grey,
+          //   onTap: (int? pos){
+          //     FocusScope.of(context).unfocus();
+          //     if(pos!=null){
+          //       pageController.animateToPage(pos,duration: const Duration(milliseconds: 200),curve: Curves.linear);
+          //     }
+          //   },
+          //   tabs: [
+          //     Tab(text: LocaleKeys.cash.tr(context: context),),
+          //     Tab(text: LocaleKeys.accountNumber.tr(context: context),),
+          //   ],
+          // ),
         ),
         body: PageView(
           controller: pageController,
           physics: const NeverScrollableScrollPhysics(),
-          children: const [
-            PaymentWithCardPage(),
-            PaymentWithAccountNumber(),
+          children: [
+            PaymentWithCardPage(params: widget.params,),
+            PaymentWithAccountNumber(params: widget.params,),
           ],
         )
     );

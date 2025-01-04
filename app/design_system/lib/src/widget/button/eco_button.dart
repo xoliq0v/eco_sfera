@@ -2,7 +2,7 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
 class EcoButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;  // Change to nullable
   final Widget child;
   final double? width;
   final double? height;
@@ -14,7 +14,7 @@ class EcoButton extends StatelessWidget {
 
   const EcoButton({
     super.key,
-    required this.onPressed,
+    this.onPressed,  // Allow null for onPressed
     required this.child,
     this.width,
     this.height,
@@ -70,12 +70,13 @@ class EcoButton extends StatelessWidget {
               color: backgroundColor,
             ),
             child: ElevatedButton(
-              onPressed: onPressed,
+              onPressed: onPressed == null ? null : onPressed,  // Disable if null
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(borderRadius),
                 ),
                 foregroundColor: Colors.white,
+                backgroundColor: onPressed == null ? Colors.grey : null,  // Change button color when disabled
               ),
               child: child,
             ),

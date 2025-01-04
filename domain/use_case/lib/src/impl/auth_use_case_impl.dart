@@ -10,7 +10,7 @@ class AuthImpl implements AuthUseCase {
   final AuthRepository authRepository;
 
   @override
-  Future<Result<String>> login({
+  Future<Result<AuthResult>> login({
     required String login,
     required String password,
     required String deviceToken
