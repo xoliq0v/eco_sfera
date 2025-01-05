@@ -15,6 +15,7 @@ import 'package:repository/src/repository/impl/user_repo_impl.dart';
 
 import '../repository/history_repo.dart';
 import '../repository/impl/customer_repo_impl.dart';
+import '../repository/impl/partner_repo_impl.dart';
 
 @module
 abstract class RepositoryModule {
@@ -84,6 +85,14 @@ abstract class RepositoryModule {
       HistoryProvider historyProvider
       ){
     return HistoryRepoImpl(historyProvider: historyProvider);
+  }
+
+  @lazySingleton
+  PartnerRepo providePartnerRepository(
+      PartnerProvider partnerProvider,
+      PartnerProfileDAO partnerProfileDAO,
+      ){
+    return PartnerRepoImpl(partnerProvider: partnerProvider, partnerProfileDAO: partnerProfileDAO);
   }
 }
 

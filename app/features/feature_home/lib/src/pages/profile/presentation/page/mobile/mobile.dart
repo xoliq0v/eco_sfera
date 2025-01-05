@@ -12,7 +12,7 @@ class Mobile extends State<_Mobile> {
 
   @override
   void initState() {
-    context.read<ProfileCubit>().initUser();
+    context.read<ProfileCubit>().init();
     super.initState();
   }
 
@@ -40,7 +40,7 @@ class Mobile extends State<_Mobile> {
                 return AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
                   child: state.maybeWhen(
-                      user: (userProfile) => _ProfileWidget(userProfile: userProfile,),
+                      user: (driver,partner) => _ProfileWidget(userProfile: driver,),
                       error: (String error) => _ProfileWidget(),
                       loading: () => ShimmerView(child: _ProfileWidget()),
                       orElse: SizedBox.shrink
@@ -59,7 +59,7 @@ class Mobile extends State<_Mobile> {
 }
 
 class _ProfileWidget extends StatelessWidget {
-  final UserProfile? userProfile;
+  final DriverData? userProfile;
   const _ProfileWidget({super.key,this.userProfile});
 
   @override
@@ -121,7 +121,7 @@ class _ProfileWidget extends StatelessWidget {
                                           .textTheme
                                           .headlineSmall
                                           ?.copyWith(fontSize: 10),),
-                                      Text('9 255 549', style: Theme
+                                      Text(userProfile?.outlay??'0.00', style: Theme
                                           .of(context)
                                           .textTheme
                                           .bodyMedium
@@ -148,12 +148,8 @@ class _ProfileWidget extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment
                                         .start,
                                     children: [
-                                      Text('Lorem ipsum', style: Theme
-                                          .of(context)
-                                          .textTheme
-                                          .headlineSmall
-                                          ?.copyWith(fontSize: 10),),
-                                      Text('10 000 000', style: Theme
+                                      Text('Lorem ipsum', style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 10),),
+                                      Text(userProfile?.earnings??'0.00', style: Theme
                                           .of(context)
                                           .textTheme
                                           .bodyMedium

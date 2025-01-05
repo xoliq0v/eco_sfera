@@ -6,6 +6,6 @@ abstract class BuyRepo extends BaseRepository {
 
   Future<Result<bool>> buy(BuyModel buyModel);
 
-  Future<Result<List<TrashParamModel>>> fetchParams();
+  Future<Result<List<TrashInfo>>> fetchParams();
 
 }

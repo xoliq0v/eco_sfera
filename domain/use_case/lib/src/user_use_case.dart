@@ -5,7 +5,7 @@ abstract class FetchUserProfile {
 }
 
 abstract class GetUserProfile {
-  UserProfile? get();
+  DriverData? get();
 
-  Stream<UserProfile?> watch();
+  Stream<DriverData?> watch();
 }

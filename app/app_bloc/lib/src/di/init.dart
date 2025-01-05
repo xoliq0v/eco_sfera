@@ -36,9 +36,12 @@ abstract class AppBlocModule {
   ProfileCubit provideProfileCubit(
     GetUserProfile getUserProfile,
     FetchUserProfile fetchUserProfile,
-      GetToken getToken
+      GetToken getToken,
+      GetAuthType getType,
+      FetchPartnerProfile fetchPartnerProfile,
+      GetPartnerProfile getPartnerProfile,
   ){
-    return ProfileCubit(fetchUserProfile: fetchUserProfile, getUserProfile: getUserProfile,getToken: getToken);
+    return ProfileCubit(fetchUserProfile: fetchUserProfile, getUserProfile: getUserProfile,getToken: getToken,getType: getType, fetchPartnerProfile: fetchPartnerProfile, getPartnerProfile: getPartnerProfile);
   }
 
   LogoutCubit provideLogOutCubit(Logout logout){

@@ -34,6 +34,14 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
             ));
     gh.factory<_i3.LogoutCubit>(
         () => appBlocModule.provideLogOutCubit(gh<_i5.Logout>()));
+    gh.factory<_i3.ProfileCubit>(() => appBlocModule.provideProfileCubit(
+          gh<_i5.GetUserProfile>(),
+          gh<_i5.FetchUserProfile>(),
+          gh<_i5.GetToken>(),
+          gh<_i5.GetAuthType>(),
+          gh<_i5.FetchPartnerProfile>(),
+          gh<_i5.GetPartnerProfile>(),
+        ));
     gh.factory<_i3.PostCustomerCubit>(
         () => appBlocModule.providePostCustomerCubit(gh<_i5.PostCustomer>()));
     gh.factory<_i3.HistoryPaginationCubit>(() =>
@@ -46,11 +54,6 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
         ));
     gh.factory<_i3.OrderCubit>(
         () => appBlocModule.provideOrderCubit(gh<_i5.GetOrder>()));
-    gh.factory<_i3.ProfileCubit>(() => appBlocModule.provideProfileCubit(
-          gh<_i5.GetUserProfile>(),
-          gh<_i5.FetchUserProfile>(),
-          gh<_i5.GetToken>(),
-        ));
     gh.factory<_i3.CustomerCubit>(
         () => appBlocModule.provideCustomerCubit(gh<_i5.GetCustomer>()));
     gh.factory<_i3.CustomerPaginationCubit>(() =>

@@ -4,7 +4,7 @@ abstract class UserRepository{
 
   Future<int?> fetchUserInfo();
 
-  UserProfile? getUserProfile();
+  DriverData? getUserProfile();
 
-  Stream<UserProfile?> watchUserProfile();
+  Stream<DriverData?> watchUserProfile();
 }

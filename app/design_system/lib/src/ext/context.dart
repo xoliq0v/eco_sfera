@@ -245,6 +245,11 @@ extension AppLanguage on BuildContext {
     };
   }
 
+  String? getLocalization(Map<String, String> localizedValues) {
+    Locale locale = Localizations.localeOf(this);
+    return localizedValues[locale.languageCode];
+  }
+
   String currentLocaleIcon() {
     return switch (locale.currentLanguage()) {
       AppLanguages.ru => AppIcons.globe01,

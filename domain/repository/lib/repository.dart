@@ -6,6 +6,7 @@ export 'src/repository/user_repo.dart';
 export 'src/repository/order_repo.dart';
 export 'src/repository/location_repo.dart';
 export 'src/repository/customer_repo.dart';
+export 'src/repository/partner_repo.dart';
 export 'src/repository/buy_repo.dart';
 export 'src/repository/history_repo.dart';
 export 'src/di/init.module.dart';

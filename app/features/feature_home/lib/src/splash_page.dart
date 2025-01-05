@@ -19,8 +19,8 @@ class SplashScreen extends StatefulWidget implements AutoRouteWrapper {
         BlocProvider<InternetConnectivityController>(
           create: (_) => AppBlocHelper.getInternetConnectivityController(),
         ),
-        BlocProvider<AuthCubit>(
-          create: (_) => AppBlocHelper.getAuthCubit(),
+        BlocProvider<ProfileCubit>(
+          create: (_) => AppBlocHelper.getProfileCubit(),
         ),
       ],
       child: this,
@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
     } else {
       // If no token, check connectivity and proceed as before
       isFinished = true;
-      navigateNext(context);
+      await navigateNext(context);
     }
   }
 
@@ -114,7 +114,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> navigateMainPage(BuildContext context) async{
-    final type = await context.read<AuthCubit>().getType();
+    final type = await context.read<ProfileCubit>().type();
     return await NavigationUtils.getMainNavigator().navigateMainPage(
       type: type,
     );

@@ -19,12 +19,12 @@ class GetUserProfileImpl extends GetUserProfile {
   final UserRepository userRepository;
 
   @override
-  UserProfile? get() {
+  DriverData? get() {
     return userRepository.getUserProfile();
   }
 
   @override
-  Stream<UserProfile?> watch() {
+  Stream<DriverData?> watch() {
     return userRepository.watchUserProfile();
   }
 

@@ -20,7 +20,9 @@ mixin _$ProfileState {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(UserProfile userProfile) user,
+    required TResult Function(
+            DriverData? driverProfile, PartnerInfoModel? partnerProfile)
+        user,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +30,9 @@ mixin _$ProfileState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(UserProfile userProfile)? user,
+    TResult? Function(
+            DriverData? driverProfile, PartnerInfoModel? partnerProfile)?
+        user,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +40,9 @@ mixin _$ProfileState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(UserProfile userProfile)? user,
+    TResult Function(
+            DriverData? driverProfile, PartnerInfoModel? partnerProfile)?
+        user,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -125,7 +131,9 @@ class _$InitImpl implements _Init {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(UserProfile userProfile) user,
+    required TResult Function(
+            DriverData? driverProfile, PartnerInfoModel? partnerProfile)
+        user,
     required TResult Function(String error) error,
   }) {
     return init();
@@ -136,7 +144,9 @@ class _$InitImpl implements _Init {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(UserProfile userProfile)? user,
+    TResult? Function(
+            DriverData? driverProfile, PartnerInfoModel? partnerProfile)?
+        user,
     TResult? Function(String error)? error,
   }) {
     return init?.call();
@@ -147,7 +157,9 @@ class _$InitImpl implements _Init {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(UserProfile userProfile)? user,
+    TResult Function(
+            DriverData? driverProfile, PartnerInfoModel? partnerProfile)?
+        user,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -239,7 +251,9 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(UserProfile userProfile) user,
+    required TResult Function(
+            DriverData? driverProfile, PartnerInfoModel? partnerProfile)
+        user,
     required TResult Function(String error) error,
   }) {
     return loading();
@@ -250,7 +264,9 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(UserProfile userProfile)? user,
+    TResult? Function(
+            DriverData? driverProfile, PartnerInfoModel? partnerProfile)?
+        user,
     TResult? Function(String error)? error,
   }) {
     return loading?.call();
@@ -261,7 +277,9 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(UserProfile userProfile)? user,
+    TResult Function(
+            DriverData? driverProfile, PartnerInfoModel? partnerProfile)?
+        user,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -319,7 +337,7 @@ abstract class _$$UserImplCopyWith<$Res> {
           _$UserImpl value, $Res Function(_$UserImpl) then) =
       __$$UserImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({UserProfile userProfile});
+  $Res call({DriverData? driverProfile, PartnerInfoModel? partnerProfile});
 }
 
 /// @nodoc
@@ -332,13 +350,18 @@ class __$$UserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userProfile = null,
+    Object? driverProfile = freezed,
+    Object? partnerProfile = freezed,
   }) {
     return _then(_$UserImpl(
-      userProfile: null == userProfile
-          ? _value.userProfile
-          : userProfile // ignore: cast_nullable_to_non_nullable
-              as UserProfile,
+      driverProfile: freezed == driverProfile
+          ? _value.driverProfile
+          : driverProfile // ignore: cast_nullable_to_non_nullable
+              as DriverData?,
+      partnerProfile: freezed == partnerProfile
+          ? _value.partnerProfile
+          : partnerProfile // ignore: cast_nullable_to_non_nullable
+              as PartnerInfoModel?,
     ));
   }
 }
@@ -346,14 +369,16 @@ class __$$UserImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UserImpl implements _User {
-  const _$UserImpl({required this.userProfile});
+  const _$UserImpl({this.driverProfile, this.partnerProfile});
 
   @override
-  final UserProfile userProfile;
+  final DriverData? driverProfile;
+  @override
+  final PartnerInfoModel? partnerProfile;
 
   @override
   String toString() {
-    return 'ProfileState.user(userProfile: $userProfile)';
+    return 'ProfileState.user(driverProfile: $driverProfile, partnerProfile: $partnerProfile)';
   }
 
   @override
@@ -361,12 +386,14 @@ class _$UserImpl implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
-            (identical(other.userProfile, userProfile) ||
-                other.userProfile == userProfile));
+            (identical(other.driverProfile, driverProfile) ||
+                other.driverProfile == driverProfile) &&
+            (identical(other.partnerProfile, partnerProfile) ||
+                other.partnerProfile == partnerProfile));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userProfile);
+  int get hashCode => Object.hash(runtimeType, driverProfile, partnerProfile);
 
   @JsonKey(ignore: true)
   @override
@@ -379,10 +406,12 @@ class _$UserImpl implements _User {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(UserProfile userProfile) user,
+    required TResult Function(
+            DriverData? driverProfile, PartnerInfoModel? partnerProfile)
+        user,
     required TResult Function(String error) error,
   }) {
-    return user(userProfile);
+    return user(driverProfile, partnerProfile);
   }
 
   @override
@@ -390,10 +419,12 @@ class _$UserImpl implements _User {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(UserProfile userProfile)? user,
+    TResult? Function(
+            DriverData? driverProfile, PartnerInfoModel? partnerProfile)?
+        user,
     TResult? Function(String error)? error,
   }) {
-    return user?.call(userProfile);
+    return user?.call(driverProfile, partnerProfile);
   }
 
   @override
@@ -401,12 +432,14 @@ class _$UserImpl implements _User {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(UserProfile userProfile)? user,
+    TResult Function(
+            DriverData? driverProfile, PartnerInfoModel? partnerProfile)?
+        user,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (user != null) {
-      return user(userProfile);
+      return user(driverProfile, partnerProfile);
     }
     return orElse();
   }
@@ -450,9 +483,12 @@ class _$UserImpl implements _User {
 }
 
 abstract class _User implements ProfileState {
-  const factory _User({required final UserProfile userProfile}) = _$UserImpl;
+  const factory _User(
+      {final DriverData? driverProfile,
+      final PartnerInfoModel? partnerProfile}) = _$UserImpl;
 
-  UserProfile get userProfile;
+  DriverData? get driverProfile;
+  PartnerInfoModel? get partnerProfile;
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -524,7 +560,9 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(UserProfile userProfile) user,
+    required TResult Function(
+            DriverData? driverProfile, PartnerInfoModel? partnerProfile)
+        user,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -535,7 +573,9 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(UserProfile userProfile)? user,
+    TResult? Function(
+            DriverData? driverProfile, PartnerInfoModel? partnerProfile)?
+        user,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -546,7 +586,9 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(UserProfile userProfile)? user,
+    TResult Function(
+            DriverData? driverProfile, PartnerInfoModel? partnerProfile)?
+        user,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {

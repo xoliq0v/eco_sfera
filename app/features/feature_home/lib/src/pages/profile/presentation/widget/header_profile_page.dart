@@ -5,7 +5,7 @@ import 'package:model/model.dart';
 
 
 class HeaderProfilePage extends StatelessWidget {
-  final UserProfile? userProfile;
+  final DriverData? userProfile;
   const HeaderProfilePage({super.key,required this.userProfile});
 
   @override
@@ -31,9 +31,9 @@ class HeaderProfilePage extends StatelessWidget {
                   onTap:(){
                     ChangeAvatarBottomSheet.show(context);
                   },
-                  child: const CircleAvatar(
+                  child: CircleAvatar(
                     backgroundImage: NetworkImage(
-                        'https://www.wilsoncenter.org/sites/default/files/media/images/person/james-person-1.jpg'
+                        userProfile?.profileImage??'https://www.wilsoncenter.org/sites/default/files/media/images/person/james-person-1.jpg'
                     ),
                     maxRadius: 30,
                   ),
@@ -43,7 +43,7 @@ class HeaderProfilePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      userProfile?.name??'Name',
+                      '${userProfile?.name} ${userProfile?.surname}',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Theme.of(context).colorScheme.background,
                           fontWeight: FontWeight.w700,
@@ -52,7 +52,7 @@ class HeaderProfilePage extends StatelessWidget {
                     ),
                     5.verticalSpace,
                     Text(
-                      userProfile?.phoneUI??'phone number',
+                      userProfile?.phone.formatUzbekPhoneNumber()??'Phone empty',
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         color: Theme.of(context).colorScheme.background,
                       ),

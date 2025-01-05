@@ -3,6 +3,6 @@ import 'package:network/network.dart';
 
 abstract class TrashProvider extends BaseProvider {
 
-  Future<ApiResponse<List<TrashDto>>> fetchTrashes();
+  Future<ApiResponse<List<TrashInfoDto>>> fetchTrashes();
 
 }

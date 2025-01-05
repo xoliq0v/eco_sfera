@@ -55,6 +55,11 @@ abstract class DatabaseModule {
   FavoriteDetectorDAO provideFavoriteDetectorDAO(MyObjectBox myObjectBox) {
     return FavoriteDetectorDAO(myObjectBox.store);
   }
+
+  @lazySingleton
+  PartnerProfileDAO providePartnerProfileDAO(MyObjectBox myObjectBox) {
+    return PartnerProfileDAO(myObjectBox.store);
+  }
 }
 
 @InjectableInit.microPackage()

@@ -35,6 +35,8 @@ class DatabasePackageModule extends _i1.MicroPackageModule {
         () => databaseModule.provideDrugSearchDAO(gh<_i4.MyObjectBox>()));
     gh.lazySingleton<_i4.FavoriteDetectorDAO>(
         () => databaseModule.provideFavoriteDetectorDAO(gh<_i4.MyObjectBox>()));
+    gh.lazySingleton<_i4.PartnerProfileDAO>(
+        () => databaseModule.providePartnerProfileDAO(gh<_i4.MyObjectBox>()));
     gh.lazySingleton<_i4.SecureStorage>(() =>
         databaseModule.provideSecureStorage(gh<_i5.FlutterSecureStorage>()));
     gh.lazySingleton<_i4.AppStorage>(

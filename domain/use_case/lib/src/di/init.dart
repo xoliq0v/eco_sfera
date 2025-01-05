@@ -3,15 +3,16 @@ import 'dart:async';
 
 import 'package:core/core.dart';
 import 'package:repository/repository.dart';
-import 'package:use_case/src/impl/auth_use_case_impl.dart';
-import 'package:use_case/src/impl/buy_use_case_impl.dart';
-import 'package:use_case/src/impl/customer_use_case_impl.dart';
-import 'package:use_case/src/impl/location_use_case_impl.dart';
-import 'package:use_case/src/impl/order_use_case_impl.dart';
-import 'package:use_case/src/impl/session_use_case_impl.dart';
-import 'package:use_case/use_case.dart';
+import '../impl/auth_use_case_impl.dart';
+import '../impl/buy_use_case_impl.dart';
+import '../impl/customer_use_case_impl.dart';
+import '../impl/location_use_case_impl.dart';
+import '../impl/order_use_case_impl.dart';
+import '../impl/session_use_case_impl.dart';
+import '../../use_case.dart';
 
 import '../impl/history_use_case_impl.dart';
+import '../impl/parnter_use_case_impl.dart';
 
 @module
 abstract class UseCaseModule {
@@ -70,6 +71,18 @@ abstract class UseCaseModule {
 
   SaveType provideSaveType(SessionRepository sessionRepository){
     return SaveTypeImpl(sessionRepository: sessionRepository);
+  }
+
+  FetchPartnerProfile provideFetchPartnerProfile(PartnerRepo partnerRepository) {
+    return FetchPartnerProfileImpl(partnerRepo: partnerRepository);
+  }
+
+  GetPartnerProfile provideGetPartnerProfile(PartnerRepo partnerRepository) {
+    return GetPartnerProfileImpl(partnerRepo: partnerRepository);
+  }
+
+  GetAuthType provideGetAuthType(SessionRepository sessionRepository){
+    return GetAuthTypeImpl(sessionRepository: sessionRepository);
   }
 }
 

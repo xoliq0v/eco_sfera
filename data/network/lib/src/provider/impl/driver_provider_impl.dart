@@ -1,8 +1,10 @@
+import 'dart:developer';
+
 import 'package:core/src/network_config/base_model.dart';
 import 'package:dio/dio.dart';
-import 'package:network/src/dto/client_data_dto.dart';
+import 'package:network/src/dto/driver_dto.dart';
 import 'package:network/src/endpoints/endpoints.dart';
-import 'package:network/src/provider/client_provider.dart';
+import 'package:network/src/provider/driver_provider.dart';
 
 class ClientProviderImpl extends ClientProvider {
   ClientProviderImpl({required this.authClient});
@@ -10,11 +12,12 @@ class ClientProviderImpl extends ClientProvider {
   final Dio authClient;
 
   @override
-  Future<ApiResponse<ClientDataDTO>> fetchData() {
+  Future<ApiResponse<DriverDTO>> fetchData() {
     return apiCall(
-      authClient.get(ClientEndpoint.clientData),
+      authClient.get(DriverEndpoint.clientData),
       dataFromJson: (data) {
-        return ClientDataDTO.fromJson(data[0] as Map<String, dynamic>);
+        log('ClientProviderImpl fetchData $data');
+        return DriverDTO.fromJson(data as Map<String, dynamic>);
       },
     );
   }
@@ -22,7 +25,7 @@ class ClientProviderImpl extends ClientProvider {
   @override
   Future<ApiResponse<Map<String, dynamic>?>> logout() {
     return apiCall(
-      authClient.post(ClientEndpoint.logout),
+      authClient.post(DriverEndpoint.logout),
       dataFromJson: (data) => data as Map<String, dynamic>?,
     );
   }

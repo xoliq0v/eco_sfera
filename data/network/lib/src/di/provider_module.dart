@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:network/network.dart';
 import 'package:network/src/provider/impl/auth_provider_impl.dart';
 import 'package:network/src/provider/impl/buy_provider_impl.dart';
-import 'package:network/src/provider/impl/client_provider_impl.dart';
+import 'package:network/src/provider/impl/driver_provider_impl.dart';
 import 'package:network/src/provider/impl/customer_provider_impl.dart';
 import 'package:network/src/provider/impl/history_provider_impl.dart';
 import 'package:network/src/provider/impl/order_provider_impl.dart';

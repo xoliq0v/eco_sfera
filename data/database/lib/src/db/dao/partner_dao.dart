@@ -1,22 +1,23 @@
-import 'package:database/database.dart';
 import 'package:objectbox/objectbox.dart';
 
-class UserProfileDAO {
-  UserProfileDAO(Store store) : _box = store.box<DriverEntity>();
-  final Box<DriverEntity> _box;
+import '../../entity/partner_entity.dart';
 
-  int saveProfile(DriverEntity userProfileEntity) {
+class PartnerProfileDAO {
+  PartnerProfileDAO(Store store) : _box = store.box<PartnerEntity>();
+  final Box<PartnerEntity> _box;
+
+  int saveProfile(PartnerEntity userProfileEntity) {
     return _box.put(userProfileEntity);
   }
 
-  DriverEntity? getProfile() {
+  PartnerEntity? getProfile() {
     final builder = _box.query().build();
     final profile = builder.findFirst();
     builder.close();
     return profile;
   }
 
-  Stream<DriverEntity?> watchProfile() {
+  Stream<PartnerEntity?> watchProfile() {
     return _box.query().watch().map((event) {
       return event.findFirst();
     });

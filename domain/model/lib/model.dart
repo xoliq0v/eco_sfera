@@ -1,5 +1,5 @@
 export 'src/location.dart';
-export 'src/user.dart';
+export 'src/driver.dart';
 export 'src/base_paginated_response.dart';
 export 'src/partner.dart';
 export 'src/customer.dart';
@@ -17,3 +17,5 @@ export 'src/buy_page_prams_model.dart';
 export 'src/trash_param_model.dart';
 export 'src/customer_response.dart';
 export 'src/auth_result.dart';
+export 'src/partner_info_model.dart';
+export 'src/trash_info.dart';

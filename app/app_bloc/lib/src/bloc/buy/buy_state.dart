@@ -9,7 +9,7 @@ sealed class BuyState with _$BuyState {
 
   const factory BuyState.buyLoading() = _BuyLoading;
 
-  const factory BuyState.success(List<TrashParamModel> params) = _Success;
+  const factory BuyState.success(List<TrashInfo> params) = _Success;
 
   const factory BuyState.buySuccess() = _BuySuccess;
 

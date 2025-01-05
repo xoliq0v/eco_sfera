@@ -2,11 +2,11 @@ mixin AuthEndpoint {
   static const base = 'api/employee/login';
 }
 
-mixin ClientEndpoint {
+mixin DriverEndpoint {
 
   static const _basePath = 'api/employee';
 
-  static String clientData = '$_basePath/data';
+  static String clientData = '$_basePath/data?type=driver';
   static String logout = '$_basePath/logout';
 
 }
@@ -24,6 +24,7 @@ mixin PartnerEndpoint {
 
   static String partners = _basePath;
   static String search = '$_basePath/search';
+  static String data = '$_basePath/data?type=partner';
 }
 
 mixin TrashEndpoint {

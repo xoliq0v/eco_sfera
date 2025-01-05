@@ -10,5 +10,8 @@ abstract class SaveToken{
 
 abstract class SaveType {
   Future<void> save(AuthType value);
+}
+
+abstract class GetAuthType {
   Future<AuthType> get();
 }

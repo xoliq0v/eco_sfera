@@ -32,9 +32,15 @@ class SaveTypeImpl extends SaveType {
     return sessionRepository.saveType(value);
   }
 
+}
+
+class GetAuthTypeImpl extends GetAuthType {
+  GetAuthTypeImpl({required this.sessionRepository});
+
+  final SessionRepository sessionRepository;
+
   @override
   Future<AuthType> get() async{
     return sessionRepository.getType();
   }
-
 }

@@ -22,7 +22,7 @@ class MyObjectBox {
       store.box<DrugSearchEntity>(),
       store.box<FavoriteDetectorEntity>(),
       store.box<UserLocationEntity>(),
-      store.box<UserProfileEntity>(),
+      store.box<DriverEntity>(),
     ];
     return Future.wait(tables.map((e) => e.removeAllAsync()));
   }

@@ -21,7 +21,7 @@ mixin _$BuyState {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function() buyLoading,
-    required TResult Function(List<TrashParamModel> params) success,
+    required TResult Function(List<TrashInfo> params) success,
     required TResult Function() buySuccess,
     required TResult Function(String error) error,
   }) =>
@@ -31,7 +31,7 @@ mixin _$BuyState {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function()? buyLoading,
-    TResult? Function(List<TrashParamModel> params)? success,
+    TResult? Function(List<TrashInfo> params)? success,
     TResult? Function()? buySuccess,
     TResult? Function(String error)? error,
   }) =>
@@ -41,7 +41,7 @@ mixin _$BuyState {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function()? buyLoading,
-    TResult Function(List<TrashParamModel> params)? success,
+    TResult Function(List<TrashInfo> params)? success,
     TResult Function()? buySuccess,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -137,7 +137,7 @@ class _$InitImpl implements _Init {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function() buyLoading,
-    required TResult Function(List<TrashParamModel> params) success,
+    required TResult Function(List<TrashInfo> params) success,
     required TResult Function() buySuccess,
     required TResult Function(String error) error,
   }) {
@@ -150,7 +150,7 @@ class _$InitImpl implements _Init {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function()? buyLoading,
-    TResult? Function(List<TrashParamModel> params)? success,
+    TResult? Function(List<TrashInfo> params)? success,
     TResult? Function()? buySuccess,
     TResult? Function(String error)? error,
   }) {
@@ -163,7 +163,7 @@ class _$InitImpl implements _Init {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function()? buyLoading,
-    TResult Function(List<TrashParamModel> params)? success,
+    TResult Function(List<TrashInfo> params)? success,
     TResult Function()? buySuccess,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -263,7 +263,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function() buyLoading,
-    required TResult Function(List<TrashParamModel> params) success,
+    required TResult Function(List<TrashInfo> params) success,
     required TResult Function() buySuccess,
     required TResult Function(String error) error,
   }) {
@@ -276,7 +276,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function()? buyLoading,
-    TResult? Function(List<TrashParamModel> params)? success,
+    TResult? Function(List<TrashInfo> params)? success,
     TResult? Function()? buySuccess,
     TResult? Function(String error)? error,
   }) {
@@ -289,7 +289,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function()? buyLoading,
-    TResult Function(List<TrashParamModel> params)? success,
+    TResult Function(List<TrashInfo> params)? success,
     TResult Function()? buySuccess,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -389,7 +389,7 @@ class _$BuyLoadingImpl implements _BuyLoading {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function() buyLoading,
-    required TResult Function(List<TrashParamModel> params) success,
+    required TResult Function(List<TrashInfo> params) success,
     required TResult Function() buySuccess,
     required TResult Function(String error) error,
   }) {
@@ -402,7 +402,7 @@ class _$BuyLoadingImpl implements _BuyLoading {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function()? buyLoading,
-    TResult? Function(List<TrashParamModel> params)? success,
+    TResult? Function(List<TrashInfo> params)? success,
     TResult? Function()? buySuccess,
     TResult? Function(String error)? error,
   }) {
@@ -415,7 +415,7 @@ class _$BuyLoadingImpl implements _BuyLoading {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function()? buyLoading,
-    TResult Function(List<TrashParamModel> params)? success,
+    TResult Function(List<TrashInfo> params)? success,
     TResult Function()? buySuccess,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -480,7 +480,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<TrashParamModel> params});
+  $Res call({List<TrashInfo> params});
 }
 
 /// @nodoc
@@ -500,7 +500,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
       null == params
           ? _value._params
           : params // ignore: cast_nullable_to_non_nullable
-              as List<TrashParamModel>,
+              as List<TrashInfo>,
     ));
   }
 }
@@ -508,11 +508,11 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(final List<TrashParamModel> params) : _params = params;
+  const _$SuccessImpl(final List<TrashInfo> params) : _params = params;
 
-  final List<TrashParamModel> _params;
+  final List<TrashInfo> _params;
   @override
-  List<TrashParamModel> get params {
+  List<TrashInfo> get params {
     if (_params is EqualUnmodifiableListView) return _params;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_params);
@@ -547,7 +547,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function() buyLoading,
-    required TResult Function(List<TrashParamModel> params) success,
+    required TResult Function(List<TrashInfo> params) success,
     required TResult Function() buySuccess,
     required TResult Function(String error) error,
   }) {
@@ -560,7 +560,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function()? buyLoading,
-    TResult? Function(List<TrashParamModel> params)? success,
+    TResult? Function(List<TrashInfo> params)? success,
     TResult? Function()? buySuccess,
     TResult? Function(String error)? error,
   }) {
@@ -573,7 +573,7 @@ class _$SuccessImpl implements _Success {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function()? buyLoading,
-    TResult Function(List<TrashParamModel> params)? success,
+    TResult Function(List<TrashInfo> params)? success,
     TResult Function()? buySuccess,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -629,9 +629,9 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements BuyState {
-  const factory _Success(final List<TrashParamModel> params) = _$SuccessImpl;
+  const factory _Success(final List<TrashInfo> params) = _$SuccessImpl;
 
-  List<TrashParamModel> get params;
+  List<TrashInfo> get params;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -678,7 +678,7 @@ class _$BuySuccessImpl implements _BuySuccess {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function() buyLoading,
-    required TResult Function(List<TrashParamModel> params) success,
+    required TResult Function(List<TrashInfo> params) success,
     required TResult Function() buySuccess,
     required TResult Function(String error) error,
   }) {
@@ -691,7 +691,7 @@ class _$BuySuccessImpl implements _BuySuccess {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function()? buyLoading,
-    TResult? Function(List<TrashParamModel> params)? success,
+    TResult? Function(List<TrashInfo> params)? success,
     TResult? Function()? buySuccess,
     TResult? Function(String error)? error,
   }) {
@@ -704,7 +704,7 @@ class _$BuySuccessImpl implements _BuySuccess {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function()? buyLoading,
-    TResult Function(List<TrashParamModel> params)? success,
+    TResult Function(List<TrashInfo> params)? success,
     TResult Function()? buySuccess,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -830,7 +830,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function() buyLoading,
-    required TResult Function(List<TrashParamModel> params) success,
+    required TResult Function(List<TrashInfo> params) success,
     required TResult Function() buySuccess,
     required TResult Function(String error) error,
   }) {
@@ -843,7 +843,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function()? buyLoading,
-    TResult? Function(List<TrashParamModel> params)? success,
+    TResult? Function(List<TrashInfo> params)? success,
     TResult? Function()? buySuccess,
     TResult? Function(String error)? error,
   }) {
@@ -856,7 +856,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function()? buyLoading,
-    TResult Function(List<TrashParamModel> params)? success,
+    TResult Function(List<TrashInfo> params)? success,
     TResult Function()? buySuccess,
     TResult Function(String error)? error,
     required TResult orElse(),

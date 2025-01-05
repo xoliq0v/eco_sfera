@@ -8,6 +8,8 @@ import 'package:repository/src/mapping/requests/buy_mapping.dart';
 import 'package:repository/src/mapping/trash_param_mapping.dart';
 import 'package:repository/src/repository/buy_repo.dart';
 
+import '../../mapping/trash_mapping.dart';
+
 class BuyRepoImpl extends BuyRepo {
   BuyRepoImpl({required this.buyProvider,required this.trashProvider});
 
@@ -43,7 +45,7 @@ class BuyRepoImpl extends BuyRepo {
   }
 
   @override
-  Future<Result<List<TrashParamModel>>> fetchParams() {
+  Future<Result<List<TrashInfo>>> fetchParams() {
     return toResult2(
         trashProvider.fetchTrashes(),
         fromSuccessResponse: (data){

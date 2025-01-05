@@ -46,14 +46,14 @@ class _BuyPageState extends State<BuyPage> {
   double _totalKg = 0;
   double _totalSum = 0;
 
-  void _updateTotals(List<TrashParamModel> params) {
+  void _updateTotals(List<TrashInfo> params) {
     double totalKg = 0;
     double totalSum = 0;
 
     _values.forEach((index, kg) {
       totalKg += kg;
       if (index < params.length) {
-        double pricePerKg = params[index].price?.toDouble() ?? 0;
+        double pricePerKg = params[index].price.toDouble() ?? 0;
         totalSum += kg * pricePerKg;
       }
     });
@@ -64,7 +64,7 @@ class _BuyPageState extends State<BuyPage> {
     });
   }
 
-  void _handleTextChange(int index, String value, List<TrashParamModel> params) {
+  void _handleTextChange(int index, String value, List<TrashInfo> params) {
     double? parsedValue = double.tryParse(value);
     _values[index] = parsedValue ?? 0;
     _updateTotals(params);
@@ -177,12 +177,19 @@ class _BuyPageState extends State<BuyPage> {
                                   flex: 2,
                                   child: EcoTextField(
                                     key: Key('param_textfield_$index'),
-                                    topRightText: params.params[index].key ?? '',
+                                    topRightText: context.getLocalization({
+                                      'uz': params.params[index].name,
+                                      'ru': params.params[index].nameRu,
+                                      'en': params.params[index].nameKr,
+                                    }) ?? '',
                                     keyboardType: TextInputType.numberWithOptions(decimal: true),
                                     inputFormatters: [
                                       FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
                                     ],
-                                    onChanged: (value) => _handleTextChange(index, value ?? '0', params.params),
+                                    onChanged: (value) => _handleTextChange(
+                                        index, value ?? '0',
+                                        params.params
+                                    ),
                                   ),
                                 ),
                                 Flexible(

@@ -1,12 +1,15 @@
-import 'package:core/core.dart';
 import 'package:model/model.dart';
-import 'package:repository/repository.dart';
 
-abstract class PartnerRepo extends BaseRepository{
+abstract class PartnerRepo{
 
-  Future<Result<BasePaginatedResponse<Partner>>> fetchPartner();
+  // Future<Result<BasePaginatedResponse<Partner>>> fetchPartner();
 
-  Future<Result<BasePaginatedResponse<Partner>>> searchPartnerByName();
+  // Future<Result<BasePaginatedResponse<Partner>>> searchPartnerByName();
 
+  Future<int?> fetchPartnerInfo();
+
+  PartnerInfoModel? getPartnerProfile();
+
+  Stream<PartnerInfoModel?> watchPartnerProfile();
 
 }

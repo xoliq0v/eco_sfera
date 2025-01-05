@@ -64,8 +64,8 @@ class AuthCubit extends Cubit<AuthState> {
     login(login: _login, password: _password);
   }
 
-  Future<AuthType> getType() async{
-    return await _saveType.get();
-  }
+  // Future<AuthType> getType() async{
+  //   return await _getAuthType.get();
+  // }
 
 }

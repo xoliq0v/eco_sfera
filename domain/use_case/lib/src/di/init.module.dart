@@ -31,6 +31,8 @@ class UseCasePackageModule extends _i526.MicroPackageModule {
         () => useCaseModule.provideLogout(gh<_i585.SessionRepository>()));
     gh.factory<_i987.SaveType>(
         () => useCaseModule.provideSaveType(gh<_i585.SessionRepository>()));
+    gh.factory<_i987.GetAuthType>(
+        () => useCaseModule.provideGetAuthType(gh<_i585.SessionRepository>()));
     gh.factory<_i627.AuthImpl>(
         () => _i627.AuthImpl(authRepository: gh<_i585.AuthRepository>()));
     gh.factory<_i987.AuthUseCase>(
@@ -46,6 +48,10 @@ class UseCasePackageModule extends _i526.MicroPackageModule {
         () => useCaseModule.provideGetLocation(gh<_i585.LocationRepository>()));
     gh.factory<_i987.GetOrder>(
         () => useCaseModule.provideGetOrder(gh<_i585.OrderRepo>()));
+    gh.factory<_i987.FetchPartnerProfile>(() =>
+        useCaseModule.provideFetchPartnerProfile(gh<_i585.PartnerRepo>()));
+    gh.factory<_i987.GetPartnerProfile>(
+        () => useCaseModule.provideGetPartnerProfile(gh<_i585.PartnerRepo>()));
   }
 }
 

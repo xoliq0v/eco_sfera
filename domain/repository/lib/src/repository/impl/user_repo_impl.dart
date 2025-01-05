@@ -1,5 +1,5 @@
 import 'package:model/model.dart';
-import 'package:repository/src/mapping/user_profile.dart';
+import 'package:repository/src/mapping/driver_mapper.dart';
 import 'package:repository/src/repository/user_repo.dart';
 import 'package:database/database.dart';
 import 'package:network/network.dart';
@@ -23,12 +23,12 @@ class UserRepositoryImpl extends UserRepository {
   }
 
   @override
-  UserProfile? getUserProfile() {
+  DriverData? getUserProfile() {
     return userProfileDAO.getProfile()?.toUserProfile();
   }
 
   @override
-  Stream<UserProfile?> watchUserProfile() {
+  Stream<DriverData?> watchUserProfile() {
     return userProfileDAO.watchProfile().map((event) {
       return event?.toUserProfile();
     });

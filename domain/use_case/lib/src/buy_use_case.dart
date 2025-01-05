@@ -9,6 +9,6 @@ abstract class Buy {
 
 abstract class FetchBuyPageParams{
 
-  Future<Result<List<TrashParamModel>>> fetch();
+  Future<Result<List<TrashInfo>>> fetch();
 
 }

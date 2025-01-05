@@ -23,7 +23,7 @@ class FetchBuyParamsImpl extends FetchBuyPageParams {
   final BuyRepo buyRepo;
 
   @override
-  Future<Result<List<TrashParamModel>>> fetch() {
+  Future<Result<List<TrashInfo>>> fetch() {
     return buyRepo.fetchParams();
   }
 
