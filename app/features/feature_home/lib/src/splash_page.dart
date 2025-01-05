@@ -49,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (token != null && token.isNotEmpty) {
       // If token exists, navigate to the main page
       /// navigateMainPage(context);
-      await navigateToPartnerApp();
+      await navigateMainPage();
     } else {
       // If no token, check connectivity and proceed as before
       isFinished = true;
@@ -113,16 +113,16 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-  Future<void> navigateMainPage(BuildContext context) async{
+  Future<void> navigateMainPage() async{
     final type = await context.read<ProfileCubit>().type();
     return await NavigationUtils.getMainNavigator().navigateMainPage(
       type: type,
     );
   }
 
-  Future<void> navigateToPartnerApp() async{
-    return await NavigationUtils.getMainNavigator().navigateMainPage();
-  }
+  // Future<void> navigateToPartnerApp() async{
+  //   return await NavigationUtils.getMainNavigator().navigateMainPage();
+  // }
 
   Future<void> navigateChooseLangPage(BuildContext context) async {
     return NavigationUtils.getAuthNavigator().navigateChooseLangPage();

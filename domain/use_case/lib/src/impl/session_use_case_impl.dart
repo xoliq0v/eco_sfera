@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:model/model.dart';
 import 'package:use_case/src/session_use_case.dart';
 import 'package:repository/repository.dart';
@@ -29,6 +31,7 @@ class SaveTypeImpl extends SaveType {
 
   @override
   Future<void> save(AuthType value) {
+    log('SaveTypeImpl: save: $value');
     return sessionRepository.saveType(value);
   }
 
@@ -41,6 +44,8 @@ class GetAuthTypeImpl extends GetAuthType {
 
   @override
   Future<AuthType> get() async{
-    return sessionRepository.getType();
+    final type = await sessionRepository.getType();
+    log('GetAuthTypeImpl get: $type');
+    return type;
   }
 }

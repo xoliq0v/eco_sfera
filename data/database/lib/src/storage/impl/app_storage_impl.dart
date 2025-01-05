@@ -22,8 +22,6 @@ class AppStorageImpl implements AppStorage {
     return sharedPreferences.clear();
   }
 
-
-
   @override
   Future<bool> saveType(String value) {
     return sharedPreferences.setString(StorageEndpoints.TYPE, value);
