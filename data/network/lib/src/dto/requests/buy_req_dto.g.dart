@@ -1,15 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'buy_dto.dart';
+part of 'buy_req_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-BuyDto _$BuyDtoFromJson(Map<String, dynamic> json) => BuyDto(
+BuyReqDto _$BuyReqDtoFromJson(Map<String, dynamic> json) => BuyReqDto(
       employee: json['employee'] as String,
       customerId: (json['customer_id'] as num).toInt(),
-      paperKg: (json['customer_kg'] as num).toDouble(),
+      paperKg: (json['paper_kg'] as num).toDouble(),
       paperPrice: (json['paper_price'] as num).toDouble(),
       plasticKg: (json['plastic_kg'] as num).toDouble(),
       plasticPrice: (json['plastic_price'] as num).toDouble(),
@@ -22,10 +22,10 @@ BuyDto _$BuyDtoFromJson(Map<String, dynamic> json) => BuyDto(
       type: json['type'] as String,
     );
 
-Map<String, dynamic> _$BuyDtoToJson(BuyDto instance) => <String, dynamic>{
+Map<String, dynamic> _$BuyReqDtoToJson(BuyReqDto instance) => <String, dynamic>{
       'employee': instance.employee,
       'customer_id': instance.customerId,
-      'customer_kg': instance.paperKg,
+      'paper_kg': instance.paperKg,
       'paper_price': instance.paperPrice,
       'plastic_kg': instance.plasticKg,
       'plastic_price': instance.plasticPrice,
