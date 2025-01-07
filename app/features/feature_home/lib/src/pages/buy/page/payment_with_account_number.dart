@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:model/model.dart';
 
 class PaymentWithAccountNumber extends StatefulWidget {
-  final BuyModel params;
+  final BuyReq params;
   const PaymentWithAccountNumber({super.key,required this.params});
 
   @override

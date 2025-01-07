@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
+import 'widget/drop_down.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:model/model.dart';
@@ -49,18 +50,38 @@ class _BuyPageState extends State<BuyPage> {
   void _updateTotals(List<TrashInfo> params) {
     double totalKg = 0;
     double totalSum = 0;
+    double plasticKg = 0;
+    double plasticBottleKg = 0;
+    double cartonKg = 0;
+    double paperKg = 0;
 
     _values.forEach((index, kg) {
       totalKg += kg;
       if (index < params.length) {
         double pricePerKg = params[index].price.toDouble() ?? 0;
         totalSum += kg * pricePerKg;
+
+        switch (params[index].key) {
+          case 'plastic':
+            plasticKg += kg;
+            break;
+          case 'plastic_bottle':
+            plasticBottleKg += kg;
+            break;
+          case 'carton':
+            cartonKg += kg;
+            break;
+          case 'paper':
+            paperKg += kg;
+            break;
+        }
       }
     });
 
     setState(() {
       _totalKg = totalKg;
       _totalSum = totalSum;
+      // Update other values here if needed
     });
   }
 
@@ -127,33 +148,33 @@ class _BuyPageState extends State<BuyPage> {
                     ),
                     BlocBuilder<CustomerPaginationCubit,CustomerPaginationState>(
                         builder: (context, state) {
-                          return GestureDetector(
-                            onTap: (){
-
+                          return widget.param == null ? CustomDropDown(
+                            padding: const EdgeInsets.only(left: 16),
+                            topText: LocaleKeys.customer.tr(context: context),
+                            initialSelection: dropDownSelection,
+                            isLoading: state.isLoadingShimmer,
+                            onLoadMore: () async {
+                              await context.read<CustomerPaginationCubit>().getCustomer();
                             },
-                            child: widget.param == null ? EcoDropdownMenu(
+                            items: state.customers.map((value){ return value.name; }).toList(),
+                            onChanged: (value){
+                              dropDownSelection = value??'';
+                            },
+                            onAddCustomer:  () async{
+                              final result = await NavigationUtils.getMainNavigator().navigateAddCustomerPage();
+                              if(result != null){
+                                setState(() {
+                                  state.customers.add(Customer(id: int.parse(result.id.toString()), name: result.name.toString()));
+                                  dropDownSelection = result.name.toString();
+                                });
+                              }else{
+                                log("NULL");
+                              }
+                            },
+                          ) : EcoDropdownMenu(
                               padding: const EdgeInsets.only(left: 16),
-                              topText: LocaleKeys.customer.tr(context: context),
-                              initialSelection: dropDownSelection,
-                              isLoading: state.isLoadingShimmer,
-                              items: state.customers.map((value){ return value.name; }).toList(),
-                              onChanged: (value){},
-                              onAddCustomer:  () async{
-                                final result = await NavigationUtils.getMainNavigator().navigateAddCustomerPage();
-                                if(result != null){
-                                  setState(() {
-                                    state.customers.add(Customer(id: int.parse(result.id.toString()), name: result.name.toString()));
-                                    dropDownSelection = result.name.toString();
-                                  });
-                                }else{
-                                  log("NULL");
-                                }
-                              },
-                            ) : EcoDropdownMenu(
-                                padding: const EdgeInsets.only(left: 16),
-                                placeholderText: widget.param!.orderUser.name,
-                                onChanged:  null
-                            ),
+                              placeholderText: widget.param!.orderUser.name,
+                              onChanged:  null
                           );
                         }
                     ).toBoxAdapter(),
@@ -205,7 +226,7 @@ class _BuyPageState extends State<BuyPage> {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Text(
-                                      '${params.params[index].price ?? 0} sum',
+                                      '${params.params[index].price} sum',
                                     ),
                                   ),
                                 )
@@ -245,10 +266,74 @@ class _BuyPageState extends State<BuyPage> {
                                 backgroundColor: colorScheme.secondary,
                                 height: 65,
                                 borderRadius: 40,
-                                onPressed: (){
-                                  navigatePaymentPage(
-                                    BuyModel(employee: 'employee', customerId: 1, paperKg: 1, paperPrice: 1, plasticKg: 1, plasticPrice: 1, plasticBottleKg: 1, plasticBottlePrice: 1, cartonKg: 1, cartonPrice: 1, totalKg: 1, totalPrice: widget.param == null ? _totalSum : double.parse(widget.param?.totalPrice ?? '0'), type: 'type')
+                                onPressed: () {
+                                  bool hasError = false;
+                                  String errorMessage = '';
+
+                                  // Check if employee is selected
+                                  if (dropDownSelection.isEmpty) {
+                                    hasError = true;
+                                    errorMessage = 'LocaleKeys.employeeRequired.tr(context: context)';
+                                  }
+
+                                  // Check if dropdown is selected
+                                  if (dropDownSelection.isEmpty && widget.param == null) {
+                                    hasError = true;
+                                    errorMessage = 'LocaleKeys.customerRequired.tr(context: context)';
+                                  }
+
+                                  // Check if at least one field is filled
+                                  bool hasAnyValue = false;
+                                  for (int i = 0; i < params.params.length; i++) {
+                                    if ((_values[i] ?? 0) > 0) {
+                                      hasAnyValue = true;
+                                      break;
+                                    }
+                                  }
+
+                                  if (!hasAnyValue) {
+                                    hasError = true;
+                                    errorMessage = 'LocaleKeys.fillAtLeastOne.tr(context: context)';
+                                  }
+
+                                  if (hasError) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text(errorMessage)),
+                                    );
+                                    return;
+                                  }
+
+                                  // Get customer ID
+                                  final int customerId;
+                                  if (widget.param != null) {
+                                    customerId = widget.param!.orderUser.id;
+                                  } else {
+                                    final selectedCustomer = context
+                                        .read<CustomerPaginationCubit>()
+                                        .state
+                                        .customers
+                                        .firstWhere((c) => c.name == dropDownSelection);
+                                    customerId = selectedCustomer.id;
+                                  }
+
+                                  // Create Buy model
+                                  final buy = BuyReq(
+                                    employee: dropDownSelection,
+                                    customerId: customerId,
+                                    paperKg: _values[0] ?? 0,
+                                    paperPrice: params.params[0].price.toDouble() ?? 0,
+                                    plasticKg: _values[1] ?? 0,
+                                    plasticPrice: params.params[1].price.toDouble() ?? 0,
+                                    plasticBottleKg: _values[2] ?? 0,
+                                    plasticBottlePrice: params.params[2].price.toDouble() ?? 0,
+                                    cartonKg: _values[3] ?? 0,
+                                    cartonPrice: params.params[3].price.toDouble() ?? 0,
+                                    totalKg: _totalKg,
+                                    totalPrice: _totalSum,
+                                    type: 'buy',
                                   );
+
+                                  navigatePaymentPage(buy);
                                 },
                                 child: Text(LocaleKeys.acceptance.tr(),style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),)
                             )
@@ -275,7 +360,8 @@ class _BuyPageState extends State<BuyPage> {
     );
   }
 
-  Future<void> navigatePaymentPage(BuyModel param) async{
+  Future<void> navigatePaymentPage(BuyReq param) async{
     return NavigationUtils.getMainNavigator().navigatePaymentPage(param);
   }
 }
+

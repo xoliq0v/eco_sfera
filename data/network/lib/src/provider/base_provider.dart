@@ -3,10 +3,52 @@ import 'dart:developer';
 import 'package:core/core.dart' hide Map;
 import 'package:dio/dio.dart';
 
+import 'package:network/network.dart';
+
 abstract class BaseProvider {
+
+  Future<ApiResponse<PageableContentDTO<T>>> fetchPaginatedData<T>({
+    required Future<Response> request,
+    required T Function(Map<String, dynamic> json) itemFromJson,
+  }) async {
+    return apiCall(
+      request,
+      dataFromJson: (data) {
+        log('Received paginated data: $data');
+
+        if (data is Map<String, dynamic>) {
+          // API returns proper pagination structure
+          return PageableContentDTO.fromJson(
+            data,
+                (json) => itemFromJson(json as Map<String, dynamic>),
+          );
+        } else if (data is List) {
+          // API returns just a list without pagination
+          return PageableContentDTO<T>(
+            data: data.map((item) => itemFromJson(item as Map<String, dynamic>)).toList(),
+            currentPage: 1,
+            perPage: data.length,
+            total: data.length,
+            lastPage: 1,
+          );
+        }
+
+        // Handle unexpected data format
+        log('Warning: Unexpected data format received');
+        return PageableContentDTO<T>(
+          data: [],
+          currentPage: 0,
+          perPage: 0,
+          total: 0,
+          lastPage: 0,
+        );
+      },
+    );
+  }
+
   Future<ApiResponse<T>> apiCall<T>(
       Future<Response> request, {
-        required T Function(dynamic data) dataFromJson,
+        required T Function(dynamic data,) dataFromJson,
         T? Function(dynamic errorData)? errorDataFromJson,
       }) async {
     try {

@@ -17,6 +17,9 @@ ApiResponse<T> _$ApiResponseFromJson<T>(
           ? null
           : ApiResponseError.fromJson(json['error'] as Map<String, dynamic>),
       message: json['message'] as String?,
+      pagination: json['pagination'] == null
+          ? null
+          : Pagination.fromJson(json['pagination'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ApiResponseToJson<T>(
@@ -28,6 +31,7 @@ Map<String, dynamic> _$ApiResponseToJson<T>(
       'success': instance.success,
       'error': instance.error,
       'message': instance.message,
+      'pagination': instance.pagination,
     };
 
 T? _$nullableGenericFromJson<T>(

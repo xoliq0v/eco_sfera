@@ -2,7 +2,7 @@
 part of '../payment_page.dart';
 
 class _Mobile extends StatefulWidget {
-  final BuyModel params;
+  final BuyReq params;
   const _Mobile({super.key,required this.params});
 
   @override
@@ -54,13 +54,14 @@ class Mobile extends State<_Mobile> with SingleTickerProviderStateMixin {
           //   ],
           // ),
         ),
-        body: PageView(
-          controller: pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: [
-            PaymentWithCardPage(params: widget.params,),
-            PaymentWithAccountNumber(params: widget.params,),
+        body: AutoTabsRouter(
+          routes: [
+            PaymentWithCardRoute(params: widget.params),
+            // PaymentWithAccountNumberRoute(),
           ],
+          builder: (context, child) {
+            return child;
+          },
         )
     );
   }

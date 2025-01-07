@@ -45,7 +45,13 @@ class AppRouter extends _$AppRouter {
       AutoRoute(page: PriceChangerRoute.page,),
       AutoRoute(page: AddCustomerRoute.page,),
       AutoRoute(page: ProfileRoute.page,),
-      AutoRoute(page: PaymentRoute.page),
+      AutoRoute(
+          page: PaymentRoute.page,
+        children: [
+          AutoRoute(page: PaymentWithCardRoute.page),
+        ]
+      ),
+      AutoRoute(page: PaymentWithCardRoute.page),
       AutoRoute(page: SettingsRoute.page),
       AutoRoute(page: MyAccountRoute.page),
       AutoRoute(page: OrderCardRoute.page),

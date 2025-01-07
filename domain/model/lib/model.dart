@@ -8,6 +8,7 @@ export 'src/trash.dart';
 export 'src/customer_get.dart';
 export 'src/requests/customer_post_request.dart';
 export 'src/requests/auth_request.dart';
+export 'src/requests/buy_req.dart';
 export 'src/order.dart';
 export 'src/order_user.dart';
 export 'src/location_entity.dart';

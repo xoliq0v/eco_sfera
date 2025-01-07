@@ -17,7 +17,7 @@ abstract class MainNavigation {
 
   Future<void> navigateProfilePage();
 
-  Future<void> navigatePaymentPage(BuyModel param);
+  Future<void> navigatePaymentPage(BuyReq param);
 
   Future<void> navigateOrderCardPage();
 

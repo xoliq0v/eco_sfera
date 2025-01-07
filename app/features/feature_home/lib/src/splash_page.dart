@@ -48,7 +48,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
     if (token != null && token.isNotEmpty) {
       // If token exists, navigate to the main page
-      /// navigateMainPage(context);
       await navigateMainPage();
     } else {
       // If no token, check connectivity and proceed as before

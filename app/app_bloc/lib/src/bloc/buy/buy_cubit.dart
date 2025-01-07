@@ -35,7 +35,7 @@ class BuyCubit extends Cubit<BuyState>{
     }
   }
 
-  Future<void> buy(BuyModel model) async {
+  Future<void> buy(BuyReq model) async {
 
     emit(BuyState.buyLoading());
 

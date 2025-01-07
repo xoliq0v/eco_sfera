@@ -12,10 +12,10 @@ PageableContentDTO<T> _$PageableContentDTOFromJson<T>(
 ) =>
     PageableContentDTO<T>(
       data: (json['data'] as List<dynamic>).map(fromJsonT).toList(),
-      currentPage: (json['current_page'] as num).toInt(),
-      perPage: (json['per_page'] as num).toInt(),
+      currentPage: (json['currentPage'] as num).toInt(),
+      perPage: (json['perPage'] as num).toInt(),
       total: (json['total'] as num).toInt(),
-      lastPage: (json['last_page'] as num).toInt(),
+      lastPage: (json['lastPage'] as num).toInt(),
     );
 
 Map<String, dynamic> _$PageableContentDTOToJson<T>(
@@ -24,8 +24,8 @@ Map<String, dynamic> _$PageableContentDTOToJson<T>(
 ) =>
     <String, dynamic>{
       'data': instance.data.map(toJsonT).toList(),
-      'current_page': instance.currentPage,
-      'per_page': instance.perPage,
+      'currentPage': instance.currentPage,
+      'perPage': instance.perPage,
       'total': instance.total,
-      'last_page': instance.lastPage,
+      'lastPage': instance.lastPage,
     };

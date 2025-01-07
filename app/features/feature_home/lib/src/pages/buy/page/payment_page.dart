@@ -8,12 +8,14 @@ import 'package:feature_home/src/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:model/model.dart';
 
+import '../../../../feature_home.dart';
+
 part 'mobile/mobile.dart';
 part 'mobile/tablet.dart';
 
 @RoutePage()
 class PaymentPage extends StatelessWidget {
-  final BuyModel params;
+  final BuyReq params;
   const PaymentPage({super.key,required this.params});
 
   @override

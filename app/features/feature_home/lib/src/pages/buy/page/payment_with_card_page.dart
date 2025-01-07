@@ -1,18 +1,30 @@
 
 import 'dart:developer';
 
+import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:model/model.dart';
 
-class PaymentWithCardPage extends StatefulWidget {
-  final BuyModel params;
+import '../../auth/auth_screen.dart';
+
+@RoutePage()
+class PaymentWithCardPage extends StatefulWidget implements AutoRouteWrapper {
+  final BuyReq params;
   const PaymentWithCardPage({super.key,required this.params});
 
   @override
   State<PaymentWithCardPage> createState() => _PaymentWithCardPageState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider<BuyCubit>(
+      create: (context) => AppBlocHelper.getBuyCubit(),
+      child: this,
+    );
+  }
 }
 
 class _PaymentWithCardPageState extends State<PaymentWithCardPage> {
@@ -74,66 +86,81 @@ class _PaymentWithCardPageState extends State<PaymentWithCardPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        40.verticalSpace,
-        // EcoTextField(
-        //   topRightText: LocaleKeys.recipientsCardNumber.tr(context: context),
-        //   controller: cardNumberController,
-        //   svgSuffixIcon: AppIcons.scan,
-        //   hintText: 'xxxx  xxxx  xxxx  xxxx',
-        //   svgSuffixIconPressed: () async{
-        //     // var cardDetails = await CardScanner.scanCard();
-        //     // if(cardDetails!=null){
-        //     //   cardNumberController.text = cardDetails.cardNumber;
-        //     // }
-        //   },
-        //   keyboardType: TextInputType.number,
-        //   inputFormatters: [
-        //     FilteringTextInputFormatter.digitsOnly,
-        //     LengthLimitingTextInputFormatter(16),
-        //     // CreditCardFormatter(),
-        //   ],
-        //   validator: (value) {
-        //     if (value == null || value.isEmpty) {
-        //       return 'Please enter a card number';
-        //     }
-        //     if (value.replaceAll(RegExp(r'\s+\b|\b\s'), '').length < 16) {
-        //       return 'Please enter a valid 16-digit card number';
-        //     }
-        //     return null;
-        //   },
-        //   onChanged: (value) {
-        //     if (value != null) {
-        //     //   onChanged!(value.replaceAll(RegExp(r'\s+\b|\b\s'), ''));
-        //       value.replaceAll(RegExp(r'\s+\b|\b\s'), '');
-        //     }
-        //   },
-        // ),
-        EcoTextField(
-          readOnly: true,
-          topRightText: LocaleKeys.amount.tr(context: context),
-          controller: amountController,
-          keyboardType: TextInputType.number,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
+    return Material(
+      child: BlocListener<BuyCubit,BuyState>(
+        listener: (BuildContext context, state) {
+          state.mapOrNull(
+            error: (value) {
+              context.router.canPop();
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.error)));
+            },
+            buyLoading: (value) {
+              LoadingDialog.show(context);
+            },
+            buySuccess: (value) async{
+              context.router.canPop();
+              SuccessPaymentDialog.show(context);
+            },
+          );
+        },
+        child: Column(
+          children: [
+            40.verticalSpace,
+            // EcoTextField(
+            //   topRightText: LocaleKeys.recipientsCardNumber.tr(context: context),
+            //   controller: cardNumberController,
+            //   svgSuffixIcon: AppIcons.scan,
+            //   hintText: 'xxxx  xxxx  xxxx  xxxx',
+            //   svgSuffixIconPressed: () async{
+            //     // var cardDetails = await CardScanner.scanCard();
+            //     // if(cardDetails!=null){
+            //     //   cardNumberController.text = cardDetails.cardNumber;
+            //     // }
+            //   },
+            //   keyboardType: TextInputType.number,
+            //   inputFormatters: [
+            //     FilteringTextInputFormatter.digitsOnly,
+            //     LengthLimitingTextInputFormatter(16),
+            //     // CreditCardFormatter(),
+            //   ],
+            //   validator: (value) {
+            //     if (value == null || value.isEmpty) {
+            //       return 'Please enter a card number';
+            //     }
+            //     if (value.replaceAll(RegExp(r'\s+\b|\b\s'), '').length < 16) {
+            //       return 'Please enter a valid 16-digit card number';
+            //     }
+            //     return null;
+            //   },
+            //   onChanged: (value) {
+            //     if (value != null) {
+            //     //   onChanged!(value.replaceAll(RegExp(r'\s+\b|\b\s'), ''));
+            //       value.replaceAll(RegExp(r'\s+\b|\b\s'), '');
+            //     }
+            //   },
+            // ),
+            EcoTextField(
+              readOnly: true,
+              topRightText: LocaleKeys.amount.tr(context: context),
+              controller: amountController,
+              keyboardType: TextInputType.number,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+              ],
+            ),
+            const Spacer(),
+            EcoButton(
+                onPressed: () async{
+                  await context.read<BuyCubit>().buy(widget.params);
+                },
+              borderRadius: 35,
+              height: 60,
+                child: Text(LocaleKeys.confirmation.tr(context: context)),
+            ),
+            25.verticalSpace
           ],
         ),
-        const Spacer(),
-        EcoButton(
-            onPressed: (){
-              LoadingDialog.show(context);
-              Future.delayed(const Duration(seconds: 3),(){
-                context.router.popForced();
-                SuccessPaymentDialog.show(context);
-              });
-            },
-          borderRadius: 35,
-          height: 60,
-            child: Text(LocaleKeys.confirmation.tr(context: context)),
-        ),
-        25.verticalSpace
-      ],
+      ),
     );
   }
 }

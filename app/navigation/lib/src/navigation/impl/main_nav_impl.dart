@@ -74,8 +74,8 @@ class MainNavigationImpl extends MainNavigation {
   }
 
   @override
-  Future<void> navigatePaymentPage(BuyModel param) {
-    return appRouter.navigate(PaymentRoute(params: param));
+  Future<void> navigatePaymentPage(BuyReq param) {
+    return appRouter.navigate(PaymentWithCardRoute(params: param));
   }
 
   @override

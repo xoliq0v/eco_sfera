@@ -17,9 +17,9 @@ class BuyRepoImpl extends BuyRepo {
   final TrashProvider trashProvider;
 
   @override
-  Future<Result<bool>> buy(BuyModel buyModel) async{
+  Future<Result<bool>> buy(BuyReq buyModel) async{
     final response = await buyProvider.buy(
-      buyModel.toBuyModel()
+      buyModel.toBuyDto()
     );
 
     try {

@@ -11,7 +11,7 @@ class BuyImpl extends Buy {
   final BuyRepo buyRepo;
 
   @override
-  Future<Result<bool>> buy(BuyModel buyModel) {
+  Future<Result<bool>> buy(BuyReq buyModel) {
     return buyRepo.buy(buyModel);
   }
 

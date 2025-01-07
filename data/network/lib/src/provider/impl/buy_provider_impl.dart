@@ -1,8 +1,9 @@
 import 'package:core/core.dart';
 import 'package:dio/dio.dart';
-import 'package:network/src/dto/buy_dto.dart';
 import 'package:network/src/endpoints/endpoints.dart';
 import 'package:network/src/provider/buy_provider.dart';
+
+import '../../../network.dart';
 
 class BuyProviderImpl extends BuyProvider {
   BuyProviderImpl({required this.apiClient});
@@ -10,7 +11,7 @@ class BuyProviderImpl extends BuyProvider {
   final Dio apiClient;
 
   @override
-  Future<ApiResponse<bool>> buy(BuyDto buyDto) {
+  Future<ApiResponse<bool>> buy(BuyReqDto buyDto) {
     return apiCall(
         apiClient.post(BuyEndpoint.buy,data: buyDto.toJson()),
         dataFromJson: (json){
