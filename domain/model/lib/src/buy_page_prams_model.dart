@@ -2,24 +2,26 @@ import 'package:equatable/equatable.dart';
 
 class HistoryModel extends Equatable {
   final int id;
-  final String employee;
-  final int customerId;
-  final double paperKg;
-  final double paperPrice;
-  final double plasticKg;
-  final double plasticPrice;
-  final double plasticBottleKg;
-  final double plasticBottlePrice;
-  final double cartonKg;
-  final double cartonPrice;
-  final double totalKg;
-  final double totalPrice;
+  final String date;
+  final String user;
+  final String location;
+  final int paperKg;
+  final String paperPrice;
+  final int plasticKg;
+  final String plasticPrice;
+  final int plasticBottleKg;
+  final String plasticBottlePrice;
+  final int cartonKg;
+  final String cartonPrice;
+  final int totalKg;
+  final String totalPrice;
   final String type;
 
   const HistoryModel({
     required this.id,
-    required this.employee,
-    required this.customerId,
+    required this.date,
+    required this.user,
+    required this.location,
     required this.paperKg,
     required this.paperPrice,
     required this.plasticKg,
@@ -36,8 +38,9 @@ class HistoryModel extends Equatable {
   @override
   List<Object> get props => [
     id,
-    employee,
-    customerId,
+    date,
+    user,
+    location,
     paperKg,
     paperPrice,
     plasticKg,

@@ -11,10 +11,10 @@ class CompletePage extends StatefulWidget {
 class _CompletePageState extends State<CompletePage> {
 
   final List<HistoryModel> list = [
-    HistoryModel(id: 9, employee: 'employee', customerId: 9, paperKg: 1, paperPrice: 1, plasticKg: 11, plasticPrice: 1, plasticBottleKg: 1, plasticBottlePrice: 1, cartonKg: 1, cartonPrice: 1, totalKg: 1, totalPrice: 1, type: 'type'),
-    HistoryModel(id: 9, employee: 'employee', customerId: 9, paperKg: 1, paperPrice: 1, plasticKg: 11, plasticPrice: 1, plasticBottleKg: 1, plasticBottlePrice: 1, cartonKg: 1, cartonPrice: 1, totalKg: 1, totalPrice: 1, type: 'type'),
-    HistoryModel(id: 9, employee: 'employee', customerId: 9, paperKg: 1, paperPrice: 1, plasticKg: 11, plasticPrice: 1, plasticBottleKg: 1, plasticBottlePrice: 1, cartonKg: 1, cartonPrice: 1, totalKg: 1, totalPrice: 1, type: 'type'),
-    HistoryModel(id: 9, employee: 'employee', customerId: 9, paperKg: 1, paperPrice: 1, plasticKg: 11, plasticPrice: 1, plasticBottleKg: 1, plasticBottlePrice: 1, cartonKg: 1, cartonPrice: 1, totalKg: 1, totalPrice: 1, type: 'type'),
+    // HistoryModel(id: 9, employee: 'employee', customerId: 9, paperKg: 1, paperPrice: 1, plasticKg: 11, plasticPrice: 1, plasticBottleKg: 1, plasticBottlePrice: 1, cartonKg: 1, cartonPrice: 1, totalKg: 1, totalPrice: 1, type: 'type'),
+    // HistoryModel(id: 9, employee: 'employee', customerId: 9, paperKg: 1, paperPrice: 1, plasticKg: 11, plasticPrice: 1, plasticBottleKg: 1, plasticBottlePrice: 1, cartonKg: 1, cartonPrice: 1, totalKg: 1, totalPrice: 1, type: 'type'),
+    // HistoryModel(id: 9, employee: 'employee', customerId: 9, paperKg: 1, paperPrice: 1, plasticKg: 11, plasticPrice: 1, plasticBottleKg: 1, plasticBottlePrice: 1, cartonKg: 1, cartonPrice: 1, totalKg: 1, totalPrice: 1, type: 'type'),
+    // HistoryModel(id: 9, employee: 'employee', customerId: 9, paperKg: 1, paperPrice: 1, plasticKg: 11, plasticPrice: 1, plasticBottleKg: 1, plasticBottlePrice: 1, cartonKg: 1, cartonPrice: 1, totalKg: 1, totalPrice: 1, type: 'type'),
   ];
 
   @override

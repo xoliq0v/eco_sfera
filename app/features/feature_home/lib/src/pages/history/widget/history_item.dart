@@ -46,7 +46,7 @@ class HistoryItem extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    history.employee,
+                                    history.user,
                                     overflow: TextOverflow.ellipsis,
                                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                                         fontWeight: FontWeight.w400,
@@ -56,7 +56,7 @@ class HistoryItem extends StatelessWidget {
                                   ),
                                   Flexible(
                                       child: Text(
-                                        history.employee,
+                                        history.user,
                                         overflow: TextOverflow.ellipsis,
                                         style: Theme.of(context).textTheme.headlineMedium,
                                       )
