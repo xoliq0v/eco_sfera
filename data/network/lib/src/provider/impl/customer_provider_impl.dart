@@ -38,4 +38,17 @@ class CustomerProviderImpl extends CustomerProvider {
         },
     );
   }
+
+  @override
+  Future<ApiResponse<List<CustomerDto>>> searchCustomer(String number) {
+    return apiCall(
+        apiClient.get(
+            CustomerEndpoint.search,
+          queryParameters: {
+            'search': number
+          }
+        ),
+        dataFromJson: (data) => (data as List<dynamic>).map((item)=> CustomerDto.fromJson(item as Map<String, dynamic>)).toList(),
+    );
+  }
 }

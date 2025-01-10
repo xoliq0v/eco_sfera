@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:alice/alice.dart';
 import 'package:core/core.dart' hide Duration;
 import 'package:database/database.dart';
 import 'package:dio/dio.dart';

@@ -26,14 +26,17 @@ class AuthImpl implements AuthUseCase {
 class LogoutImpl implements Logout {
   LogoutImpl({
     required this.sessionRepository,
+    required this.authRepository,
   });
 
   final SessionRepository sessionRepository;
+  final AuthRepository authRepository;
 
   @override
   Future<Result<bool>> logout() async {
       try {
         await sessionRepository.closeSession();
+        await authRepository.logout();
         return Result.completed(true);
       } catch (e) {
         return Result.error(const ResultError(
@@ -42,4 +45,20 @@ class LogoutImpl implements Logout {
         ));
       }
   }
+}
+
+class FCMTokenRefreshImpl extends FCMTokenRefresh {
+  FCMTokenRefreshImpl({required this.authRepository});
+
+  final AuthRepository authRepository;
+
+  @override
+  Future<Result<bool>> refresh(String token) async{
+    try {
+      return await authRepository.refreshFCMToken(token);
+    } catch (e) {
+      return Result.error(ResultError(reason: e.toString(),message: e.toString()));
+    }
+  }
+
 }

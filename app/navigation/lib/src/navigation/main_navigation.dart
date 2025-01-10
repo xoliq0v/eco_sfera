@@ -29,7 +29,7 @@ abstract class MainNavigation {
 
   Future<void> navigateSettingsPage();
 
-  Future<void> navigateBuyPage(OrderModel params);
+  Future<void> navigateBuyPage(OrderModel params,String type);
 
   Future<dynamic> navigateAddCustomerPage();
 

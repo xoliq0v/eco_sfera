@@ -24,6 +24,8 @@ mixin _$BuyState {
     required TResult Function(List<TrashInfo> params) success,
     required TResult Function() buySuccess,
     required TResult Function(String error) error,
+    required TResult Function(List<Customer> customers) searchResult,
+    required TResult Function() searchLoading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,6 +36,8 @@ mixin _$BuyState {
     TResult? Function(List<TrashInfo> params)? success,
     TResult? Function()? buySuccess,
     TResult? Function(String error)? error,
+    TResult? Function(List<Customer> customers)? searchResult,
+    TResult? Function()? searchLoading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,6 +48,8 @@ mixin _$BuyState {
     TResult Function(List<TrashInfo> params)? success,
     TResult Function()? buySuccess,
     TResult Function(String error)? error,
+    TResult Function(List<Customer> customers)? searchResult,
+    TResult Function()? searchLoading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +61,8 @@ mixin _$BuyState {
     required TResult Function(_Success value) success,
     required TResult Function(_BuySuccess value) buySuccess,
     required TResult Function(_Error value) error,
+    required TResult Function(_SearchResult value) searchResult,
+    required TResult Function(_SearchLoading value) searchLoading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +73,8 @@ mixin _$BuyState {
     TResult? Function(_Success value)? success,
     TResult? Function(_BuySuccess value)? buySuccess,
     TResult? Function(_Error value)? error,
+    TResult? Function(_SearchResult value)? searchResult,
+    TResult? Function(_SearchLoading value)? searchLoading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +85,8 @@ mixin _$BuyState {
     TResult Function(_Success value)? success,
     TResult Function(_BuySuccess value)? buySuccess,
     TResult Function(_Error value)? error,
+    TResult Function(_SearchResult value)? searchResult,
+    TResult Function(_SearchLoading value)? searchLoading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -140,6 +152,8 @@ class _$InitImpl implements _Init {
     required TResult Function(List<TrashInfo> params) success,
     required TResult Function() buySuccess,
     required TResult Function(String error) error,
+    required TResult Function(List<Customer> customers) searchResult,
+    required TResult Function() searchLoading,
   }) {
     return init();
   }
@@ -153,6 +167,8 @@ class _$InitImpl implements _Init {
     TResult? Function(List<TrashInfo> params)? success,
     TResult? Function()? buySuccess,
     TResult? Function(String error)? error,
+    TResult? Function(List<Customer> customers)? searchResult,
+    TResult? Function()? searchLoading,
   }) {
     return init?.call();
   }
@@ -166,6 +182,8 @@ class _$InitImpl implements _Init {
     TResult Function(List<TrashInfo> params)? success,
     TResult Function()? buySuccess,
     TResult Function(String error)? error,
+    TResult Function(List<Customer> customers)? searchResult,
+    TResult Function()? searchLoading,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -183,6 +201,8 @@ class _$InitImpl implements _Init {
     required TResult Function(_Success value) success,
     required TResult Function(_BuySuccess value) buySuccess,
     required TResult Function(_Error value) error,
+    required TResult Function(_SearchResult value) searchResult,
+    required TResult Function(_SearchLoading value) searchLoading,
   }) {
     return init(this);
   }
@@ -196,6 +216,8 @@ class _$InitImpl implements _Init {
     TResult? Function(_Success value)? success,
     TResult? Function(_BuySuccess value)? buySuccess,
     TResult? Function(_Error value)? error,
+    TResult? Function(_SearchResult value)? searchResult,
+    TResult? Function(_SearchLoading value)? searchLoading,
   }) {
     return init?.call(this);
   }
@@ -209,6 +231,8 @@ class _$InitImpl implements _Init {
     TResult Function(_Success value)? success,
     TResult Function(_BuySuccess value)? buySuccess,
     TResult Function(_Error value)? error,
+    TResult Function(_SearchResult value)? searchResult,
+    TResult Function(_SearchLoading value)? searchLoading,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -266,6 +290,8 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(List<TrashInfo> params) success,
     required TResult Function() buySuccess,
     required TResult Function(String error) error,
+    required TResult Function(List<Customer> customers) searchResult,
+    required TResult Function() searchLoading,
   }) {
     return loading();
   }
@@ -279,6 +305,8 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(List<TrashInfo> params)? success,
     TResult? Function()? buySuccess,
     TResult? Function(String error)? error,
+    TResult? Function(List<Customer> customers)? searchResult,
+    TResult? Function()? searchLoading,
   }) {
     return loading?.call();
   }
@@ -292,6 +320,8 @@ class _$LoadingImpl implements _Loading {
     TResult Function(List<TrashInfo> params)? success,
     TResult Function()? buySuccess,
     TResult Function(String error)? error,
+    TResult Function(List<Customer> customers)? searchResult,
+    TResult Function()? searchLoading,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -309,6 +339,8 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Success value) success,
     required TResult Function(_BuySuccess value) buySuccess,
     required TResult Function(_Error value) error,
+    required TResult Function(_SearchResult value) searchResult,
+    required TResult Function(_SearchLoading value) searchLoading,
   }) {
     return loading(this);
   }
@@ -322,6 +354,8 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Success value)? success,
     TResult? Function(_BuySuccess value)? buySuccess,
     TResult? Function(_Error value)? error,
+    TResult? Function(_SearchResult value)? searchResult,
+    TResult? Function(_SearchLoading value)? searchLoading,
   }) {
     return loading?.call(this);
   }
@@ -335,6 +369,8 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Success value)? success,
     TResult Function(_BuySuccess value)? buySuccess,
     TResult Function(_Error value)? error,
+    TResult Function(_SearchResult value)? searchResult,
+    TResult Function(_SearchLoading value)? searchLoading,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -392,6 +428,8 @@ class _$BuyLoadingImpl implements _BuyLoading {
     required TResult Function(List<TrashInfo> params) success,
     required TResult Function() buySuccess,
     required TResult Function(String error) error,
+    required TResult Function(List<Customer> customers) searchResult,
+    required TResult Function() searchLoading,
   }) {
     return buyLoading();
   }
@@ -405,6 +443,8 @@ class _$BuyLoadingImpl implements _BuyLoading {
     TResult? Function(List<TrashInfo> params)? success,
     TResult? Function()? buySuccess,
     TResult? Function(String error)? error,
+    TResult? Function(List<Customer> customers)? searchResult,
+    TResult? Function()? searchLoading,
   }) {
     return buyLoading?.call();
   }
@@ -418,6 +458,8 @@ class _$BuyLoadingImpl implements _BuyLoading {
     TResult Function(List<TrashInfo> params)? success,
     TResult Function()? buySuccess,
     TResult Function(String error)? error,
+    TResult Function(List<Customer> customers)? searchResult,
+    TResult Function()? searchLoading,
     required TResult orElse(),
   }) {
     if (buyLoading != null) {
@@ -435,6 +477,8 @@ class _$BuyLoadingImpl implements _BuyLoading {
     required TResult Function(_Success value) success,
     required TResult Function(_BuySuccess value) buySuccess,
     required TResult Function(_Error value) error,
+    required TResult Function(_SearchResult value) searchResult,
+    required TResult Function(_SearchLoading value) searchLoading,
   }) {
     return buyLoading(this);
   }
@@ -448,6 +492,8 @@ class _$BuyLoadingImpl implements _BuyLoading {
     TResult? Function(_Success value)? success,
     TResult? Function(_BuySuccess value)? buySuccess,
     TResult? Function(_Error value)? error,
+    TResult? Function(_SearchResult value)? searchResult,
+    TResult? Function(_SearchLoading value)? searchLoading,
   }) {
     return buyLoading?.call(this);
   }
@@ -461,6 +507,8 @@ class _$BuyLoadingImpl implements _BuyLoading {
     TResult Function(_Success value)? success,
     TResult Function(_BuySuccess value)? buySuccess,
     TResult Function(_Error value)? error,
+    TResult Function(_SearchResult value)? searchResult,
+    TResult Function(_SearchLoading value)? searchLoading,
     required TResult orElse(),
   }) {
     if (buyLoading != null) {
@@ -550,6 +598,8 @@ class _$SuccessImpl implements _Success {
     required TResult Function(List<TrashInfo> params) success,
     required TResult Function() buySuccess,
     required TResult Function(String error) error,
+    required TResult Function(List<Customer> customers) searchResult,
+    required TResult Function() searchLoading,
   }) {
     return success(params);
   }
@@ -563,6 +613,8 @@ class _$SuccessImpl implements _Success {
     TResult? Function(List<TrashInfo> params)? success,
     TResult? Function()? buySuccess,
     TResult? Function(String error)? error,
+    TResult? Function(List<Customer> customers)? searchResult,
+    TResult? Function()? searchLoading,
   }) {
     return success?.call(params);
   }
@@ -576,6 +628,8 @@ class _$SuccessImpl implements _Success {
     TResult Function(List<TrashInfo> params)? success,
     TResult Function()? buySuccess,
     TResult Function(String error)? error,
+    TResult Function(List<Customer> customers)? searchResult,
+    TResult Function()? searchLoading,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -593,6 +647,8 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Success value) success,
     required TResult Function(_BuySuccess value) buySuccess,
     required TResult Function(_Error value) error,
+    required TResult Function(_SearchResult value) searchResult,
+    required TResult Function(_SearchLoading value) searchLoading,
   }) {
     return success(this);
   }
@@ -606,6 +662,8 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Success value)? success,
     TResult? Function(_BuySuccess value)? buySuccess,
     TResult? Function(_Error value)? error,
+    TResult? Function(_SearchResult value)? searchResult,
+    TResult? Function(_SearchLoading value)? searchLoading,
   }) {
     return success?.call(this);
   }
@@ -619,6 +677,8 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Success value)? success,
     TResult Function(_BuySuccess value)? buySuccess,
     TResult Function(_Error value)? error,
+    TResult Function(_SearchResult value)? searchResult,
+    TResult Function(_SearchLoading value)? searchLoading,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -681,6 +741,8 @@ class _$BuySuccessImpl implements _BuySuccess {
     required TResult Function(List<TrashInfo> params) success,
     required TResult Function() buySuccess,
     required TResult Function(String error) error,
+    required TResult Function(List<Customer> customers) searchResult,
+    required TResult Function() searchLoading,
   }) {
     return buySuccess();
   }
@@ -694,6 +756,8 @@ class _$BuySuccessImpl implements _BuySuccess {
     TResult? Function(List<TrashInfo> params)? success,
     TResult? Function()? buySuccess,
     TResult? Function(String error)? error,
+    TResult? Function(List<Customer> customers)? searchResult,
+    TResult? Function()? searchLoading,
   }) {
     return buySuccess?.call();
   }
@@ -707,6 +771,8 @@ class _$BuySuccessImpl implements _BuySuccess {
     TResult Function(List<TrashInfo> params)? success,
     TResult Function()? buySuccess,
     TResult Function(String error)? error,
+    TResult Function(List<Customer> customers)? searchResult,
+    TResult Function()? searchLoading,
     required TResult orElse(),
   }) {
     if (buySuccess != null) {
@@ -724,6 +790,8 @@ class _$BuySuccessImpl implements _BuySuccess {
     required TResult Function(_Success value) success,
     required TResult Function(_BuySuccess value) buySuccess,
     required TResult Function(_Error value) error,
+    required TResult Function(_SearchResult value) searchResult,
+    required TResult Function(_SearchLoading value) searchLoading,
   }) {
     return buySuccess(this);
   }
@@ -737,6 +805,8 @@ class _$BuySuccessImpl implements _BuySuccess {
     TResult? Function(_Success value)? success,
     TResult? Function(_BuySuccess value)? buySuccess,
     TResult? Function(_Error value)? error,
+    TResult? Function(_SearchResult value)? searchResult,
+    TResult? Function(_SearchLoading value)? searchLoading,
   }) {
     return buySuccess?.call(this);
   }
@@ -750,6 +820,8 @@ class _$BuySuccessImpl implements _BuySuccess {
     TResult Function(_Success value)? success,
     TResult Function(_BuySuccess value)? buySuccess,
     TResult Function(_Error value)? error,
+    TResult Function(_SearchResult value)? searchResult,
+    TResult Function(_SearchLoading value)? searchLoading,
     required TResult orElse(),
   }) {
     if (buySuccess != null) {
@@ -833,6 +905,8 @@ class _$ErrorImpl implements _Error {
     required TResult Function(List<TrashInfo> params) success,
     required TResult Function() buySuccess,
     required TResult Function(String error) error,
+    required TResult Function(List<Customer> customers) searchResult,
+    required TResult Function() searchLoading,
   }) {
     return error(this.error);
   }
@@ -846,6 +920,8 @@ class _$ErrorImpl implements _Error {
     TResult? Function(List<TrashInfo> params)? success,
     TResult? Function()? buySuccess,
     TResult? Function(String error)? error,
+    TResult? Function(List<Customer> customers)? searchResult,
+    TResult? Function()? searchLoading,
   }) {
     return error?.call(this.error);
   }
@@ -859,6 +935,8 @@ class _$ErrorImpl implements _Error {
     TResult Function(List<TrashInfo> params)? success,
     TResult Function()? buySuccess,
     TResult Function(String error)? error,
+    TResult Function(List<Customer> customers)? searchResult,
+    TResult Function()? searchLoading,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -876,6 +954,8 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Success value) success,
     required TResult Function(_BuySuccess value) buySuccess,
     required TResult Function(_Error value) error,
+    required TResult Function(_SearchResult value) searchResult,
+    required TResult Function(_SearchLoading value) searchLoading,
   }) {
     return error(this);
   }
@@ -889,6 +969,8 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Success value)? success,
     TResult? Function(_BuySuccess value)? buySuccess,
     TResult? Function(_Error value)? error,
+    TResult? Function(_SearchResult value)? searchResult,
+    TResult? Function(_SearchLoading value)? searchLoading,
   }) {
     return error?.call(this);
   }
@@ -902,6 +984,8 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Success value)? success,
     TResult Function(_BuySuccess value)? buySuccess,
     TResult Function(_Error value)? error,
+    TResult Function(_SearchResult value)? searchResult,
+    TResult Function(_SearchLoading value)? searchLoading,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -918,4 +1002,320 @@ abstract class _Error implements BuyState {
   @JsonKey(ignore: true)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SearchResultImplCopyWith<$Res> {
+  factory _$$SearchResultImplCopyWith(
+          _$SearchResultImpl value, $Res Function(_$SearchResultImpl) then) =
+      __$$SearchResultImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Customer> customers});
+}
+
+/// @nodoc
+class __$$SearchResultImplCopyWithImpl<$Res>
+    extends _$BuyStateCopyWithImpl<$Res, _$SearchResultImpl>
+    implements _$$SearchResultImplCopyWith<$Res> {
+  __$$SearchResultImplCopyWithImpl(
+      _$SearchResultImpl _value, $Res Function(_$SearchResultImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? customers = null,
+  }) {
+    return _then(_$SearchResultImpl(
+      null == customers
+          ? _value._customers
+          : customers // ignore: cast_nullable_to_non_nullable
+              as List<Customer>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SearchResultImpl implements _SearchResult {
+  const _$SearchResultImpl(final List<Customer> customers)
+      : _customers = customers;
+
+  final List<Customer> _customers;
+  @override
+  List<Customer> get customers {
+    if (_customers is EqualUnmodifiableListView) return _customers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_customers);
+  }
+
+  @override
+  String toString() {
+    return 'BuyState.searchResult(customers: $customers)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SearchResultImpl &&
+            const DeepCollectionEquality()
+                .equals(other._customers, _customers));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_customers));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SearchResultImplCopyWith<_$SearchResultImpl> get copyWith =>
+      __$$SearchResultImplCopyWithImpl<_$SearchResultImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() loading,
+    required TResult Function() buyLoading,
+    required TResult Function(List<TrashInfo> params) success,
+    required TResult Function() buySuccess,
+    required TResult Function(String error) error,
+    required TResult Function(List<Customer> customers) searchResult,
+    required TResult Function() searchLoading,
+  }) {
+    return searchResult(customers);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? loading,
+    TResult? Function()? buyLoading,
+    TResult? Function(List<TrashInfo> params)? success,
+    TResult? Function()? buySuccess,
+    TResult? Function(String error)? error,
+    TResult? Function(List<Customer> customers)? searchResult,
+    TResult? Function()? searchLoading,
+  }) {
+    return searchResult?.call(customers);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function()? buyLoading,
+    TResult Function(List<TrashInfo> params)? success,
+    TResult Function()? buySuccess,
+    TResult Function(String error)? error,
+    TResult Function(List<Customer> customers)? searchResult,
+    TResult Function()? searchLoading,
+    required TResult orElse(),
+  }) {
+    if (searchResult != null) {
+      return searchResult(customers);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_BuyLoading value) buyLoading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_BuySuccess value) buySuccess,
+    required TResult Function(_Error value) error,
+    required TResult Function(_SearchResult value) searchResult,
+    required TResult Function(_SearchLoading value) searchLoading,
+  }) {
+    return searchResult(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_BuyLoading value)? buyLoading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_BuySuccess value)? buySuccess,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_SearchResult value)? searchResult,
+    TResult? Function(_SearchLoading value)? searchLoading,
+  }) {
+    return searchResult?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_BuyLoading value)? buyLoading,
+    TResult Function(_Success value)? success,
+    TResult Function(_BuySuccess value)? buySuccess,
+    TResult Function(_Error value)? error,
+    TResult Function(_SearchResult value)? searchResult,
+    TResult Function(_SearchLoading value)? searchLoading,
+    required TResult orElse(),
+  }) {
+    if (searchResult != null) {
+      return searchResult(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SearchResult implements BuyState {
+  const factory _SearchResult(final List<Customer> customers) =
+      _$SearchResultImpl;
+
+  List<Customer> get customers;
+  @JsonKey(ignore: true)
+  _$$SearchResultImplCopyWith<_$SearchResultImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SearchLoadingImplCopyWith<$Res> {
+  factory _$$SearchLoadingImplCopyWith(
+          _$SearchLoadingImpl value, $Res Function(_$SearchLoadingImpl) then) =
+      __$$SearchLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SearchLoadingImplCopyWithImpl<$Res>
+    extends _$BuyStateCopyWithImpl<$Res, _$SearchLoadingImpl>
+    implements _$$SearchLoadingImplCopyWith<$Res> {
+  __$$SearchLoadingImplCopyWithImpl(
+      _$SearchLoadingImpl _value, $Res Function(_$SearchLoadingImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SearchLoadingImpl implements _SearchLoading {
+  const _$SearchLoadingImpl();
+
+  @override
+  String toString() {
+    return 'BuyState.searchLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SearchLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() loading,
+    required TResult Function() buyLoading,
+    required TResult Function(List<TrashInfo> params) success,
+    required TResult Function() buySuccess,
+    required TResult Function(String error) error,
+    required TResult Function(List<Customer> customers) searchResult,
+    required TResult Function() searchLoading,
+  }) {
+    return searchLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? loading,
+    TResult? Function()? buyLoading,
+    TResult? Function(List<TrashInfo> params)? success,
+    TResult? Function()? buySuccess,
+    TResult? Function(String error)? error,
+    TResult? Function(List<Customer> customers)? searchResult,
+    TResult? Function()? searchLoading,
+  }) {
+    return searchLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function()? buyLoading,
+    TResult Function(List<TrashInfo> params)? success,
+    TResult Function()? buySuccess,
+    TResult Function(String error)? error,
+    TResult Function(List<Customer> customers)? searchResult,
+    TResult Function()? searchLoading,
+    required TResult orElse(),
+  }) {
+    if (searchLoading != null) {
+      return searchLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_BuyLoading value) buyLoading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_BuySuccess value) buySuccess,
+    required TResult Function(_Error value) error,
+    required TResult Function(_SearchResult value) searchResult,
+    required TResult Function(_SearchLoading value) searchLoading,
+  }) {
+    return searchLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_BuyLoading value)? buyLoading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_BuySuccess value)? buySuccess,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_SearchResult value)? searchResult,
+    TResult? Function(_SearchLoading value)? searchLoading,
+  }) {
+    return searchLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_BuyLoading value)? buyLoading,
+    TResult Function(_Success value)? success,
+    TResult Function(_BuySuccess value)? buySuccess,
+    TResult Function(_Error value)? error,
+    TResult Function(_SearchResult value)? searchResult,
+    TResult Function(_SearchLoading value)? searchLoading,
+    required TResult orElse(),
+  }) {
+    if (searchLoading != null) {
+      return searchLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SearchLoading implements BuyState {
+  const factory _SearchLoading() = _$SearchLoadingImpl;
 }

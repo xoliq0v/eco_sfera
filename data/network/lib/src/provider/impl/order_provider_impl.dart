@@ -32,4 +32,21 @@ class OrderProviderImpl extends OrderProvider {
         }
     );
   }
+
+  @override
+  Future<ApiResponse<bool>> watch(int id){
+    try{
+      return apiCall(
+          apiClient.post(
+            OrderEndpoint.watch,
+            data: {
+              'order_id': id,
+            },
+          ),
+          dataFromJson: (data) => data != null,
+      );
+    }catch(e){
+      throw e.toString();
+    }
+  }
 }

@@ -8,8 +8,8 @@ part of 'order_user_dto.dart';
 
 OrderUserDto _$OrderUserDtoFromJson(Map<String, dynamic> json) => OrderUserDto(
       id: (json['id'] as num).toInt(),
-      name: json['name'] as String,
-      phoneNumber: json['phone_number'] as String,
+      name: json['name'] as String?,
+      phoneNumber: json['phone_number'] as String?,
     );
 
 Map<String, dynamic> _$OrderUserDtoToJson(OrderUserDto instance) =>

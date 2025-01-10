@@ -15,4 +15,8 @@ sealed class BuyState with _$BuyState {
 
   const factory BuyState.error(String error) = _Error;
 
+  const factory BuyState.searchResult(List<Customer> customers) = _SearchResult;
+
+  const factory BuyState.searchLoading() = _SearchLoading;
+
 }

@@ -11,6 +11,8 @@ class OrderModel extends Equatable {
   final OrderUser orderUser;
   final List<OrderLocationModel> locations;
   final double? distance;
+  final List<OrderItemModel>? items;
+  final bool status;
 
   const OrderModel({
     required this.totalKg,
@@ -19,6 +21,8 @@ class OrderModel extends Equatable {
     required this.id,
     required this.orderUser,
     required this.locations,
+    required this.items,
+    required this.status,
     this.distance,
   });
 
@@ -30,6 +34,8 @@ class OrderModel extends Equatable {
     int? id,
     OrderUser? orderUser,
     List<OrderLocationModel>? locations,
+    List<OrderItemModel>? items,
+    bool? status,
     double? distance,
   }) {
     return OrderModel(
@@ -40,9 +46,25 @@ class OrderModel extends Equatable {
       orderUser: orderUser ?? this.orderUser,
       locations: locations ?? this.locations,
       distance: distance ?? this.distance,
+      items: items ?? this.items,
+      status: status ?? this.status,
     );
   }
 
   @override
-  List<Object?> get props => [totalKg, totalPrice, date, id, orderUser, locations, distance];
+  List<Object?> get props => [totalKg, totalPrice, date, id, orderUser, locations, distance, items, status];
+}
+
+class OrderItemModel extends Equatable{
+
+  OrderItemModel({
+    required this.name,
+    required this.price,
+  });
+
+  String name;
+  String price;
+
+  @override
+  List<Object?> get props => [name,price];
 }

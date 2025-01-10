@@ -18,3 +18,19 @@ class GetOrderImpl extends GetOrder{
   }
 
 }
+
+class WatchPostImpl extends WatchPost{
+  WatchPostImpl({required this.orderRepo});
+
+  final OrderRepo orderRepo;
+
+  @override
+  Future<Result<bool>> watch(int id) async {
+    try{
+      return await orderRepo.watch(id);
+    }catch(e){
+      return Result.error(ResultError(reason: e.toString(),message: e.toString()));
+    }
+  }
+
+}

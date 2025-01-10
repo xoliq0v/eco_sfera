@@ -30,3 +30,15 @@ class PostCustomerImpl implements PostCustomer {
   }
 
 }
+
+class SearchCustomerImpl extends SearchCustomer {
+  SearchCustomerImpl({required this.customerRepository});
+
+  final CustomerRepository customerRepository;
+
+  @override
+  Future<Result<List<Customer>>> search(String number) {
+    return customerRepository.searchCustomer(number);
+  }
+
+}

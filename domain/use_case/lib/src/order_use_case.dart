@@ -6,3 +6,9 @@ abstract class GetOrder {
   Future<Result<List<OrderModel>>> get();
 
 }
+
+abstract class WatchPost {
+
+  Future<Result<bool>> watch(int id);
+
+}

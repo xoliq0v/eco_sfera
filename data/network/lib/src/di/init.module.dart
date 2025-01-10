@@ -6,7 +6,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i2;
 
-import 'package:alice/alice.dart' as _i6;
+import 'package:core/core.dart' as _i6;
 import 'package:database/database.dart' as _i5;
 import 'package:dio/dio.dart' as _i3;
 import 'package:injectable/injectable.dart' as _i1;

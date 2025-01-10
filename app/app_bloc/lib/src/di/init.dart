@@ -6,7 +6,7 @@ import 'package:app_bloc/src/bloc/buy/buy_cubit.dart';
 import 'package:app_bloc/src/bloc/customer/customer_cubit.dart';
 import 'package:app_bloc/src/bloc/customer/post_customer_cubit.dart';
 import 'package:app_bloc/src/bloc/history/history_pagination_cubit.dart';
-import 'package:app_bloc/src/bloc/order/handler.dart';
+import '../bloc/order/handler.dart';
 import 'package:app_bloc/src/bloc/order/order_cubit.dart';
 import 'package:app_bloc/src/bloc/theme/theme_cubit.dart';
 import 'package:core/core.dart';
@@ -48,8 +48,8 @@ abstract class AppBlocModule {
     return LogoutCubit(logout);
   }
 
-  OrderCubit provideOrderCubit(GetOrder getOrder){
-    return OrderCubit(getOrder);
+  OrderCubit provideOrderCubit(GetOrder getOrder,FCMTokenRefresh fcm,WatchPost watchPost){
+    return OrderCubit(getOrder,fcm, watchPost);
   }
 
   PostCustomerCubit providePostCustomerCubit(PostCustomer postCustomer){
@@ -68,8 +68,8 @@ abstract class AppBlocModule {
     return LocationServiceCubit(_getLocation);
   }
 
-  BuyCubit provideBuyCubit(Buy _buy,FetchBuyPageParams _fetchBuyPageParams){
-    return BuyCubit(_buy, _fetchBuyPageParams);
+  BuyCubit provideBuyCubit(Buy _buy,FetchBuyPageParams _fetchBuyPageParams, SearchCustomer search){
+    return BuyCubit(_buy,search, _fetchBuyPageParams);
   }
 
   HistoryPaginationCubit provideHistoryPaginationCubit(

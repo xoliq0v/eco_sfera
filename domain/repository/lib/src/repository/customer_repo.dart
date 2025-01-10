@@ -8,4 +8,6 @@ abstract class CustomerRepository extends BaseRepository {
 
   Future<Result<CustomerResponseModel>> postCustomer(CustomerPostModel customer);
 
+  Future<Result<List<Customer>>> searchCustomer(String number);
+
 }

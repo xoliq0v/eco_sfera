@@ -12,3 +12,7 @@ abstract class AuthUseCase {
 abstract class Logout {
   Future<Result<bool>> logout();
 }
+
+abstract class FCMTokenRefresh {
+  Future<Result<bool>> refresh(String token);
+}

@@ -102,6 +102,7 @@ abstract class $FeatureHomeModule extends _i28.AutoRouterModule {
             child: _i6.BuyPage(
           key: args.key,
           param: args.param,
+          type: args.type,
         )),
       );
     },
@@ -192,10 +193,11 @@ abstract class $FeatureHomeModule extends _i28.AutoRouterModule {
       final args = routeData.argsAs<PaymentWithCardRouteArgs>();
       return _i28.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i18.PaymentWithCardPage(
+        child: _i28.WrappedRoute(
+            child: _i18.PaymentWithCardPage(
           key: args.key,
           params: args.params,
-        ),
+        )),
       );
     },
     PolygonRoute.name: (routeData) {
@@ -349,12 +351,14 @@ class BuyRoute extends _i28.PageRouteInfo<BuyRouteArgs> {
   BuyRoute({
     _i29.Key? key,
     _i30.OrderModel? param,
+    String? type,
     List<_i28.PageRouteInfo>? children,
   }) : super(
           BuyRoute.name,
           args: BuyRouteArgs(
             key: key,
             param: param,
+            type: type,
           ),
           initialChildren: children,
         );
@@ -369,15 +373,18 @@ class BuyRouteArgs {
   const BuyRouteArgs({
     this.key,
     this.param,
+    this.type,
   });
 
   final _i29.Key? key;
 
   final _i30.OrderModel? param;
 
+  final String? type;
+
   @override
   String toString() {
-    return 'BuyRouteArgs{key: $key, param: $param}';
+    return 'BuyRouteArgs{key: $key, param: $param, type: $type}';
   }
 }
 

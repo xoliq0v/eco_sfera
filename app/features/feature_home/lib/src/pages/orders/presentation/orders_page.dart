@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart' hide Order;
 import 'package:design_system/design_system.dart';
@@ -5,6 +7,7 @@ import 'package:navigation/navigation.dart';
 import 'widgets/order_item.dart';
 import 'package:flutter/material.dart';
 import 'package:model/model.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 part 'widgets/search.dart';
 
@@ -13,7 +16,7 @@ class OrdersPage extends StatefulWidget implements AutoRouteWrapper {
   const OrdersPage({super.key});
 
   @override
-  _OrdersPageState createState() => _OrdersPageState();
+  State<OrdersPage> createState() => _OrdersPageState();
 
   @override
   Widget wrappedRoute(BuildContext context) {
@@ -31,266 +34,218 @@ class OrdersPage extends StatefulWidget implements AutoRouteWrapper {
   }
 }
 
-class _OrdersPageState extends State<OrdersPage> {
-  ValueNotifier<bool> loading = ValueNotifier(true);
-  ValueNotifier<bool> readyGetOrder = ValueNotifier(false);
+class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMixin {
+  final ValueNotifier<bool> _readyGetOrder = ValueNotifier(false);
   final TextEditingController _searchController = TextEditingController();
-  late LocationEntity location;
+  late LocationEntity _location;
+  // Add a Set to keep track of viewed orders
+  final Set<String> _viewedOrders = {};
+
+  // Add debouncer for search
+  final _searchDebouncer = Debouncer(milliseconds: 300);
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
     super.initState();
+    WakelockPlus.enable();
+    _initializeLocation();
+  }
+
+  Future<void> _initializeLocation() async {
+    // Initialize location service when page loads
+    await Future.delayed(Duration.zero);
+    if (mounted) {
+      context.read<LocationServiceCubit>().init();
+    }
   }
 
   void _searchOrders(String query) {
+    _searchDebouncer.run(() {
+      // Implement your search logic here
+      // Use the debouncer to prevent excessive API calls
+    });
+  }
+
+  Future<void> _handleRefresh() async {
+    return await context.read<OrderCubit>().retry(_location);
+  }
+
+  Widget _buildOrdersList(List<OrderModel> orders) {
+    if (orders.isEmpty) {
+      return Center(
+        child: RefreshIndicator(
+          onRefresh: _handleRefresh,
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.8,
+              child: Center(
+                child: Text(LocaleKeys.noOrdersAvailable.tr(context: context)),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    return RefreshIndicator(
+      onRefresh: _handleRefresh,
+      child: ListView.builder(
+        itemCount: orders.length,
+        padding: const EdgeInsets.all(16),
+        itemBuilder: (context, index) {
+          final order = orders[index];
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: OrderItem(
+              key: ValueKey(order.id),
+              order: order,
+              isNew: order.status && !_viewedOrders.contains(order.id),
+              onTap: () {
+                _viewedOrders.add(order.id.toString());
+                _showOrderSheet(order,false);
+              },
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  void _showOrderSheet(OrderModel order,bool isNew) {
+    order.copyWith(status: false);
+    OrderSheet.show(
+      onAcceptPress: () async{
+        await context.read<OrderCubit>().accept(order.id);
+      },
+      context: context,
+      coords: Coords(
+        double.parse(order.locations[0].latitude),
+        double.parse(order.locations[0].longitude),
+      ),
+      user: {order.orderUser.name: order.orderUser.phoneNumber.formatUzbekPhoneNumberMap()},
+      order: order,
+      isNewOrder: isNew,
+    );
+  }
+
+  Widget _buildSliderButton() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+      child: SliderButton(
+        width: double.maxFinite,
+        height: 60, // Reduced height for better performance
+        backgroundColor: context.colorScheme.surface,
+        label: Text(LocaleKeys.getOrder.tr(context: context)),
+        alignLabel: Alignment.center,
+        action: () async {
+          if (mounted) {
+            await context.read<LocationServiceCubit>().getLocation();
+          }
+        },
+        child: Container(
+          height: 50,
+          width: 50,
+          decoration: BoxDecoration(
+            color: context.colorScheme.secondary,
+            borderRadius: BorderRadius.circular(25),
+          ),
+          child: Icon(
+            Icons.arrow_forward,
+            color: context.colorScheme.cardColor,
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: context.colorScheme.background,
         leading: Padding(
           padding: const EdgeInsets.all(5.0),
           child: GestureDetector(
-              onTap: (){
-                NavigationUtils.getMainNavigator().navigateProfilePage();
-              },
-              child: PriceBadge()),
+            onTap: () => NavigationUtils.getMainNavigator().navigateProfilePage(),
+            child: const PriceBadge(),
+          ),
         ),
         leadingWidth: 120,
         title: Text(LocaleKeys.orders.tr(context: context)),
         actions: [
           ValueListenableBuilder(
-            valueListenable: readyGetOrder,
-            builder: (context,value,child){ {
-              return readyGetOrder.value ? DecoratedBox(
-                decoration: BoxDecoration(
-                  color: context.colorScheme.secondary,
-                  borderRadius: BorderRadius.circular(50),
+            valueListenable: _readyGetOrder,
+            builder: (_, value, __) => value
+                ? DecoratedBox(
+              decoration: BoxDecoration(
+                color: context.colorScheme.secondary,
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: IconButton(
+                onPressed: () {
+                  context.read<LocationServiceCubit>().init();
+                  context.read<OrderCubit>().init();
+                },
+                icon: Icon(
+                  Icons.power_settings_new_outlined,
+                  color: context.colorScheme.cardColor,
                 ),
-                  child: IconButton(
-                    onPressed: () {
-                      context.read<LocationServiceCubit>().init();
-                      context.read<OrderCubit>().init();
-                    },
-                    icon: Icon(Icons.power_settings_new_outlined,color: context.colorScheme.cardColor,),
-                  ),
-                ) : SizedBox.shrink();
-              }
-            },
+              ),
+            )
+                : const SizedBox.shrink(),
           ),
-          10.horizontalSpace
+          const SizedBox(width: 10),
         ],
       ),
       body: BlocListener<LocationServiceCubit, LocationServiceState>(
         listener: (context, state) {
           state.whenOrNull(
-            loading: () {
-              // Show a non-dismissible loading dialog
-              // return showDialog(
-              //   context: context,
-              //   barrierDismissible: false,
-              //   builder: (BuildContext context) {
-              //     return PopScope(
-              //       canPop: false, // Prevent dialog from being dismissed
-              //       child: AlertDialog(
-              //         content: Column(
-              //           mainAxisSize: MainAxisSize.min,
-              //           children: [
-              //             CircularProgressIndicator.adaptive(),
-              //             SizedBox(height: 16),
-              //             Text('Getting location...'),
-              //           ],
-              //         ),
-              //       ),
-              //     );
-              //   },
-              // );
-            },
-            error: (error) {
-              // Show error dialog with option to open settings
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text(LocaleKeys.locationPermission.tr(context: context)),
-                    content: Text(error.toString()),
-                    actions: [
-                      TextButton(
-                        child: Text(LocaleKeys.openSettings.tr(context: context)),
-                        onPressed: () async {
-                          // Use a method to open app settings
-                          // This is a placeholder - replace with actual method
-                          await openAppSettings();
-                          // if(await Permission.location.isGranted){
-                          //   context.read<LocationServiceCubit>().getLocation();
-                          // }
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
             success: (location) {
-              this.location = location;
-              readyGetOrder.value = true;
+              _location = location;
+              _readyGetOrder.value = true;
               context.read<OrderCubit>().getOrder(location);
             },
-            init: (){
-              readyGetOrder.value = false;
-            }
+            error: (error) => _showLocationErrorDialog(context,error.toString()),
+            init: () => _readyGetOrder.value = false,
           );
         },
-        child: BlocBuilder<OrderCubit, OrderState>(
-          builder: (BuildContext context, state) {
+        child: BlocConsumer<OrderCubit, OrderState>(
+          listener: (context, state) {
+            state.mapOrNull(
+              success: (orders) {
+                if (orders.isRealtime && orders.newOrders.isNotEmpty) {
+                  _showOrderSheet(orders.newOrders[0],true);
+                }
+              },
+            );
+          },
+          builder: (context, state) {
             return state.maybeWhen(
-              loading: () {
-                return Center(
-                  child: CircularProgressIndicator.adaptive(),
-                );
-              },
-              error: (e) {
-                return RefreshIndicator(
-                  onRefresh: () async {
-                    return await context.read<OrderCubit>().retry(location);
-                  },
-                  child: Center(
-                    child: Text(e),
-                  ),
-                );
-              },
-              success: (result, locationEntry) {
-                readyGetOrder.value = true;
-                return LayoutBuilder(
-                  builder: (context, constraints) {
-                    if (result.isEmpty) {
-                      return Center(
-                        child: RefreshIndicator(
-                          onRefresh: () async {
-                            return await context.read<OrderCubit>().retry(location);
-                          },
-                          child: Text(LocaleKeys.noOrdersAvailable.tr(context: context)),
-                        ),
-                      );
-                    }
-
-                    if (constraints.maxWidth > 600) {
-                      return GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 3,
-                          crossAxisSpacing: 16,
-                          mainAxisSpacing: 16,
-                        ),
-                        itemCount: result.length,
-                        padding: const EdgeInsets.all(16),
-                        itemBuilder: (context, index) {
-                          return OrderItem(
-                            order: result[index],
-                            onTap: () {
-                              AdmissionSheet.show(context);
-                            },
-                          );
-                        },
-                      );
-                    }
-
-                    return RefreshIndicator(
-                      onRefresh: () async {
-                        return await context.read<OrderCubit>().retry(location);
-                      },
-                      child: Column(
-                        children: [
-                          _OrderSearch(
-                            searchController: _searchController,
-                            onChanged: _searchOrders,
-                          ),
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount: result.length,
-                              padding: const EdgeInsets.all(16),
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(bottom: 16),
-                                  child: OrderItem(
-                                    order: result[index],
-                                    isNew: index == 0,
-                                    onTap: () {
-                                      OrderSheet.show(
-                                        context,
-                                        Coords(
-                                          double.parse(result[index].locations[0].latitude),
-                                          double.parse(result[index].locations[0].longitude),
-                                        ),
-                                        {result[index].orderUser.name: result[index].orderUser.phoneNumber.formatUzbekPhoneNumberMap()},
-                                        result[index],
-                                      );
-                                    },
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
-              },
-                init: (){
-                  readyGetOrder.value = false;
-                  return Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                      child: SliderButton(
-                        width: double.maxFinite,
-                        backgroundColor: context.colorScheme.surface,
-                        label: Text(
-                            LocaleKeys.getOrder.tr(context: context),
-                        ),
-                        alignLabel: Alignment.center,
-                        action: () async{
-                          await context.read<LocationServiceCubit>().getLocation();
-                        },
-                        child: SizedBox(
-                          height: 70,
-                          width: 70,
-                          child: Padding(
-                            padding: const EdgeInsets.all(1.0),
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                color: context.colorScheme.secondary,
-                                borderRadius: BorderRadius.circular(50),
-                              ),
-                              child: Icon(Icons.arrow_forward,color: context.colorScheme.cardColor,),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              orElse: () {
+              loading: () => const Center(child: CircularProgressIndicator.adaptive()),
+              error: (e) => RefreshIndicator(
+                onRefresh: _handleRefresh,
+                child: Center(child: Text(e)),
+              ),
+              success: (orders, currentLocation, isInitialFetch, isRealtime, newOrders) {
+                _readyGetOrder.value = true;
                 return Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(LocaleKeys.locationAccessIsRequired.tr(context: context)),
-                    TextButton(
-                      child: Text(LocaleKeys.openSettings.tr(context: context)),
-                      onPressed: () async {
-                        await openAppSettings();
-                        if (await Permission.location.isGranted) {
-                          await context.read<LocationServiceCubit>().getLocation();
-                        }
-                      },
+                    _OrderSearch(
+                      searchController: _searchController,
+                      onChanged: _searchOrders,
                     ),
+                    Expanded(child: _buildOrdersList(orders)),
                   ],
                 );
               },
+              init: () => Center(child: _buildSliderButton()),
+              orElse: () => _buildLocationAccessRequired(),
             );
           },
         ),
@@ -298,9 +253,69 @@ class _OrdersPageState extends State<OrdersPage> {
     );
   }
 
+  Widget _buildLocationAccessRequired() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(LocaleKeys.locationAccessIsRequired.tr(context: context)),
+        TextButton(
+          onPressed: () async {
+            await openAppSettings();
+            if (await Permission.location.isGranted && mounted) {
+              await context.read<LocationServiceCubit>().getLocation();
+            }
+          },
+          child: Text(LocaleKeys.openSettings.tr(context: context)),
+        ),
+      ],
+    );
+  }
+
+  void _showLocationErrorDialog(BuildContext context, String error) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        title: Text(LocaleKeys.locationPermission.tr(context: context)),
+        content: Text(error),
+        actions: [
+          TextButton(
+            child: Text(LocaleKeys.openSettings.tr(context: context)),
+            onPressed: () async {
+              await openAppSettings();
+              if (await Permission.location.isGranted && mounted) {
+                await context.read<LocationServiceCubit>().getLocation();
+              }
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   void dispose() {
     _searchController.dispose();
+    _searchDebouncer.dispose();
+    _readyGetOrder.dispose();
+    WakelockPlus.disable();
     super.dispose();
+  }
+}
+
+// Add this class for search debouncing
+class Debouncer {
+  final int milliseconds;
+  Timer? _timer;
+
+  Debouncer({required this.milliseconds});
+
+  void run(VoidCallback action) {
+    _timer?.cancel();
+    _timer = Timer(Duration(milliseconds: milliseconds), action);
+  }
+
+  void dispose() {
+    _timer?.cancel();
   }
 }

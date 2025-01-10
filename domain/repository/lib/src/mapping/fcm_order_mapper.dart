@@ -42,6 +42,8 @@ extension OrderMessageParser on Map<String, dynamic> {
       totalPrice: orderData['total_price'] as String,
       date: DateTime.parse(orderData['date'] as String),
       id: orderData['id'] as int,
+      items: [],
+      status: true,
       orderUser: user,
       locations: locations,
     );

@@ -11,12 +11,14 @@ class BuyCubit extends Cubit<BuyState>{
 
   BuyCubit(
       this._buy,
+      this.search,
       this._fetchBuyPageParams
       ):super(BuyState.init()){
     fetchParams();
   }
 
   final Buy _buy;
+  final SearchCustomer search;
   final FetchBuyPageParams _fetchBuyPageParams;
 
   Future<void> fetchParams() async {
@@ -49,6 +51,21 @@ class BuyCubit extends Cubit<BuyState>{
       }
     } catch (e) {
       emit(BuyState.error('An unexpected error occurred: ${e.toString()}'));
+    }
+
+  }
+
+
+  Future<void> searchCustomer(String number) async {
+
+    emit(BuyState.searchLoading());
+
+    final result = await search.search(number);
+
+    if(result.status == Status.completed){
+
+      emit(BuyState.searchResult(result.data??[]));
+
     }
 
   }

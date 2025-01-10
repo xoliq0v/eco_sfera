@@ -1,10 +1,11 @@
 import 'package:core/core.dart';
+import 'package:database/database.dart';
 import 'package:dio/dio.dart';
 import 'package:network/network.dart';
 import 'package:network/src/provider/impl/auth_provider_impl.dart';
 import 'package:network/src/provider/impl/buy_provider_impl.dart';
-import 'package:network/src/provider/impl/driver_provider_impl.dart';
 import 'package:network/src/provider/impl/customer_provider_impl.dart';
+import 'package:network/src/provider/impl/driver_provider_impl.dart';
 import 'package:network/src/provider/impl/history_provider_impl.dart';
 import 'package:network/src/provider/impl/order_provider_impl.dart';
 import 'package:network/src/provider/impl/partner_provider_impl.dart';
@@ -21,8 +22,8 @@ abstract class NetworkProvidersModule {
   }
 
   @lazySingleton
-  ClientProvider provideClientProvider(Dio apiClient){
-    return ClientProviderImpl(authClient: apiClient);
+  ClientProvider provideClientProvider(Dio apiClient) {
+    return ClientProviderImpl(apiClient: apiClient);
   }
 
   @lazySingleton

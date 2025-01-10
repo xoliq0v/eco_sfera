@@ -1,14 +1,18 @@
-
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:model/model.dart';
-
 
 class OrderItem extends StatelessWidget {
   final OrderModel order;
   final bool isNew;
   final Function()? onTap;
-  const OrderItem({super.key, required this.order,this.onTap, this.isNew = false});
+
+  const OrderItem({
+    super.key,
+    required this.order,
+    required this.isNew,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +20,7 @@ class OrderItem extends StatelessWidget {
       onTap: onTap,
       child: SizedBox(
         width: double.maxFinite,
-        height: 140,
+        height: 150,
         child: DecoratedBox(
           decoration: BoxDecoration(
               boxShadow: const [
@@ -51,7 +55,7 @@ class OrderItem extends StatelessWidget {
                                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 20,
-                                      color: isNew ? AppColors.main : context.colorScheme.primary
+                                        color: isNew ? AppColors.main : context.colorScheme.primary
                                     ),
                                   ),
                                   Flexible(
@@ -65,13 +69,16 @@ class OrderItem extends StatelessWidget {
                               ),
                             )
                         ),
-                        SvgPicture.asset(AppIcons.delivery,color: Theme.of(context).colorScheme.primary,),
-                        10.horizontalSpace
+                        SvgPicture.asset(
+                          AppIcons.delivery,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        const SizedBox(width: 10)
                       ],
                     ),
                   )
               ),
-              const Divider(color: Colors.grey,),
+              const Divider(color: Colors.grey),
               Padding(
                 padding: const EdgeInsets.only(
                     right: 20,
@@ -82,8 +89,18 @@ class OrderItem extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('${order.date.hour}:${order.date.minute}',style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : context.colorScheme.primary),),
-                    Text(order.distance!.toInt().toString().toKm(context),style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : context.colorScheme.primary),),
+                    Text(
+                      '${order.date.hour}:${order.date.minute}',
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          color: isNew ? AppColors.main : context.colorScheme.primary
+                      ),
+                    ),
+                    Text(
+                      order.distance!.toInt().toString().toKm(context),
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          color: isNew ? AppColors.main : context.colorScheme.primary
+                      ),
+                    ),
                   ],
                 ),
               )

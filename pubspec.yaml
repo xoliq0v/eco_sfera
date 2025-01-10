@@ -54,6 +54,7 @@ flutter:
     - assets/
     - assets/icons/
     - assets/images/
+    - assets/audio/
 
 flutter_launcher_icons:
   android: true

@@ -25,4 +25,14 @@ class OrderRepoImpl extends OrderRepo {
     );
   }
 
+  @override
+  Future<Result<bool>> watch(int id) async {
+    final res = await orderProvider.watch(id);
+    if(res.data ?? false){
+      return Result.completed(res.data);
+    }else{
+      throw 'Something went wrong!';
+    }
+  }
+
 }

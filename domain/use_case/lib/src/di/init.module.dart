@@ -27,8 +27,6 @@ class UseCasePackageModule extends _i526.MicroPackageModule {
         () => useCaseModule.provideSaveSession(gh<_i585.SessionRepository>()));
     gh.factory<_i987.GetToken>(
         () => useCaseModule.provideGetToken(gh<_i585.SessionRepository>()));
-    gh.factory<_i987.Logout>(
-        () => useCaseModule.provideLogout(gh<_i585.SessionRepository>()));
     gh.factory<_i987.SaveType>(
         () => useCaseModule.provideSaveType(gh<_i585.SessionRepository>()));
     gh.factory<_i987.GetAuthType>(
@@ -37,6 +35,8 @@ class UseCasePackageModule extends _i526.MicroPackageModule {
         () => _i627.AuthImpl(authRepository: gh<_i585.AuthRepository>()));
     gh.factory<_i987.AuthUseCase>(
         () => useCaseModule.provideAuthUseCase(gh<_i585.AuthRepository>()));
+    gh.factory<_i987.FCMTokenRefresh>(
+        () => useCaseModule.provideFCMTokenRefresh(gh<_i585.AuthRepository>()));
     gh.factory<_i987.GetCustomer>(
         () => useCaseModule.provideGetCustomer(gh<_i585.CustomerRepository>()));
     gh.factory<_i987.PostCustomer>(() =>
@@ -44,10 +44,18 @@ class UseCasePackageModule extends _i526.MicroPackageModule {
     gh.factory<_i987.Buy>(() => useCaseModule.provideBuy(gh<_i585.BuyRepo>()));
     gh.factory<_i987.FetchBuyPageParams>(
         () => useCaseModule.provideBuyPageParams(gh<_i585.BuyRepo>()));
+    gh.factory<_i987.SearchCustomer>(() =>
+        useCaseModule.provideSearchCustomer(gh<_i585.CustomerRepository>()));
+    gh.factory<_i987.Logout>(() => useCaseModule.provideLogout(
+          gh<_i585.SessionRepository>(),
+          gh<_i585.AuthRepository>(),
+        ));
     gh.factory<_i987.GetLocation>(
         () => useCaseModule.provideGetLocation(gh<_i585.LocationRepository>()));
     gh.factory<_i987.GetOrder>(
         () => useCaseModule.provideGetOrder(gh<_i585.OrderRepo>()));
+    gh.factory<_i987.WatchPost>(
+        () => useCaseModule.provideWatchPost(gh<_i585.OrderRepo>()));
     gh.factory<_i987.FetchPartnerProfile>(() =>
         useCaseModule.provideFetchPartnerProfile(gh<_i585.PartnerRepo>()));
     gh.factory<_i987.GetPartnerProfile>(

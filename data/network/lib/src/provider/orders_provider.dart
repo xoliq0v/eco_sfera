@@ -6,4 +6,6 @@ abstract class OrderProvider extends BaseProvider {
 
   Future<ApiResponse<List<OrderDto>>> getOrders();
 
+  Future<ApiResponse<bool>> watch(int id);
+
 }

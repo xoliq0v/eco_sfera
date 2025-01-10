@@ -12,6 +12,10 @@ OrderDto _$OrderDtoFromJson(Map<String, dynamic> json) => OrderDto(
       date: OrderDto._dateFromJson(json['date'] as String),
       id: (json['id'] as num).toInt(),
       user: OrderUserDto.fromJson(json['user'] as Map<String, dynamic>),
+      items: (json['items'] as List<dynamic>)
+          .map((e) => OrderItemDTO.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      status: json['status'] as String,
       locations: (json['locations'] as List<dynamic>?)
               ?.map((e) => LocationDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -25,4 +29,17 @@ Map<String, dynamic> _$OrderDtoToJson(OrderDto instance) => <String, dynamic>{
       'id': instance.id,
       'locations': instance.locations,
       'user': instance.user,
+      'items': instance.items,
+      'status': instance.status,
+    };
+
+OrderItemDTO _$OrderItemDTOFromJson(Map<String, dynamic> json) => OrderItemDTO(
+      name: json['name'] as String?,
+      price: json['price'] as String?,
+    );
+
+Map<String, dynamic> _$OrderItemDTOToJson(OrderItemDTO instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'price': instance.price,
     };

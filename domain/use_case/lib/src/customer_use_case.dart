@@ -15,3 +15,9 @@ abstract class PostCustomer {
   Future<Result<CustomerResponseModel>> post({required CustomerPostModel model});
 
 }
+
+abstract class SearchCustomer {
+
+  Future<Result<List<Customer>>> search(String number);
+
+}

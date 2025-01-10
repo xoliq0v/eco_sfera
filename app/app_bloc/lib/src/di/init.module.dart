@@ -48,12 +48,16 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
         appBlocModule.provideHistoryPaginationCubit(gh<_i5.FetchHistory>()));
     gh.factory<_i3.LocationServiceCubit>(
         () => appBlocModule.provideLocationCubit(gh<_i5.GetLocation>()));
+    gh.factory<_i3.OrderCubit>(() => appBlocModule.provideOrderCubit(
+          gh<_i5.GetOrder>(),
+          gh<_i5.FCMTokenRefresh>(),
+          gh<_i5.WatchPost>(),
+        ));
     gh.factory<_i3.BuyCubit>(() => appBlocModule.provideBuyCubit(
           gh<_i5.Buy>(),
           gh<_i5.FetchBuyPageParams>(),
+          gh<_i5.SearchCustomer>(),
         ));
-    gh.factory<_i3.OrderCubit>(
-        () => appBlocModule.provideOrderCubit(gh<_i5.GetOrder>()));
     gh.factory<_i3.CustomerCubit>(
         () => appBlocModule.provideCustomerCubit(gh<_i5.GetCustomer>()));
     gh.factory<_i3.CustomerPaginationCubit>(() =>

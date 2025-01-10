@@ -14,14 +14,21 @@ part  'order_state.dart';
 class OrderCubit extends Cubit<OrderState> {
   OrderCubit(
       this.getOrderUseCase,
+      this.fcmTokenRefresh,
+      this.watchPost,
       ) : super(const OrderState.init()) {
     _initializeFCM();
+    _listenToBotChanges(); // Listen to bot changes
   }
 
   final GetOrder getOrderUseCase;
+  final FCMTokenRefresh fcmTokenRefresh;
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
   final FlutterLocalNotificationsPlugin _notificationsPlugin = FlutterLocalNotificationsPlugin();
   bool _isFCMInitialized = false;
+  final FirebaseDatabase _firebaseDatabase = FirebaseDatabase.instance;
+  bool isInitialFetch = true;
+  final WatchPost watchPost;
 
   static const AndroidNotificationChannel _channel = AndroidNotificationChannel(
     'high_importance_channel',
@@ -29,6 +36,114 @@ class OrderCubit extends Cubit<OrderState> {
     importance: Importance.max,
     playSound: true,
   );
+
+  void _listenToBotChanges() {
+    _firebaseDatabase.ref('bot').onValue.listen((event) {
+      final botValue = event.snapshot.value;
+      print('[log] Bot value changed: $botValue');
+
+      if (botValue != null) {
+        final currentLocation = (state is _Success) ? (state as _Success).currentLocation : null;
+        if (currentLocation != null) {
+          _getOrdersWithoutLoading(currentLocation, isRealtime: true);
+        } else {
+          print('[log] Current location is null, cannot fetch orders.');
+        }
+      }
+    });
+  }
+
+  Future<void> accept(int id) async{
+
+    await watchPost.watch(id);
+
+  }
+
+  Future<void> getOrder(LocationEntity location) async {
+    if (isInitialFetch) {
+      emit(const OrderState.loading());
+    }
+
+    final result = await getOrderUseCase.get();
+
+    if (result.status == Status.error || result.data == null) {
+      emit(OrderState.error(result.error?.message ?? 'Something went wrong'));
+      return;
+    }
+
+    try {
+      final value = await result.data?.map((data) {
+        if (data.locations.isEmpty) return data;
+
+        return data.copyWith(
+          distance: calculateDistance(
+            location,
+            double.parse(data.locations[0].latitude),
+            double.parse(data.locations[0].longitude),
+          ),
+        );
+      }).toList();
+
+      emit(OrderState.success(
+        value ?? [],
+        currentLocation: location,
+        isInitialFetch: isInitialFetch,
+      ));
+
+      isInitialFetch = false;
+    } catch (e) {
+      emit(OrderState.error(e.toString()));
+    }
+  }
+
+
+  Future<void> _getOrdersWithoutLoading(LocationEntity location, {required bool isRealtime}) async {
+    final result = await getOrderUseCase.get();
+
+    if (result.status == Status.error || result.data == null) {
+      emit(OrderState.error(result.error?.message ?? 'Something went wrong'));
+      return;
+    }
+
+    try {
+      final value = await result.data?.map((data) {
+        if (data.locations.isEmpty) return data;
+
+        return data.copyWith(
+          distance: calculateDistance(
+            location,
+            double.parse(data.locations[0].latitude),
+            double.parse(data.locations[0].longitude),
+          ),
+        );
+      }).toList();
+
+      // Compare with current state to find new orders
+      if (state is _Success) {
+        final currentOrders = (state as _Success).orders;
+        final newOrders = value?.where((newOrder) =>
+        !currentOrders.any((currentOrder) => currentOrder.id == newOrder.id)
+        ).toList() ?? [];
+
+        emit(OrderState.success(
+          value ?? [],
+          currentLocation: location,
+          isRealtime: isRealtime,
+          newOrders: newOrders,
+        ));
+      } else {
+        emit(OrderState.success(
+          value ?? [],
+          currentLocation: location,
+          isRealtime: isRealtime,
+          newOrders: value ?? [],
+        ));
+      }
+    } catch (e) {
+      emit(OrderState.error(e.toString()));
+    }
+  }
+
 
   Future<void> _initializeFCM() async {
     if (_isFCMInitialized) return;
@@ -99,9 +214,37 @@ class OrderCubit extends Cubit<OrderState> {
     }
   }
 
+  // Future<void> getOrder(LocationEntity location) async {
+  //   emit(const OrderState.loading());
+  //
+  //   final result = await getOrderUseCase.get();
+  //
+  //   if (result.status == Status.error || result.data == null) {
+  //     emit(OrderState.error(result.error?.message ?? 'Something went wrong'));
+  //     return;
+  //   }
+  //
+  //   try {
+  //     final value = await result.data?.map((data) {
+  //       if (data.locations.isEmpty) return data;
+  //
+  //       return data.copyWith(
+  //         distance: calculateDistance(
+  //           location,
+  //           double.parse(data.locations[0].latitude),
+  //           double.parse(data.locations[0].longitude),
+  //         ),
+  //       );
+  //     }).toList();
+  //
+  //     emit(OrderState.success(value ?? [], currentLocation: location));
+  //   } catch (e) {
+  //     emit(OrderState.error(e.toString()));
+  //   }
+  // }
+
   Future<void> _handleTokenRefresh(String token) async {
-    print('[log] FCM Token refreshed: $token');
-    // TODO: Implement token update logic (e.g., send to your server)
+    await fcmTokenRefresh.refresh(token);
   }
 
   void _handleForegroundMessage(RemoteMessage message) {
@@ -176,8 +319,7 @@ class OrderCubit extends Cubit<OrderState> {
 
         // Update state with new order list and animate flag
         emit(OrderState.success(
-          currentOrders,
-          currentLocation: currentLocation,
+          currentOrders, currentLocation: currentLocation,
         ));
 
         // Show notification
@@ -237,38 +379,38 @@ class OrderCubit extends Cubit<OrderState> {
   //   }
   // }
 
-  Future<void> getOrder(LocationEntity location) async {
-    emit(const OrderState.loading());
-
-    final result = await getOrderUseCase.get();
-
-    if (result.status == Status.error || result.data == null) {
-      emit(OrderState.error(result.error?.message ?? 'Something went wrong'));
-      return;
-    }
-
-    try {
-      final value = await result.data?.map((data) {
-        if (data.locations.isEmpty) return data;
-
-        return data.copyWith(
-          distance: calculateDistance(
-            location,
-            double.parse(data.locations[0].latitude),
-            double.parse(data.locations[0].longitude),
-          ),
-        );
-      }).toList();
-
-      emit(OrderState.success(value ?? [], currentLocation: location));
-
-      if (!_isFCMInitialized) {
-        await _initializeFCM();
-      }
-    } catch (e) {
-      emit(OrderState.error(e.toString()));
-    }
-  }
+  // Future<void> getOrder(LocationEntity location) async {
+  //   emit(const OrderState.loading());
+  //
+  //   final result = await getOrderUseCase.get();
+  //
+  //   if (result.status == Status.error || result.data == null) {
+  //     emit(OrderState.error(result.error?.message ?? 'Something went wrong'));
+  //     return;
+  //   }
+  //
+  //   try {
+  //     final value = await result.data?.map((data) {
+  //       if (data.locations.isEmpty) return data;
+  //
+  //       return data.copyWith(
+  //         distance: calculateDistance(
+  //           location,
+  //           double.parse(data.locations[0].latitude),
+  //           double.parse(data.locations[0].longitude),
+  //         ),
+  //       );
+  //     }).toList();
+  //
+  //     emit(OrderState.success(value ?? [], currentLocation: location));
+  //
+  //     if (!_isFCMInitialized) {
+  //       await _initializeFCM();
+  //     }
+  //   } catch (e) {
+  //     emit(OrderState.error(e.toString()));
+  //   }
+  // }
 
   double calculateDistance(LocationEntity userLocation, double orderLat, double orderLon) {
     const double earthRadius = 6371;
@@ -307,7 +449,7 @@ class OrderCubit extends Cubit<OrderState> {
         );
       }).toList();
 
-      emit(OrderState.success(value ?? [], currentLocation: location));
+      emit(OrderState.success(value ?? [],currentLocation: location));
     } catch (e) {
       emit(OrderState.error(e.toString()));
     }

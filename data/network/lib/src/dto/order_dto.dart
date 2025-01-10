@@ -14,6 +14,8 @@ class OrderDto {
     required this.date,
     required this.id,
     required this.user,
+    required this.items,
+    required this.status,
     this.locations = const []
   });
 
@@ -40,6 +42,10 @@ class OrderDto {
 
   final OrderUserDto user;
 
+  final List<OrderItemDTO> items;
+
+  final String status;
+
   // Custom DateTime parsing function
   static DateTime _dateFromJson(String date) {
     return DateFormat('dd.MM.yyyy HH:mm').parse(date);
@@ -49,4 +55,21 @@ class OrderDto {
   static String _dateToJson(DateTime date) {
     return DateFormat('dd.MM.yyyy HH:mm').format(date);
   }
+}
+
+
+@JsonSerializable()
+class OrderItemDTO {
+
+  OrderItemDTO({
+    required this.name,
+    required this.price,
+  });
+
+  String? name;
+  String? price;
+
+  factory OrderItemDTO.fromJson(Map<String, dynamic> json) => _$OrderItemDTOFromJson(json);
+
+
 }

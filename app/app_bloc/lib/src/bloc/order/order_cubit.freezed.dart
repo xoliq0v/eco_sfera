@@ -21,27 +21,33 @@ mixin _$OrderState {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(
-            List<OrderModel> orders, LocationEntity? currentLocation)
+            List<OrderModel> orders,
+            LocationEntity? currentLocation,
+            bool isInitialFetch,
+            bool isRealtime,
+            List<OrderModel> newOrders)
         success,
-    required TResult Function(String error) error,
+    required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+    TResult? Function(List<OrderModel> orders, LocationEntity? currentLocation,
+            bool isInitialFetch, bool isRealtime, List<OrderModel> newOrders)?
         success,
-    TResult? Function(String error)? error,
+    TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+    TResult Function(List<OrderModel> orders, LocationEntity? currentLocation,
+            bool isInitialFetch, bool isRealtime, List<OrderModel> newOrders)?
         success,
-    TResult Function(String error)? error,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -130,9 +136,13 @@ class _$InitImpl implements _Init {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(
-            List<OrderModel> orders, LocationEntity? currentLocation)
+            List<OrderModel> orders,
+            LocationEntity? currentLocation,
+            bool isInitialFetch,
+            bool isRealtime,
+            List<OrderModel> newOrders)
         success,
-    required TResult Function(String error) error,
+    required TResult Function(String message) error,
   }) {
     return init();
   }
@@ -142,9 +152,10 @@ class _$InitImpl implements _Init {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+    TResult? Function(List<OrderModel> orders, LocationEntity? currentLocation,
+            bool isInitialFetch, bool isRealtime, List<OrderModel> newOrders)?
         success,
-    TResult? Function(String error)? error,
+    TResult? Function(String message)? error,
   }) {
     return init?.call();
   }
@@ -154,9 +165,10 @@ class _$InitImpl implements _Init {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+    TResult Function(List<OrderModel> orders, LocationEntity? currentLocation,
+            bool isInitialFetch, bool isRealtime, List<OrderModel> newOrders)?
         success,
-    TResult Function(String error)? error,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -248,9 +260,13 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(
-            List<OrderModel> orders, LocationEntity? currentLocation)
+            List<OrderModel> orders,
+            LocationEntity? currentLocation,
+            bool isInitialFetch,
+            bool isRealtime,
+            List<OrderModel> newOrders)
         success,
-    required TResult Function(String error) error,
+    required TResult Function(String message) error,
   }) {
     return loading();
   }
@@ -260,9 +276,10 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+    TResult? Function(List<OrderModel> orders, LocationEntity? currentLocation,
+            bool isInitialFetch, bool isRealtime, List<OrderModel> newOrders)?
         success,
-    TResult? Function(String error)? error,
+    TResult? Function(String message)? error,
   }) {
     return loading?.call();
   }
@@ -272,9 +289,10 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+    TResult Function(List<OrderModel> orders, LocationEntity? currentLocation,
+            bool isInitialFetch, bool isRealtime, List<OrderModel> newOrders)?
         success,
-    TResult Function(String error)? error,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -331,7 +349,12 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<OrderModel> orders, LocationEntity? currentLocation});
+  $Res call(
+      {List<OrderModel> orders,
+      LocationEntity? currentLocation,
+      bool isInitialFetch,
+      bool isRealtime,
+      List<OrderModel> newOrders});
 }
 
 /// @nodoc
@@ -347,6 +370,9 @@ class __$$SuccessImplCopyWithImpl<$Res>
   $Res call({
     Object? orders = null,
     Object? currentLocation = freezed,
+    Object? isInitialFetch = null,
+    Object? isRealtime = null,
+    Object? newOrders = null,
   }) {
     return _then(_$SuccessImpl(
       null == orders
@@ -357,6 +383,18 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.currentLocation
           : currentLocation // ignore: cast_nullable_to_non_nullable
               as LocationEntity?,
+      isInitialFetch: null == isInitialFetch
+          ? _value.isInitialFetch
+          : isInitialFetch // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRealtime: null == isRealtime
+          ? _value.isRealtime
+          : isRealtime // ignore: cast_nullable_to_non_nullable
+              as bool,
+      newOrders: null == newOrders
+          ? _value._newOrders
+          : newOrders // ignore: cast_nullable_to_non_nullable
+              as List<OrderModel>,
     ));
   }
 }
@@ -364,8 +402,13 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(final List<OrderModel> orders, {this.currentLocation})
-      : _orders = orders;
+  const _$SuccessImpl(final List<OrderModel> orders,
+      {required this.currentLocation,
+      this.isInitialFetch = false,
+      this.isRealtime = false,
+      final List<OrderModel> newOrders = const []})
+      : _orders = orders,
+        _newOrders = newOrders;
 
   final List<OrderModel> _orders;
   @override
@@ -377,10 +420,24 @@ class _$SuccessImpl implements _Success {
 
   @override
   final LocationEntity? currentLocation;
+  @override
+  @JsonKey()
+  final bool isInitialFetch;
+  @override
+  @JsonKey()
+  final bool isRealtime;
+  final List<OrderModel> _newOrders;
+  @override
+  @JsonKey()
+  List<OrderModel> get newOrders {
+    if (_newOrders is EqualUnmodifiableListView) return _newOrders;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_newOrders);
+  }
 
   @override
   String toString() {
-    return 'OrderState.success(orders: $orders, currentLocation: $currentLocation)';
+    return 'OrderState.success(orders: $orders, currentLocation: $currentLocation, isInitialFetch: $isInitialFetch, isRealtime: $isRealtime, newOrders: $newOrders)';
   }
 
   @override
@@ -390,12 +447,23 @@ class _$SuccessImpl implements _Success {
             other is _$SuccessImpl &&
             const DeepCollectionEquality().equals(other._orders, _orders) &&
             (identical(other.currentLocation, currentLocation) ||
-                other.currentLocation == currentLocation));
+                other.currentLocation == currentLocation) &&
+            (identical(other.isInitialFetch, isInitialFetch) ||
+                other.isInitialFetch == isInitialFetch) &&
+            (identical(other.isRealtime, isRealtime) ||
+                other.isRealtime == isRealtime) &&
+            const DeepCollectionEquality()
+                .equals(other._newOrders, _newOrders));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_orders), currentLocation);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_orders),
+      currentLocation,
+      isInitialFetch,
+      isRealtime,
+      const DeepCollectionEquality().hash(_newOrders));
 
   @JsonKey(ignore: true)
   @override
@@ -409,11 +477,16 @@ class _$SuccessImpl implements _Success {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(
-            List<OrderModel> orders, LocationEntity? currentLocation)
+            List<OrderModel> orders,
+            LocationEntity? currentLocation,
+            bool isInitialFetch,
+            bool isRealtime,
+            List<OrderModel> newOrders)
         success,
-    required TResult Function(String error) error,
+    required TResult Function(String message) error,
   }) {
-    return success(orders, currentLocation);
+    return success(
+        orders, currentLocation, isInitialFetch, isRealtime, newOrders);
   }
 
   @override
@@ -421,11 +494,13 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+    TResult? Function(List<OrderModel> orders, LocationEntity? currentLocation,
+            bool isInitialFetch, bool isRealtime, List<OrderModel> newOrders)?
         success,
-    TResult? Function(String error)? error,
+    TResult? Function(String message)? error,
   }) {
-    return success?.call(orders, currentLocation);
+    return success?.call(
+        orders, currentLocation, isInitialFetch, isRealtime, newOrders);
   }
 
   @override
@@ -433,13 +508,15 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+    TResult Function(List<OrderModel> orders, LocationEntity? currentLocation,
+            bool isInitialFetch, bool isRealtime, List<OrderModel> newOrders)?
         success,
-    TResult Function(String error)? error,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(orders, currentLocation);
+      return success(
+          orders, currentLocation, isInitialFetch, isRealtime, newOrders);
     }
     return orElse();
   }
@@ -484,10 +561,16 @@ class _$SuccessImpl implements _Success {
 
 abstract class _Success implements OrderState {
   const factory _Success(final List<OrderModel> orders,
-      {final LocationEntity? currentLocation}) = _$SuccessImpl;
+      {required final LocationEntity? currentLocation,
+      final bool isInitialFetch,
+      final bool isRealtime,
+      final List<OrderModel> newOrders}) = _$SuccessImpl;
 
   List<OrderModel> get orders;
   LocationEntity? get currentLocation;
+  bool get isInitialFetch;
+  bool get isRealtime;
+  List<OrderModel> get newOrders;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -499,7 +582,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
           _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
       __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String error});
+  $Res call({String message});
 }
 
 /// @nodoc
@@ -513,12 +596,12 @@ class __$$ErrorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = null,
+    Object? message = null,
   }) {
     return _then(_$ErrorImpl(
-      null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -527,14 +610,14 @@ class __$$ErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ErrorImpl implements _Error {
-  const _$ErrorImpl(this.error);
+  const _$ErrorImpl(this.message);
 
   @override
-  final String error;
+  final String message;
 
   @override
   String toString() {
-    return 'OrderState.error(error: $error)';
+    return 'OrderState.error(message: $message)';
   }
 
   @override
@@ -542,11 +625,11 @@ class _$ErrorImpl implements _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorImpl &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
+  int get hashCode => Object.hash(runtimeType, message);
 
   @JsonKey(ignore: true)
   @override
@@ -560,11 +643,15 @@ class _$ErrorImpl implements _Error {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(
-            List<OrderModel> orders, LocationEntity? currentLocation)
+            List<OrderModel> orders,
+            LocationEntity? currentLocation,
+            bool isInitialFetch,
+            bool isRealtime,
+            List<OrderModel> newOrders)
         success,
-    required TResult Function(String error) error,
+    required TResult Function(String message) error,
   }) {
-    return error(this.error);
+    return error(message);
   }
 
   @override
@@ -572,11 +659,12 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+    TResult? Function(List<OrderModel> orders, LocationEntity? currentLocation,
+            bool isInitialFetch, bool isRealtime, List<OrderModel> newOrders)?
         success,
-    TResult? Function(String error)? error,
+    TResult? Function(String message)? error,
   }) {
-    return error?.call(this.error);
+    return error?.call(message);
   }
 
   @override
@@ -584,13 +672,14 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<OrderModel> orders, LocationEntity? currentLocation)?
+    TResult Function(List<OrderModel> orders, LocationEntity? currentLocation,
+            bool isInitialFetch, bool isRealtime, List<OrderModel> newOrders)?
         success,
-    TResult Function(String error)? error,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(this.error);
+      return error(message);
     }
     return orElse();
   }
@@ -634,9 +723,9 @@ class _$ErrorImpl implements _Error {
 }
 
 abstract class _Error implements OrderState {
-  const factory _Error(final String error) = _$ErrorImpl;
+  const factory _Error(final String message) = _$ErrorImpl;
 
-  String get error;
+  String get message;
   @JsonKey(ignore: true)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;

@@ -37,8 +37,8 @@ abstract class UseCaseModule {
     return GetUserProfileImpl(userRepository: userRepository);
   }
 
-  Logout provideLogout(SessionRepository sessionRepository){
-    return LogoutImpl(sessionRepository: sessionRepository);
+  Logout provideLogout(SessionRepository sessionRepository,AuthRepository authRepository){
+    return LogoutImpl(sessionRepository: sessionRepository,authRepository: authRepository);
   }
 
   GetOrder provideGetOrder(OrderRepo orderRepo){
@@ -83,6 +83,18 @@ abstract class UseCaseModule {
 
   GetAuthType provideGetAuthType(SessionRepository sessionRepository){
     return GetAuthTypeImpl(sessionRepository: sessionRepository);
+  }
+
+  FCMTokenRefresh provideFCMTokenRefresh(AuthRepository authRepository){
+    return FCMTokenRefreshImpl(authRepository: authRepository);
+  }
+
+  SearchCustomer provideSearchCustomer(CustomerRepository customerRepo){
+    return SearchCustomerImpl(customerRepository: customerRepo);
+  }
+
+  WatchPost provideWatchPost(OrderRepo orderRepo){
+    return WatchPostImpl(orderRepo: orderRepo);
   }
 }
 

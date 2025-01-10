@@ -11,7 +11,9 @@ extension OrderModelExt on OrderDto {
         totalPrice: totalPrice,
         date: date,
         id: id,
-        orderUser: OrderUser(id: user.id, name: user.name, phoneNumber: user.phoneNumber),
+        orderUser: OrderUser(id: user.id, name: user.name ?? 'NULL', phoneNumber: user.phoneNumber ?? 'null'),
+        items: items.map((item)=> OrderItemModel(name: item.name ?? 'NULL', price: item.price ?? 'NULL')).toList(),
+        status: status == "NEW" ? true : false,
         locations: locations.map((data){
           return data.toOrderLocationModel();
         }).toList(),

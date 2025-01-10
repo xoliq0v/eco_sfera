@@ -15,8 +15,8 @@ class OrderUserDto {
   }
 
   final int id;
-  final String name;
+  final String? name;
   @JsonKey(name: 'phone_number')
-  final String phoneNumber;
+  final String? phoneNumber;
 
 }

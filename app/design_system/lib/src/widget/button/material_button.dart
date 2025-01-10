@@ -23,6 +23,7 @@ class EcoMaterialButton extends MaterialButton {
             borderRadius: BorderRadius.circular(radius).r,
           ),
         );
+
 }
 
 class EcoOutlineButton extends OutlinedButton {
@@ -89,7 +90,7 @@ class EcoElevatedButton extends ElevatedButton {
     Animation<Color> loadingColor = const AlwaysStoppedAnimation<Color>(
       Colors.black,
     ),
-    double radius = 16,
+    double radius = 35,
     super.key,
     double elevation = 0,
     double minHeight = double.minPositive,

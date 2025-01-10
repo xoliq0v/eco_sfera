@@ -53,4 +53,9 @@ class AuthRepoImpl extends AuthRepository{
     );
   }
 
+  @override
+  Future<Result<bool>> refreshFCMToken(String token) {
+    return toResult2(clientProvider.refreshFCMToken(token), fromSuccessResponse: (response)=> response.data != null);
+  }
+
 }

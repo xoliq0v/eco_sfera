@@ -35,4 +35,12 @@ class CustomerRepositoryImpl extends CustomerRepository {
       }
     );
   }
+
+  @override
+  Future<Result<List<Customer>>> searchCustomer(String number) {
+    return toResult2(
+        customerProvider.searchCustomer(number),
+        fromSuccessResponse: (response) => response.data!.map((item)=> item.toCustomerModel()).toList(),
+    );
+  }
 }

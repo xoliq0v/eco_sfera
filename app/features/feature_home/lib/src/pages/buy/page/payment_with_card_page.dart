@@ -90,15 +90,23 @@ class _PaymentWithCardPageState extends State<PaymentWithCardPage> {
       child: BlocListener<BuyCubit,BuyState>(
         listener: (BuildContext context, state) {
           state.mapOrNull(
-            error: (value) {
-              context.router.canPop();
+            error: (value) async {
+              // First close the loading dialog
+               context.router.popForced(); // Changed to use auto_router
+
+              // Then handle the rest of the error logic
+              if(context.router.canPop()){ await context.router.pop(); }
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.error)));
             },
             buyLoading: (value) {
               LoadingDialog.show(context);
             },
-            buySuccess: (value) async{
-              context.router.canPop();
+            buySuccess: (value) async {
+              // First close the loading dialog
+              context.router.popForced(); // Changed to use auto_router
+
+              // Then handle the success logic
+              if(context.router.canPop()){ await context.router.pop(); }
               SuccessPaymentDialog.show(context);
             },
           );

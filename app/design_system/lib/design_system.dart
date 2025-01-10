@@ -19,6 +19,7 @@ export 'src/const/app_const.dart';
 export 'src/const/app_icons.dart';
 export 'src/const/app_screen.dart';
 export 'src/const/app_theme.dart';
+export 'src/const/app_audio.dart';
 export 'src/ext/context.dart';
 export 'src/ext/indicator_position.dart';
 export 'src/ext/scroll_controller.dart';

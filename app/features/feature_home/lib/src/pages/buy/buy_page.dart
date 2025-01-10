@@ -10,10 +10,16 @@ import 'package:flutter/services.dart';
 import 'package:model/model.dart';
 import 'package:navigation/navigation.dart';
 
+enum BuyType {
+  home,
+  point
+}
+
 @RoutePage()
 class BuyPage extends StatefulWidget implements AutoRouteWrapper {
   final OrderModel? param;
-  const BuyPage({super.key, this.param});
+  final String? type;
+  const BuyPage({super.key, this.param, this.type});
 
   @override
   State<BuyPage> createState() => _BuyPageState();
@@ -330,7 +336,7 @@ class _BuyPageState extends State<BuyPage> {
                                     cartonPrice: params.params[3].price.toDouble() ?? 0,
                                     totalKg: _totalKg,
                                     totalPrice: _totalSum,
-                                    type: 'buy',
+                                    type: widget.type ?? 'from_home',
                                   );
 
                                   navigatePaymentPage(buy);

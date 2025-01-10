@@ -8,6 +8,7 @@ mixin DriverEndpoint {
 
   static String clientData = '$_basePath/data?type=driver';
   static String logout = '$_basePath/logout';
+  static String refreshFCMToken = '$_basePath/refresh-device-token';
 
 }
 
@@ -44,6 +45,7 @@ mixin OrderEndpoint {
   static const _basePath = 'api/bot-orders';
 
   static String orders = _basePath;
+  static String watch = 'api/accept-order';
 
 }
 

@@ -9,4 +9,6 @@ abstract class AuthRepository extends BaseRepository {
   });
 
   Future<Result<bool>> logout();
+
+  Future<Result<bool>> refreshFCMToken(String token);
 }

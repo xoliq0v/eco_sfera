@@ -1,197 +1,317 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:core/core.dart';
-import 'package:core/generated/locale_keys.g.dart';
-import 'package:design_system/design_system.dart';
+import '../../../design_system.dart';
 import 'package:flutter/material.dart';
-import 'package:map_service/map_service.dart';
 import 'package:model/model.dart';
 import 'package:navigation/navigation.dart';
 
-import '../expandble_text.dart';
-
 class OrderSheet {
-  static void show(BuildContext context,Coords coords,Map<String,String> user,OrderModel params) {
-    showModalBottomSheet(
+  static Future<void> show({
+    required BuildContext context,
+    required Coords coords,
+    required Map<String, String> user,
+    required OrderModel order,
+    required bool isNewOrder,
+    required Function() onAcceptPress
+  }) async {
+    await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       elevation: 0,
       backgroundColor: Colors.transparent,
-      barrierColor: Colors.grey.withOpacity(0.85),
-      builder: (context) => _OrderSheetContent(coords: coords,user: user,params: params,),
-    );
-  }
-}
-
-class _OrderSheetContent extends StatelessWidget {
-  final Coords coords;
-  final Map<String,String> user;
-  final OrderModel params;
-  const _OrderSheetContent({super.key,required this.coords,required this.user,required this.params});
-
-  @override
-  Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Column(
-        children: [
-          _SheetBody(coords: coords,user: user,params: params,),
-        ],
+      barrierColor: Colors.black.withOpacity(0.5),
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.9,
+      ),
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.6,
+        minChildSize: 0.25,
+        maxChildSize: 0.9,
+        expand: false,
+        builder: (context, scrollController) => OrderSheetContent(
+          coords: coords,
+          user: user,
+          order: order,
+          scrollController: scrollController,
+          isNewOrder: isNewOrder,
+          onAcceptPress: onAcceptPress,
+        ),
       ),
     );
   }
 }
 
-class _SheetBody extends StatelessWidget {
-  _SheetBody({required this.coords,required this.user,required this.params});
-  late Coords coords;
+class OrderSheetContent extends StatefulWidget {
+  final Coords coords;
+  final Map<String, String> user;
+  final OrderModel order;
+  final ScrollController scrollController;
+  final bool isNewOrder;
+  final Function() onAcceptPress;
 
-  final Map<String,String> user;
-  final OrderModel params;
+  const OrderSheetContent({
+    super.key,
+    required this.coords,
+    required this.user,
+    required this.order,
+    required this.scrollController,
+    required this.isNewOrder,
+    required this.onAcceptPress,
+  });
 
-  void openMapsSheet(BuildContext context) async {
-    try {
-      final title = LocaleKeys.orderAddress.tr(context: context,args: [user.keys.first,user.values.first]);
-      final availableMaps = await MapLauncher.installedMaps;
+  @override
+  State<OrderSheetContent> createState() => _OrderSheetContentState();
+}
 
-      return showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return SafeArea(
-            child: SingleChildScrollView(
-              child: Container(
-                child: Wrap(
-                  children: <Widget>[
-                    for (var map in availableMaps)
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: ListTile(
-                          onTap: () => map.showMarker(
-                            coords: coords,
-                            title: title,
-                          ),
-                          title: Text(map.mapName),
-                          leading: SvgPicture.asset(
-                            map.icon,
-                            height: 30.0,
-                            width: 30.0,
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      );
-    } catch (e) {
-      print(e);
+class _OrderSheetContentState extends State<OrderSheetContent> {
+  late final AudioPlayer _audioPlayer;
+  bool _isPlaying = false;
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _initAudioPlayer();
+  }
+
+  Future<void> _initAudioPlayer() async {
+    if(!widget.isNewOrder) return;
+    _audioPlayer = AudioPlayer();
+    if (widget.isNewOrder) {
+      try {
+        await _audioPlayer.setReleaseMode(ReleaseMode.loop);
+        await _audioPlayer.setVolume(1.0);
+        await _audioPlayer.play(AssetSource(AppSound.newOrder));
+        setState(() => _isPlaying = true);
+
+        _audioPlayer.onPlayerComplete.listen((event) {
+          setState(() => _isPlaying = false);
+        });
+      } catch (e) {
+        debugPrint('Audio playback error: $e');
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
+  }
+
+  Future<void> _stopAudio() async {
+    if (_isPlaying) {
+      await _audioPlayer.stop();
+      setState(() => _isPlaying = false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: SizedBox(
-        width: double.maxFinite,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 15,
-              horizontal: 20,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                5.verticalSpace,
-                Text('2 km · 6 daq',style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  fontSize: 35
-                ),),
-                5.verticalSpace,
-                Text(
-                  'Roderick Usher  +998 71 234 56 78',
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
-                  ),
-                ),
-                30.verticalSpace,
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _Box(icon: AppIcons.box,title: LocaleKeys.payment.tr(context: context),value: 'Qog’oz'),
-                    _Box(icon: AppIcons.weight,title: LocaleKeys.payment.tr(context: context),value: '15 kg'),
-                  ],
-                ),
-
-                35.verticalSpace,
-
-                ExpandableText(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget'
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget'
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget'),
-
-                30.verticalSpace,
-
-                Row(
-                  children: [
-                    Expanded(
-                      child: EcoMaterialButton(color: context.colorScheme.surface, onPressed: () async{
-                        await context.router.pop();
-                      }, child: Text(LocaleKeys.cancel.tr(context: context))),
-                    ),
-                    10.horizontalSpace,
-                    Expanded(
-                      child: EcoMaterialButton(onPressed: () async{
-                        // openMapsSheet(context);
-                        await NavigationUtils.getMainNavigator().navigateBuyPage(params);
-                      }, child: Text(LocaleKeys.buy.tr(context: context))),
-                    ),
-                  ],
-                ),
-
-
+    return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _buildDragHandle(),
+          Expanded(
+            child: CustomScrollView(
+              controller: widget.scrollController,
+              slivers: [
+                _buildHeader(context),
+                if (widget.order.items?.isNotEmpty ?? false)
+                  _buildOrderItems(context),
+                _buildFooter(context),
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDragHandle() {
+    return Container(
+      width: 40,
+      height: 4,
+      margin: const EdgeInsets.symmetric(vertical: 12),
+      decoration: BoxDecoration(
+        color: Colors.grey.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(2),
+      ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      sliver: SliverList(
+        delegate: SliverChildListDelegate([
+          Text(
+            '44 km · 12 min',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.displayMedium?.copyWith(
+              fontSize: 35,
+            ),
+          ),
+          const SizedBox(height: 5),
+          Text(
+            '${widget.order.orderUser.name}  ${widget.order.orderUser.phoneNumber.formatUzbekPhoneNumber()}',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.w400,
+              fontSize: 14,
+            ),
+          ),
+          const SizedBox(height: 30),
+        ]),
+      ),
+    );
+  }
+
+  Widget _buildOrderItems(BuildContext context) {
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      sliver: SliverList(
+        delegate: SliverChildBuilderDelegate(
+              (context, index) => Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: OrderItemTile(item: widget.order.items![index]),
+          ),
+          childCount: widget.order.items?.length ?? 0,
         ),
       ),
     );
   }
 
+  Widget _buildFooter(BuildContext context) {
+    return SliverPadding(
+      padding: const EdgeInsets.all(20),
+      sliver: SliverToBoxAdapter(
+        child: Column(
+          children: [
+            // ExpandableText(
+            //   // text: widget.order.description ?? '',
+            //   // maxLines: 3,
+            // ),
+            const SizedBox(height: 30),
+            Row(
+              children: [
+                Expanded(
+                  child: EcoMaterialButton(
+                    color: Theme.of(context).colorScheme.surface,
+                    onPressed: () async {
+                      await _stopAudio();
+                      Navigator.pop(context);
+                    },
+                    child: Text(LocaleKeys.cancel.tr(context: context)),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: EcoElevatedButton.loading(
+                    maxHeight: 80,
+                    minHeight: 75,
+                    loading: isLoading,
+                    onPressed: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      await widget.onAcceptPress.call();
+                      await _stopAudio();
+                      context.router.popForced();
+                      setState(() {
+                        isLoading = false;
+                      });
+                    },
+                    child: Text(LocaleKeys.acceptance.tr(context: context)),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: MediaQuery.of(context).padding.bottom),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
-class _Box extends StatelessWidget {
+class OrderItemTile extends StatelessWidget {
+  final OrderItemModel item;
+
+  const OrderItemTile({
+    super.key,
+    required this.item,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        InfoBox(
+          icon: AppIcons.box,
+          title: LocaleKeys.payment.tr(context: context),
+          value: item.name,
+        ),
+        InfoBox(
+          icon: AppIcons.weight,
+          title: LocaleKeys.payment.tr(context: context),
+          value: item.price,
+        ),
+      ],
+    );
+  }
+}
+
+class InfoBox extends StatelessWidget {
   final String icon;
   final String title;
   final String value;
-  const _Box({super.key,required this.icon,required this.title,required this.value});
+
+  const InfoBox({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.value,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SvgPicture.asset(icon,height: 30,width: 30,),
-        5.horizontalSpace,
+        SvgPicture.asset(
+          icon,
+          height: 30,
+          width: 30,
+        ),
+        const SizedBox(width: 5),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title,style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.w400,
-              fontSize: 16,
-            ),),
-            2.verticalSpace,
-            Text(value,style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.w700,
-              fontSize: 17,
-              color: context.colorScheme.primary
-            ),),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              value,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.w700,
+                fontSize: 17,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
           ],
         )
       ],
     );
   }
 }
-
-
