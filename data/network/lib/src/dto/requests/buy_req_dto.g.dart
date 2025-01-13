@@ -8,6 +8,7 @@ part of 'buy_req_dto.dart';
 
 BuyReqDto _$BuyReqDtoFromJson(Map<String, dynamic> json) => BuyReqDto(
       employee: json['employee'] as String,
+      userOrderId: (json['user_order_id'] as num).toInt(),
       customerId: (json['customer_id'] as num).toInt(),
       paperKg: (json['paper_kg'] as num).toDouble(),
       paperPrice: (json['paper_price'] as num).toDouble(),
@@ -24,6 +25,7 @@ BuyReqDto _$BuyReqDtoFromJson(Map<String, dynamic> json) => BuyReqDto(
 
 Map<String, dynamic> _$BuyReqDtoToJson(BuyReqDto instance) => <String, dynamic>{
       'employee': instance.employee,
+      'user_order_id': instance.userOrderId,
       'customer_id': instance.customerId,
       'paper_kg': instance.paperKg,
       'paper_price': instance.paperPrice,

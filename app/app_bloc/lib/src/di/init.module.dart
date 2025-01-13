@@ -27,11 +27,21 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
           gh<_i5.SaveType>(),
           gh<_i5.FetchUserProfile>(),
         ));
+    gh.factory<_i3.ActiveHistoryCubit>(
+        () => appBlocModule.provideActiveHistory(gh<_i5.GetActiveHistory>()));
     gh.factory<_i3.InternetConnectivityController>(
         () => appBlocModule.provideInternetConnectivityController(
               gh<_i6.Connectivity>(),
               gh<_i6.InternetConnectionChecker>(),
             ));
+    gh.factory<_i3.BuyCubit>(() => appBlocModule.provideBuyCubit(
+          gh<_i5.Buy>(),
+          gh<_i5.FetchBuyPageParams>(),
+          gh<_i5.SearchCustomer>(),
+          gh<_i5.GetUserProfile>(),
+        ));
+    gh.factory<_i3.PartnerPaginationCubit>(() =>
+        appBlocModule.providePaginationPartnerCubit(gh<_i5.FetchPartners>()));
     gh.factory<_i3.LogoutCubit>(
         () => appBlocModule.provideLogOutCubit(gh<_i5.Logout>()));
     gh.factory<_i3.ProfileCubit>(() => appBlocModule.provideProfileCubit(
@@ -44,6 +54,8 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
         ));
     gh.factory<_i3.PostCustomerCubit>(
         () => appBlocModule.providePostCustomerCubit(gh<_i5.PostCustomer>()));
+    gh.factory<_i3.RegionCubit>(
+        () => appBlocModule.provideRegionCubit(gh<_i5.GetRegions>()));
     gh.factory<_i3.HistoryPaginationCubit>(() =>
         appBlocModule.provideHistoryPaginationCubit(gh<_i5.FetchHistory>()));
     gh.factory<_i3.LocationServiceCubit>(
@@ -52,11 +64,6 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
           gh<_i5.GetOrder>(),
           gh<_i5.FCMTokenRefresh>(),
           gh<_i5.WatchPost>(),
-        ));
-    gh.factory<_i3.BuyCubit>(() => appBlocModule.provideBuyCubit(
-          gh<_i5.Buy>(),
-          gh<_i5.FetchBuyPageParams>(),
-          gh<_i5.SearchCustomer>(),
         ));
     gh.factory<_i3.CustomerCubit>(
         () => appBlocModule.provideCustomerCubit(gh<_i5.GetCustomer>()));

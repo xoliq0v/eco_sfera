@@ -26,7 +26,6 @@ class OrderModel extends Equatable {
     this.distance,
   });
 
-  // CopyWith function to create a new OrderModel with optional changes to some properties
   OrderModel copyWith({
     int? totalKg,
     String? totalPrice,
@@ -60,11 +59,13 @@ class OrderItemModel extends Equatable{
   OrderItemModel({
     required this.name,
     required this.price,
+    required this.kg,
   });
 
   String name;
   String price;
+  double kg;
 
   @override
-  List<Object?> get props => [name,price];
+  List<Object?> get props => [name,price, kg];
 }

@@ -13,6 +13,7 @@ class CustomDropDown extends StatefulWidget {
   final String? placeholderText;
   final Function()? onLoadMore;
   final bool? isLast;
+  final bool? readOnly;
 
   const CustomDropDown({
     super.key,
@@ -27,6 +28,7 @@ class CustomDropDown extends StatefulWidget {
     this.placeholderText,
     this.onLoadMore,
     this.isLast,
+    this.readOnly,
   });
 
   @override
@@ -250,7 +252,7 @@ class CustomDropDownState extends State<CustomDropDown> {
           CompositedTransformTarget(
             link: _layerLink,
             child: GestureDetector(
-              onTap: widget.onChanged == null ? null : () {
+              onTap: widget.readOnly ?? false ? null : widget.onChanged == null ? null : () {
                 if (_isMenuOpen) {
                   _hideMenu();
                 } else {

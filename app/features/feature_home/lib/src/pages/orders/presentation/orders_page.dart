@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:action_slider/action_slider.dart';
 import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart' hide Order;
 import 'package:design_system/design_system.dart';
@@ -36,13 +37,95 @@ class OrdersPage extends StatefulWidget implements AutoRouteWrapper {
 
 class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMixin {
   final ValueNotifier<bool> _readyGetOrder = ValueNotifier(false);
+  final ValueNotifier<bool> _hasIssue = ValueNotifier(true);
   final TextEditingController _searchController = TextEditingController();
+  late final ActionSliderController sliderController;
   late LocationEntity _location;
   // Add a Set to keep track of viewed orders
   final Set<String> _viewedOrders = {};
 
+  bool isControllerInitialized() {
+    try {
+      // Try to access the controller
+      final _ = sliderController;
+      return true;
+    } on Exception {
+      return false;
+    }
+  }
+
+
   // Add debouncer for search
   final _searchDebouncer = Debouncer(milliseconds: 300);
+
+  void _showLocationErrorDialog(BuildContext context, String error) {
+    // Capture the cubit before showing dialog
+    final locationCubit = context.read<LocationServiceCubit>();
+
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (dialogContext) => AlertDialog(  // Note: using dialogContext here
+        title: Text(LocaleKeys.locationPermission.tr(context: context)),
+        content: Text(error),
+        actions: [
+          TextButton(
+            child: Text(LocaleKeys.cancel.tr(context: context)),
+            onPressed: () {
+              _hasIssue.value = true;
+              _readyGetOrder.value = false;
+              Navigator.pop(dialogContext);
+            },
+          ),
+          TextButton(
+            child: Text(LocaleKeys.tryAgain.tr(context: context)),
+            onPressed: () async {
+              Navigator.pop(dialogContext);
+              await locationCubit.retryLocation();  // Use captured cubit
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showLocationPermissionDialog(BuildContext context, String error) {
+    // Capture the cubit before showing dialog
+    final locationCubit = context.read<LocationServiceCubit>();
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) => AlertDialog(  // Note: using dialogContext here
+        title: Text(LocaleKeys.locationPermission.tr(context: context)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(error),
+            const SizedBox(height: 12),
+            Text(LocaleKeys.locationAccessIsRequired.tr(context: context)),
+          ],
+        ),
+        actions: [
+          TextButton(
+            child: Text(LocaleKeys.cancel.tr(context: context)),
+            onPressed: () => Navigator.pop(dialogContext),
+          ),
+          TextButton(
+            child: Text(LocaleKeys.openSettings.tr(context: context)),
+            onPressed: () async {
+              Navigator.pop(dialogContext);
+              await openAppSettings();
+              if (mounted && await Permission.location.isGranted) {
+                await locationCubit.getLocation();  // Use captured cubit
+              }
+            },
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   bool get wantKeepAlive => true;
@@ -50,16 +133,8 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
   @override
   void initState() {
     super.initState();
+    sliderController = ActionSliderController();
     WakelockPlus.enable();
-    _initializeLocation();
-  }
-
-  Future<void> _initializeLocation() async {
-    // Initialize location service when page loads
-    await Future.delayed(Duration.zero);
-    if (mounted) {
-      context.read<LocationServiceCubit>().init();
-    }
   }
 
   void _searchOrders(String query) {
@@ -135,31 +210,53 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
   Widget _buildSliderButton() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0),
-      child: SliderButton(
-        width: double.maxFinite,
-        height: 60, // Reduced height for better performance
-        backgroundColor: context.colorScheme.surface,
-        label: Text(LocaleKeys.getOrder.tr(context: context)),
-        alignLabel: Alignment.center,
-        action: () async {
-          if (mounted) {
-            await context.read<LocationServiceCubit>().getLocation();
+      child: ValueListenableBuilder(
+          valueListenable: _hasIssue,
+          builder: (context, hasIssue, _) {
+            if (hasIssue && isControllerInitialized()) {
+              sliderController.failure();
+              sliderController.reset();
+            }
+            return ActionSlider.standard(
+              width: double.maxFinite,
+              rolling: true,
+              height: 75,
+              backgroundColor: context.colorScheme.surface,
+              toggleColor: context.colorScheme.secondary,
+              sliderBehavior: SliderBehavior.stretch,
+              boxShadow: [],
+              controller: sliderController, // Use the controller here
+              action: (controller) async {
+                controller.loading();
+                if (mounted) {
+                  final res = await context.read<LocationServiceCubit>().getLocation();
+                  if (!res) {
+                    controller.failure();
+                    controller.reset();
+                  }
+                }
+                if (_hasIssue.value) {
+                  controller.failure();
+                  controller.reset();
+                } else {
+                  controller.success();
+                }
+              },
+              child: Text(LocaleKeys.getOrder.tr(context: context)),
+            );
           }
-        },
-        child: Container(
-          height: 50,
-          width: 50,
-          decoration: BoxDecoration(
-            color: context.colorScheme.secondary,
-            borderRadius: BorderRadius.circular(25),
-          ),
-          child: Icon(
-            Icons.arrow_forward,
-            color: context.colorScheme.cardColor,
-          ),
-        ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    sliderController.dispose();
+    _searchController.dispose();
+    _searchDebouncer.dispose();
+    _readyGetOrder.dispose();
+    WakelockPlus.disable();
+    super.dispose();
   }
 
   @override
@@ -189,7 +286,9 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
               ),
               child: IconButton(
                 onPressed: () {
-                  context.read<LocationServiceCubit>().init();
+                  _readyGetOrder.value = false;
+                  sliderController.reset();
+                  // context.read<LocationServiceCubit>().init();
                   context.read<OrderCubit>().init();
                 },
                 icon: Icon(
@@ -204,17 +303,7 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
         ],
       ),
       body: BlocListener<LocationServiceCubit, LocationServiceState>(
-        listener: (context, state) {
-          state.whenOrNull(
-            success: (location) {
-              _location = location;
-              _readyGetOrder.value = true;
-              context.read<OrderCubit>().getOrder(location);
-            },
-            error: (error) => _showLocationErrorDialog(context,error.toString()),
-            init: () => _readyGetOrder.value = false,
-          );
-        },
+        listener: (context, state) => _handleLocationState(state),
         child: BlocConsumer<OrderCubit, OrderState>(
           listener: (context, state) {
             state.mapOrNull(
@@ -230,10 +319,19 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
               loading: () => const Center(child: CircularProgressIndicator.adaptive()),
               error: (e) => RefreshIndicator(
                 onRefresh: _handleRefresh,
-                child: Center(child: Text(e)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(child: Text(e)),
+                    ElevatedButton(onPressed: (){
+                       context.read<LocationServiceCubit>().retryLocation();
+                    }, child: Text(LocaleKeys.tryAgain.tr(context: context)))
+                  ],
+                ),
               ),
               success: (orders, currentLocation, isInitialFetch, isRealtime, newOrders) {
-                _readyGetOrder.value = true;
+                // _readyGetOrder.value = true;
                 return Column(
                   children: [
                     _OrderSearch(
@@ -250,6 +348,27 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
           },
         ),
       ),
+    );
+  }
+
+  void _handleLocationState(LocationServiceState state) {
+    state.whenOrNull(
+      success: (location) async {
+        _location = location;
+        await context.read<OrderCubit>().getOrder(location);
+        _hasIssue.value = false;
+        _readyGetOrder.value = true;
+      },
+      error: (error) {
+        _hasIssue.value = true;
+        _readyGetOrder.value = false;
+        if (error.toString().contains('permanently denied')) {
+          _showLocationPermissionDialog(context, error.toString());
+        } else {
+          _showLocationErrorDialog(context, error.toString());
+        }
+      },
+      init: () => _readyGetOrder.value = false,
     );
   }
 
@@ -271,36 +390,6 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
     );
   }
 
-  void _showLocationErrorDialog(BuildContext context, String error) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        title: Text(LocaleKeys.locationPermission.tr(context: context)),
-        content: Text(error),
-        actions: [
-          TextButton(
-            child: Text(LocaleKeys.openSettings.tr(context: context)),
-            onPressed: () async {
-              await openAppSettings();
-              if (await Permission.location.isGranted && mounted) {
-                await context.read<LocationServiceCubit>().getLocation();
-              }
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    _searchDebouncer.dispose();
-    _readyGetOrder.dispose();
-    WakelockPlus.disable();
-    super.dispose();
-  }
 }
 
 // Add this class for search debouncing

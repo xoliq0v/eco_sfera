@@ -3,12 +3,13 @@
 import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart' hide Order;
 import 'package:design_system/design_system.dart';
-import 'package:feature_home/src/pages/history/widget/history_item.dart';
+import 'widget/history_item.dart';
 import 'package:flutter/material.dart';
 import 'package:model/model.dart';
 
 import '../../../feature_home.dart';
 import '../auth/auth_screen.dart';
+import 'widget/active_item.dart';
 
 part 'page/active.dart';
 part 'page/completed.dart';
@@ -22,8 +23,15 @@ class AdmissionsHistoryPage extends StatefulWidget implements AutoRouteWrapper{
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return BlocProvider<HistoryPaginationCubit>(
-      create: (_) => AppBlocHelper.getHistoryCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<HistoryPaginationCubit>(
+          create: (_) => AppBlocHelper.getHistoryCubit(),
+        ),
+        BlocProvider<ActiveHistoryCubit>(
+          create: (_) => AppBlocHelper.getActiveHistory(),
+        ),
+      ],
       child: this,
     );
   }

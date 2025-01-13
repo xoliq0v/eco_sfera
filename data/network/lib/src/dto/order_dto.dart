@@ -64,10 +64,12 @@ class OrderItemDTO {
   OrderItemDTO({
     required this.name,
     required this.price,
+    required this.kg,
   });
 
   String? name;
   String? price;
+  double? kg;
 
   factory OrderItemDTO.fromJson(Map<String, dynamic> json) => _$OrderItemDTOFromJson(json);
 

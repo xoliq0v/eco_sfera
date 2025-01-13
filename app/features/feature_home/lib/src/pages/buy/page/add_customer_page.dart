@@ -1,4 +1,5 @@
 import 'dart:core';
+import 'dart:developer';
 
 import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart';
@@ -6,6 +7,8 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:model/model.dart';
+
+import '../widget/custom_phone_input.dart';
 
 @RoutePage()
 class AddCustomerPage extends StatefulWidget implements AutoRouteWrapper {
@@ -16,8 +19,15 @@ class AddCustomerPage extends StatefulWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return BlocProvider<PostCustomerCubit>(
-      create: (_) => AppBlocHelper.getPostCustomerCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<PostCustomerCubit>(
+          create: (_) => AppBlocHelper.getPostCustomerCubit(),
+        ),
+        BlocProvider<RegionCubit>(
+          create: (_) => AppBlocHelper.getRegionCubit(),
+        ),
+      ],
       child: this,
     );
   }
@@ -32,8 +42,10 @@ class _AddingPageState extends State<AddCustomerPage> {
   TextEditingController father = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController address = TextEditingController();
+  List<Region>? regions;
+  String? regionID;
   String gender = 'male';
-  ValueNotifier<DateTime> birthDate = ValueNotifier(DateTime(2007));
+  ValueNotifier<DateTime> birthDate = ValueNotifier(DateTime(2006));
 
   ValueNotifier<bool> loading = ValueNotifier(false);
 
@@ -87,7 +99,7 @@ class _AddingPageState extends State<AddCustomerPage> {
     return true;
   }
 
-  void _submitForm() {
+  void _submitForm() async{
     if (_formKey.currentState!.validate()) {
       if (!_validateAge(birthDate.value)) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -96,17 +108,20 @@ class _AddingPageState extends State<AddCustomerPage> {
         return;
       }
 
+      var regId = 0;
+
+      await regions?.map((item) { if(item.name == regionID) { regId = item.id; } } );
+
       _customer = CustomerPostModel(
-          name: name.text,
-          surname: surname.text,
-          middleName: father.text,
+          fullName: '${name.text} ${surname.text} ${father.text}',
           phone: phone.text,
-          birthDay: '${birthDate.value.day}/${birthDate.value.month}/${birthDate.value.year}',
-          gender: gender,
-          address: address.text
+          // birthDay: '${birthDate.value.day}/${birthDate.value.month}/${birthDate.value.year}',
+          // gender: gender,
+          regionId: regId,
+          address: address.text,
       );
 
-      context.read<PostCustomerCubit>().post(
+      await context.read<PostCustomerCubit>().post(
           _customer
       );
     }
@@ -124,22 +139,56 @@ class _AddingPageState extends State<AddCustomerPage> {
           autovalidateMode: AutovalidateMode.disabled,
           child: CustomScrollView(
             slivers: [
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                  child: EcoDropdownMenu(
-                    topText: LocaleKeys.gender.tr(context: context),
-                    initialSelection: items[0].tr(context: context),
-                    items: items.map((value){
-                      return value.tr(context: context);
-                    }).toList(),
-                    onChanged: (value) {
-                      if(value == null) return;
-                      gender = value;
-                    },
-                  ),
+              // SliverToBoxAdapter(
+              //   child: Padding(
+              //     padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+              //     child: EcoDropdownMenu(
+              //       topText: LocaleKeys.gender.tr(context: context),
+              //       initialSelection: items[0].tr(context: context),
+              //       items: items.map((value){
+              //         return value.tr(context: context);
+              //       }).toList(),
+              //       onChanged: (value) {
+              //         if(value == null) return;
+              //         gender = value;
+              //       },
+              //     ),
+              //   ),
+              // ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 15),
+                child: BlocBuilder<RegionCubit,RegionState>(
+                    builder: (context,state){
+                      return state.maybeMap(
+                          success: (data){
+                            regions = data.regions;
+                            log(data.regions.length.toString());
+                            return EcoDropdownMenu(
+                              topText: 'Region',
+                              initialSelection: 'Select',
+                              placeholderText: 'Select region',
+                              items: data.regions.map((item)=> item.name).toList(),
+                              onChanged: (String? value) {
+                                regionID = value;
+                              },
+                            );
+                          },
+                          error: (er){
+                            return Text(er.error);
+                          },
+                          orElse: (){
+                            return Center(
+                              child: SizedBox(
+                                width: 40,
+                                  height: 40,
+                                  child: CircularProgressIndicator.adaptive()),
+                            );
+                          }
+                      );
+                    }
                 ),
-              ),
+              ).toBoxAdapter(),
 
               SliverToBoxAdapter(
                 child: Padding(
@@ -185,50 +234,52 @@ class _AddingPageState extends State<AddCustomerPage> {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-                  child: EcoTextField(
+                  child: UzbekPhoneInput(
                     controller: phone,
-                    topRightText: LocaleKeys.phoneNumber.tr(context: context),
-                    width: double.maxFinite,
-                    radius: 10,
-                  ),
-                ),
-              ),
-
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                  child: GestureDetector(
-                    onTap: () async {
-                      final value = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime(2006),
-                        firstDate: DateTime(1900),
-                        lastDate: DateTime(2006),
-                      );
-
-                      if(value == null) return;
-                      birthDate.value = value;
+                    label: "Phone Number",
+                    onChanged: (value) {
+                      print('Phone number: $value');
                     },
-                    child: Container(
-                      width: double.maxFinite,
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: ValueListenableBuilder(
-                          valueListenable: birthDate,
-                          builder: (context, param, param2) {
-                            return Text(
-                              '${param.day}/${param.month}/${param.year}',
-                              style: TextStyle(color: Colors.grey),
-                            );
-                          }
-                      ),
-                    ),
-                  ),
+                    // errorText: _validatePhoneNumber(value), // Your validation logic
+                  )
                 ),
               ),
+
+              // SliverToBoxAdapter(
+              //   child: Padding(
+              //     padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+              //     child: GestureDetector(
+              //       onTap: () async {
+              //         final value = await showDatePicker(
+              //           context: context,
+              //           initialDate: DateTime(2006),
+              //           firstDate: DateTime(1900),
+              //           lastDate: DateTime(2006),
+              //         );
+              //
+              //         if(value == null) return;
+              //         birthDate.value = value;
+              //       },
+              //       child: Container(
+              //         width: double.maxFinite,
+              //         padding: const EdgeInsets.all(12),
+              //         decoration: BoxDecoration(
+              //           border: Border.all(color: Colors.grey),
+              //           borderRadius: BorderRadius.circular(10),
+              //         ),
+              //         child: ValueListenableBuilder(
+              //             valueListenable: birthDate,
+              //             builder: (context, param, param2) {
+              //               return Text(
+              //                 '${param.day}/${param.month}/${param.year}',
+              //                 style: TextStyle(color: Colors.grey),
+              //               );
+              //             }
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
 
               SliverToBoxAdapter(
                 child: Padding(

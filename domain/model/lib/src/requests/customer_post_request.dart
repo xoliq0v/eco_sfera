@@ -2,31 +2,22 @@ import 'package:core/core.dart';
 
 class CustomerPostModel extends Equatable {
   CustomerPostModel({
-    required this.name,
-    required this.surname,
-    required this.middleName,
+    required this.fullName,
     required this.phone,
-    required this.birthDay,
-    required this.gender,
+    required this.regionId,
     required this.address,
   });
 
-  final String name;
-  final String surname;
-  final String middleName;
+  final String fullName;
   final String phone;
-  final String birthDay;
-  final String gender;
+  final int regionId;
   final String address;
 
   @override
   List<Object?> get props => [
-    name,
-    surname,
-    middleName,
+    fullName,
     phone,
-    birthDay,
-    gender,
+    regionId,
     address
   ];
 

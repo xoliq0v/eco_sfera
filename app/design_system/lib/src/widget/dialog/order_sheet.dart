@@ -261,7 +261,7 @@ class OrderItemTile extends StatelessWidget {
         InfoBox(
           icon: AppIcons.weight,
           title: LocaleKeys.payment.tr(context: context),
-          value: item.price,
+          value: item.kg.toString(),
         ),
       ],
     );

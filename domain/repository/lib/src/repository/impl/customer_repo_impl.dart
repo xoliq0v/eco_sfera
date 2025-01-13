@@ -3,6 +3,7 @@ import 'package:model/model.dart';
 import 'package:network/network.dart';
 import '../../../repository.dart';
 import '../../mapping/customer_mapping.dart';
+import '../../mapping/customer_region_mapper.dart';
 import '../../mapping/customer_response_mapper.dart';
 
 class CustomerRepositoryImpl extends CustomerRepository {
@@ -42,5 +43,33 @@ class CustomerRepositoryImpl extends CustomerRepository {
         customerProvider.searchCustomer(number),
         fromSuccessResponse: (response) => response.data!.map((item)=> item.toCustomerModel()).toList(),
     );
+  }
+
+
+  @override
+  Future<Result<List<Region>>> getRegions() async {
+    final response = await customerProvider.getRegions();
+
+    try {
+      if (!response.success || response.data == null) {
+        return Result.error(
+          ResultError(
+            message: response.error?.message ?? 'Something went wrong',
+            reason: response.error?.reason ?? 'Something went wrong',
+          ),
+        );
+      }
+
+      return Result.completed(
+          response.data?.map((item)=> item.toModel()).toList()
+      );
+    } catch(e) {
+      return Result.error(
+        ResultError(
+          message: 'Operation failed',
+          reason: e.toString(),
+        ),
+      );
+    }
   }
 }

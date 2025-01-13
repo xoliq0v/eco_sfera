@@ -12,7 +12,8 @@ class BuyCubit extends Cubit<BuyState>{
   BuyCubit(
       this._buy,
       this.search,
-      this._fetchBuyPageParams
+      this._fetchBuyPageParams,
+      this.getUserProfile
       ):super(BuyState.init()){
     fetchParams();
   }
@@ -20,15 +21,17 @@ class BuyCubit extends Cubit<BuyState>{
   final Buy _buy;
   final SearchCustomer search;
   final FetchBuyPageParams _fetchBuyPageParams;
+  final GetUserProfile getUserProfile;
 
   Future<void> fetchParams() async {
     emit(BuyState.loading());
 
     try {
       final result = await _fetchBuyPageParams.fetch();
+      final user = await getUserProfile.get();
 
       if (result.data != null) {
-        emit(BuyState.success(result.data!));
+        if(user != null) emit(BuyState.success(result.data!,user));
       } else {
         emit(BuyState.error('Failed to fetch buy page parameters!'));
       }

@@ -17,6 +17,7 @@ mixin CustomerEndpoint {
 
   static String customers = _basePath;
   static String search = '$_basePath/search';
+  static String regions = 'api/regions';
 }
 
 mixin PartnerEndpoint {
@@ -62,5 +63,6 @@ mixin HistoryEndpoint{
   static const _basePath = 'api/order-history';
 
   static String history = _basePath;
+  static String active = '/api/orders';
 
 }

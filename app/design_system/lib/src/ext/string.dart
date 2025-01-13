@@ -5,6 +5,7 @@ import 'dart:ui' as ui;
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/services.dart' as services;
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 extension StringExtDesign on String {
@@ -77,5 +78,44 @@ extension UzbekPhoneNumberFormatter on String {
     } else {
       return 'Invalid number';
     }
+  }
+}
+
+class UzbekPhoneFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue,
+      TextEditingValue newValue,
+      ) {
+    // Remove all non-digit characters
+    String numbers = newValue.text.replaceAll(RegExp(r'[^\d]'), '');
+
+    // Remove the country code if user tries to input it
+    if (numbers.startsWith('998')) {
+      numbers = numbers.substring(3);
+    }
+
+    // Limit to 9 digits (excluding country code)
+    if (numbers.length > 9) {
+      numbers = numbers.substring(0, 9);
+    }
+
+    String formatted = '';
+
+    // Always add the country code
+    formatted += '+998 ';
+
+    // Add the remaining numbers with proper spacing
+    for (var i = 0; i < numbers.length; i++) {
+      if (i == 2) formatted += '${numbers[i]} ';
+      else if (i == 5) formatted += '${numbers[i]} ';
+      else if (i == 7) formatted += '${numbers[i]} ';
+      else formatted += numbers[i];
+    }
+
+    return TextEditingValue(
+      text: formatted,
+      selection: TextSelection.collapsed(offset: formatted.length),
+    );
   }
 }

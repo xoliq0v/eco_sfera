@@ -5,24 +5,21 @@ part 'customer_post_dto.g.dart';
 @JsonSerializable()
 class CustomerPostDTO {
   CustomerPostDTO({
-    required this.name,
-    required this.surname,
-    required this.middleName,
-    required this.gender,
+    required this.fullName,
     required this.phone,
-    required this.birthDate,
+    required this.regionId,
     required this.address,
+    this.pinfl
   });
 
-  final String name;
-  final String surname;
-  @JsonKey(name: 'middle_name')
-  final String middleName;
-  final String gender;
+  final String fullName;
+  @JsonKey(name: 'phone_number')
   final String phone;
-  @JsonKey(name: 'birth_date')
-  final String birthDate;
+  @JsonKey(name: 'region_id')
+  final int regionId;
+  @JsonKey(name: 'full_address')
   final String address;
+  final String? pinfl;
 
 
   factory CustomerPostDTO.fromJson(Map<String, dynamic> json) {

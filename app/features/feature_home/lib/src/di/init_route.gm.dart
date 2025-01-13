@@ -103,6 +103,7 @@ abstract class $FeatureHomeModule extends _i28.AutoRouterModule {
           key: args.key,
           param: args.param,
           type: args.type,
+          historyOrder: args.historyOrder,
         )),
       );
     },
@@ -176,7 +177,7 @@ abstract class $FeatureHomeModule extends _i28.AutoRouterModule {
     PartnersRoute.name: (routeData) {
       return _i28.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i16.PartnersPage(),
+        child: _i28.WrappedRoute(child: const _i16.PartnersPage()),
       );
     },
     PaymentRoute.name: (routeData) {
@@ -352,6 +353,7 @@ class BuyRoute extends _i28.PageRouteInfo<BuyRouteArgs> {
     _i29.Key? key,
     _i30.OrderModel? param,
     String? type,
+    _i30.ActiveHistory? historyOrder,
     List<_i28.PageRouteInfo>? children,
   }) : super(
           BuyRoute.name,
@@ -359,6 +361,7 @@ class BuyRoute extends _i28.PageRouteInfo<BuyRouteArgs> {
             key: key,
             param: param,
             type: type,
+            historyOrder: historyOrder,
           ),
           initialChildren: children,
         );
@@ -374,6 +377,7 @@ class BuyRouteArgs {
     this.key,
     this.param,
     this.type,
+    this.historyOrder,
   });
 
   final _i29.Key? key;
@@ -382,9 +386,11 @@ class BuyRouteArgs {
 
   final String? type;
 
+  final _i30.ActiveHistory? historyOrder;
+
   @override
   String toString() {
-    return 'BuyRouteArgs{key: $key, param: $param, type: $type}';
+    return 'BuyRouteArgs{key: $key, param: $param, type: $type, historyOrder: $historyOrder}';
   }
 }
 

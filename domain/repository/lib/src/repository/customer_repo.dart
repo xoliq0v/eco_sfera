@@ -10,4 +10,6 @@ abstract class CustomerRepository extends BaseRepository {
 
   Future<Result<List<Customer>>> searchCustomer(String number);
 
+
+  Future<Result<List<Region>>> getRegions();
 }

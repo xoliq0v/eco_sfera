@@ -29,6 +29,7 @@ class EcoTextField extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final Function(String? value)? onChanged;
   final bool readOnly;
+  final String? initialValue;
 
   const EcoTextField({
     super.key,
@@ -54,7 +55,8 @@ class EcoTextField extends StatefulWidget {
     this.svgSuffixIconPressed,
     this.inputFormatters,
     this.onChanged,
-    this.readOnly = false
+    this.readOnly = false,
+    this.initialValue
   });
 
   @override
@@ -63,11 +65,15 @@ class EcoTextField extends StatefulWidget {
 class _EcoTextFieldState extends State<EcoTextField> {
   late bool _isObscured;
   String? _errorText;
+  TextEditingController? _controller;
 
   @override
   void initState() {
     super.initState();
     _isObscured = widget.obscureText;
+    if (widget.controller == null && widget.initialValue != null) {
+      _controller = TextEditingController(text: widget.initialValue);
+    }
   }
 
   void _runValidator(String? value) {
@@ -76,6 +82,13 @@ class _EcoTextFieldState extends State<EcoTextField> {
         _errorText = widget.validator!(value);
       });
     }
+  }
+
+  @override
+  void dispose() {
+    // Dispose the controller if we created it
+    _controller?.dispose();
+    super.dispose();
   }
 
   @override
@@ -112,7 +125,7 @@ class _EcoTextFieldState extends State<EcoTextField> {
                   ),
                   child: TextFormField(
                     autocorrect: widget.autocorrect,
-                    controller: widget.controller,
+                    controller: widget.controller ?? _controller,
                     readOnly: widget.readOnly,
                     keyboardType: widget.keyboardType,
                     obscureText: _isObscured,

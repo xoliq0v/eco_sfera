@@ -8,11 +8,17 @@ part of 'partner_dto.dart';
 
 PartnerDto _$PartnerDtoFromJson(Map<String, dynamic> json) => PartnerDto(
       id: (json['id'] as num).toInt(),
-      title: json['title'] as String,
+      nickname: json['nickname'] as String,
+      comment: json['comment'] as String,
+      longitude: json['longitude'] as String,
+      latitude: json['latitude'] as String,
     );
 
 Map<String, dynamic> _$PartnerDtoToJson(PartnerDto instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'title': instance.title,
+      'nickname': instance.nickname,
+      'comment': instance.comment,
+      'longitude': instance.longitude,
+      'latitude': instance.latitude,
     };

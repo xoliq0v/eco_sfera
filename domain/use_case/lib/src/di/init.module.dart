@@ -9,6 +9,9 @@ import 'dart:async' as _i687;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:repository/repository.dart' as _i585;
 import 'package:use_case/src/di/init.dart' as _i854;
+import 'package:use_case/src/fetchpartners_use_case.dart' as _i481;
+import 'package:use_case/src/getactivehistory_use_case.dart' as _i655;
+import 'package:use_case/src/getregions_use_case.dart' as _i175;
 import 'package:use_case/src/impl/auth_use_case_impl.dart' as _i627;
 import 'package:use_case/use_case.dart' as _i987;
 
@@ -17,6 +20,10 @@ class UseCasePackageModule extends _i526.MicroPackageModule {
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
     final useCaseModule = _$UseCaseModule();
+    gh.factory<_i175.GetRegions>(
+        () => useCaseModule.provideGetRegions(gh<_i585.CustomerRepository>()));
+    gh.factory<_i655.GetActiveHistory>(
+        () => useCaseModule.provideGetActiveHistory(gh<_i585.HistoryRepo>()));
     gh.factory<_i987.FetchHistory>(
         () => useCaseModule.provideFetchHistory(gh<_i585.HistoryRepo>()));
     gh.factory<_i987.FetchUserProfile>(() =>
@@ -37,6 +44,8 @@ class UseCasePackageModule extends _i526.MicroPackageModule {
         () => useCaseModule.provideAuthUseCase(gh<_i585.AuthRepository>()));
     gh.factory<_i987.FCMTokenRefresh>(
         () => useCaseModule.provideFCMTokenRefresh(gh<_i585.AuthRepository>()));
+    gh.factory<_i481.FetchPartners>(
+        () => useCaseModule.provideFetchPartners(gh<_i585.PartnerRepo>()));
     gh.factory<_i987.GetCustomer>(
         () => useCaseModule.provideGetCustomer(gh<_i585.CustomerRepository>()));
     gh.factory<_i987.PostCustomer>(() =>

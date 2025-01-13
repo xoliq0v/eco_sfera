@@ -3,9 +3,15 @@ import 'dart:async';
 
 import 'package:core/core.dart';
 import 'package:repository/repository.dart';
+import 'package:use_case/src/getregions_use_case.dart';
+import '../fetchpartners_use_case.dart';
+import '../getactivehistory_use_case.dart';
 import '../impl/auth_use_case_impl.dart';
 import '../impl/buy_use_case_impl.dart';
 import '../impl/customer_use_case_impl.dart';
+import '../impl/fetchpartners_use_case_impl.dart';
+import '../impl/getactivehistory_use_case_impl.dart';
+import '../impl/getregions_use_case_impl.dart';
 import '../impl/location_use_case_impl.dart';
 import '../impl/order_use_case_impl.dart';
 import '../impl/session_use_case_impl.dart';
@@ -95,6 +101,18 @@ abstract class UseCaseModule {
 
   WatchPost provideWatchPost(OrderRepo orderRepo){
     return WatchPostImpl(orderRepo: orderRepo);
+  }
+
+  GetRegions provideGetRegions(CustomerRepository customerrepo){
+    return GetRegionsImpl(customerrepo: customerrepo);
+  }
+
+  GetActiveHistory provideGetActiveHistory(HistoryRepo historyrepo){
+    return GetActiveHistoryImpl(historyrepo: historyrepo);
+  }
+
+  FetchPartners provideFetchPartners(PartnerRepo partnerRepo){
+    return FetchPartnersImpl(partnerRepo: partnerRepo);
   }
 }
 

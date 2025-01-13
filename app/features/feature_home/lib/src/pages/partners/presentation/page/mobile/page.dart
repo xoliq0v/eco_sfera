@@ -9,14 +9,32 @@ class _Mobile extends StatefulWidget {
 
 class _MobileState extends State<_Mobile> {
 
+  final ScrollController _scrollController = ScrollController();
   final TextEditingController searchController = TextEditingController();
   final ScrollController scrollController = ScrollController();
 
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
   @override
   void dispose() {
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
     searchController.dispose();
     scrollController.dispose();
     super.dispose();
+  }
+
+  void _onScroll() {
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    if (currentScroll >= maxScroll - 200) {
+      context.read<PartnerPaginationCubit>().fetchHistory();
+    }
   }
 
   @override
@@ -25,52 +43,85 @@ class _MobileState extends State<_Mobile> {
       appBar: AppBar(
         title: Text(LocaleKeys.partners.tr(context: context)),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
-            child: Row(
+      body: BlocBuilder<PartnerPaginationCubit,PartnerPaginationState>(
+        builder: (context,state) {
+          if (state.isLoadingShimmer) {
+            return const Center(child: CircularProgressIndicator.adaptive());
+          }
+
+          if (state.error != null && state.history.isEmpty) {
+            return Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: TextField(
-                    // hintText: LocaleKeys.name.tr(context: context),
-                    onChanged: (value) {
-                      // _searchOrders(value);
-                    },
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    FilterSheet.show(context);
-                  },
-                  icon: SvgPicture.asset(AppIcons.filter),
-                ),
+                Text(state.error.toString()),
+                ElevatedButton(onPressed: (){
+                  context.read<PartnerPaginationCubit>().refresh();
+                }, child: Text(LocaleKeys.tryAgain.tr(context: context)))
               ],
-            ),
-          ),
-          Expanded(
-              child: ListView.builder(
-                controller: scrollController,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 15),
-                    child: PartnerItem(
-                      title: 'Eko Sfera MChJ',
-                      caption: 'caption',
-                      distance: 'distance',
-                      isNew: false,
-                      onTap: () {
-                        // _navigateToDetail();
+            );
+          }
+
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        // hintText: LocaleKeys.name.tr(context: context),
+                        onChanged: (value) {
+                          // _searchOrders(value);
+                        },
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        FilterSheet.show(context);
+                      },
+                      icon: SvgPicture.asset(AppIcons.filter),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      await context.read<PartnerPaginationCubit>().refresh();
+                    },
+                    child: ListView.builder(
+                      controller: _scrollController,
+                      itemCount: state.history.length + (state.isLoadingPagination ? 1 : 0),
+                      padding: const EdgeInsets.all(16),
+                      itemBuilder: (context, index) {
+                        if (index >= state.history.length) {
+                          return const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: CircularProgressIndicator.adaptive(),
+                            ),
+                          );
+                        }
+
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 16),
+                          child: PartnerItem(
+                            distance: state.history[index].longitude,
+                            onTap: (){
+                            },
+                            title: state.history[index].nickName, caption: state.history[index].comment,
+                          ),
+                        );
                       },
                     ),
-                  );
-                },
-              )
-          ),
-        ],
+                  ),
+              ),
+            ],
+          );
+        }
       ),
     );
   }

@@ -36,10 +36,12 @@ Map<String, dynamic> _$OrderDtoToJson(OrderDto instance) => <String, dynamic>{
 OrderItemDTO _$OrderItemDTOFromJson(Map<String, dynamic> json) => OrderItemDTO(
       name: json['name'] as String?,
       price: json['price'] as String?,
+      kg: (json['kg'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$OrderItemDTOToJson(OrderItemDTO instance) =>
     <String, dynamic>{
       'name': instance.name,
       'price': instance.price,
+      'kg': instance.kg,
     };

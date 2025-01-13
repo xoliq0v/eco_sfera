@@ -22,6 +22,7 @@ dependencies:
     path: ../../../domain/model
   flutter_staggered_grid_view: ^0.7.0
   wakelock_plus: ^1.2.10
+  action_slider: ^0.7.0
   flutter:
     sdk: flutter
 

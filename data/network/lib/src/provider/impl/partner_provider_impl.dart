@@ -5,6 +5,8 @@ import 'package:network/src/dto/partner_info_dto.dart';
 import 'package:network/src/endpoints/endpoints.dart';
 import 'package:network/src/provider/partner_provider.dart';
 
+import '../../../network.dart';
+
 class PartnerProviderImpl extends PartnerProvider {
   PartnerProviderImpl({required this.apiClient});
 
@@ -13,12 +15,10 @@ class PartnerProviderImpl extends PartnerProvider {
 
   /// Function for drivers to fetch partners from the API
   @override
-  Future<ApiResponse<PartnerDto>> fetchPartners(int page, int size) {
-    return apiCall(
-        apiClient.get('${PartnerEndpoint.partners}?page=$page&per_page=$size'),
-        dataFromJson: (data){
-          return PartnerDto.fromJson(data as Map<String, dynamic>);
-        },
+  Future<ApiResponse<PageableContentDTO<PartnerDto>>> fetchPartners(int page, int size) {
+    return fetchPaginatedData(
+        request: apiClient.get('${PartnerEndpoint.partners}?page=$page&per_page=$size'),
+        itemFromJson: PartnerDto.fromJson,
     );
   }
 
@@ -33,4 +33,5 @@ class PartnerProviderImpl extends PartnerProvider {
         },
     );
   }
+
 }

@@ -51,4 +51,15 @@ class CustomerProviderImpl extends CustomerProvider {
         dataFromJson: (data) => (data as List<dynamic>).map((item)=> CustomerDto.fromJson(item as Map<String, dynamic>)).toList(),
     );
   }
+
+
+  @override
+  Future<ApiResponse<List<RegionDTO>>> getRegions() {
+    return apiCall(
+        apiClient.get(CustomerEndpoint.regions),
+        dataFromJson: (json) {
+          return (json as List<dynamic>).map((item) => RegionDTO.fromJson(item as Map<String, dynamic>)).toList();
+        }
+    );
+  }
 }

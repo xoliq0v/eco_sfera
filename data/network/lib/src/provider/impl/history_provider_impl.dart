@@ -24,4 +24,18 @@ class HistoryProviderImpl extends HistoryProvider {
   }
 
 
+
+  @override
+  Future<ApiResponse<PageableContentDTO<ActiveHistoryDto>>> getActiveHistory(int page,int size) {
+    return fetchPaginatedData(
+        request: apiClient.get(
+            HistoryEndpoint.active,
+            queryParameters: {
+              'page': page,
+              'size': size
+            }
+        ), itemFromJson: ActiveHistoryDto.fromJson,
+
+    );
+  }
 }

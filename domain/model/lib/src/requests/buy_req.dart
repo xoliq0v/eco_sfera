@@ -2,6 +2,7 @@ import 'package:core/core.dart';
 
 class BuyReq extends Equatable {
   final String employee;
+  final int userOrderId;
   final int customerId;
   final double paperKg;
   final double paperPrice;
@@ -17,6 +18,7 @@ class BuyReq extends Equatable {
 
   const BuyReq({
     required this.employee,
+    required this.userOrderId,
     required this.customerId,
     required this.paperKg,
     required this.paperPrice,
@@ -34,6 +36,7 @@ class BuyReq extends Equatable {
   @override
   List<Object?> get props => [
     employee,
+    userOrderId,
     customerId,
     paperKg,
     paperPrice,

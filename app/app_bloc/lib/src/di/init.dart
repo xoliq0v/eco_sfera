@@ -1,11 +1,12 @@
 
 import 'dart:async';
 
-import 'package:app_bloc/app_bloc.dart';
+import '../../app_bloc.dart';
 import 'package:app_bloc/src/bloc/buy/buy_cubit.dart';
 import 'package:app_bloc/src/bloc/customer/customer_cubit.dart';
 import 'package:app_bloc/src/bloc/customer/post_customer_cubit.dart';
 import 'package:app_bloc/src/bloc/history/history_pagination_cubit.dart';
+import '../bloc/customer/get_region_cubit.dart';
 import '../bloc/order/handler.dart';
 import 'package:app_bloc/src/bloc/order/order_cubit.dart';
 import 'package:app_bloc/src/bloc/theme/theme_cubit.dart';
@@ -68,8 +69,8 @@ abstract class AppBlocModule {
     return LocationServiceCubit(_getLocation);
   }
 
-  BuyCubit provideBuyCubit(Buy _buy,FetchBuyPageParams _fetchBuyPageParams, SearchCustomer search){
-    return BuyCubit(_buy,search, _fetchBuyPageParams);
+  BuyCubit provideBuyCubit(Buy _buy,FetchBuyPageParams _fetchBuyPageParams, SearchCustomer search,GetUserProfile profile){
+    return BuyCubit(_buy,search, _fetchBuyPageParams,profile);
   }
 
   HistoryPaginationCubit provideHistoryPaginationCubit(
@@ -78,12 +79,24 @@ abstract class AppBlocModule {
     return HistoryPaginationCubit(_fetchHistory, initialPageSize: 5);
   }
 
+  ActiveHistoryCubit provideActiveHistory(GetActiveHistory get){
+    return ActiveHistoryCubit(get, initialPageSize: 5);
+  }
+
   ThemeChangerCubit provideThemeChangCubit(){
     return ThemeChangerCubit();
   }
 
   FCMHandler provideHandler(){
     return FCMHandler();
+  }
+
+  RegionCubit provideRegionCubit(GetRegions getReg){
+    return RegionCubit(getReg);
+  }
+
+  PartnerPaginationCubit providePaginationPartnerCubit(FetchPartners fetch){
+    return PartnerPaginationCubit(fetch,initialPageSize: 5);
   }
 }
 

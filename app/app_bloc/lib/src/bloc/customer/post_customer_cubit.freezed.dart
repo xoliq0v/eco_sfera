@@ -19,6 +19,8 @@ mixin _$PostCustomerState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() rLoading,
+    required TResult Function(List<Region> regions) rSuccess,
     required TResult Function() loading,
     required TResult Function(CustomerResponseModel customer) success,
     required TResult Function(String error) error,
@@ -27,6 +29,8 @@ mixin _$PostCustomerState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
+    TResult? Function()? rLoading,
+    TResult? Function(List<Region> regions)? rSuccess,
     TResult? Function()? loading,
     TResult? Function(CustomerResponseModel customer)? success,
     TResult? Function(String error)? error,
@@ -35,6 +39,8 @@ mixin _$PostCustomerState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? rLoading,
+    TResult Function(List<Region> regions)? rSuccess,
     TResult Function()? loading,
     TResult Function(CustomerResponseModel customer)? success,
     TResult Function(String error)? error,
@@ -44,6 +50,8 @@ mixin _$PostCustomerState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
+    required TResult Function(_RLoading value) rLoading,
+    required TResult Function(_RSuccess value) rSuccess,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
@@ -52,6 +60,8 @@ mixin _$PostCustomerState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Init value)? init,
+    TResult? Function(_RLoading value)? rLoading,
+    TResult? Function(_RSuccess value)? rSuccess,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
@@ -60,6 +70,8 @@ mixin _$PostCustomerState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_RLoading value)? rLoading,
+    TResult Function(_RSuccess value)? rSuccess,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
@@ -124,6 +136,8 @@ class _$InitImpl implements _Init {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() rLoading,
+    required TResult Function(List<Region> regions) rSuccess,
     required TResult Function() loading,
     required TResult Function(CustomerResponseModel customer) success,
     required TResult Function(String error) error,
@@ -135,6 +149,8 @@ class _$InitImpl implements _Init {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
+    TResult? Function()? rLoading,
+    TResult? Function(List<Region> regions)? rSuccess,
     TResult? Function()? loading,
     TResult? Function(CustomerResponseModel customer)? success,
     TResult? Function(String error)? error,
@@ -146,6 +162,8 @@ class _$InitImpl implements _Init {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? rLoading,
+    TResult Function(List<Region> regions)? rSuccess,
     TResult Function()? loading,
     TResult Function(CustomerResponseModel customer)? success,
     TResult Function(String error)? error,
@@ -161,6 +179,8 @@ class _$InitImpl implements _Init {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
+    required TResult Function(_RLoading value) rLoading,
+    required TResult Function(_RSuccess value) rSuccess,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
@@ -172,6 +192,8 @@ class _$InitImpl implements _Init {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Init value)? init,
+    TResult? Function(_RLoading value)? rLoading,
+    TResult? Function(_RSuccess value)? rSuccess,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
@@ -183,6 +205,8 @@ class _$InitImpl implements _Init {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_RLoading value)? rLoading,
+    TResult Function(_RSuccess value)? rSuccess,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
@@ -197,6 +221,295 @@ class _$InitImpl implements _Init {
 
 abstract class _Init implements PostCustomerState {
   const factory _Init() = _$InitImpl;
+}
+
+/// @nodoc
+abstract class _$$RLoadingImplCopyWith<$Res> {
+  factory _$$RLoadingImplCopyWith(
+          _$RLoadingImpl value, $Res Function(_$RLoadingImpl) then) =
+      __$$RLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RLoadingImplCopyWithImpl<$Res>
+    extends _$PostCustomerStateCopyWithImpl<$Res, _$RLoadingImpl>
+    implements _$$RLoadingImplCopyWith<$Res> {
+  __$$RLoadingImplCopyWithImpl(
+      _$RLoadingImpl _value, $Res Function(_$RLoadingImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$RLoadingImpl implements _RLoading {
+  const _$RLoadingImpl();
+
+  @override
+  String toString() {
+    return 'PostCustomerState.rLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$RLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() rLoading,
+    required TResult Function(List<Region> regions) rSuccess,
+    required TResult Function() loading,
+    required TResult Function(CustomerResponseModel customer) success,
+    required TResult Function(String error) error,
+  }) {
+    return rLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? rLoading,
+    TResult? Function(List<Region> regions)? rSuccess,
+    TResult? Function()? loading,
+    TResult? Function(CustomerResponseModel customer)? success,
+    TResult? Function(String error)? error,
+  }) {
+    return rLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? rLoading,
+    TResult Function(List<Region> regions)? rSuccess,
+    TResult Function()? loading,
+    TResult Function(CustomerResponseModel customer)? success,
+    TResult Function(String error)? error,
+    required TResult orElse(),
+  }) {
+    if (rLoading != null) {
+      return rLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_RLoading value) rLoading,
+    required TResult Function(_RSuccess value) rSuccess,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+  }) {
+    return rLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_RLoading value)? rLoading,
+    TResult? Function(_RSuccess value)? rSuccess,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+  }) {
+    return rLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_RLoading value)? rLoading,
+    TResult Function(_RSuccess value)? rSuccess,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (rLoading != null) {
+      return rLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RLoading implements PostCustomerState {
+  const factory _RLoading() = _$RLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$RSuccessImplCopyWith<$Res> {
+  factory _$$RSuccessImplCopyWith(
+          _$RSuccessImpl value, $Res Function(_$RSuccessImpl) then) =
+      __$$RSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Region> regions});
+}
+
+/// @nodoc
+class __$$RSuccessImplCopyWithImpl<$Res>
+    extends _$PostCustomerStateCopyWithImpl<$Res, _$RSuccessImpl>
+    implements _$$RSuccessImplCopyWith<$Res> {
+  __$$RSuccessImplCopyWithImpl(
+      _$RSuccessImpl _value, $Res Function(_$RSuccessImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? regions = null,
+  }) {
+    return _then(_$RSuccessImpl(
+      null == regions
+          ? _value._regions
+          : regions // ignore: cast_nullable_to_non_nullable
+              as List<Region>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$RSuccessImpl implements _RSuccess {
+  const _$RSuccessImpl(final List<Region> regions) : _regions = regions;
+
+  final List<Region> _regions;
+  @override
+  List<Region> get regions {
+    if (_regions is EqualUnmodifiableListView) return _regions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_regions);
+  }
+
+  @override
+  String toString() {
+    return 'PostCustomerState.rSuccess(regions: $regions)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RSuccessImpl &&
+            const DeepCollectionEquality().equals(other._regions, _regions));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_regions));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RSuccessImplCopyWith<_$RSuccessImpl> get copyWith =>
+      __$$RSuccessImplCopyWithImpl<_$RSuccessImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() rLoading,
+    required TResult Function(List<Region> regions) rSuccess,
+    required TResult Function() loading,
+    required TResult Function(CustomerResponseModel customer) success,
+    required TResult Function(String error) error,
+  }) {
+    return rSuccess(regions);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? rLoading,
+    TResult? Function(List<Region> regions)? rSuccess,
+    TResult? Function()? loading,
+    TResult? Function(CustomerResponseModel customer)? success,
+    TResult? Function(String error)? error,
+  }) {
+    return rSuccess?.call(regions);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? rLoading,
+    TResult Function(List<Region> regions)? rSuccess,
+    TResult Function()? loading,
+    TResult Function(CustomerResponseModel customer)? success,
+    TResult Function(String error)? error,
+    required TResult orElse(),
+  }) {
+    if (rSuccess != null) {
+      return rSuccess(regions);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_RLoading value) rLoading,
+    required TResult Function(_RSuccess value) rSuccess,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+  }) {
+    return rSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_RLoading value)? rLoading,
+    TResult? Function(_RSuccess value)? rSuccess,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+  }) {
+    return rSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_RLoading value)? rLoading,
+    TResult Function(_RSuccess value)? rSuccess,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (rSuccess != null) {
+      return rSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RSuccess implements PostCustomerState {
+  const factory _RSuccess(final List<Region> regions) = _$RSuccessImpl;
+
+  List<Region> get regions;
+  @JsonKey(ignore: true)
+  _$$RSuccessImplCopyWith<_$RSuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -238,6 +551,8 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() rLoading,
+    required TResult Function(List<Region> regions) rSuccess,
     required TResult Function() loading,
     required TResult Function(CustomerResponseModel customer) success,
     required TResult Function(String error) error,
@@ -249,6 +564,8 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
+    TResult? Function()? rLoading,
+    TResult? Function(List<Region> regions)? rSuccess,
     TResult? Function()? loading,
     TResult? Function(CustomerResponseModel customer)? success,
     TResult? Function(String error)? error,
@@ -260,6 +577,8 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? rLoading,
+    TResult Function(List<Region> regions)? rSuccess,
     TResult Function()? loading,
     TResult Function(CustomerResponseModel customer)? success,
     TResult Function(String error)? error,
@@ -275,6 +594,8 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
+    required TResult Function(_RLoading value) rLoading,
+    required TResult Function(_RSuccess value) rSuccess,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
@@ -286,6 +607,8 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Init value)? init,
+    TResult? Function(_RLoading value)? rLoading,
+    TResult? Function(_RSuccess value)? rSuccess,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
@@ -297,6 +620,8 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_RLoading value)? rLoading,
+    TResult Function(_RSuccess value)? rSuccess,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
@@ -379,6 +704,8 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() rLoading,
+    required TResult Function(List<Region> regions) rSuccess,
     required TResult Function() loading,
     required TResult Function(CustomerResponseModel customer) success,
     required TResult Function(String error) error,
@@ -390,6 +717,8 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
+    TResult? Function()? rLoading,
+    TResult? Function(List<Region> regions)? rSuccess,
     TResult? Function()? loading,
     TResult? Function(CustomerResponseModel customer)? success,
     TResult? Function(String error)? error,
@@ -401,6 +730,8 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? rLoading,
+    TResult Function(List<Region> regions)? rSuccess,
     TResult Function()? loading,
     TResult Function(CustomerResponseModel customer)? success,
     TResult Function(String error)? error,
@@ -416,6 +747,8 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
+    required TResult Function(_RLoading value) rLoading,
+    required TResult Function(_RSuccess value) rSuccess,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
@@ -427,6 +760,8 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Init value)? init,
+    TResult? Function(_RLoading value)? rLoading,
+    TResult? Function(_RSuccess value)? rSuccess,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
@@ -438,6 +773,8 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_RLoading value)? rLoading,
+    TResult Function(_RSuccess value)? rSuccess,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
@@ -525,6 +862,8 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() rLoading,
+    required TResult Function(List<Region> regions) rSuccess,
     required TResult Function() loading,
     required TResult Function(CustomerResponseModel customer) success,
     required TResult Function(String error) error,
@@ -536,6 +875,8 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
+    TResult? Function()? rLoading,
+    TResult? Function(List<Region> regions)? rSuccess,
     TResult? Function()? loading,
     TResult? Function(CustomerResponseModel customer)? success,
     TResult? Function(String error)? error,
@@ -547,6 +888,8 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? rLoading,
+    TResult Function(List<Region> regions)? rSuccess,
     TResult Function()? loading,
     TResult Function(CustomerResponseModel customer)? success,
     TResult Function(String error)? error,
@@ -562,6 +905,8 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
+    required TResult Function(_RLoading value) rLoading,
+    required TResult Function(_RSuccess value) rSuccess,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
@@ -573,6 +918,8 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Init value)? init,
+    TResult? Function(_RLoading value)? rLoading,
+    TResult? Function(_RSuccess value)? rSuccess,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
@@ -584,6 +931,8 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_RLoading value)? rLoading,
+    TResult Function(_RSuccess value)? rSuccess,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,

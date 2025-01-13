@@ -6,7 +6,10 @@ part 'partner_dto.g.dart';
 class PartnerDto {
   PartnerDto({
     required this.id,
-    required this.title
+    required this.nickname,
+    required this.comment,
+    required this.longitude,
+    required this.latitude,
   });
 
   factory PartnerDto.fromJson(Map<String, dynamic> json){
@@ -14,5 +17,8 @@ class PartnerDto {
   }
 
   final int id;
-  final String title;
+  final String nickname;
+  final String comment;
+  final String longitude;
+  final String latitude;
 }

@@ -50,7 +50,19 @@ mixin AppBlocHelper {
     return GetIt.I.get<HistoryPaginationCubit>();
   }
 
+  static ActiveHistoryCubit getActiveHistory(){
+    return GetIt.I.get<ActiveHistoryCubit>();
+  }
+
   static ThemeChangerCubit getThemeChangeCubit(){
     return GetIt.I.get<ThemeChangerCubit>();
+  }
+
+  static RegionCubit getRegionCubit(){
+    return GetIt.I.get<RegionCubit>();
+  }
+
+  static PartnerPaginationCubit getPartnerPaginationCubit(){
+    return GetIt.I.get<PartnerPaginationCubit>();
   }
 }

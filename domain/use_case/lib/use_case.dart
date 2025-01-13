@@ -11,4 +11,7 @@ export 'src/location_use_case.dart';
 export 'src/buy_use_case.dart';
 export 'src/history_use_case.dart';
 export 'src/partner_use_case.dart';
+export 'src/getregions_use_case.dart';
+export 'src/getactivehistory_use_case.dart';
+export 'src/fetchpartners_use_case.dart';
 export 'src/di/init.module.dart';

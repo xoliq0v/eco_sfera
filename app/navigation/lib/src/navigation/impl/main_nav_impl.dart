@@ -104,8 +104,8 @@ class MainNavigationImpl extends MainNavigation {
   }
 
   @override
-  Future<void> navigateBuyPage(OrderModel params,String type) {
-    return appRouter.push(BuyRoute(param: params,type: type));
+  Future<void> navigateBuyPage(OrderModel? params,String type,ActiveHistory? historyOrder) {
+    return appRouter.push(BuyRoute(param: params,type: type,historyOrder: historyOrder));
   }
 
   @override

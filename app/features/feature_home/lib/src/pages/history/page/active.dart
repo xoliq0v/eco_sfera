@@ -28,13 +28,13 @@ class _ActivePageState extends State<ActivePage> {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.offset;
     if (currentScroll >= maxScroll - 200) {
-      context.read<HistoryPaginationCubit>().fetchHistory();
+      context.read<ActiveHistoryCubit>().fetchHistory();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HistoryPaginationCubit, HistoryPaginationState>(
+    return BlocBuilder<ActiveHistoryCubit, ActiveHistoryPaginationState>(
       builder: (context, state) {
         if (state.isLoadingShimmer) {
           return const Center(child: CircularProgressIndicator.adaptive());
@@ -71,7 +71,7 @@ class _ActivePageState extends State<ActivePage> {
                       );
                     }
 
-                    return HistoryItem(history: state.history[index]);
+                    return ActiveItem(history: state.history[index]);
                   },
                 ),
               );
@@ -97,7 +97,12 @@ class _ActivePageState extends State<ActivePage> {
 
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 16),
-                    child: HistoryItem(history: state.history[index]),
+                    child: ActiveItem(
+                        history: state.history[index],
+                      onTap: (){
+                          ActiveHistoryBottomSheet.show(context, state.history[index]);
+                      },
+                    ),
                   );
                 },
               ),

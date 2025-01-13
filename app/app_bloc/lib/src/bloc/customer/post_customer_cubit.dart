@@ -1,4 +1,4 @@
-import 'package:app_bloc/app_bloc.dart';
+import '../../../app_bloc.dart';
 import 'package:core/core.dart';
 import 'package:model/model.dart';
 import 'package:use_case/use_case.dart';
@@ -8,10 +8,11 @@ part 'post_customer_state.dart';
 
 class PostCustomerCubit extends Cubit<PostCustomerState>{
   PostCustomerCubit(
-      this._postCustomer
+      this._postCustomer,
       ) : super(PostCustomerState.init());
 
   final PostCustomer _postCustomer;
+
 
 
   Future<void> post(CustomerPostModel model) async{
