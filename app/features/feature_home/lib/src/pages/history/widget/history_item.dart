@@ -46,7 +46,7 @@ class HistoryItem extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    history.user,
+                                    history.user.name??'NULL',
                                     overflow: TextOverflow.ellipsis,
                                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                                         fontWeight: FontWeight.w400,
@@ -56,7 +56,7 @@ class HistoryItem extends StatelessWidget {
                                   ),
                                   Flexible(
                                       child: Text(
-                                        history.user,
+                                        history.user.phoneNumber ?? 'NULL',
                                         overflow: TextOverflow.ellipsis,
                                         style: Theme.of(context).textTheme.headlineMedium,
                                       )
@@ -80,8 +80,8 @@ class HistoryItem extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('${history.id}:${history.id}',style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : context.colorScheme.primary),),
-                    Text(history.id.toString(),style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : context.colorScheme.primary),),
+                    Text('${history.date}',style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : Colors.grey),),
+                    Text('#${history.id.toString()}',style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : context.colorScheme.primary),),
                   ],
                 ),
               )

@@ -28,12 +28,12 @@ class LocationServiceCubit extends Cubit<LocationServiceState> {
         await getLocation();
       } else {
         emit(LocationServiceState.error(
-            LocationException('Location permission denied')
+            LocationException(LocaleKeys.location_permission_denied)
         ));
       }
     } else if (status.isPermanentlyDenied) {
       emit(LocationServiceState.error(
-          LocationException('Location permission permanently denied. Please enable in settings.')
+          LocationException(LocaleKeys.location_permanently_denied)
       ));
     } else if (status.isGranted) {
       await getLocation();
@@ -48,7 +48,7 @@ class LocationServiceCubit extends Cubit<LocationServiceState> {
       final isServiceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!isServiceEnabled) {
         emit(LocationServiceState.error(
-            LocationException('Location services are disabled. Please enable location services.')
+            LocationException(LocaleKeys.location_disabled)
         ));
         return false;
       }
@@ -57,7 +57,7 @@ class LocationServiceCubit extends Cubit<LocationServiceState> {
       final result = await _getLocation.get().timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          throw LocationException('Location request timed out. Please try again.');
+          throw LocationException(LocaleKeys.location_request_timed_out);
         },
       );
 
@@ -67,11 +67,11 @@ class LocationServiceCubit extends Cubit<LocationServiceState> {
       emit(LocationServiceState.error(e));
     } on TimeoutException {
       emit(LocationServiceState.error(
-          LocationException('Location request timed out. Please try again.')
+          LocationException(LocaleKeys.location_request_timed_out)
       ));
     } catch (e) {
       emit(LocationServiceState.error(
-          LocationException('Failed to get location: ${e.toString()}')
+          LocationException(LocaleKeys.failed_to_get_location)
       ));
     }
     return false;

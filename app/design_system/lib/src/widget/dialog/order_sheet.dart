@@ -255,12 +255,12 @@ class OrderItemTile extends StatelessWidget {
       children: [
         InfoBox(
           icon: AppIcons.box,
-          title: LocaleKeys.payment.tr(context: context),
+          title: LocaleKeys.trash.tr(context: context),
           value: item.name,
         ),
         InfoBox(
           icon: AppIcons.weight,
-          title: LocaleKeys.payment.tr(context: context),
+          title: LocaleKeys.weight.tr(context: context),
           value: item.kg.toString(),
         ),
       ],

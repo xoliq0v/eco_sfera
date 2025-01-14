@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:action_slider/action_slider.dart';
 import 'package:app_bloc/app_bloc.dart';
@@ -67,7 +68,7 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
       barrierDismissible: true,
       builder: (dialogContext) => AlertDialog(  // Note: using dialogContext here
         title: Text(LocaleKeys.locationPermission.tr(context: context)),
-        content: Text(error),
+        content: Text(error.tr(context: context)),
         actions: [
           TextButton(
             child: Text(LocaleKeys.cancel.tr(context: context)),
@@ -102,7 +103,7 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(error),
+            Text(error.tr(context: context)),
             const SizedBox(height: 12),
             Text(LocaleKeys.locationAccessIsRequired.tr(context: context)),
           ],
@@ -190,11 +191,17 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
     );
   }
 
+  void changeTabUsingContext(BuildContext context, int index) {
+    AutoTabsRouter.of(context).setActiveIndex(index);
+  }
+
   void _showOrderSheet(OrderModel order,bool isNew) {
     order.copyWith(status: false);
     OrderSheet.show(
       onAcceptPress: () async{
         await context.read<OrderCubit>().accept(order.id);
+        await context.read<OrderCubit>().retry(_location);
+        changeTabUsingContext(context, 2);
       },
       context: context,
       coords: Coords(

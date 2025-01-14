@@ -6,8 +6,10 @@ import 'package:model/model.dart';
 import 'package:navigation/navigation.dart';
 
 class ActiveHistoryBottomSheet {
-  static void show(BuildContext context, ActiveHistory order) {
-    context.showCustomBarModalBottomSheet(
+
+  static void show(BuildContext context, ActiveHistory order) async {
+    final availableMaps = await MapLauncher.installedMaps;
+    await context.showCustomBarModalBottomSheet(
       builder: (context) {
         return IntrinsicHeight(
           child: SizedBox(
@@ -67,9 +69,12 @@ class ActiveHistoryBottomSheet {
                             child: EcoMaterialButton(
                               color: Theme.of(context).colorScheme.surface,
                               onPressed: () async {
-                                Navigator.pop(context);
+                                await availableMaps.first.showMarker(
+                                  coords: Coords(double.parse(order.locations[0].longitude),double.parse(order.locations[0].latitude),),
+                                  title: "${order.user.name}\n${order.user.phoneNumber?.formatUzbekPhoneNumber()}",
+                                );
                               },
-                              child: Text(LocaleKeys.cancel.tr(context: context)),
+                              child: Text(LocaleKeys.location.tr(context: context)),
                             ),
                           ),
                           5.horizontalSpace,

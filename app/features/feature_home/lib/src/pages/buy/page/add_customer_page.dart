@@ -42,8 +42,8 @@ class _AddingPageState extends State<AddCustomerPage> {
   TextEditingController father = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController address = TextEditingController();
-  List<Region>? regions;
-  String? regionID;
+  Map<String,int> regions = {};
+  int regionID = 0;
   String gender = 'male';
   ValueNotifier<DateTime> birthDate = ValueNotifier(DateTime(2006));
 
@@ -108,16 +108,14 @@ class _AddingPageState extends State<AddCustomerPage> {
         return;
       }
 
-      var regId = 0;
-
-      await regions?.map((item) { if(item.name == regionID) { regId = item.id; } } );
+      // await regions?.map((item) { if(item.keys == regionID) { regId = item.values; } } );
 
       _customer = CustomerPostModel(
           fullName: '${name.text} ${surname.text} ${father.text}',
           phone: phone.text,
           // birthDay: '${birthDate.value.day}/${birthDate.value.month}/${birthDate.value.year}',
           // gender: gender,
-          regionId: regId,
+          regionId: regionID,
           address: address.text,
       );
 
@@ -161,16 +159,22 @@ class _AddingPageState extends State<AddCustomerPage> {
                 child: BlocBuilder<RegionCubit,RegionState>(
                     builder: (context,state){
                       return state.maybeMap(
-                          success: (data){
-                            regions = data.regions;
+                          success: (data) {
+
+                            data.regions.forEach((it){
+                              regions.addAll({it.name : it.id});
+                            });
+
+                            log('REGIONS: $regions');
                             log(data.regions.length.toString());
                             return EcoDropdownMenu(
-                              topText: 'Region',
+                              topText: LocaleKeys.region.tr(context: context),
                               initialSelection: 'Select',
                               placeholderText: 'Select region',
                               items: data.regions.map((item)=> item.name).toList(),
                               onChanged: (String? value) {
-                                regionID = value;
+                                regionID = regions[value] ?? 0;
+                                log('REGION ID: $regionID');
                               },
                             );
                           },
@@ -236,7 +240,7 @@ class _AddingPageState extends State<AddCustomerPage> {
                   padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
                   child: UzbekPhoneInput(
                     controller: phone,
-                    label: "Phone Number",
+                    label: LocaleKeys.phoneNumber.tr(context: context),
                     onChanged: (value) {
                       print('Phone number: $value');
                     },

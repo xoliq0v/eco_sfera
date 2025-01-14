@@ -1,5 +1,9 @@
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../auth/auth_screen.dart';
 
 class UzbekPhoneInput extends StatefulWidget {
   final ValueChanged<String>? onChanged;
@@ -85,13 +89,20 @@ class _UzbekPhoneInputState extends State<UzbekPhoneInput> {
               child: TextFormField(
                 controller: _controller,
                 enabled: widget.enabled,
-                style: TextStyle(
-                  fontSize: 16,
+                style: GoogleFonts.robotoMono(
+                  fontSize: 17,
                   color: Theme.of(context).colorScheme.onSurface,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.bold,
                 ),
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: context.colorScheme.surface,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(15)
+                  ),
                   contentPadding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
                   border: InputBorder.none,
                   hintText: '+998 99 999 99 99',

@@ -8,27 +8,25 @@ part of 'customer_response_dto.dart';
 
 CustomerResponseDto _$CustomerResponseDtoFromJson(Map<String, dynamic> json) =>
     CustomerResponseDto(
-      name: json['name'] as String,
-      surname: json['surname'] as String,
-      gender: json['gender'] as String,
-      phone: json['phone'] as String,
-      birthDate: json['birth_date'] as String,
-      address: json['address'] as String,
-      updatedAt: json['updated_at'] as String,
-      createdAt: json['created_at'] as String,
+      fullName: json['full_name'] as String,
+      phone: json['phone_number'] as String,
       id: (json['id'] as num).toInt(),
+      regionId: (json['region_id'] as num).toInt(),
+      isApproved: json['is_approved'] as bool,
+      isRegistered: json['is_registered'] as bool,
+      isVerified: json['is_verified'] as bool,
+      fullAddress: json['full_address'] as String,
     );
 
 Map<String, dynamic> _$CustomerResponseDtoToJson(
         CustomerResponseDto instance) =>
     <String, dynamic>{
-      'name': instance.name,
-      'surname': instance.surname,
-      'gender': instance.gender,
-      'phone': instance.phone,
-      'birth_date': instance.birthDate,
-      'address': instance.address,
-      'updated_at': instance.updatedAt,
-      'created_at': instance.createdAt,
+      'full_name': instance.fullName,
+      'phone_number': instance.phone,
+      'full_address': instance.fullAddress,
+      'is_approved': instance.isApproved,
+      'is_registered': instance.isRegistered,
+      'is_verified': instance.isVerified,
+      'region_id': instance.regionId,
       'id': instance.id,
     };

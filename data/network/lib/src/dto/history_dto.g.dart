@@ -20,8 +20,8 @@ HistoryDto _$HistoryDtoFromJson(Map<String, dynamic> json) => HistoryDto(
       totalKg: (json['total_kg'] as num).toInt(),
       totalPrice: json['total_price'] as String,
       type: json['type'] as String,
-      user: json['user'] as String?,
-      location: json['location'] as String?,
+      user: UserDto.fromJson(json['user'] as Map<String, dynamic>),
+      location: LocationDto.fromJson(json['location'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$HistoryDtoToJson(HistoryDto instance) =>

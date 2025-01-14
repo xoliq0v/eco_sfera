@@ -14,6 +14,8 @@ extension StringExtDesign on String {
     double targetHeight = 48,
     String? package,
   }) async {
+
+
     final path = package == null ? this : 'packages/$package/$this';
     final svgString = await services.rootBundle.loadString(path);
     final pictureInfo = await vg.loadPicture(
@@ -78,6 +80,13 @@ extension UzbekPhoneNumberFormatter on String {
     } else {
       return 'Invalid number';
     }
+  }
+
+  String formatTime() {
+    final parts = this.split(':');
+    final hours = parts[0].padLeft(2, '0');
+    final minutes = parts[1].padLeft(2, '0');
+    return '$hours:$minutes';
   }
 }
 

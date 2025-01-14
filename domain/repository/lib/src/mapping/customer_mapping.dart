@@ -13,6 +13,6 @@ extension CustomerDTOExt on CustomerDto {
 
 extension CustomerExt on CustomerPostModel {
   CustomerPostDTO toCustomerPostDTO(){
-    return CustomerPostDTO(fullName: fullName, phone: phone, regionId: regionId, address: address);
+    return CustomerPostDTO(fullName: fullName, phone: phone.trim(), regionId: regionId, address: address);
   }
 }

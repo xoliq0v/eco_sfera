@@ -8,16 +8,16 @@ part of 'customer_post_dto.dart';
 
 CustomerPostDTO _$CustomerPostDTOFromJson(Map<String, dynamic> json) =>
     CustomerPostDTO(
-      fullName: json['fullName'] as String,
+      fullName: json['full_name'] as String,
       phone: json['phone_number'] as String,
       regionId: (json['region_id'] as num).toInt(),
       address: json['full_address'] as String,
-      pinfl: json['pinfl'] as String?,
+      pinfl: json['pinfl'] as String? ?? '',
     );
 
 Map<String, dynamic> _$CustomerPostDTOToJson(CustomerPostDTO instance) =>
     <String, dynamic>{
-      'fullName': instance.fullName,
+      'full_name': instance.fullName,
       'phone_number': instance.phone,
       'region_id': instance.regionId,
       'full_address': instance.address,

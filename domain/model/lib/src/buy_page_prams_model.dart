@@ -1,10 +1,12 @@
 import 'package:equatable/equatable.dart';
 
+import '../model.dart';
+
 class HistoryModel extends Equatable {
   final int id;
   final String date;
-  final String user;
-  final String location;
+  final User user;
+  final OrderLocationModel location;
   final int paperKg;
   final String paperPrice;
   final int plasticKg;

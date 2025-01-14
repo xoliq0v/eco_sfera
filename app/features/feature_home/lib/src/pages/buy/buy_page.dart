@@ -1087,7 +1087,7 @@ class _BuyPageState extends State<BuyPage> {
                                           borderRadius: BorderRadius.circular(10),
                                         ),
                                         child: Text(
-                                          '${params.params[index].price} sum',
+                                          '${params.params[index].price.toInt()} sum',
                                         ),
                                       ),
                                     )
@@ -1114,7 +1114,8 @@ class _BuyPageState extends State<BuyPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Jami  ${ widget.param == null ? _totalKg.toStringAsFixed(2) : widget.param?.totalKg} kg',
+                                      // 'Jami  ${ widget.param == null ? _totalKg.toStringAsFixed(2) : widget.param?.totalKg} kg',
+                                      LocaleKeys.totalPrice.tr(context: context,args: [widget.param == null ? _totalKg.toStringAsFixed(2).toString()??'' : widget.param?.totalKg.toString()??'']),
                                       style: Theme.of(context).textTheme.headlineSmall,
                                     ),
                                     Text(
@@ -1167,7 +1168,7 @@ class _BuyPageState extends State<BuyPage> {
                                       if (widget.param != null) {
                                         customerId = widget.param!.orderUser.id;
                                       } else {
-                                        if(widget.historyOrder !=null){
+                                        if(widget.historyOrder == null){
                                           final selectedCustomer = context
                                               .read<CustomerPaginationCubit>()
                                               .state

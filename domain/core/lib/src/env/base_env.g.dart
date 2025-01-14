@@ -9,5 +9,5 @@ part of 'base_env.dart';
 // coverage:ignore-file
 // ignore_for_file: type=lint
 final class _BaseEnv {
-  static const String _baseUrl = 'http://176.221.29.141/';
+  static const String _baseUrl = 'https://ekosfera.uz/';
 }

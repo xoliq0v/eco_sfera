@@ -1,6 +1,12 @@
 
 part of '../../main_page.dart';
 
+final GlobalKey navigationKey = GlobalKey();
+
+void changeTabUsingContext(BuildContext context, int index) {
+  AutoTabsRouter.of(context).setActiveIndex(index);
+}
+
 class _Tablet extends StatefulWidget {
   final List<PageRouteInfo<dynamic>> pages;
   final List<String> icons;
@@ -78,6 +84,7 @@ class Tablet extends State<_Tablet> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AutoTabsRouter(
+        key: navigationKey,
         routes: widget.pages,
         builder: (context, child) {
           final tabsRouter = AutoTabsRouter.of(context);
@@ -295,3 +302,4 @@ class _ToggleButton extends StatelessWidget {
     );
   }
 }
+

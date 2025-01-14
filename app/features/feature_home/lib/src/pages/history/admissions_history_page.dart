@@ -54,9 +54,9 @@ class _AdmissionsHistoryPageState extends State<AdmissionsHistoryPage> with Tick
         title: Text(LocaleKeys.history.tr(context: context)),
         bottom: TabBar(
           controller: tabController,
-          tabs: const [
-            Tab(text: 'Active'),
-            Tab(text: 'Completed'),
+          tabs: [
+            Tab(text: LocaleKeys.active.tr(context: context)),
+            Tab(text: LocaleKeys.completed.tr(context: context)),
           ],
           unselectedLabelColor: Theme.of(context).textTheme.headlineMedium?.color,
           indicator: BoxDecoration(

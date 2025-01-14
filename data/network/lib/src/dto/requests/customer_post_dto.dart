@@ -9,9 +9,10 @@ class CustomerPostDTO {
     required this.phone,
     required this.regionId,
     required this.address,
-    this.pinfl
+    this.pinfl = ''
   });
 
+  @JsonKey(name: 'full_name')
   final String fullName;
   @JsonKey(name: 'phone_number')
   final String phone;

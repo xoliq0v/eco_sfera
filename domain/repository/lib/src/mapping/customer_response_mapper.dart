@@ -5,7 +5,7 @@ extension CustomerResponseMapper on CustomerResponseDto {
 
   CustomerResponseModel toModel(){
 
-    return CustomerResponseModel(name: name, surname: surname, gender: gender, phone: phone, birthDate: birthDate, address: address, updatedAt: updatedAt, createdAt: createdAt, id: id);
+    return CustomerResponseModel(id: id, fullName: fullName, fullAddress: fullAddress, isApproved: isApproved, isVerified: isVerified, isRegistered: isRegistered, regionId: regionId, phoneNumber: phone);
 
   }
 

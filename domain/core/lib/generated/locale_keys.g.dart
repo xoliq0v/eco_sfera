@@ -149,5 +149,36 @@ abstract class  LocaleKeys {
   static const logout = 'logout';
   static const cash = 'cash';
   static const getOrder = 'getOrder';
+  static const welcome_header = 'welcome_header';
+  static const hello = 'hello';
+  static const metal = 'metal';
+  static const open_map = 'open_map';
+  static const add_customer = 'add_customer';
+  static const view_more_customer = 'view_more_customer';
+  static const active = 'active';
+  static const completed = 'completed';
+  static const res_error = 'res_error';
+  static const mon = 'mon';
+  static const tue = 'tue';
+  static const wed = 'wed';
+  static const thu = 'thu';
+  static const fri = 'fri';
+  static const sat = 'sat';
+  static const sun = 'sun';
+  static const location_disabled = 'location_disabled';
+  static const location_permission_denied = 'location_permission_denied';
+  static const location_permanently_denied = 'location_permanently_denied';
+  static const location_request_timed_out = 'location_request_timed_out';
+  static const failed_to_get_location = 'failed_to_get_location';
+  static const load_more_customer = 'load_more_customer';
+  static const loading_more = 'loading_more';
+  static const location = 'location';
+  static const search = 'search';
+  static const no_results_found = 'no_results_found';
+  static const region = 'region';
+  static const totalPrice = 'totalPrice';
+  static const trash = 'trash';
+  static const weight = 'weight';
+  static const locationGettingField = 'locationGettingField';
 
 }

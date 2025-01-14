@@ -4,29 +4,31 @@ part 'customer_response_dto.g.dart';
 
 @JsonSerializable()
 class CustomerResponseDto {
-  final String name;
-  final String surname;
-  final String gender;
+  @JsonKey(name: 'full_name')
+  final String fullName;
+  @JsonKey(name: 'phone_number')
   final String phone;
-  @JsonKey(name: 'birth_date')
-  final String birthDate;
-  final String address;
-  @JsonKey(name: 'updated_at')
-  final String updatedAt;
-  @JsonKey(name: 'created_at')
-  final String createdAt;
+  @JsonKey(name: 'full_address')
+  final String fullAddress;
+  @JsonKey(name: 'is_approved')
+  final bool isApproved;
+  @JsonKey(name: 'is_registered')
+  final bool isRegistered;
+  @JsonKey(name: 'is_verified')
+  final bool isVerified;
+  @JsonKey(name: 'region_id')
+  final int regionId;
   final int id;
 
   CustomerResponseDto({
-    required this.name,
-    required this.surname,
-    required this.gender,
+    required this.fullName,
     required this.phone,
-    required this.birthDate,
-    required this.address,
-    required this.updatedAt,
-    required this.createdAt,
     required this.id,
+    required this.regionId,
+    required this.isApproved,
+    required this.isRegistered,
+    required this.isVerified,
+    required this.fullAddress,
   });
 
   /// Factory method for creating a `UserDto` from JSON.
