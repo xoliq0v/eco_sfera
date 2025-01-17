@@ -48,7 +48,7 @@ class BuyCubit extends Cubit<BuyState>{
       final result = await _buy.buy(model);
 
       if (result.status == Status.completed) {
-        emit(BuyState.buySuccess());
+        emit(BuyState.buySuccess(result.data!));
       } else {
         emit(BuyState.error('Failed to post data!'));
       }

@@ -14,6 +14,7 @@ import 'package:objectbox/internal.dart'
 import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
+import 'src/entity/blance_entity.dart';
 import 'src/entity/driver_entity.dart';
 import 'src/entity/drug_search.dart';
 import 'src/entity/favorite_detactor.dart';
@@ -319,6 +320,25 @@ final _entities = <obx_int.ModelEntity>[
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(13, 7448933138182415208),
+      name: 'BalanceEntity',
+      lastPropertyId: const obx_int.IdUid(2, 5231469155842607932),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 6257286934863561857),
+            name: 'id',
+            type: 6,
+            flags: 129),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 5231469155842607932),
+            name: 'balance',
+            type: 8,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[])
 ];
 
@@ -357,7 +377,7 @@ Future<obx.Store> openStore(
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
       entities: _entities,
-      lastEntityId: const obx_int.IdUid(12, 1204596445333538320),
+      lastEntityId: const obx_int.IdUid(13, 7448933138182415208),
       lastIndexId: const obx_int.IdUid(2, 5408362179349710280),
       lastRelationId: const obx_int.IdUid(0, 0),
       lastSequenceId: const obx_int.IdUid(0, 0),
@@ -551,9 +571,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final workOrderOffset = fbb.writeString(object.workOrder);
           final vehicleOffset = fbb.writeString(object.vehicle);
           final vehicleNumberOffset = fbb.writeString(object.vehicleNumber);
-          final profileImageOffset = object.profileImage == null
-              ? null
-              : fbb.writeString(object.profileImage!);
+          final profileImageOffset = fbb.writeString(object.profileImage);
           final patronymicOffset = fbb.writeString(object.patronymic);
           final nicknameOffset = fbb.writeString(object.nickname);
           final provinceOffset = fbb.writeString(object.province);
@@ -623,7 +641,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 32, 0));
           final profileImageParam =
               const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 34);
+                  .vTableGet(buffer, rootOffset, 34, '');
           final patronymicParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 36, '');
           final nicknameParam = const fb.StringReader(asciiOptimization: true)
@@ -776,6 +794,31 @@ obx_int.ModelDefinition getObjectBoxModel() {
               trashes: trashesParam,
               trashePrices: trashePricesParam,
               phone: phoneParam);
+
+          return object;
+        }),
+    BalanceEntity: obx_int.EntityDefinition<BalanceEntity>(
+        model: _entities[5],
+        toOneRelations: (BalanceEntity object) => [],
+        toManyRelations: (BalanceEntity object) => {},
+        getId: (BalanceEntity object) => object.id,
+        setId: (BalanceEntity object, int id) {
+          object.id = id;
+        },
+        objectToFB: (BalanceEntity object, fb.Builder fbb) {
+          fbb.startTable(3);
+          fbb.addInt64(0, object.id);
+          fbb.addFloat64(1, object.balance);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final balanceParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 6, 0);
+          final object = BalanceEntity(balance: balanceParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
         })
@@ -997,4 +1040,15 @@ class PartnerEntity_ {
   /// See [PartnerEntity.phone].
   static final phone =
       obx.QueryStringProperty<PartnerEntity>(_entities[4].properties[18]);
+}
+
+/// [BalanceEntity] entity fields to define ObjectBox queries.
+class BalanceEntity_ {
+  /// See [BalanceEntity.id].
+  static final id =
+      obx.QueryIntegerProperty<BalanceEntity>(_entities[5].properties[0]);
+
+  /// See [BalanceEntity.balance].
+  static final balance =
+      obx.QueryDoubleProperty<BalanceEntity>(_entities[5].properties[1]);
 }

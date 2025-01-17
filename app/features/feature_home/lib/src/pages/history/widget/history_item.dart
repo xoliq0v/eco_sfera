@@ -56,7 +56,7 @@ class HistoryItem extends StatelessWidget {
                                   ),
                                   Flexible(
                                       child: Text(
-                                        history.user.phoneNumber ?? 'NULL',
+                                        history.user.phoneNumber?.formatUzbekPhoneNumber() ?? 'NULL',
                                         overflow: TextOverflow.ellipsis,
                                         style: Theme.of(context).textTheme.headlineMedium,
                                       )

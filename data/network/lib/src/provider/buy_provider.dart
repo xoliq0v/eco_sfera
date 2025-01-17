@@ -3,6 +3,6 @@ import 'package:network/network.dart';
 
 abstract class BuyProvider extends BaseProvider {
 
-  Future<ApiResponse<bool>> buy(BuyReqDto buyDto);
+  Future<ApiResponse<BuyCheckDto>> buy(BuyReqDto buyDto);
 
 }

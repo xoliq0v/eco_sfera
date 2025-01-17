@@ -69,23 +69,7 @@ class _ViewState extends State<_View> with TickerProviderStateMixin {
   late MotionTabBarController motionTabBarController;
   int lastIndex = 0;
 
-  @override
-  void initState() {
-    motionTabBarController = MotionTabBarController(
-      length: widget.pages.length,
-      vsync: this,
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    motionTabBarController.dispose();
-    super.dispose();
-  }
-
   Widget slidePageTransition(BuildContext context, Widget child, Animation<double> animation) {
-    // Create custom curves for reveal and fade
     final revealAnimation = CurvedAnimation(
       parent: animation,
       curve: Curves.easeInOutCubic,
@@ -102,17 +86,18 @@ class _ViewState extends State<_View> with TickerProviderStateMixin {
         final screenSize = MediaQuery.of(context).size;
         final maxRadius = screenSize.longestSide * 1.5;
         final radius = revealAnimation.value * maxRadius;
-
         final center = TabTapPosition.tapPosition ?? screenSize.center(Offset.zero);
 
         return FadeTransition(
-          opacity: fadeAnimation,
-          child: child
+            opacity: fadeAnimation,
+            child: child
         );
       },
       child: child,
     );
   }
+  // Update tab router when bloc state changes
+  // final tabsRouter = AutoTabsRouter.of(context);
 
   @override
   Widget build(BuildContext context) {
@@ -121,41 +106,69 @@ class _ViewState extends State<_View> with TickerProviderStateMixin {
       transitionBuilder: slidePageTransition,
       animationDuration: const Duration(milliseconds: 200),
       animationCurve: Curves.easeInOutCubic,
-      bottomNavigationBuilder: (_, tabsRouter) {
-        return GestureDetector(
-          onTapDown: (details){
-            TabTapPosition.setTapPosition(details.globalPosition);
+      bottomNavigationBuilder: (context, tabsRouter) {
+        return NavigationBar(
+          selectedIndex: tabsRouter.activeIndex,
+          onDestinationSelected: (index){
+            context.read<NavigationBloc>().add(UpdateTabIndex(index));
+            lastIndex = index;
+            tabsRouter.setActiveIndex(index);
           },
-          child: MotionTabBar(
-            controller: motionTabBarController,
-            initialSelectedTab: widget.routes.first,
-            labels: widget.routes,
-            svgIconPaths: widget.icons,
-            tabSize: 50,
-            tabBarHeight: 60,
-            textStyle: TextStyle(
-              fontSize: 12,
-              color: Theme.of(context).colorScheme.primary,
-              fontWeight: FontWeight.w500,
-            ),
-            tabBarColor: Theme.of(context).colorScheme.background,
-            tabIconColor: AppColors.main,
-            tabIconSize: 28.0,
-            tabIconSelectedSize: 26.0,
-            tabSelectedColor: AppColors.cactusWater,
-            tabIconSelectedColor: AppColors.main,
-            onTabItemSelected: (int index) {
-              // if (index == 4) {
-              //   motionTabBarController.index = lastIndex;
-              //   navigateProfilePage();
-              // } else {
-              //   lastIndex = index;
-                tabsRouter.setActiveIndex(index);
-              // }
-            },
-          ),
+          destinations: List.generate(widget.icons.length, (index) {
+            final icon = widget.icons[index];
+            final label = widget.routes[index];
+            return NavigationDestination(
+              selectedIcon: SvgPicture.asset(
+                width: 25,
+                icon,
+                color: context.colorScheme.background,
+              ),
+              icon: SvgPicture.asset(
+                icon,color: context.colorScheme.secondary,
+              ),
+              label: label.tr(context: context),
+            );
+          }),
         );
       },
+    // bottomNavigationBuilder: (_, tabsRouter) {
+      //   return GestureDetector(
+      //     onTapDown: (details){
+      //       TabTapPosition.setTapPosition(details.globalPosition);
+      //     },
+      //     child: MotionTabBar(
+      //       controller: motionTabBarController,
+      //       initialSelectedTab: widget.routes.first.tr(context: context),
+      //       labels: widget.routes.map((str)=> str.tr(context: context)).toList(),
+      //       svgIconPaths: widget.icons,
+      //       tabSize: 50,
+      //       tabBarHeight: 60,
+      //       textStyle: TextStyle(
+      //         fontSize: 12,
+      //         color: Theme.of(context).colorScheme.primary,
+      //         fontWeight: FontWeight.w500,
+      //       ),
+      //       tabBarColor: Theme.of(context).colorScheme.background,
+      //       tabIconColor: AppColors.main,
+      //       tabIconSize: 28.0,
+      //       tabIconSelectedSize: 26.0,
+      //       tabSelectedColor: AppColors.cactusWater,
+      //       tabIconSelectedColor: AppColors.main,
+      //       onTabItemSelected: (int index) {
+      //         // if (index == 4) {
+      //         //   motionTabBarController.index = lastIndex;
+      //         //   navigateProfilePage();
+      //         // } else {
+      //         //   lastIndex = index;
+      //         //   tabsRouter.setActiveIndex(index);
+      //         // }
+      //         context.read<NavigationBloc>().add(UpdateTabIndex(index));
+      //         lastIndex = index;
+      //         tabsRouter.setActiveIndex(index);
+      //       },
+      //     ),
+      //   );
+      // },
     );
   }
 

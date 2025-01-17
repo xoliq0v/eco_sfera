@@ -17,4 +17,7 @@ export 'src/bloc/location_service/location_service_cubit.dart';
 export 'src/bloc/buy/buy_cubit.dart';
 export 'src/bloc/customer/get_region_cubit.dart';
 export 'src/bloc/partner/partner_pagination_cubit.dart';
+export 'src/bloc/balance/balance_cubit.dart';
+export 'src/bloc/transaction/transaction_cubit.dart';
 export 'src/bloc/theme/theme_cubit.dart';
+export 'src/bloc/navigation/bloc.dart';

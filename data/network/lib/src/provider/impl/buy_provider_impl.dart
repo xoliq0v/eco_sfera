@@ -11,11 +11,13 @@ class BuyProviderImpl extends BuyProvider {
   final Dio apiClient;
 
   @override
-  Future<ApiResponse<bool>> buy(BuyReqDto buyDto) {
+  Future<ApiResponse<BuyCheckDto>> buy(BuyReqDto buyDto) {
     return apiCall(
         apiClient.post(BuyEndpoint.buy,data: buyDto.toJson()),
         dataFromJson: (json){
-          return json != null;
+          final res = json as List<dynamic>;
+          return BuyCheckDto.fromJson(res[0] as Map<String, dynamic>);
+
         }
     );
   }

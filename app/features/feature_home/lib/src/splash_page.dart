@@ -22,6 +22,9 @@ class SplashScreen extends StatefulWidget implements AutoRouteWrapper {
         BlocProvider<ProfileCubit>(
           create: (_) => AppBlocHelper.getProfileCubit(),
         ),
+        BlocProvider<BalanceCubit>(
+          create: (_) => AppBlocHelper.getBalanceCubit(),
+        ),
       ],
       child: this,
     );

@@ -7,21 +7,25 @@ part of 'history_dto.dart';
 // **************************************************************************
 
 HistoryDto _$HistoryDtoFromJson(Map<String, dynamic> json) => HistoryDto(
-      id: (json['id'] as num).toInt(),
-      date: json['date'] as String,
-      paperKg: (json['paper_kg'] as num).toInt(),
-      paperPrice: json['paper_price'] as String,
-      plasticKg: (json['plastic_kg'] as num).toInt(),
-      plasticPrice: json['plastic_price'] as String,
-      plasticBottleKg: (json['plastic_bottle_kg'] as num).toInt(),
-      plasticBottlePrice: json['plastic_bottle_price'] as String,
-      cartonKg: (json['carton_kg'] as num).toInt(),
-      cartonPrice: json['carton_price'] as String,
-      totalKg: (json['total_kg'] as num).toInt(),
-      totalPrice: json['total_price'] as String,
-      type: json['type'] as String,
-      user: UserDto.fromJson(json['user'] as Map<String, dynamic>),
-      location: LocationDto.fromJson(json['location'] as Map<String, dynamic>),
+      id: (json['id'] as num?)?.toInt(),
+      date: json['date'] as String?,
+      paperKg: json['paper_kg'] as String?,
+      paperPrice: json['paper_price'] as String?,
+      plasticKg: json['plastic_kg'] as String?,
+      plasticPrice: json['plastic_price'] as String?,
+      plasticBottleKg: json['plastic_bottle_kg'] as String?,
+      plasticBottlePrice: json['plastic_bottle_price'] as String?,
+      cartonKg: json['carton_kg'] as String?,
+      cartonPrice: json['carton_price'] as String?,
+      totalKg: json['total_kg'] as String?,
+      totalPrice: json['total_price'] as String?,
+      type: json['type'] as String?,
+      user: json['user'] == null
+          ? null
+          : UserDto.fromJson(json['user'] as Map<String, dynamic>),
+      location: json['location'] == null
+          ? null
+          : LocationDto.fromJson(json['location'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$HistoryDtoToJson(HistoryDto instance) =>

@@ -6,6 +6,8 @@ export 'src/impl/user_use_case_impl.dart';
 export 'src/user_use_case.dart';
 export 'src/customer_use_case.dart';
 export 'src/settings_use_case.dart';
+export 'src/gettransactions_use_case.dart';
+export 'src/getbalance_use_case.dart';
 export 'src/order_use_case.dart';
 export 'src/location_use_case.dart';
 export 'src/buy_use_case.dart';

@@ -4,7 +4,7 @@ import 'package:network/network.dart';
 extension HistoryMapper on HistoryDto{
 
   HistoryModel toModel(){
-    return HistoryModel(id: id, date: date, user: User(id: user.id, name: user.name, phoneNumber: user.phoneNumber), location: OrderLocationModel(latitude: location.latitude, longitude: location.longitude, id: location.id), paperKg: paperKg, paperPrice: paperPrice, plasticKg: plasticKg, plasticPrice: plasticPrice, plasticBottleKg: plasticBottleKg, plasticBottlePrice: plasticBottlePrice, cartonKg: cartonKg, cartonPrice: cartonPrice, totalKg: totalKg, totalPrice: totalPrice, type: type);
+    return HistoryModel(id: id??-1, date: date??'NULL', user: User(id: user?.id??-1, name: user?.name, phoneNumber: user?.phoneNumber), location: OrderLocationModel(latitude: location?.latitude??'', longitude: location?.longitude??'NULL', id: location?.id??-1), paperKg: paperKg??'NULL', paperPrice: paperPrice??'NULL', plasticKg: plasticKg??'NULL', plasticPrice: plasticPrice??'NULL', plasticBottleKg: plasticBottleKg??'NULL', plasticBottlePrice: plasticBottlePrice??'NULL', cartonKg: cartonKg??'NULL', cartonPrice: cartonPrice??'NULL', totalKg: totalKg??'NULL', totalPrice: totalPrice??'NULL', type: type??'NULL');
   }
 
 }

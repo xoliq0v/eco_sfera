@@ -26,13 +26,13 @@ class MainNavigationImpl extends MainNavigation {
         AppIcons.buy,
         AppIcons.historySvg,
         AppIcons.partnersSvg,
-        AppIcons.reportSvg,
+        // AppIcons.reportSvg,
       ], routes: [
         LocaleKeys.orders,
         LocaleKeys.buy,
         LocaleKeys.history,
         LocaleKeys.profile,
-        LocaleKeys.reports,
+        // LocaleKeys.reports,
         // LocaleKeys.profile.tr(context: context)
       ])]);
     } else {

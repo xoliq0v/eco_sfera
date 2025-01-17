@@ -301,9 +301,28 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "13:7448933138182415208",
+      "lastPropertyId": "2:5231469155842607932",
+      "name": "BalanceEntity",
+      "properties": [
+        {
+          "id": "1:6257286934863561857",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:5231469155842607932",
+          "name": "balance",
+          "type": 8
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "12:1204596445333538320",
+  "lastEntityId": "13:7448933138182415208",
   "lastIndexId": "2:5408362179349710280",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

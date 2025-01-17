@@ -16,7 +16,7 @@ class DriverData extends Equatable {
   final String? outlay;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final String? profileImage;
+  final String profileImage;
   final String patronymic;
   final String nickname;
   final String province;
@@ -41,7 +41,7 @@ class DriverData extends Equatable {
     this.outlay,
     required this.createdAt,
     required this.updatedAt,
-    this.profileImage,
+    required this.profileImage,
     required this.patronymic,
     required this.nickname,
     required this.province,

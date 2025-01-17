@@ -4,7 +4,7 @@ import 'package:repository/repository.dart';
 
 abstract class BuyRepo extends BaseRepository {
 
-  Future<Result<bool>> buy(BuyReq buyModel);
+  Future<Result<BuyCheckModel>> buy(BuyReq buyModel);
 
   Future<Result<List<TrashInfo>>> fetchParams();
 

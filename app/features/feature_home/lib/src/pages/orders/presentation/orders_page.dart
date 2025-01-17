@@ -5,6 +5,7 @@ import 'package:action_slider/action_slider.dart';
 import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart' hide Order;
 import 'package:design_system/design_system.dart';
+import 'package:feature_home/src/pages/orders/presentation/widgets/price_badge.dart';
 import 'package:navigation/navigation.dart';
 import 'widgets/order_item.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,14 @@ class OrdersPage extends StatefulWidget implements AutoRouteWrapper {
         ),
         BlocProvider<LocationServiceCubit>(
           create: (_) => AppBlocHelper.getLocationServiceCubit(),
+        ),
+        BlocProvider<BalanceCubit>(
+          create: (_) => AppBlocHelper.getBalanceCubit(),
+        ),
+        BlocProvider<NavigationBloc>(
+          create: (context) {
+            return AppBlocHelper.getNavigationBloc();
+          },
         ),
       ],
       child: this,
@@ -331,7 +340,7 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Center(child: Text(e)),
-                    ElevatedButton(onPressed: (){
+                    EcoOutlineButton(onPressed: (){
                        context.read<LocationServiceCubit>().retryLocation();
                     }, child: Text(LocaleKeys.tryAgain.tr(context: context)))
                   ],

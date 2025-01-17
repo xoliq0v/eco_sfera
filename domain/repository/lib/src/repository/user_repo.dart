@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:model/model.dart';
 
 abstract class UserRepository{
@@ -7,4 +8,12 @@ abstract class UserRepository{
   DriverData? getUserProfile();
 
   Stream<DriverData?> watchUserProfile();
+
+  Future<Result<TransactionsResponse>> getTransactions();
+
+  Future<int?> fetchBalance();
+
+  Stream<double?> watchBalance();
+
+  double? getBalance();
 }

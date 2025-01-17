@@ -7,6 +7,8 @@ import 'package:database/src/storage/impl/secure_storage_impl.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../db/dao/balance_dao.dart';
+
 @module
 abstract class DatabaseModule {
   @preResolve
@@ -59,6 +61,11 @@ abstract class DatabaseModule {
   @lazySingleton
   PartnerProfileDAO providePartnerProfileDAO(MyObjectBox myObjectBox) {
     return PartnerProfileDAO(myObjectBox.store);
+  }
+
+  @lazySingleton
+  BalanceDao provideBalanceDAO(MyObjectBox myObjectBox) {
+    return BalanceDao(myObjectBox.store);
   }
 }
 

@@ -35,10 +35,12 @@ abstract class RepositoryModule {
   UserRepository provideUserRepository(
       ClientProvider clientProvider,
       UserProfileDAO userProfileDAO,
+      BalanceDao balanceDao
       ){
     return UserRepositoryImpl(
         userProfileDAO: userProfileDAO,
-        clientProvider: clientProvider
+        clientProvider: clientProvider,
+        balanceDao: balanceDao
     );
   }
 

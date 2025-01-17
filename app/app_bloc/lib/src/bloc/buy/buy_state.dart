@@ -11,7 +11,7 @@ sealed class BuyState with _$BuyState {
 
   const factory BuyState.success(List<TrashInfo> params,DriverData user) = _Success;
 
-  const factory BuyState.buySuccess() = _BuySuccess;
+  const factory BuyState.buySuccess(BuyCheckModel check) = _BuySuccess;
 
   const factory BuyState.error(String error) = _Error;
 

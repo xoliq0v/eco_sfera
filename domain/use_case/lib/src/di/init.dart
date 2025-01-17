@@ -11,7 +11,9 @@ import '../impl/buy_use_case_impl.dart';
 import '../impl/customer_use_case_impl.dart';
 import '../impl/fetchpartners_use_case_impl.dart';
 import '../impl/getactivehistory_use_case_impl.dart';
+import '../impl/getbalance_use_case_impl.dart';
 import '../impl/getregions_use_case_impl.dart';
+import '../impl/gettransactions_use_case_impl.dart';
 import '../impl/location_use_case_impl.dart';
 import '../impl/order_use_case_impl.dart';
 import '../impl/session_use_case_impl.dart';
@@ -113,6 +115,18 @@ abstract class UseCaseModule {
 
   FetchPartners provideFetchPartners(PartnerRepo partnerRepo){
     return FetchPartnersImpl(partnerRepo: partnerRepo);
+  }
+
+  GetTransactions provideGetTransactions(UserRepository userRepo){
+    return GetTransactionsImpl(driverrepo: userRepo);
+  }
+
+  GetBalance provideGetBalance(UserRepository userRepo){
+    return GetBalanceImpl(driverrepo: userRepo);
+  }
+
+  FetchBalance provideFetchBalance(UserRepository userRepo){
+    return FetchBalanceImpl(userRepository: userRepo);
   }
 }
 

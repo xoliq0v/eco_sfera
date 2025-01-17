@@ -33,27 +33,27 @@ class PartnerInfoDto {
       _$PartnerInfoDtoFromJson(json);
 
   final int id;
-  final String latitude;
-  final String longitude;
+  final String? latitude;
+  final String? longitude;
   final String? location;
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
   @JsonKey(name: 'updated_at')
   final DateTime updatedAt;
-  final String province;
-  final String district;
-  final String address;
+  final String? province;
+  final String? district;
+  final String? address;
   @JsonKey(name: 'is_active')
-  final bool isActive;
-  final bool status;
-  final String nickname;
-  final String fish;
-  final String comment;
-  final String login;
-  final String password;
-  final String trashes;
+  final bool? isActive;
+  final bool? status;
+  final String? nickname;
+  final String? fish;
+  final String? comment;
+  final String? login;
+  final String? password;
+  final String? trashes;
   @JsonKey(name: 'trashe_prices')
-  final String trashePrices;
+  final String? trashePrices;
   final String? phone;
 
   // Method for serialization

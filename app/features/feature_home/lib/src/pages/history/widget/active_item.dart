@@ -3,6 +3,8 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:model/model.dart';
 
+import '../../../di/init_route.dart';
+
 
 class ActiveItem extends StatelessWidget {
   final ActiveHistory history;
@@ -56,7 +58,7 @@ class ActiveItem extends StatelessWidget {
                                   ),
                                   Flexible(
                                       child: Text(
-                                        history.user.phoneNumber ?? '',
+                                        history.user.phoneNumber?.formatUzbekPhoneNumber() ?? '',
                                         overflow: TextOverflow.ellipsis,
                                         style: Theme.of(context).textTheme.headlineMedium,
                                       )

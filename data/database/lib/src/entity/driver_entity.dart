@@ -24,7 +24,7 @@ class DriverEntity {
   @Property(type: PropertyType.date)
   DateTime updatedAt;
 
-  String? profileImage;
+  String profileImage;
   String patronymic;
   String nickname;
   String province;
@@ -49,7 +49,7 @@ class DriverEntity {
     this.outlay,
     required this.createdAt,
     required this.updatedAt,
-    this.profileImage,
+    required this.profileImage,
     required this.patronymic,
     required this.nickname,
     required this.province,

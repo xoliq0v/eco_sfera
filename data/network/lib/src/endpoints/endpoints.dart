@@ -9,7 +9,7 @@ mixin DriverEndpoint {
   static String clientData = '$_basePath/data?type=driver';
   static String logout = '$_basePath/logout';
   static String refreshFCMToken = '$_basePath/refresh-device-token';
-
+  static String balance = '$_basePath/balance';
 }
 
 mixin CustomerEndpoint {
@@ -18,6 +18,7 @@ mixin CustomerEndpoint {
   static String customers = _basePath;
   static String search = '$_basePath/search';
   static String regions = 'api/regions';
+
 }
 
 mixin PartnerEndpoint {
@@ -26,7 +27,7 @@ mixin PartnerEndpoint {
 
   static String partners = _basePath;
   static String search = '$_basePath/search';
-  static String data = '$_basePath/data?type=partner';
+  static String data = 'api/employee/data?type=partner';
 }
 
 mixin TrashEndpoint {
@@ -63,6 +64,12 @@ mixin HistoryEndpoint{
   static const _basePath = 'api/order-history';
 
   static String history = _basePath;
-  static String active = '/api/orders';
+  static String active = '/api/accepted-orders';
 
+}
+
+mixin TransactionEndpoint {
+  static const _basePath = '/api/transactions';
+
+  static String driver = _basePath;
 }

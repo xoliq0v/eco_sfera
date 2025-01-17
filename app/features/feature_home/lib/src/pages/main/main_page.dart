@@ -36,6 +36,11 @@ class MainPage extends StatefulWidget implements AutoRouteWrapper {
             return AppBlocHelper.getInternetConnectivityController();
           },
         ),
+        BlocProvider<NavigationBloc>(
+          create: (context) {
+            return AppBlocHelper.getNavigationBloc();
+          },
+        ),
       ],
       child: this,
     );
@@ -48,6 +53,8 @@ class _NavigationState extends State<MainPage> {
 
   bool hasConnection = true;
   bool isLostConnectionPage = false;
+
+
 
   @override
   Widget build(BuildContext context) {

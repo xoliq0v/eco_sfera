@@ -162,9 +162,7 @@ class _Tablet extends StatelessWidget {
                   color: Theme.of(context).colorScheme.surface,
                 ),
               ),
-              itemBuilder: (context, index) => PaymentItem(
-                paymentHistory: payments[index],
-              ),
+              itemBuilder: (context, index) => SizedBox(),
             ),
           ),
         ],

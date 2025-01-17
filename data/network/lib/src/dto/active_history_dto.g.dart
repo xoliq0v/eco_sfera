@@ -8,17 +8,19 @@ part of 'active_history_dto.dart';
 
 ActiveHistoryDto _$ActiveHistoryDtoFromJson(Map<String, dynamic> json) =>
     ActiveHistoryDto(
-      id: (json['id'] as num).toInt(),
-      user: UserDto.fromJson(json['user'] as Map<String, dynamic>),
-      locations: (json['locations'] as List<dynamic>)
-          .map((e) => LocationDto.fromJson(e as Map<String, dynamic>))
+      id: (json['id'] as num?)?.toInt(),
+      user: json['user'] == null
+          ? null
+          : UserDto.fromJson(json['user'] as Map<String, dynamic>),
+      locations: (json['locations'] as List<dynamic>?)
+          ?.map((e) => LocationDto.fromJson(e as Map<String, dynamic>))
           .toList(),
-      items: (json['items'] as List<dynamic>)
-          .map((e) => ItemDto.fromJson(e as Map<String, dynamic>))
+      items: (json['items'] as List<dynamic>?)
+          ?.map((e) => ItemDto.fromJson(e as Map<String, dynamic>))
           .toList(),
-      status: json['status'] as String,
-      totalPrice: json['total_price'] as String,
-      totalKg: (json['total_kg'] as num).toInt(),
+      status: json['status'] as String?,
+      totalPrice: json['total_price'] as String?,
+      totalKg: (json['total_kg'] as num?)?.toInt(),
       date: json['date'] as String?,
     );
 
@@ -35,9 +37,9 @@ Map<String, dynamic> _$ActiveHistoryDtoToJson(ActiveHistoryDto instance) =>
     };
 
 UserDto _$UserDtoFromJson(Map<String, dynamic> json) => UserDto(
-      id: (json['id'] as num).toInt(),
-      name: json['name'] as String,
-      phoneNumber: json['phone_number'] as String,
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String?,
+      phoneNumber: json['phone_number'] as String?,
     );
 
 Map<String, dynamic> _$UserDtoToJson(UserDto instance) => <String, dynamic>{
@@ -47,9 +49,9 @@ Map<String, dynamic> _$UserDtoToJson(UserDto instance) => <String, dynamic>{
     };
 
 ItemDto _$ItemDtoFromJson(Map<String, dynamic> json) => ItemDto(
-      name: json['name'] as String,
-      price: json['price'] as String,
-      kg: (json['kg'] as num).toInt(),
+      name: json['name'] as String?,
+      price: json['price'] as String?,
+      kg: (json['kg'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$ItemDtoToJson(ItemDto instance) => <String, dynamic>{

@@ -8,8 +8,8 @@ part of 'buy_req_dto.dart';
 
 BuyReqDto _$BuyReqDtoFromJson(Map<String, dynamic> json) => BuyReqDto(
       employee: json['employee'] as String,
-      userOrderId: (json['user_order_id'] as num).toInt(),
       customerId: (json['customer_id'] as num).toInt(),
+      userOrderId: json['user_order_id'] as String,
       paperKg: (json['paper_kg'] as num).toDouble(),
       paperPrice: (json['paper_price'] as num).toDouble(),
       plasticKg: (json['plastic_kg'] as num).toDouble(),

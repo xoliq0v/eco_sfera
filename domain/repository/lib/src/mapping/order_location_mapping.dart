@@ -5,9 +5,9 @@ extension OrderLocationMappingExt on LocationDto {
 
   OrderLocationModel toOrderLocationModel(){
     return OrderLocationModel(
-        latitude: latitude,
-        longitude: longitude,
-        id: id
+        latitude: latitude??"NULL",
+        longitude: longitude??'NULL',
+        id: id ?? -1
     );
   }
 

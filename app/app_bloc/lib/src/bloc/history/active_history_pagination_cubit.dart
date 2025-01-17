@@ -26,7 +26,7 @@ class ActiveHistoryCubit extends Cubit<ActiveHistoryPaginationState> with Pagina
     if (isLoaded && state.history.isNotEmpty) {
       emit(state.copyWith(isLoadingPagination: true));
     }
-    return _fetch();
+    return _fetchActive();
   }
 
   Future<bool?> refresh() async {
@@ -34,10 +34,10 @@ class ActiveHistoryCubit extends Cubit<ActiveHistoryPaginationState> with Pagina
       return null;
     }
     localCurrentPage = 0;
-    return _fetch(isRefresh: true);
+    return _fetchActive(isRefresh: true);
   }
 
-  Future<bool> _fetch({
+  Future<bool> _fetchActive({
     bool isRefresh = false,
   }) async {
     final res = await _fetchHistory.get(

@@ -7,15 +7,15 @@ class HistoryModel extends Equatable {
   final String date;
   final User user;
   final OrderLocationModel location;
-  final int paperKg;
+  final String paperKg;
   final String paperPrice;
-  final int plasticKg;
+  final String plasticKg;
   final String plasticPrice;
-  final int plasticBottleKg;
+  final String plasticBottleKg;
   final String plasticBottlePrice;
-  final int cartonKg;
+  final String cartonKg;
   final String cartonPrice;
-  final int totalKg;
+  final String totalKg;
   final String totalPrice;
   final String type;
 

@@ -3,7 +3,7 @@ import 'package:model/model.dart';
 
 abstract class Buy {
 
-  Future<Result<bool>> buy(BuyReq buyModel);
+  Future<Result<BuyCheckModel>> buy(BuyReq buyModel);
 
 }
 

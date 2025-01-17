@@ -8,7 +8,7 @@ mixin RouteUtils {
       mainRoutes.getPaymentPage(),
       mainRoutes.getConfirmedHistoryPage(),
       mainRoutes.getPartnersPage(),
-      mainRoutes.getReportPage()
+      // mainRoutes.getReportPage()
       // mainRoutes.getConfirmedHistoryPage(),
     ];
   }

@@ -1,13 +1,10 @@
 import 'package:core/src/network_config/result_mapping.dart';
 import 'package:model/model.dart';
-import 'package:model/src/buy_model.dart';
-import 'package:model/src/buy_page_prams_model.dart';
 import 'package:network/network.dart';
-import 'package:repository/src/mapping/history_mapper.dart';
-import 'package:repository/src/mapping/requests/buy_mapping.dart';
-import 'package:repository/src/mapping/trash_param_mapping.dart';
-import 'package:repository/src/repository/buy_repo.dart';
+import '../../mapping/requests/buy_mapping.dart';
+import '../buy_repo.dart';
 
+import '../../mapping/buy_check_mapper.dart';
 import '../../mapping/trash_mapping.dart';
 
 class BuyRepoImpl extends BuyRepo {
@@ -17,7 +14,7 @@ class BuyRepoImpl extends BuyRepo {
   final TrashProvider trashProvider;
 
   @override
-  Future<Result<bool>> buy(BuyReq buyModel) async{
+  Future<Result<BuyCheckModel>> buy(BuyReq buyModel) async{
     final response = await buyProvider.buy(
       buyModel.toBuyDto()
     );
@@ -32,7 +29,7 @@ class BuyRepoImpl extends BuyRepo {
         );
       }
 
-      return Result.completed(response.data);
+      return Result.completed(response.data?.toModel());
     }catch(e){
       return Result.error(
         ResultError(

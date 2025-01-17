@@ -4,7 +4,7 @@ import 'package:network/network.dart';
 
 extension PartnerDataMapper on PartnerInfoDto {
   PartnerEntity toEntity(){
-    return PartnerEntity(id: id, latitude: latitude, longitude: longitude, createdAt: createdAt, updatedAt: updatedAt, province: province, district: district, address: address, isActive: isActive, status: status, nickname: nickname, fish: fish, comment: comment, login: login, password: password, trashes: trashes, trashePrices: trashePrices);
+    return PartnerEntity(id: id, latitude: latitude??'', longitude: longitude??'', createdAt: createdAt, updatedAt: updatedAt, province: province??'', district: district??'', address: address??'', isActive: isActive??false, status: status??false, nickname: nickname??'', fish: fish??'', comment: comment??'', login: login??'', password: password??'', trashes: trashes??'', trashePrices: trashePrices??'');
   }
 }
 

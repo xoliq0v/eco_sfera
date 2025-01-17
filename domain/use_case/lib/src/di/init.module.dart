@@ -22,6 +22,12 @@ class UseCasePackageModule extends _i526.MicroPackageModule {
     final useCaseModule = _$UseCaseModule();
     gh.factory<_i175.GetRegions>(
         () => useCaseModule.provideGetRegions(gh<_i585.CustomerRepository>()));
+    gh.factory<_i987.GetTransactions>(
+        () => useCaseModule.provideGetTransactions(gh<_i585.UserRepository>()));
+    gh.factory<_i987.GetBalance>(
+        () => useCaseModule.provideGetBalance(gh<_i585.UserRepository>()));
+    gh.factory<_i987.FetchBalance>(
+        () => useCaseModule.provideFetchBalance(gh<_i585.UserRepository>()));
     gh.factory<_i655.GetActiveHistory>(
         () => useCaseModule.provideGetActiveHistory(gh<_i585.HistoryRepo>()));
     gh.factory<_i987.FetchHistory>(

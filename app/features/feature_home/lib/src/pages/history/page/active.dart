@@ -40,8 +40,33 @@ class _ActivePageState extends State<ActivePage> {
           return const Center(child: CircularProgressIndicator.adaptive());
         }
 
-        if (state.error != null && state.history.isEmpty) {
-          return Center(child: Text(state.error.toString()));
+        if(state.history.isEmpty){
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(LocaleKeys.activeHistoryIsEmpty.tr(context: context)),
+              5.verticalSpace,
+              EcoOutlineButton(onPressed: (){
+                context.read<ActiveHistoryCubit>().refresh();
+              }, child: Text(LocaleKeys.update.tr(context: context)))
+            ],
+          );
+
+        }
+
+        if (state.error != null) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(state.error.toString()),
+              5.verticalSpace,
+              EcoOutlineButton(onPressed: (){
+                context.read<ActiveHistoryCubit>().refresh();
+              }, child: Text(LocaleKeys.tryAgain.tr(context: context)))
+            ],
+          );
         }
 
         return LayoutBuilder(
@@ -49,7 +74,7 @@ class _ActivePageState extends State<ActivePage> {
             if (constraints.maxWidth > 600) {
               return RefreshIndicator(
                 onRefresh: () async {
-                  await context.read<HistoryPaginationCubit>().refresh();
+                  await context.read<ActiveHistoryCubit>().refresh();
                 },
                 child: GridView.builder(
                   controller: _scrollController,
@@ -79,32 +104,40 @@ class _ActivePageState extends State<ActivePage> {
 
             return RefreshIndicator(
               onRefresh: () async {
-                await context.read<HistoryPaginationCubit>().refresh();
+                await context.read<ActiveHistoryCubit>().refresh();
               },
-              child: ListView.builder(
-                controller: _scrollController,
-                itemCount: state.history.length + (state.isLoadingPagination ? 1 : 0),
-                padding: const EdgeInsets.all(16),
-                itemBuilder: (context, index) {
-                  if (index >= state.history.length) {
-                    return const Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: CircularProgressIndicator.adaptive(),
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                // constraints: BoxConstraints(
+                //   minHeight: MediaQuery.of(context).size.height,
+                // ),
+                child: ListView.builder(
+                  controller: _scrollController,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: state.history.length + (state.isLoadingPagination ? 1 : 0),
+                  padding: const EdgeInsets.all(16),
+                  itemBuilder: (context, index) {
+                    if (index >= state.history.length) {
+                      return const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: CircularProgressIndicator.adaptive(),
+                        ),
+                      );
+                    }
+
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: ActiveItem(
+                          history: state.history[index],
+                        onTap: (){
+                            ActiveHistoryBottomSheet.show(context, state.history[index]);
+                        },
                       ),
                     );
-                  }
-
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: ActiveItem(
-                        history: state.history[index],
-                      onTap: (){
-                          ActiveHistoryBottomSheet.show(context, state.history[index]);
-                      },
-                    ),
-                  );
-                },
+                  },
+                ),
               ),
             );
           },

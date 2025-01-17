@@ -116,7 +116,7 @@ class _ProfileWidget extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment
                                         .start,
                                     children: [
-                                      Text('Lorem ipsum', style: Theme
+                                      Text(LocaleKeys.output.tr(context: context), style: Theme
                                           .of(context)
                                           .textTheme
                                           .headlineSmall
@@ -148,7 +148,7 @@ class _ProfileWidget extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment
                                         .start,
                                     children: [
-                                      Text('Lorem ipsum', style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 10),),
+                                      Text(LocaleKeys.income.tr(context: context), style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 10),),
                                       Text(userProfile?.earnings??'0.00', style: Theme
                                           .of(context)
                                           .textTheme

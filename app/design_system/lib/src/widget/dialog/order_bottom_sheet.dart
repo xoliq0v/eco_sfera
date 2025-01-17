@@ -86,7 +86,7 @@ class ActiveHistoryBottomSheet {
                                 onPressed: (){
                                   NavigationUtils.getMainNavigator().navigateBuyPage(
                                       null,
-                                      'from_point',
+                                      'from_home',
                                       order
                                   );
                                 },

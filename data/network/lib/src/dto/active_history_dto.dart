@@ -19,15 +19,15 @@ class ActiveHistoryDto {
   });
 
   factory ActiveHistoryDto.fromJson(Map<String, dynamic> json) => _$ActiveHistoryDtoFromJson(json);
-  final int id;
-  final UserDto user;
-  final List<LocationDto> locations;
-  final List<ItemDto> items;
-  final String status;
+  final int? id;
+  final UserDto? user;
+  final List<LocationDto>? locations;
+  final List<ItemDto>? items;
+  final String? status;
   @JsonKey(name: 'total_price')
-  final String totalPrice;
+  final String? totalPrice;
   @JsonKey(name: 'total_kg')
-  final int totalKg;
+  final int? totalKg;
   final String? date;
 
   Map<String, dynamic> toJson() => _$ActiveHistoryDtoToJson(this);
@@ -43,10 +43,10 @@ class UserDto {
   });
 
   factory UserDto.fromJson(Map<String, dynamic> json) => _$UserDtoFromJson(json);
-  final int id;
-  final String name;
+  final int? id;
+  final String? name;
   @JsonKey(name: 'phone_number')
-  final String phoneNumber;
+  final String? phoneNumber;
 
   Map<String, dynamic> toJson() => _$UserDtoToJson(this);
 }
@@ -61,9 +61,9 @@ class ItemDto {
   });
 
   factory ItemDto.fromJson(Map<String, dynamic> json) => _$ItemDtoFromJson(json);
-  final String name;
-  final String price;
-  final int kg;
+  final String? name;
+  final String? price;
+  final int? kg;
 
   Map<String, dynamic> toJson() => _$ItemDtoToJson(this);
 }

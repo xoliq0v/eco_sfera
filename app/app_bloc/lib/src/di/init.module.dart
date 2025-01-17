@@ -21,6 +21,7 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
     gh.factory<_i3.ThemeChangerCubit>(
         () => appBlocModule.provideThemeChangCubit());
     gh.factory<_i4.FCMHandler>(() => appBlocModule.provideHandler());
+    gh.factory<_i3.NavigationBloc>(() => appBlocModule.provideNavigationBloc());
     gh.factory<_i3.AuthCubit>(() => appBlocModule.provideAuthCubit(
           gh<_i5.AuthUseCase>(),
           gh<_i5.SaveToken>(),
@@ -65,6 +66,16 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
           gh<_i5.FCMTokenRefresh>(),
           gh<_i5.WatchPost>(),
         ));
+    gh.factory<_i3.BalanceCubit>(() => appBlocModule.provideBalanceCubit(
+          gh<_i5.GetBalance>(),
+          gh<_i5.FetchBalance>(),
+          gh<_i5.GetUserProfile>(),
+        ));
+    gh.factory<_i3.TransactionCubit>(
+        () => appBlocModule.provideTransactionCubit(
+              gh<_i5.GetTransactions>(),
+              gh<_i5.GetUserProfile>(),
+            ));
     gh.factory<_i3.CustomerCubit>(
         () => appBlocModule.provideCustomerCubit(gh<_i5.GetCustomer>()));
     gh.factory<_i3.CustomerPaginationCubit>(() =>

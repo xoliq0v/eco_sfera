@@ -170,7 +170,7 @@ class _AddingPageState extends State<AddCustomerPage> {
                             return EcoDropdownMenu(
                               topText: LocaleKeys.region.tr(context: context),
                               initialSelection: 'Select',
-                              placeholderText: 'Select region',
+                              placeholderText: LocaleKeys.selectRegion.tr(context: context),
                               items: data.regions.map((item)=> item.name).toList(),
                               onChanged: (String? value) {
                                 regionID = regions[value] ?? 0;

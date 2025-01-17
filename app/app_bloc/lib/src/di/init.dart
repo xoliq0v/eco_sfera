@@ -98,6 +98,18 @@ abstract class AppBlocModule {
   PartnerPaginationCubit providePaginationPartnerCubit(FetchPartners fetch){
     return PartnerPaginationCubit(fetch,initialPageSize: 5);
   }
+
+  TransactionCubit provideTransactionCubit(GetTransactions get,GetUserProfile user){
+    return TransactionCubit(get,user);
+  }
+
+  BalanceCubit provideBalanceCubit(GetBalance get, FetchBalance fetch,GetUserProfile profile){
+    return BalanceCubit(get, fetch,profile);
+  }
+
+  NavigationBloc provideNavigationBloc(){
+    return NavigationBloc();
+  }
 }
 
 @InjectableInit.microPackage()

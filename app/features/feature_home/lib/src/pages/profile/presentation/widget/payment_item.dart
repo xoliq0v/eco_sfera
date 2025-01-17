@@ -1,11 +1,14 @@
+import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:model/model.dart';
 
+import '../../../../di/init_route.dart';
 import '../../data/model/payment_history.dart';
 
 class PaymentItem extends StatelessWidget {
-  final PaymentHistory paymentHistory;
+  final Transaction paymentHistory;
   const PaymentItem({super.key, required this.paymentHistory});
 
   @override
@@ -23,13 +26,13 @@ class PaymentItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  DateFormat('HH:mm').format(paymentHistory.date),
+                  paymentHistory.type.tr(context: context),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Text(
-                  paymentHistory.description,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                )
+                  paymentHistory.date,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ],
             ),
             const Spacer(),
@@ -37,13 +40,13 @@ class PaymentItem extends StatelessWidget {
               text: TextSpan(
                 children: [
                   TextSpan(
-                    text: '-${paymentHistory.amount.abs().toStringAsFixed(2)} ',
+                    text: '${double.parse(paymentHistory.amount).formattedWithSpaces} ',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.main,
+                      color: paymentHistory.type == 'income' ? AppColors.main : AppColors.red,
                     ),
                   ),
                   TextSpan(
-                    text: 'sum',
+                    text: LocaleKeys.sum.tr(context: context),
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
                     ),

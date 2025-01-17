@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart' hide AppImage;
 import 'package:flutter/material.dart';
@@ -32,8 +34,8 @@ class HeaderProfilePage extends StatelessWidget {
                     ChangeAvatarBottomSheet.show(context);
                   },
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        userProfile?.profileImage??'https://www.wilsoncenter.org/sites/default/files/media/images/person/james-person-1.jpg'
+                    backgroundImage: CachedNetworkImageProvider(
+                        userProfile?.profileImage ?? ''
                     ),
                     maxRadius: 30,
                   ),

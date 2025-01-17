@@ -22,7 +22,7 @@ mixin _$BuyState {
     required TResult Function() loading,
     required TResult Function() buyLoading,
     required TResult Function(List<TrashInfo> params, DriverData user) success,
-    required TResult Function() buySuccess,
+    required TResult Function(BuyCheckModel check) buySuccess,
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
@@ -34,7 +34,7 @@ mixin _$BuyState {
     TResult? Function()? loading,
     TResult? Function()? buyLoading,
     TResult? Function(List<TrashInfo> params, DriverData user)? success,
-    TResult? Function()? buySuccess,
+    TResult? Function(BuyCheckModel check)? buySuccess,
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
@@ -46,7 +46,7 @@ mixin _$BuyState {
     TResult Function()? loading,
     TResult Function()? buyLoading,
     TResult Function(List<TrashInfo> params, DriverData user)? success,
-    TResult Function()? buySuccess,
+    TResult Function(BuyCheckModel check)? buySuccess,
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,
@@ -150,7 +150,7 @@ class _$InitImpl implements _Init {
     required TResult Function() loading,
     required TResult Function() buyLoading,
     required TResult Function(List<TrashInfo> params, DriverData user) success,
-    required TResult Function() buySuccess,
+    required TResult Function(BuyCheckModel check) buySuccess,
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
@@ -165,7 +165,7 @@ class _$InitImpl implements _Init {
     TResult? Function()? loading,
     TResult? Function()? buyLoading,
     TResult? Function(List<TrashInfo> params, DriverData user)? success,
-    TResult? Function()? buySuccess,
+    TResult? Function(BuyCheckModel check)? buySuccess,
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
@@ -180,7 +180,7 @@ class _$InitImpl implements _Init {
     TResult Function()? loading,
     TResult Function()? buyLoading,
     TResult Function(List<TrashInfo> params, DriverData user)? success,
-    TResult Function()? buySuccess,
+    TResult Function(BuyCheckModel check)? buySuccess,
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,
@@ -288,7 +288,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() loading,
     required TResult Function() buyLoading,
     required TResult Function(List<TrashInfo> params, DriverData user) success,
-    required TResult Function() buySuccess,
+    required TResult Function(BuyCheckModel check) buySuccess,
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
@@ -303,7 +303,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? loading,
     TResult? Function()? buyLoading,
     TResult? Function(List<TrashInfo> params, DriverData user)? success,
-    TResult? Function()? buySuccess,
+    TResult? Function(BuyCheckModel check)? buySuccess,
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
@@ -318,7 +318,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? loading,
     TResult Function()? buyLoading,
     TResult Function(List<TrashInfo> params, DriverData user)? success,
-    TResult Function()? buySuccess,
+    TResult Function(BuyCheckModel check)? buySuccess,
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,
@@ -426,7 +426,7 @@ class _$BuyLoadingImpl implements _BuyLoading {
     required TResult Function() loading,
     required TResult Function() buyLoading,
     required TResult Function(List<TrashInfo> params, DriverData user) success,
-    required TResult Function() buySuccess,
+    required TResult Function(BuyCheckModel check) buySuccess,
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
@@ -441,7 +441,7 @@ class _$BuyLoadingImpl implements _BuyLoading {
     TResult? Function()? loading,
     TResult? Function()? buyLoading,
     TResult? Function(List<TrashInfo> params, DriverData user)? success,
-    TResult? Function()? buySuccess,
+    TResult? Function(BuyCheckModel check)? buySuccess,
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
@@ -456,7 +456,7 @@ class _$BuyLoadingImpl implements _BuyLoading {
     TResult Function()? loading,
     TResult Function()? buyLoading,
     TResult Function(List<TrashInfo> params, DriverData user)? success,
-    TResult Function()? buySuccess,
+    TResult Function(BuyCheckModel check)? buySuccess,
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,
@@ -606,7 +606,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function() loading,
     required TResult Function() buyLoading,
     required TResult Function(List<TrashInfo> params, DriverData user) success,
-    required TResult Function() buySuccess,
+    required TResult Function(BuyCheckModel check) buySuccess,
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
@@ -621,7 +621,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? loading,
     TResult? Function()? buyLoading,
     TResult? Function(List<TrashInfo> params, DriverData user)? success,
-    TResult? Function()? buySuccess,
+    TResult? Function(BuyCheckModel check)? buySuccess,
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
@@ -636,7 +636,7 @@ class _$SuccessImpl implements _Success {
     TResult Function()? loading,
     TResult Function()? buyLoading,
     TResult Function(List<TrashInfo> params, DriverData user)? success,
-    TResult Function()? buySuccess,
+    TResult Function(BuyCheckModel check)? buySuccess,
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,
@@ -714,6 +714,8 @@ abstract class _$$BuySuccessImplCopyWith<$Res> {
   factory _$$BuySuccessImplCopyWith(
           _$BuySuccessImpl value, $Res Function(_$BuySuccessImpl) then) =
       __$$BuySuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({BuyCheckModel check});
 }
 
 /// @nodoc
@@ -723,26 +725,50 @@ class __$$BuySuccessImplCopyWithImpl<$Res>
   __$$BuySuccessImplCopyWithImpl(
       _$BuySuccessImpl _value, $Res Function(_$BuySuccessImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? check = null,
+  }) {
+    return _then(_$BuySuccessImpl(
+      null == check
+          ? _value.check
+          : check // ignore: cast_nullable_to_non_nullable
+              as BuyCheckModel,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$BuySuccessImpl implements _BuySuccess {
-  const _$BuySuccessImpl();
+  const _$BuySuccessImpl(this.check);
+
+  @override
+  final BuyCheckModel check;
 
   @override
   String toString() {
-    return 'BuyState.buySuccess()';
+    return 'BuyState.buySuccess(check: $check)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$BuySuccessImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$BuySuccessImpl &&
+            (identical(other.check, check) || other.check == check));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, check);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BuySuccessImplCopyWith<_$BuySuccessImpl> get copyWith =>
+      __$$BuySuccessImplCopyWithImpl<_$BuySuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -751,12 +777,12 @@ class _$BuySuccessImpl implements _BuySuccess {
     required TResult Function() loading,
     required TResult Function() buyLoading,
     required TResult Function(List<TrashInfo> params, DriverData user) success,
-    required TResult Function() buySuccess,
+    required TResult Function(BuyCheckModel check) buySuccess,
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
   }) {
-    return buySuccess();
+    return buySuccess(check);
   }
 
   @override
@@ -766,12 +792,12 @@ class _$BuySuccessImpl implements _BuySuccess {
     TResult? Function()? loading,
     TResult? Function()? buyLoading,
     TResult? Function(List<TrashInfo> params, DriverData user)? success,
-    TResult? Function()? buySuccess,
+    TResult? Function(BuyCheckModel check)? buySuccess,
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
   }) {
-    return buySuccess?.call();
+    return buySuccess?.call(check);
   }
 
   @override
@@ -781,14 +807,14 @@ class _$BuySuccessImpl implements _BuySuccess {
     TResult Function()? loading,
     TResult Function()? buyLoading,
     TResult Function(List<TrashInfo> params, DriverData user)? success,
-    TResult Function()? buySuccess,
+    TResult Function(BuyCheckModel check)? buySuccess,
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,
     required TResult orElse(),
   }) {
     if (buySuccess != null) {
-      return buySuccess();
+      return buySuccess(check);
     }
     return orElse();
   }
@@ -844,7 +870,12 @@ class _$BuySuccessImpl implements _BuySuccess {
 }
 
 abstract class _BuySuccess implements BuyState {
-  const factory _BuySuccess() = _$BuySuccessImpl;
+  const factory _BuySuccess(final BuyCheckModel check) = _$BuySuccessImpl;
+
+  BuyCheckModel get check;
+  @JsonKey(ignore: true)
+  _$$BuySuccessImplCopyWith<_$BuySuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -915,7 +946,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function() loading,
     required TResult Function() buyLoading,
     required TResult Function(List<TrashInfo> params, DriverData user) success,
-    required TResult Function() buySuccess,
+    required TResult Function(BuyCheckModel check) buySuccess,
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
@@ -930,7 +961,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? loading,
     TResult? Function()? buyLoading,
     TResult? Function(List<TrashInfo> params, DriverData user)? success,
-    TResult? Function()? buySuccess,
+    TResult? Function(BuyCheckModel check)? buySuccess,
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
@@ -945,7 +976,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? loading,
     TResult Function()? buyLoading,
     TResult Function(List<TrashInfo> params, DriverData user)? success,
-    TResult Function()? buySuccess,
+    TResult Function(BuyCheckModel check)? buySuccess,
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,
@@ -1092,7 +1123,7 @@ class _$SearchResultImpl implements _SearchResult {
     required TResult Function() loading,
     required TResult Function() buyLoading,
     required TResult Function(List<TrashInfo> params, DriverData user) success,
-    required TResult Function() buySuccess,
+    required TResult Function(BuyCheckModel check) buySuccess,
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
@@ -1107,7 +1138,7 @@ class _$SearchResultImpl implements _SearchResult {
     TResult? Function()? loading,
     TResult? Function()? buyLoading,
     TResult? Function(List<TrashInfo> params, DriverData user)? success,
-    TResult? Function()? buySuccess,
+    TResult? Function(BuyCheckModel check)? buySuccess,
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
@@ -1122,7 +1153,7 @@ class _$SearchResultImpl implements _SearchResult {
     TResult Function()? loading,
     TResult Function()? buyLoading,
     TResult Function(List<TrashInfo> params, DriverData user)? success,
-    TResult Function()? buySuccess,
+    TResult Function(BuyCheckModel check)? buySuccess,
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,
@@ -1236,7 +1267,7 @@ class _$SearchLoadingImpl implements _SearchLoading {
     required TResult Function() loading,
     required TResult Function() buyLoading,
     required TResult Function(List<TrashInfo> params, DriverData user) success,
-    required TResult Function() buySuccess,
+    required TResult Function(BuyCheckModel check) buySuccess,
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
@@ -1251,7 +1282,7 @@ class _$SearchLoadingImpl implements _SearchLoading {
     TResult? Function()? loading,
     TResult? Function()? buyLoading,
     TResult? Function(List<TrashInfo> params, DriverData user)? success,
-    TResult? Function()? buySuccess,
+    TResult? Function(BuyCheckModel check)? buySuccess,
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
@@ -1266,7 +1297,7 @@ class _$SearchLoadingImpl implements _SearchLoading {
     TResult Function()? loading,
     TResult Function()? buyLoading,
     TResult Function(List<TrashInfo> params, DriverData user)? success,
-    TResult Function()? buySuccess,
+    TResult Function(BuyCheckModel check)? buySuccess,
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,

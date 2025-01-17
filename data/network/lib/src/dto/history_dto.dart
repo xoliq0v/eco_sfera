@@ -6,31 +6,31 @@ part 'history_dto.g.dart';
 
 @JsonSerializable()
 class HistoryDto {
-  final int id;
-  final String date;
-  final UserDto user;
-  final LocationDto location;
+  final int? id;
+  final String? date;
+  final UserDto? user;
+  final LocationDto? location;
   @JsonKey(name: 'paper_kg')
-  final int paperKg;
+  final String? paperKg;
   @JsonKey(name: 'paper_price')
-  final String paperPrice;
+  final String? paperPrice;
   @JsonKey(name: 'plastic_kg')
-  final int plasticKg;
+  final String? plasticKg;
   @JsonKey(name: 'plastic_price')
-  final String plasticPrice;
+  final String? plasticPrice;
   @JsonKey(name: 'plastic_bottle_kg')
-  final int plasticBottleKg;
+  final String? plasticBottleKg;
   @JsonKey(name: 'plastic_bottle_price')
-  final String plasticBottlePrice;
+  final String? plasticBottlePrice;
   @JsonKey(name: 'carton_kg')
-  final int cartonKg;
+  final String? cartonKg;
   @JsonKey(name: 'carton_price')
-  final String cartonPrice;
+  final String? cartonPrice;
   @JsonKey(name: 'total_kg')
-  final int totalKg;
+  final String? totalKg;
   @JsonKey(name: 'total_price')
-  final String totalPrice;
-  final String type;
+  final String? totalPrice;
+  final String? type;
 
   HistoryDto({
     required this.id,

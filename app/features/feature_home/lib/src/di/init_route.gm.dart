@@ -159,7 +159,7 @@ abstract class $FeatureHomeModule extends _i28.AutoRouterModule {
     MyAccountRoute.name: (routeData) {
       return _i28.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i13.MyAccountPage(),
+        child: _i28.WrappedRoute(child: const _i13.MyAccountPage()),
       );
     },
     OrderCardRoute.name: (routeData) {

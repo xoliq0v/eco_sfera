@@ -22,4 +22,6 @@ export 'src/auth_result.dart';
 export 'src/partner_info_model.dart';
 export 'src/trash_info.dart';
 export 'src/region.dart';
+export 'src/buy_check_model.dart';
 export 'src/active_history.dart';
+export 'src/transaction.dart';

@@ -41,7 +41,19 @@ class _CompletedPageState extends State<CompletePage> {
         }
 
         if (state.error != null && state.history.isEmpty) {
-          return Center(child: Text(state.error.toString()));
+          return Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(state.error.toString()),
+                EcoOutlineButton(onPressed: () async{
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(LocaleKeys.update.tr(context: context))));
+                  await context.read<HistoryPaginationCubit>().refresh();
+                }, child: Text(LocaleKeys.tryAgain.tr(context: context)))
+              ],
+            ),
+          );
         }
 
         return LayoutBuilder(
@@ -82,11 +94,11 @@ class _CompletedPageState extends State<CompletePage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Empty'),
-                  ElevatedButton(
+                  Text(LocaleKeys.completedHistoryIsEmpty.tr(context: context)),
+                  EcoOutlineButton(
                       onPressed: () async {
                         await context.read<HistoryPaginationCubit>().refresh();
-                      }, child: Text(LocaleKeys.tryAgain.tr(context: context))),
+                      }, child: Text(LocaleKeys.update.tr(context: context))),
                 ],
               );
             }

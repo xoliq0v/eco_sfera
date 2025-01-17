@@ -65,4 +65,16 @@ mixin AppBlocHelper {
   static PartnerPaginationCubit getPartnerPaginationCubit(){
     return GetIt.I.get<PartnerPaginationCubit>();
   }
+
+  static TransactionCubit getTransactionCubit(){
+    return GetIt.I.get<TransactionCubit>();
+  }
+
+  static BalanceCubit getBalanceCubit(){
+    return GetIt.I.get<BalanceCubit>();
+  }
+
+  static NavigationBloc getNavigationBloc(){
+    return GetIt.I.get<NavigationBloc>();
+  }
 }

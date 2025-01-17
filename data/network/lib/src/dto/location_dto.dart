@@ -4,9 +4,9 @@ part 'location_dto.g.dart';
 
 @JsonSerializable()
 class LocationDto {
-  final String latitude;
-  final String longitude;
-  final int id;
+  final String? latitude;
+  final String? longitude;
+  final int? id;
 
   LocationDto({
     required this.latitude,

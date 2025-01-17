@@ -7,8 +7,8 @@ class BuyReqDto{
 
   const BuyReqDto({
     required this.employee,
-    required this.userOrderId,
     required this.customerId,
+    required this.userOrderId,
     required this.paperKg,
     required this.paperPrice,
     required this.plasticKg,
@@ -24,7 +24,7 @@ class BuyReqDto{
 
   final String employee;
   @JsonKey(name: 'user_order_id')
-  final int userOrderId;
+  final String userOrderId;
   @JsonKey(name: 'customer_id')
   final int customerId;
   @JsonKey(name: 'paper_kg')
