@@ -1,0 +1,10 @@
+# melos_managed_dependency_overrides: alice,core,database,network
+dependency_overrides:
+  alice:
+    path: ../../domain/alice
+  core:
+    path: ../../domain/core
+  database:
+    path: ../database
+  network:
+    path: ../network

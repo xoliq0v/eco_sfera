@@ -36,6 +36,7 @@ abstract class  LocaleKeys {
   static const chooseFromGallery = 'chooseFromGallery';
   static const chooseLang = 'chooseLang';
   static const combinedRoute = 'combinedRoute';
+  static const comments = 'comments';
   static const completed = 'completed';
   static const completedHistoryIsEmpty = 'completedHistoryIsEmpty';
   static const confirmation = 'confirmation';
@@ -44,6 +45,7 @@ abstract class  LocaleKeys {
   static const customer = 'customer';
   static const customerAdd = 'customerAdd';
   static const dailyWalkingDistance = 'dailyWalkingDistance';
+  static const data = 'data';
   static const departure = 'departure';
   static const done = 'done';
   static const driver = 'driver';
@@ -103,6 +105,7 @@ abstract class  LocaleKeys {
   static const noInternetConnection = 'noInternetConnection';
   static const noOrdersAvailable = 'noOrdersAvailable';
   static const no_results_found = 'no_results_found';
+  static const notEnoughBalance = 'notEnoughBalance';
   static const notifications = 'notifications';
   static const numberOfVouchers = 'numberOfVouchers';
   static const openSettings = 'openSettings';
@@ -142,6 +145,7 @@ abstract class  LocaleKeys {
   static const routeName = 'routeName';
   static const routeNumber = 'routeNumber';
   static const sat = 'sat';
+  static const save = 'save';
   static const search = 'search';
   static const secondary = 'secondary';
   static const select = 'select';
@@ -158,6 +162,7 @@ abstract class  LocaleKeys {
   static const stir = 'stir';
   static const stop = 'stop';
   static const stopLoading = 'stopLoading';
+  static const submit = 'submit';
   static const sum = 'sum';
   static const sun = 'sun';
   static const surname = 'surname';

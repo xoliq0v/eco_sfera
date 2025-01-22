@@ -29,7 +29,7 @@ class _PresentationPageState extends State<PresentationPage> with TickerProvider
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(LocaleKeys.partners.tr(context: context)),
+        title: Text(LocaleKeys.data.tr(context: context)),
         actions: [
           ValueListenableBuilder(
               valueListenable: isComments,
@@ -49,9 +49,9 @@ class _PresentationPageState extends State<PresentationPage> with TickerProvider
             isComments.value = index == 1;
           },
           controller: tabController,
-          tabs: const [
-            Tab(text: 'Payments'),
-            Tab(text: 'Comments'),
+          tabs: [
+            Tab(text: LocaleKeys.payment.tr(context: context)),
+            Tab(text: LocaleKeys.comments.tr(context: context)),
           ],
           unselectedLabelColor: Theme.of(context).textTheme.headlineMedium?.color,
           indicator: BoxDecoration(

@@ -1,7 +1,11 @@
+import 'package:core/core.dart';
+import 'package:core/generated/locale_keys.g.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
+
+import '../../../../di/init_route.dart';
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
@@ -13,10 +17,10 @@ class PaymentPage extends StatefulWidget {
 class _PaymentPageState extends State<PaymentPage> {
 
   Map<String, String> data = {
-    'Qog’oz': 'assets/icons/doc.svg',
-    'Karton': 'assets/icons/box.svg',
-    'Matal': 'assets/icons/metal.svg',
-    'Plastik': 'assets/icons/bottle.svg',
+    LocaleKeys.paper: 'assets/icons/doc.svg',
+    LocaleKeys.cardboard: 'assets/icons/box.svg',
+    LocaleKeys.metal: 'assets/icons/metal.svg',
+    LocaleKeys.plastic: 'assets/icons/bottle.svg',
   };
 
   @override
@@ -32,7 +36,7 @@ class _PaymentPageState extends State<PaymentPage> {
               },
               child: _Item(
                 icon: data.values.elementAt(index).toString(),
-                title: data.keys.elementAt(index).toString(),
+                title: data.keys.elementAt(index).toString().tr(context: context),
               ),
             ),
           );

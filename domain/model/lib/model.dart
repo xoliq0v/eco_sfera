@@ -25,3 +25,4 @@ export 'src/region.dart';
 export 'src/buy_check_model.dart';
 export 'src/active_history.dart';
 export 'src/transaction.dart';
+export 'src/product.dart';

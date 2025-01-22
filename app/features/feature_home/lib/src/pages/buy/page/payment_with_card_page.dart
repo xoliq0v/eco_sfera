@@ -22,8 +22,17 @@ class PaymentWithCardPage extends StatefulWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return BlocProvider<BuyCubit>(
-      create: (context) => AppBlocHelper.getBuyCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<BuyCubit>(
+          create: (context) => AppBlocHelper.getBuyCubit(),
+          child: this,
+        ),
+        BlocProvider<BalanceCubit>(
+          create: (context) => AppBlocHelper.getBalanceCubit(),
+          child: this,
+        ),
+      ],
       child: this,
     );
   }
@@ -129,6 +138,13 @@ class _PaymentWithCardPageState extends State<PaymentWithCardPage> {
                     LocaleKeys.organizationAddress: value.check.organizationAddress,
                     LocaleKeys.branchName: value.check.branchName,
                   }
+              );
+            },
+            notEnoughBalance: (value) async {
+              isLoading.value = false;
+              await showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(title: Text(LocaleKeys.notEnoughBalance.tr(context: context)))
               );
             },
           );

@@ -12,6 +12,7 @@ export 'src/dto/order_dto.dart';
 export 'src/dto/pageable_content_dto.dart';
 export 'src/dto/partner_dto.dart';
 export 'src/dto/partner_info_dto.dart';
+export 'src/dto/product_dto.dart';
 export 'src/dto/region_dto.dart';
 export 'src/dto/requests/auth_dto.dart';
 export 'src/dto/requests/buy_req_dto.dart';

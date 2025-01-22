@@ -1,0 +1,10 @@
+# melos_managed_dependency_overrides: core,database,firebase_eco,network
+dependency_overrides:
+  core:
+    path: ../core
+  database:
+    path: ../../data/database
+  firebase_eco:
+    path: ../../data/firebase_eco
+  network:
+    path: ../../data/network

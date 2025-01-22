@@ -36,15 +36,25 @@ class ProfileCubit extends Cubit<ProfileState>{
 
   Future<void> initDriver() async {
     emit(const ProfileState.loading());
-    final profile = getUserProfile.get();
-    if (profile != null) {
-      emit(ProfileState.user(driverProfile: profile));
-      return;
+    final type = await getType.get();
+    if(type == AuthType.driver){
+      final profile = getUserProfile.get();
+      if (profile != null) {
+        emit(ProfileState.user(driverProfile: profile));
+        return;
+      }
+    }else{
+      final profile = getPartnerProfile.get();
+      if (profile != null) {
+        emit(ProfileState.user(partnerProfile: profile));
+        return;
+      }
     }
     final token = await getToken.get();
     if(token != null){
       final res = await fetchUserProfile.fetch();
-      if(res == null){
+      final response = await fetchPartnerProfile.fetch();
+      if(res == null || response == null){
         emit(ProfileState.error(''));
         return;
       }

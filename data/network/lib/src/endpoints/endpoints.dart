@@ -28,6 +28,8 @@ mixin PartnerEndpoint {
   static String partners = _basePath;
   static String search = '$_basePath/search';
   static String data = 'api/employee/data?type=partner';
+  static String order = 'api/partner/driver-orders';
+  static String products = 'api/partner/products';
 }
 
 mixin TrashEndpoint {

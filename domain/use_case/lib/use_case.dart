@@ -17,3 +17,4 @@ export 'src/getregions_use_case.dart';
 export 'src/getactivehistory_use_case.dart';
 export 'src/fetchpartners_use_case.dart';
 export 'src/di/init.module.dart';
+export 'src/getallproducts_use_case.dart';

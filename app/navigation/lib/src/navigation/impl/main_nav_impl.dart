@@ -43,7 +43,7 @@ class MainNavigationImpl extends MainNavigation {
         AppIcons.historySvg,
       ], routes: [
         LocaleKeys.home,
-        LocaleKeys.buy,
+        LocaleKeys.data,
         LocaleKeys.profile,
         LocaleKeys.history
         // LocaleKeys.profile.tr(context: context)

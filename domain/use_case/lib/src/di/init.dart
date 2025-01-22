@@ -11,6 +11,7 @@ import '../impl/buy_use_case_impl.dart';
 import '../impl/customer_use_case_impl.dart';
 import '../impl/fetchpartners_use_case_impl.dart';
 import '../impl/getactivehistory_use_case_impl.dart';
+import '../impl/getallproducts_use_case_impl.dart';
 import '../impl/getbalance_use_case_impl.dart';
 import '../impl/getregions_use_case_impl.dart';
 import '../impl/gettransactions_use_case_impl.dart';
@@ -127,6 +128,14 @@ abstract class UseCaseModule {
 
   FetchBalance provideFetchBalance(UserRepository userRepo){
     return FetchBalanceImpl(userRepository: userRepo);
+  }
+
+  // GetPartnerOrders provideGetPartnerOrders(OrdersRepo ordersrepo){
+  //   return GetPartnerOrdersImpl(ordersrepo: ordersrepo);
+  // }
+
+  GetAllProducts provideGetAllProducts(PartnerRepo partnerrepo){
+    return GetAllProductsImpl(partnerrepo: partnerrepo);
   }
 }
 

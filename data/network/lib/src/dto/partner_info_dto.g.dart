@@ -12,8 +12,12 @@ PartnerInfoDto _$PartnerInfoDtoFromJson(Map<String, dynamic> json) =>
       latitude: json['latitude'] as String?,
       longitude: json['longitude'] as String?,
       location: json['location'] as String?,
-      createdAt: DateTime.parse(json['created_at'] as String),
-      updatedAt: DateTime.parse(json['updated_at'] as String),
+      createdAt: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
+      updatedAt: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
       province: json['province'] as String?,
       district: json['district'] as String?,
       address: json['address'] as String?,
@@ -35,8 +39,8 @@ Map<String, dynamic> _$PartnerInfoDtoToJson(PartnerInfoDto instance) =>
       'latitude': instance.latitude,
       'longitude': instance.longitude,
       'location': instance.location,
-      'created_at': instance.createdAt.toIso8601String(),
-      'updated_at': instance.updatedAt.toIso8601String(),
+      'created_at': instance.createdAt?.toIso8601String(),
+      'updated_at': instance.updatedAt?.toIso8601String(),
       'province': instance.province,
       'district': instance.district,
       'address': instance.address,

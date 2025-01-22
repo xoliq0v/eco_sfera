@@ -26,6 +26,7 @@ mixin _$BuyState {
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
+    required TResult Function() notEnoughBalance,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +39,7 @@ mixin _$BuyState {
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
+    TResult? Function()? notEnoughBalance,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +52,7 @@ mixin _$BuyState {
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,
+    TResult Function()? notEnoughBalance,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,6 +66,7 @@ mixin _$BuyState {
     required TResult Function(_Error value) error,
     required TResult Function(_SearchResult value) searchResult,
     required TResult Function(_SearchLoading value) searchLoading,
+    required TResult Function(_NotEnoughBalance value) notEnoughBalance,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +79,7 @@ mixin _$BuyState {
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchResult value)? searchResult,
     TResult? Function(_SearchLoading value)? searchLoading,
+    TResult? Function(_NotEnoughBalance value)? notEnoughBalance,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +92,7 @@ mixin _$BuyState {
     TResult Function(_Error value)? error,
     TResult Function(_SearchResult value)? searchResult,
     TResult Function(_SearchLoading value)? searchLoading,
+    TResult Function(_NotEnoughBalance value)? notEnoughBalance,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -154,6 +160,7 @@ class _$InitImpl implements _Init {
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
+    required TResult Function() notEnoughBalance,
   }) {
     return init();
   }
@@ -169,6 +176,7 @@ class _$InitImpl implements _Init {
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
+    TResult? Function()? notEnoughBalance,
   }) {
     return init?.call();
   }
@@ -184,6 +192,7 @@ class _$InitImpl implements _Init {
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,
+    TResult Function()? notEnoughBalance,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -203,6 +212,7 @@ class _$InitImpl implements _Init {
     required TResult Function(_Error value) error,
     required TResult Function(_SearchResult value) searchResult,
     required TResult Function(_SearchLoading value) searchLoading,
+    required TResult Function(_NotEnoughBalance value) notEnoughBalance,
   }) {
     return init(this);
   }
@@ -218,6 +228,7 @@ class _$InitImpl implements _Init {
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchResult value)? searchResult,
     TResult? Function(_SearchLoading value)? searchLoading,
+    TResult? Function(_NotEnoughBalance value)? notEnoughBalance,
   }) {
     return init?.call(this);
   }
@@ -233,6 +244,7 @@ class _$InitImpl implements _Init {
     TResult Function(_Error value)? error,
     TResult Function(_SearchResult value)? searchResult,
     TResult Function(_SearchLoading value)? searchLoading,
+    TResult Function(_NotEnoughBalance value)? notEnoughBalance,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -292,6 +304,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
+    required TResult Function() notEnoughBalance,
   }) {
     return loading();
   }
@@ -307,6 +320,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
+    TResult? Function()? notEnoughBalance,
   }) {
     return loading?.call();
   }
@@ -322,6 +336,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,
+    TResult Function()? notEnoughBalance,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -341,6 +356,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Error value) error,
     required TResult Function(_SearchResult value) searchResult,
     required TResult Function(_SearchLoading value) searchLoading,
+    required TResult Function(_NotEnoughBalance value) notEnoughBalance,
   }) {
     return loading(this);
   }
@@ -356,6 +372,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchResult value)? searchResult,
     TResult? Function(_SearchLoading value)? searchLoading,
+    TResult? Function(_NotEnoughBalance value)? notEnoughBalance,
   }) {
     return loading?.call(this);
   }
@@ -371,6 +388,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Error value)? error,
     TResult Function(_SearchResult value)? searchResult,
     TResult Function(_SearchLoading value)? searchLoading,
+    TResult Function(_NotEnoughBalance value)? notEnoughBalance,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -430,6 +448,7 @@ class _$BuyLoadingImpl implements _BuyLoading {
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
+    required TResult Function() notEnoughBalance,
   }) {
     return buyLoading();
   }
@@ -445,6 +464,7 @@ class _$BuyLoadingImpl implements _BuyLoading {
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
+    TResult? Function()? notEnoughBalance,
   }) {
     return buyLoading?.call();
   }
@@ -460,6 +480,7 @@ class _$BuyLoadingImpl implements _BuyLoading {
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,
+    TResult Function()? notEnoughBalance,
     required TResult orElse(),
   }) {
     if (buyLoading != null) {
@@ -479,6 +500,7 @@ class _$BuyLoadingImpl implements _BuyLoading {
     required TResult Function(_Error value) error,
     required TResult Function(_SearchResult value) searchResult,
     required TResult Function(_SearchLoading value) searchLoading,
+    required TResult Function(_NotEnoughBalance value) notEnoughBalance,
   }) {
     return buyLoading(this);
   }
@@ -494,6 +516,7 @@ class _$BuyLoadingImpl implements _BuyLoading {
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchResult value)? searchResult,
     TResult? Function(_SearchLoading value)? searchLoading,
+    TResult? Function(_NotEnoughBalance value)? notEnoughBalance,
   }) {
     return buyLoading?.call(this);
   }
@@ -509,6 +532,7 @@ class _$BuyLoadingImpl implements _BuyLoading {
     TResult Function(_Error value)? error,
     TResult Function(_SearchResult value)? searchResult,
     TResult Function(_SearchLoading value)? searchLoading,
+    TResult Function(_NotEnoughBalance value)? notEnoughBalance,
     required TResult orElse(),
   }) {
     if (buyLoading != null) {
@@ -610,6 +634,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
+    required TResult Function() notEnoughBalance,
   }) {
     return success(params, user);
   }
@@ -625,6 +650,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
+    TResult? Function()? notEnoughBalance,
   }) {
     return success?.call(params, user);
   }
@@ -640,6 +666,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,
+    TResult Function()? notEnoughBalance,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -659,6 +686,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Error value) error,
     required TResult Function(_SearchResult value) searchResult,
     required TResult Function(_SearchLoading value) searchLoading,
+    required TResult Function(_NotEnoughBalance value) notEnoughBalance,
   }) {
     return success(this);
   }
@@ -674,6 +702,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchResult value)? searchResult,
     TResult? Function(_SearchLoading value)? searchLoading,
+    TResult? Function(_NotEnoughBalance value)? notEnoughBalance,
   }) {
     return success?.call(this);
   }
@@ -689,6 +718,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Error value)? error,
     TResult Function(_SearchResult value)? searchResult,
     TResult Function(_SearchLoading value)? searchLoading,
+    TResult Function(_NotEnoughBalance value)? notEnoughBalance,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -781,6 +811,7 @@ class _$BuySuccessImpl implements _BuySuccess {
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
+    required TResult Function() notEnoughBalance,
   }) {
     return buySuccess(check);
   }
@@ -796,6 +827,7 @@ class _$BuySuccessImpl implements _BuySuccess {
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
+    TResult? Function()? notEnoughBalance,
   }) {
     return buySuccess?.call(check);
   }
@@ -811,6 +843,7 @@ class _$BuySuccessImpl implements _BuySuccess {
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,
+    TResult Function()? notEnoughBalance,
     required TResult orElse(),
   }) {
     if (buySuccess != null) {
@@ -830,6 +863,7 @@ class _$BuySuccessImpl implements _BuySuccess {
     required TResult Function(_Error value) error,
     required TResult Function(_SearchResult value) searchResult,
     required TResult Function(_SearchLoading value) searchLoading,
+    required TResult Function(_NotEnoughBalance value) notEnoughBalance,
   }) {
     return buySuccess(this);
   }
@@ -845,6 +879,7 @@ class _$BuySuccessImpl implements _BuySuccess {
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchResult value)? searchResult,
     TResult? Function(_SearchLoading value)? searchLoading,
+    TResult? Function(_NotEnoughBalance value)? notEnoughBalance,
   }) {
     return buySuccess?.call(this);
   }
@@ -860,6 +895,7 @@ class _$BuySuccessImpl implements _BuySuccess {
     TResult Function(_Error value)? error,
     TResult Function(_SearchResult value)? searchResult,
     TResult Function(_SearchLoading value)? searchLoading,
+    TResult Function(_NotEnoughBalance value)? notEnoughBalance,
     required TResult orElse(),
   }) {
     if (buySuccess != null) {
@@ -950,6 +986,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
+    required TResult Function() notEnoughBalance,
   }) {
     return error(this.error);
   }
@@ -965,6 +1002,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
+    TResult? Function()? notEnoughBalance,
   }) {
     return error?.call(this.error);
   }
@@ -980,6 +1018,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,
+    TResult Function()? notEnoughBalance,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -999,6 +1038,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Error value) error,
     required TResult Function(_SearchResult value) searchResult,
     required TResult Function(_SearchLoading value) searchLoading,
+    required TResult Function(_NotEnoughBalance value) notEnoughBalance,
   }) {
     return error(this);
   }
@@ -1014,6 +1054,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchResult value)? searchResult,
     TResult? Function(_SearchLoading value)? searchLoading,
+    TResult? Function(_NotEnoughBalance value)? notEnoughBalance,
   }) {
     return error?.call(this);
   }
@@ -1029,6 +1070,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Error value)? error,
     TResult Function(_SearchResult value)? searchResult,
     TResult Function(_SearchLoading value)? searchLoading,
+    TResult Function(_NotEnoughBalance value)? notEnoughBalance,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1127,6 +1169,7 @@ class _$SearchResultImpl implements _SearchResult {
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
+    required TResult Function() notEnoughBalance,
   }) {
     return searchResult(customers);
   }
@@ -1142,6 +1185,7 @@ class _$SearchResultImpl implements _SearchResult {
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
+    TResult? Function()? notEnoughBalance,
   }) {
     return searchResult?.call(customers);
   }
@@ -1157,6 +1201,7 @@ class _$SearchResultImpl implements _SearchResult {
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,
+    TResult Function()? notEnoughBalance,
     required TResult orElse(),
   }) {
     if (searchResult != null) {
@@ -1176,6 +1221,7 @@ class _$SearchResultImpl implements _SearchResult {
     required TResult Function(_Error value) error,
     required TResult Function(_SearchResult value) searchResult,
     required TResult Function(_SearchLoading value) searchLoading,
+    required TResult Function(_NotEnoughBalance value) notEnoughBalance,
   }) {
     return searchResult(this);
   }
@@ -1191,6 +1237,7 @@ class _$SearchResultImpl implements _SearchResult {
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchResult value)? searchResult,
     TResult? Function(_SearchLoading value)? searchLoading,
+    TResult? Function(_NotEnoughBalance value)? notEnoughBalance,
   }) {
     return searchResult?.call(this);
   }
@@ -1206,6 +1253,7 @@ class _$SearchResultImpl implements _SearchResult {
     TResult Function(_Error value)? error,
     TResult Function(_SearchResult value)? searchResult,
     TResult Function(_SearchLoading value)? searchLoading,
+    TResult Function(_NotEnoughBalance value)? notEnoughBalance,
     required TResult orElse(),
   }) {
     if (searchResult != null) {
@@ -1271,6 +1319,7 @@ class _$SearchLoadingImpl implements _SearchLoading {
     required TResult Function(String error) error,
     required TResult Function(List<Customer> customers) searchResult,
     required TResult Function() searchLoading,
+    required TResult Function() notEnoughBalance,
   }) {
     return searchLoading();
   }
@@ -1286,6 +1335,7 @@ class _$SearchLoadingImpl implements _SearchLoading {
     TResult? Function(String error)? error,
     TResult? Function(List<Customer> customers)? searchResult,
     TResult? Function()? searchLoading,
+    TResult? Function()? notEnoughBalance,
   }) {
     return searchLoading?.call();
   }
@@ -1301,6 +1351,7 @@ class _$SearchLoadingImpl implements _SearchLoading {
     TResult Function(String error)? error,
     TResult Function(List<Customer> customers)? searchResult,
     TResult Function()? searchLoading,
+    TResult Function()? notEnoughBalance,
     required TResult orElse(),
   }) {
     if (searchLoading != null) {
@@ -1320,6 +1371,7 @@ class _$SearchLoadingImpl implements _SearchLoading {
     required TResult Function(_Error value) error,
     required TResult Function(_SearchResult value) searchResult,
     required TResult Function(_SearchLoading value) searchLoading,
+    required TResult Function(_NotEnoughBalance value) notEnoughBalance,
   }) {
     return searchLoading(this);
   }
@@ -1335,6 +1387,7 @@ class _$SearchLoadingImpl implements _SearchLoading {
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchResult value)? searchResult,
     TResult? Function(_SearchLoading value)? searchLoading,
+    TResult? Function(_NotEnoughBalance value)? notEnoughBalance,
   }) {
     return searchLoading?.call(this);
   }
@@ -1350,6 +1403,7 @@ class _$SearchLoadingImpl implements _SearchLoading {
     TResult Function(_Error value)? error,
     TResult Function(_SearchResult value)? searchResult,
     TResult Function(_SearchLoading value)? searchLoading,
+    TResult Function(_NotEnoughBalance value)? notEnoughBalance,
     required TResult orElse(),
   }) {
     if (searchLoading != null) {
@@ -1361,4 +1415,148 @@ class _$SearchLoadingImpl implements _SearchLoading {
 
 abstract class _SearchLoading implements BuyState {
   const factory _SearchLoading() = _$SearchLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$NotEnoughBalanceImplCopyWith<$Res> {
+  factory _$$NotEnoughBalanceImplCopyWith(_$NotEnoughBalanceImpl value,
+          $Res Function(_$NotEnoughBalanceImpl) then) =
+      __$$NotEnoughBalanceImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$NotEnoughBalanceImplCopyWithImpl<$Res>
+    extends _$BuyStateCopyWithImpl<$Res, _$NotEnoughBalanceImpl>
+    implements _$$NotEnoughBalanceImplCopyWith<$Res> {
+  __$$NotEnoughBalanceImplCopyWithImpl(_$NotEnoughBalanceImpl _value,
+      $Res Function(_$NotEnoughBalanceImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$NotEnoughBalanceImpl implements _NotEnoughBalance {
+  const _$NotEnoughBalanceImpl();
+
+  @override
+  String toString() {
+    return 'BuyState.notEnoughBalance()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$NotEnoughBalanceImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() loading,
+    required TResult Function() buyLoading,
+    required TResult Function(List<TrashInfo> params, DriverData user) success,
+    required TResult Function(BuyCheckModel check) buySuccess,
+    required TResult Function(String error) error,
+    required TResult Function(List<Customer> customers) searchResult,
+    required TResult Function() searchLoading,
+    required TResult Function() notEnoughBalance,
+  }) {
+    return notEnoughBalance();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? loading,
+    TResult? Function()? buyLoading,
+    TResult? Function(List<TrashInfo> params, DriverData user)? success,
+    TResult? Function(BuyCheckModel check)? buySuccess,
+    TResult? Function(String error)? error,
+    TResult? Function(List<Customer> customers)? searchResult,
+    TResult? Function()? searchLoading,
+    TResult? Function()? notEnoughBalance,
+  }) {
+    return notEnoughBalance?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function()? buyLoading,
+    TResult Function(List<TrashInfo> params, DriverData user)? success,
+    TResult Function(BuyCheckModel check)? buySuccess,
+    TResult Function(String error)? error,
+    TResult Function(List<Customer> customers)? searchResult,
+    TResult Function()? searchLoading,
+    TResult Function()? notEnoughBalance,
+    required TResult orElse(),
+  }) {
+    if (notEnoughBalance != null) {
+      return notEnoughBalance();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_BuyLoading value) buyLoading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_BuySuccess value) buySuccess,
+    required TResult Function(_Error value) error,
+    required TResult Function(_SearchResult value) searchResult,
+    required TResult Function(_SearchLoading value) searchLoading,
+    required TResult Function(_NotEnoughBalance value) notEnoughBalance,
+  }) {
+    return notEnoughBalance(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_BuyLoading value)? buyLoading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_BuySuccess value)? buySuccess,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_SearchResult value)? searchResult,
+    TResult? Function(_SearchLoading value)? searchLoading,
+    TResult? Function(_NotEnoughBalance value)? notEnoughBalance,
+  }) {
+    return notEnoughBalance?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_BuyLoading value)? buyLoading,
+    TResult Function(_Success value)? success,
+    TResult Function(_BuySuccess value)? buySuccess,
+    TResult Function(_Error value)? error,
+    TResult Function(_SearchResult value)? searchResult,
+    TResult Function(_SearchLoading value)? searchLoading,
+    TResult Function(_NotEnoughBalance value)? notEnoughBalance,
+    required TResult orElse(),
+  }) {
+    if (notEnoughBalance != null) {
+      return notEnoughBalance(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NotEnoughBalance implements BuyState {
+  const factory _NotEnoughBalance() = _$NotEnoughBalanceImpl;
 }

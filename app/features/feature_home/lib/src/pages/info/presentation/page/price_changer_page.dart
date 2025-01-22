@@ -34,7 +34,7 @@ class _PriceChangerPageState extends State<PriceChangerPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
             child: EcoMaterialButton(
-              child: Text('Save'),
+              child: Text(LocaleKeys.save.tr(context: context)),
               onPressed: (){},
             ),
           ),

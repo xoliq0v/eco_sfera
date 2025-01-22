@@ -7,11 +7,13 @@ import 'package:model/model.dart';
 
 
 class HeaderProfilePage extends StatelessWidget {
+  final PartnerInfoModel? partner;
   final DriverData? userProfile;
-  const HeaderProfilePage({super.key,required this.userProfile});
+  const HeaderProfilePage({super.key,this.partner,this.userProfile});
 
   @override
   Widget build(BuildContext context) {
+    print(userProfile != null);
     return Padding(
       padding: const EdgeInsets.only(bottom: 25.0),
       child: Padding(
@@ -22,14 +24,11 @@ class HeaderProfilePage extends StatelessWidget {
             SvgPicture.asset(
               AppIcons.iconBackground,
             ),
-            IconButton(onPressed: (){
-              context.router.popForced();
-            }, icon: Icon(Icons.arrow_back_ios,size: 20,color: Theme.of(context).colorScheme.background,),),
-            15.verticalSpace,
+            50.verticalSpace,
             Row(
               children: [
                 //https://www.wilsoncenter.org/sites/default/files/media/images/person/james-person-1.jpg
-                InkWell(
+                userProfile != null ? InkWell(
                   onTap:(){
                     ChangeAvatarBottomSheet.show(context);
                   },
@@ -39,13 +38,13 @@ class HeaderProfilePage extends StatelessWidget {
                     ),
                     maxRadius: 30,
                   ),
-                ),
+                ) : SizedBox.shrink(),
                 15.horizontalSpace,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${userProfile?.name} ${userProfile?.surname}',
+                      userProfile != null ? '${userProfile?.name} ${userProfile?.surname} ' : '${partner?.nickname}',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Theme.of(context).colorScheme.background,
                           fontWeight: FontWeight.w700,
@@ -54,7 +53,7 @@ class HeaderProfilePage extends StatelessWidget {
                     ),
                     5.verticalSpace,
                     Text(
-                      userProfile?.phone.formatUzbekPhoneNumber()??'Phone empty',
+                      userProfile == null ? partner?.phone?.formatUzbekPhoneNumber()??'' : userProfile?.phone??'Phone empty',
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         color: Theme.of(context).colorScheme.background,
                       ),

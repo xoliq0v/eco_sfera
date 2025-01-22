@@ -8,6 +8,7 @@ import 'package:repository/src/mapping/pageable_content_mapping.dart';
 
 import '../../mapping/partner_data_mapper.dart';
 import '../../mapping/partner_item_mapping.dart';
+import '../../mapping/product_mapping.dart';
 import '../partner_repo.dart';
 
 class PartnerRepoImpl extends PartnerRepo {
@@ -54,5 +55,30 @@ class PartnerRepoImpl extends PartnerRepo {
         });
       },
     );
+  }
+
+  @override
+  Future<Result<List<Product>>> getAllProducts() async {
+    final response = await partnerProvider.getAllProducts();
+
+    try {
+      if (!response.success || response.data == null) {
+        return Result.error(
+          ResultError(
+            message: response.error?.message ?? 'Something went wrong',
+            reason: response.error?.reason ?? 'Something went wrong',
+          ),
+        );
+      }
+
+      return Result.completed(response.data?.map((e) => e.toModel()).toList() ?? []);
+    } catch(e) {
+      return Result.error(
+        ResultError(
+          message: 'Operation failed',
+          reason: e.toString(),
+        ),
+      );
+    }
   }
 }

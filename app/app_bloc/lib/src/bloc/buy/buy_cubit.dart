@@ -13,7 +13,9 @@ class BuyCubit extends Cubit<BuyState>{
       this._buy,
       this.search,
       this._fetchBuyPageParams,
-      this.getUserProfile
+      this.getUserProfile,
+      this._fetchBalance,
+      this._getBalance
       ):super(BuyState.init()){
     fetchParams();
   }
@@ -22,6 +24,8 @@ class BuyCubit extends Cubit<BuyState>{
   final SearchCustomer search;
   final FetchBuyPageParams _fetchBuyPageParams;
   final GetUserProfile getUserProfile;
+  final FetchBalance _fetchBalance;
+  final GetBalance _getBalance;
 
   Future<void> fetchParams() async {
     emit(BuyState.loading());
@@ -43,6 +47,15 @@ class BuyCubit extends Cubit<BuyState>{
   Future<void> buy(BuyReq model) async {
 
     emit(BuyState.buyLoading());
+
+    await _fetchBalance.fetch();
+
+    final balance = await _getBalance.get();
+    print('BALANCE: ${balance?.toDouble()??0}');
+    if((balance?.toDouble()??0) < model.totalPrice){
+      emit(BuyState.notEnoughBalance());
+      return;
+    }
 
     try {
       final result = await _buy.buy(model);

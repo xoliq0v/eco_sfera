@@ -19,4 +19,5 @@ sealed class BuyState with _$BuyState {
 
   const factory BuyState.searchLoading() = _SearchLoading;
 
+  const factory BuyState.notEnoughBalance() = _NotEnoughBalance;
 }

@@ -16,4 +16,6 @@ abstract class PartnerRepo extends BaseRepository {
   Stream<PartnerInfoModel?> watchPartnerProfile();
 
   Future<Result<BasePaginatedResponse<PartnerItem>?>> fetchPartners(int page,int size);
+
+  Future<Result<List<Product>>> getAllProducts();
 }

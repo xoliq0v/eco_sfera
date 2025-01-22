@@ -77,4 +77,8 @@ mixin AppBlocHelper {
   static NavigationBloc getNavigationBloc(){
     return GetIt.I.get<NavigationBloc>();
   }
+
+  static TypeBloc getTypeBloc(){
+    return GetIt.I.get<TypeBloc>();
+  }
 }

@@ -46,6 +46,8 @@ class UseCasePackageModule extends _i526.MicroPackageModule {
         () => useCaseModule.provideGetAuthType(gh<_i585.SessionRepository>()));
     gh.factory<_i627.AuthImpl>(
         () => _i627.AuthImpl(authRepository: gh<_i585.AuthRepository>()));
+    gh.factory<_i987.GetAllProducts>(
+        () => useCaseModule.provideGetAllProducts(gh<_i585.PartnerRepo>()));
     gh.factory<_i987.AuthUseCase>(
         () => useCaseModule.provideAuthUseCase(gh<_i585.AuthRepository>()));
     gh.factory<_i987.FCMTokenRefresh>(

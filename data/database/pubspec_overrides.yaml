@@ -1,0 +1,10 @@
+# melos_managed_dependency_overrides: alice,core,firebase_eco,network
+dependency_overrides:
+  alice:
+    path: ../../domain/alice
+  core:
+    path: ../../domain/core
+  firebase_eco:
+    path: ../firebase_eco
+  network:
+    path: ../network

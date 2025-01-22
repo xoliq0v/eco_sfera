@@ -13,4 +13,6 @@ abstract class PartnerProvider extends BaseProvider {
   /// For partner app
   Future<ApiResponse<PartnerInfoDto>> fetchPartnerData();
 
+
+  Future<ApiResponse<List<ProductDto>>> getAllProducts();
 }

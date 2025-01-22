@@ -1,0 +1,28 @@
+# melos_managed_dependency_overrides: alice,core,database,design_system,feature_home,firebase_eco,map_service,model,navigation,network,repository,use_case,yandex_mapkit_lite
+dependency_overrides:
+  alice:
+    path: ../../domain/alice
+  core:
+    path: ../../domain/core
+  database:
+    path: ../../data/database
+  design_system:
+    path: ../design_system
+  feature_home:
+    path: ../features/feature_home
+  firebase_eco:
+    path: ../../data/firebase_eco
+  map_service:
+    path: ../../data/map_service
+  model:
+    path: ../../domain/model
+  navigation:
+    path: ../navigation
+  network:
+    path: ../../data/network
+  repository:
+    path: ../../domain/repository
+  use_case:
+    path: ../../domain/use_case
+  yandex_mapkit_lite:
+    path: ../../data/yandex-mapkit-lite-flutter

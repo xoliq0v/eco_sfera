@@ -69,8 +69,8 @@ abstract class AppBlocModule {
     return LocationServiceCubit(_getLocation);
   }
 
-  BuyCubit provideBuyCubit(Buy _buy,FetchBuyPageParams _fetchBuyPageParams, SearchCustomer search,GetUserProfile profile){
-    return BuyCubit(_buy,search, _fetchBuyPageParams,profile);
+  BuyCubit provideBuyCubit(Buy _buy,FetchBuyPageParams _fetchBuyPageParams, SearchCustomer search,GetUserProfile profile,FetchBalance fetchBalance,GetBalance getBalance){
+    return BuyCubit(_buy,search, _fetchBuyPageParams,profile,fetchBalance,getBalance);
   }
 
   HistoryPaginationCubit provideHistoryPaginationCubit(
@@ -110,6 +110,15 @@ abstract class AppBlocModule {
   NavigationBloc provideNavigationBloc(){
     return NavigationBloc();
   }
+
+  TypeBloc provideTypeBloc(GetAuthType type){
+    return TypeBloc(type);
+  }
+
+  ProductCubit provideProductCubit(GetAllProducts getAllProducts){
+    return ProductCubit(getAllProducts);
+  }
+
 }
 
 @InjectableInit.microPackage()

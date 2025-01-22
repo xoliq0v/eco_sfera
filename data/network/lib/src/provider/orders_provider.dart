@@ -8,4 +8,5 @@ abstract class OrderProvider extends BaseProvider {
 
   Future<ApiResponse<bool>> watch(int id);
 
+  // Future<ApiResponse<bool>> getPartnerOrders(int page,int size,String status);
 }

@@ -37,9 +37,9 @@ class PartnerInfoDto {
   final String? longitude;
   final String? location;
   @JsonKey(name: 'created_at')
-  final DateTime createdAt;
+  final DateTime? createdAt;
   @JsonKey(name: 'updated_at')
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
   final String? province;
   final String? district;
   final String? address;

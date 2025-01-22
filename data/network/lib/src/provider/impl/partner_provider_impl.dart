@@ -34,4 +34,15 @@ class PartnerProviderImpl extends PartnerProvider {
     );
   }
 
+
+  @override
+  Future<ApiResponse<List<ProductDto>>> getAllProducts() {
+    return apiCall(
+        apiClient.get(PartnerEndpoint.products),
+        dataFromJson: (json) {
+          final data = json['data'] as List<dynamic>;
+          return data.map((e) => ProductDto.fromJson(e as Map<String, dynamic>)).toList();
+        }
+    );
+  }
 }

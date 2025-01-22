@@ -39,6 +39,11 @@ class OrdersPage extends StatefulWidget implements AutoRouteWrapper {
             return AppBlocHelper.getNavigationBloc();
           },
         ),
+        BlocProvider<TypeBloc>(
+          create: (context) {
+            return AppBlocHelper.getTypeBloc();
+          },
+        ),
       ],
       child: this,
     );
@@ -146,6 +151,17 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
     sliderController = ActionSliderController();
     WakelockPlus.enable();
   }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _onResume();
+  }
+
+  void _onResume() {
+    context.read<BalanceCubit>().refresh();
+  }
+
 
   void _searchOrders(String query) {
     _searchDebouncer.run(() {
@@ -282,11 +298,18 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: context.colorScheme.background,
-        leading: Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: GestureDetector(
-            onTap: () => NavigationUtils.getMainNavigator().navigateProfilePage(),
-            child: const PriceBadge(),
+        leading: BlocProvider<TypeBloc>(
+          create: (context)=> AppBlocHelper.getTypeBloc(),
+          child: BlocBuilder<TypeBloc,AuthTypeState>(
+            builder: (context,state) {
+              return Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: GestureDetector(
+                  onTap: () => NavigationUtils.getMainNavigator().navigateProfilePage(),
+                  child: state.runtimeType == DriverType ? PriceBadge() : SizedBox.shrink(),
+                ),
+              );
+            }
           ),
         ),
         leadingWidth: 120,
@@ -406,6 +429,8 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
     );
   }
 
+  
+
 }
 
 // Add this class for search debouncing
@@ -423,4 +448,5 @@ class Debouncer {
   void dispose() {
     _timer?.cancel();
   }
+
 }

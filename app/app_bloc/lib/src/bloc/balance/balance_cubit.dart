@@ -31,6 +31,21 @@ class BalanceCubit extends Cubit<BalanceState>{
   final GetBalance _getBalance;
   final GetUserProfile _getUserProfile;
 
+  Future<void> refresh() async{
+    emit(const BalanceState.loading());
+    final res = await _fetchBalance.fetch();
+    final userData = await _getUserProfile.get();
+    if(res != null){
+      emit(BalanceState.success(res.toDouble(),userData!));
+    }else{
+      emit(BalanceState.error(LocaleKeys.errorGettingTheBalance));
+    }
+  }
+
+  Future<double?> getBalance() async{
+    await refresh();
+    return await _getBalance.get();
+  }
 
   Future<void> init()async{
     emit(const BalanceState.loading());
