@@ -19,5 +19,43 @@ class TrashProviderImpl extends TrashProvider {
      }
     );
   }
+  
+  @override
+  Future<ApiResponse<List<PartnerTrashDto>>> fetchPartnerTrashes() {
+    return apiCall(
+      apiClient.get(TrashEndpoint.partnerTrashes),
+      dataFromJson: (data) {
+        return (data as List<dynamic>).map((json) => PartnerTrashDto.fromJson(json as Map<String, dynamic>)).toList();
+      }
+    );
+  }
+
+  @override
+  Future<ApiResponse<bool>> changeTrashPrice(int trashId, String price) {
+    return apiCall(
+      apiClient.put(
+        TrashEndpoint.changeTrashPrice, 
+        data: {
+          'price': price,
+          'product_id': trashId,
+        }
+      ),
+      dataFromJson: (data) {
+        return data != null;
+      }
+    );
+  }
+
+  @override
+  Future<ApiResponse<bool>> addComment(int productId, String comment) {
+    return apiCall(
+      apiClient.post(TrashEndpoint.addComment, 
+        data: {'product_id': productId, 'description': comment}
+      ),
+      dataFromJson: (data) {
+        return data != null;
+      }
+    );
+  }
 
 }

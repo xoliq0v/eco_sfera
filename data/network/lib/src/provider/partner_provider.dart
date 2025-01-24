@@ -15,4 +15,8 @@ abstract class PartnerProvider extends BaseProvider {
 
 
   Future<ApiResponse<List<ProductDto>>> getAllProducts();
+
+  Future<ApiResponse<bool>> changeStatus(bool status);
+
+  Future<ApiResponse<bool>> editPartner(PartnerEditDto partnerEditDto);
 }

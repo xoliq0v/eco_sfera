@@ -27,3 +27,5 @@ export 'src/active_history.dart';
 export 'src/transaction.dart';
 export 'src/product.dart';
 export 'src/partner_order_model.dart';
+export 'src/partner_trash.dart';
+export 'src/requests/partner_edit.dart';

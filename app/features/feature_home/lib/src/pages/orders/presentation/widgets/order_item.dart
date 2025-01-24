@@ -92,7 +92,7 @@ class OrderItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${order?.date.hour}:${order?.date.minute}'.formatTime(),
+                      order?.date != null ? '${order?.date.hour}:${order?.date.minute}'.formatTime() : '${partnerOrder?.date}'.formatTime(),
                       style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           color: isNew ? AppColors.main : context.colorScheme.primary
                       ),

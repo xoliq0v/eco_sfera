@@ -18,11 +18,6 @@ class RepositoryPackageModule extends _i526.MicroPackageModule {
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
     final repositoryModule = _$RepositoryModule();
-    gh.lazySingleton<_i585.PartnerRepo>(
-        () => repositoryModule.providePartnerRepository(
-              gh<_i372.PartnerProvider>(),
-              gh<_i252.PartnerProfileDAO>(),
-            ));
     gh.lazySingleton<_i585.SessionRepository>(
         () => repositoryModule.provideSessionRepository(
               gh<_i252.AppStorage>(),
@@ -38,6 +33,12 @@ class RepositoryPackageModule extends _i526.MicroPackageModule {
               gh<_i372.ClientProvider>(),
               gh<_i252.UserProfileDAO>(),
               gh<_i252.BalanceDao>(),
+            ));
+    gh.lazySingleton<_i585.PartnerRepo>(
+        () => repositoryModule.providePartnerRepository(
+              gh<_i372.PartnerProvider>(),
+              gh<_i252.PartnerProfileDAO>(),
+              gh<_i372.TrashProvider>(),
             ));
     gh.lazySingleton<_i585.HistoryRepo>(() =>
         repositoryModule.provideHistoryRepository(gh<_i372.HistoryProvider>()));

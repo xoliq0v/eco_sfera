@@ -8,6 +8,7 @@ import 'dart:async' as _i687;
 
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:repository/repository.dart' as _i585;
+import 'package:use_case/src/change_trash_price_use_case.dart' as _i565;
 import 'package:use_case/src/di/init.dart' as _i854;
 import 'package:use_case/src/fetchpartners_use_case.dart' as _i481;
 import 'package:use_case/src/getactivehistory_use_case.dart' as _i655;
@@ -54,6 +55,16 @@ class UseCasePackageModule extends _i526.MicroPackageModule {
         () => useCaseModule.provideFCMTokenRefresh(gh<_i585.AuthRepository>()));
     gh.factory<_i481.FetchPartners>(
         () => useCaseModule.provideFetchPartners(gh<_i585.PartnerRepo>()));
+    gh.factory<_i987.PartnerGetTrashUseCase>(
+        () => useCaseModule.providePartnerGetTrash(gh<_i585.PartnerRepo>()));
+    gh.factory<_i565.ChangeTrashPriceUseCase>(
+        () => useCaseModule.provideChangeTrashPrice(gh<_i585.PartnerRepo>()));
+    gh.factory<_i987.ChangePartnerStatusUseCase>(() =>
+        useCaseModule.provideChangePartnerStatus(gh<_i585.PartnerRepo>()));
+    gh.factory<_i987.PartnerEditUseCase>(
+        () => useCaseModule.providePartnerEdit(gh<_i585.PartnerRepo>()));
+    gh.factory<_i987.PostCommentUseCase>(
+        () => useCaseModule.providePostComment(gh<_i585.PartnerRepo>()));
     gh.factory<_i987.GetCustomer>(
         () => useCaseModule.provideGetCustomer(gh<_i585.CustomerRepository>()));
     gh.factory<_i987.PostCustomer>(() =>

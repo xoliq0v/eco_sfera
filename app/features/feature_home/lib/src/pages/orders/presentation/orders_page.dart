@@ -479,7 +479,14 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
                                 partnerOrder: state.partnerOrders[index],
                                 isNew: false,
                                 onTap: (){
-                                  // _showOrderSheet(state.partnerOrders[index],false);
+                                  PartnerOrderSheet.show(
+                                    context: context, 
+                                    order: state.partnerOrders[index],
+                                     isNewOrder: false,
+                                      onAcceptPress: (){
+
+                                      }
+                                  );
                                 },
                               ),
                             );

@@ -4,11 +4,14 @@ import 'dart:async';
 import 'package:core/core.dart';
 import 'package:repository/repository.dart';
 import 'package:use_case/src/getregions_use_case.dart';
+import '../change_trash_price_use_case.dart';
 import '../fetchpartners_use_case.dart';
 import '../getactivehistory_use_case.dart';
 import '../getpartnerorders_use_case.dart';
 import '../impl/auth_use_case_impl.dart';
 import '../impl/buy_use_case_impl.dart';
+import '../impl/change_partner_status_use_case_impl.dart';
+import '../impl/change_trash_price_use_case_impl.dart';
 import '../impl/customer_use_case_impl.dart';
 import '../impl/fetchpartners_use_case_impl.dart';
 import '../impl/get_parnter_order_impl.dart';
@@ -19,11 +22,15 @@ import '../impl/getregions_use_case_impl.dart';
 import '../impl/gettransactions_use_case_impl.dart';
 import '../impl/location_use_case_impl.dart';
 import '../impl/order_use_case_impl.dart';
+import '../impl/partner_edit_use_case_impl.dart';
+import '../impl/partner_get_trash_use_case_impl.dart';
+import '../impl/post_comment_use_case_impl.dart';
 import '../impl/session_use_case_impl.dart';
 import '../../use_case.dart';
 
 import '../impl/history_use_case_impl.dart';
 import '../impl/parnter_use_case_impl.dart';
+import '../partner_get_trash_use_case.dart';
 
 @module
 abstract class UseCaseModule {
@@ -142,6 +149,26 @@ abstract class UseCaseModule {
 
   GetPartnerOrdersUseCase provideGetPartnerOrders(OrderRepo orderRepo){
     return GetPartnerOrderImpl(orderRepo: orderRepo);
+  }
+
+  PartnerGetTrashUseCase providePartnerGetTrash(PartnerRepo partnerRepo){
+    return PartnerGetTrashUseCaseImpl(partnerRepo: partnerRepo);
+  }
+
+  ChangeTrashPriceUseCase provideChangeTrashPrice(PartnerRepo partnerRepo){
+    return ChangeTrashPriceUseCaseImpl(partnerRepo: partnerRepo);
+  }
+
+  ChangePartnerStatusUseCase provideChangePartnerStatus(PartnerRepo partnerRepo){
+    return ChangePartnerStatusUseCaseImpl(partnerRepo: partnerRepo);
+  }
+
+  PartnerEditUseCase providePartnerEdit(PartnerRepo partnerRepo){
+    return PartnerEditUseCaseImpl(partnerRepo: partnerRepo);
+  }
+
+  PostCommentUseCase providePostComment(PartnerRepo partnerRepo){
+    return PostCommentUseCaseImpl(partnerRepo);
   }
 }
 

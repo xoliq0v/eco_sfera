@@ -18,4 +18,14 @@ abstract class PartnerRepo extends BaseRepository {
   Future<Result<BasePaginatedResponse<PartnerItem>?>> fetchPartners(int page,int size);
 
   Future<Result<List<Product>>> getAllProducts();
+
+  Future<Result<List<PartnerTrash>>> fetchPartnerTrashes();
+
+  Future<Result<bool>> changeTrashPrice(int trashId, String price);
+
+  Future<Result<bool>> changeStatus(bool status);
+
+  Future<Result<bool>> editPartner(PartnerEdit partnerEdit);
+
+  Future<Result<bool>> addComment(int productId, String comment);
 }

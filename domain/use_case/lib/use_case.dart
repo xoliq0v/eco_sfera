@@ -19,3 +19,8 @@ export 'src/get_partner_orders_use_case.dart';
 export 'src/fetchpartners_use_case.dart';
 export 'src/di/init.module.dart';
 export 'src/getallproducts_use_case.dart';
+export 'src/partner_get_trash_use_case.dart';
+export 'src/change_trash_price_use_case.dart';
+export 'src/change_partner_status_use_case.dart';
+export 'src/partner_edit_use_case.dart';
+export 'src/post_comment_use_case.dart';

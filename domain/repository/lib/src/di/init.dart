@@ -93,8 +93,9 @@ abstract class RepositoryModule {
   PartnerRepo providePartnerRepository(
       PartnerProvider partnerProvider,
       PartnerProfileDAO partnerProfileDAO,
+      TrashProvider trashProvider
       ){
-    return PartnerRepoImpl(partnerProvider: partnerProvider, partnerProfileDAO: partnerProfileDAO);
+    return PartnerRepoImpl(partnerProvider: partnerProvider, partnerProfileDAO: partnerProfileDAO, trashProvider: trashProvider);
   }
 }
 

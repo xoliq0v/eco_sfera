@@ -30,12 +30,17 @@ mixin PartnerEndpoint {
   static String data = 'api/employee/data?type=partner';
   static String order = 'api/partner/driver-orders';
   static String products = 'api/partner/products';
+  static String changeStatus = 'api/partner/change-status';
+  static String editPartner = 'api/partner/edit';
 }
 
 mixin TrashEndpoint {
   static const _basePath = 'api/trashes';
 
   static String trashes =_basePath;
+  static String partnerTrashes = 'api/partner/products';
+  static String changeTrashPrice = 'api/partner/edit-product-price'; //api/partner/edit-product-price
+  static String addComment = 'api/partner/add-product-description';
 }
 
 mixin RouteEndpoint {

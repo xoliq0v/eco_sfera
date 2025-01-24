@@ -7,7 +7,9 @@ import 'package:network/network.dart';
 import 'package:repository/src/mapping/pageable_content_mapping.dart';
 
 import '../../mapping/partner_data_mapper.dart';
+import '../../mapping/partner_edit_mapping.dart';
 import '../../mapping/partner_item_mapping.dart';
+import '../../mapping/partner_trash_mapping.dart';
 import '../../mapping/product_mapping.dart';
 import '../partner_repo.dart';
 
@@ -15,11 +17,12 @@ class PartnerRepoImpl extends PartnerRepo {
   PartnerRepoImpl({
     required this.partnerProvider,
     required this.partnerProfileDAO,
+    required this.trashProvider,
   });
 
   final PartnerProvider partnerProvider;
   final PartnerProfileDAO partnerProfileDAO;
-
+  final TrashProvider trashProvider;
   @override
   Future<int?> fetchPartnerInfo() async{
     final res = await partnerProvider.fetchPartnerData();
@@ -80,5 +83,55 @@ class PartnerRepoImpl extends PartnerRepo {
         ),
       );
     }
+  }
+  
+  @override
+  Future<Result<List<PartnerTrash>>> fetchPartnerTrashes() {
+    return toResult2(
+      trashProvider.fetchPartnerTrashes(),
+      fromSuccessResponse: (response) {
+        return response.data?.map((e) => e.toDomain()).toList() ?? [];
+      },
+    );
+  }
+
+  @override
+  Future<Result<bool>> changeTrashPrice(int trashId, String price) {
+    return toResult2(
+      trashProvider.changeTrashPrice(trashId, price),
+      fromSuccessResponse: (response) {
+        return response.data ?? false;
+      },
+    );
+  }
+
+  @override
+  Future<Result<bool>> changeStatus(bool status) {
+    return toResult2(
+      partnerProvider.changeStatus(status),
+      fromSuccessResponse: (response) {
+        return response.data ?? false;
+      },
+    );
+  }
+
+  @override
+  Future<Result<bool>> editPartner(PartnerEdit partnerEdit) {
+    return toResult2(
+      partnerProvider.editPartner(partnerEdit.toDto()),
+      fromSuccessResponse: (response) {
+        return response.data ?? false;
+      },
+    );
+  }
+
+  @override
+  Future<Result<bool>> addComment(int productId, String comment) {
+    return toResult2(
+      trashProvider.addComment(productId, comment),
+      fromSuccessResponse: (response) {
+        return response.data ?? false;
+      },
+    );
   }
 }

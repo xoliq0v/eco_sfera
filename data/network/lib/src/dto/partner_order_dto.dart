@@ -9,10 +9,15 @@ class PartnerOrderDto {
   final DriverDto driver;
   final String? phone;
   final String? comment;
+  @JsonKey(name: 'total_price')
   final String? totalPrice;
+  @JsonKey(name: 'longitude')
   final String? longitude;
+  @JsonKey(name: 'latitude')
   final String? latitude;
+  @JsonKey(name: 'product_type')
   final String? productType;
+  @JsonKey(name: 'product_weight')
   final String? productWeight;
   final String? status;
   final String? date;
