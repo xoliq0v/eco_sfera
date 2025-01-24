@@ -6,10 +6,12 @@ import 'package:repository/repository.dart';
 import 'package:use_case/src/getregions_use_case.dart';
 import '../fetchpartners_use_case.dart';
 import '../getactivehistory_use_case.dart';
+import '../getpartnerorders_use_case.dart';
 import '../impl/auth_use_case_impl.dart';
 import '../impl/buy_use_case_impl.dart';
 import '../impl/customer_use_case_impl.dart';
 import '../impl/fetchpartners_use_case_impl.dart';
+import '../impl/get_parnter_order_impl.dart';
 import '../impl/getactivehistory_use_case_impl.dart';
 import '../impl/getallproducts_use_case_impl.dart';
 import '../impl/getbalance_use_case_impl.dart';
@@ -136,6 +138,10 @@ abstract class UseCaseModule {
 
   GetAllProducts provideGetAllProducts(PartnerRepo partnerrepo){
     return GetAllProductsImpl(partnerrepo: partnerrepo);
+  }
+
+  GetPartnerOrdersUseCase provideGetPartnerOrders(OrderRepo orderRepo){
+    return GetPartnerOrderImpl(orderRepo: orderRepo);
   }
 }
 

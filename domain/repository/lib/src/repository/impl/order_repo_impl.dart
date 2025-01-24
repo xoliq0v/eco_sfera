@@ -1,8 +1,12 @@
 import 'package:core/core.dart';
+import 'package:model/model.dart';
 import 'package:model/src/order.dart';
 import 'package:network/network.dart';
 import 'package:repository/src/mapping/order_mapping.dart';
 import 'package:repository/src/repository/order_repo.dart';
+import 'package:repository/src/mapping/pageable_content_mapping.dart';
+
+import '../../mapping/partner_order_mapper.dart';
 
 class OrderRepoImpl extends OrderRepo {
   OrderRepoImpl({required this.orderProvider});
@@ -33,6 +37,18 @@ class OrderRepoImpl extends OrderRepo {
     }else{
       throw 'Something went wrong!';
     }
+  }
+
+  @override
+  Future<Result<BasePaginatedResponse<PartnerOrder>?>> getPartnerOrders(int page, int size, String status) async {
+    return toResult2(
+      orderProvider.getPartnerOrders(page, size, status),
+      fromSuccessResponse: (response){
+      return response.data?.toBasePaginatedResponse(contentMapper: (json) {
+        final data = json as PartnerOrderDto;
+        return data.toPartnerOrderModel();
+      });
+    });
   }
 
 }

@@ -18,6 +18,8 @@ dependencies:
     path: ../../app/design_system
   model:
     path: ../../domain/model
+  app_bloc:
+    path: ../../app_bloc
   flutter:
     sdk: flutter
 

@@ -81,4 +81,8 @@ mixin AppBlocHelper {
   static TypeBloc getTypeBloc(){
     return GetIt.I.get<TypeBloc>();
   }
+
+  static PartnerOrderCubit getPartnerOrderCubit(){
+    return GetIt.I.get<PartnerOrderCubit>();
+  }
 }

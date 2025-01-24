@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:ffi';
 
 import 'package:action_slider/action_slider.dart';
@@ -44,6 +45,11 @@ class OrdersPage extends StatefulWidget implements AutoRouteWrapper {
             return AppBlocHelper.getTypeBloc();
           },
         ),
+        BlocProvider<PartnerOrderCubit>(
+          create: (context) {
+            return AppBlocHelper.getPartnerOrderCubit();
+          },
+        ),
       ],
       child: this,
     );
@@ -51,10 +57,12 @@ class OrdersPage extends StatefulWidget implements AutoRouteWrapper {
 }
 
 class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMixin {
+  final ScrollController _scrollController = ScrollController();
   final ValueNotifier<bool> _readyGetOrder = ValueNotifier(false);
   final ValueNotifier<bool> _hasIssue = ValueNotifier(true);
   final TextEditingController _searchController = TextEditingController();
   late final ActionSliderController sliderController;
+  AuthType? _authType;
   late LocationEntity _location;
   // Add a Set to keep track of viewed orders
   final Set<String> _viewedOrders = {};
@@ -68,7 +76,6 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
       return false;
     }
   }
-
 
   // Add debouncer for search
   final _searchDebouncer = Debouncer(milliseconds: 300);
@@ -148,8 +155,23 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
   @override
   void initState() {
     super.initState();
+    _getAuthType();
     sliderController = ActionSliderController();
     WakelockPlus.enable();
+    _scrollController.addListener(_onScroll);
+  }
+
+   void _onScroll() {
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    if (currentScroll >= maxScroll - 200) {
+      context.read<ActiveHistoryCubit>().fetchHistory();
+    }
+  }
+
+  Future<void> _getAuthType() async {
+    await context.read<TypeBloc>().get();
+    _authType = context.read<TypeBloc>().state.runtimeType == DriverType ? AuthType.driver : AuthType.partner;
   }
 
   @override
@@ -175,7 +197,8 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
   }
 
   Widget _buildOrdersList(List<OrderModel> orders) {
-    if (orders.isEmpty) {
+    final sortedOrders = orders.where((order) => order.status).toList();
+    if (sortedOrders.isEmpty) {
       return Center(
         child: RefreshIndicator(
           onRefresh: _handleRefresh,
@@ -195,10 +218,10 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
     return RefreshIndicator(
       onRefresh: _handleRefresh,
       child: ListView.builder(
-        itemCount: orders.length,
+        itemCount: sortedOrders.length,
         padding: const EdgeInsets.all(16),
         itemBuilder: (context, index) {
-          final order = orders[index];
+          final order = sortedOrders[index];
           return Padding(
             padding: const EdgeInsets.only(bottom: 16),
             child: OrderItem(
@@ -287,6 +310,8 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
     _searchController.dispose();
     _searchDebouncer.dispose();
     _readyGetOrder.dispose();
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
     WakelockPlus.disable();
     super.dispose();
   }
@@ -295,97 +320,180 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
   Widget build(BuildContext context) {
     super.build(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        surfaceTintColor: context.colorScheme.background,
-        leading: BlocProvider<TypeBloc>(
-          create: (context)=> AppBlocHelper.getTypeBloc(),
-          child: BlocBuilder<TypeBloc,AuthTypeState>(
-            builder: (context,state) {
-              return Padding(
+    return BlocProvider<TypeBloc>(
+      create: (context)=> AppBlocHelper.getTypeBloc(),
+      child: BlocBuilder<TypeBloc,AuthTypeState>(
+        builder: (context,state) {
+          _authType = state.runtimeType == DriverType ? AuthType.driver : AuthType.partner;
+          return Scaffold(
+            appBar: AppBar(
+              surfaceTintColor: context.colorScheme.background,
+              leading: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: GestureDetector(
                   onTap: () => NavigationUtils.getMainNavigator().navigateProfilePage(),
                   child: state.runtimeType == DriverType ? PriceBadge() : SizedBox.shrink(),
                 ),
-              );
-            }
-          ),
-        ),
-        leadingWidth: 120,
-        title: Text(LocaleKeys.orders.tr(context: context)),
-        actions: [
-          ValueListenableBuilder(
-            valueListenable: _readyGetOrder,
-            builder: (_, value, __) => value
-                ? DecoratedBox(
-              decoration: BoxDecoration(
-                color: context.colorScheme.secondary,
-                borderRadius: BorderRadius.circular(50),
               ),
-              child: IconButton(
-                onPressed: () {
-                  _readyGetOrder.value = false;
-                  sliderController.reset();
-                  // context.read<LocationServiceCubit>().init();
-                  context.read<OrderCubit>().init();
-                },
-                icon: Icon(
-                  Icons.power_settings_new_outlined,
-                  color: context.colorScheme.cardColor,
-                ),
-              ),
-            )
-                : const SizedBox.shrink(),
-          ),
-          const SizedBox(width: 10),
-        ],
-      ),
-      body: BlocListener<LocationServiceCubit, LocationServiceState>(
-        listener: (context, state) => _handleLocationState(state),
-        child: BlocConsumer<OrderCubit, OrderState>(
-          listener: (context, state) {
-            state.mapOrNull(
-              success: (orders) {
-                if (orders.isRealtime && orders.newOrders.isNotEmpty) {
-                  _showOrderSheet(orders.newOrders[0],true);
-                }
-              },
-            );
-          },
-          builder: (context, state) {
-            return state.maybeWhen(
-              loading: () => const Center(child: CircularProgressIndicator.adaptive()),
-              error: (e) => RefreshIndicator(
-                onRefresh: _handleRefresh,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(child: Text(e)),
-                    EcoOutlineButton(onPressed: (){
-                       context.read<LocationServiceCubit>().retryLocation();
-                    }, child: Text(LocaleKeys.tryAgain.tr(context: context)))
-                  ],
-                ),
-              ),
-              success: (orders, currentLocation, isInitialFetch, isRealtime, newOrders) {
-                // _readyGetOrder.value = true;
-                return Column(
-                  children: [
-                    _OrderSearch(
-                      searchController: _searchController,
-                      onChanged: _searchOrders,
+              leadingWidth: 120,
+              title: Text(LocaleKeys.orders.tr(context: context)),
+              actions: [
+                ValueListenableBuilder(
+                  valueListenable: _readyGetOrder,
+                  builder: (_, value, __) => value
+                      ? DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: context.colorScheme.secondary,
+                      borderRadius: BorderRadius.circular(50),
                     ),
-                    Expanded(child: _buildOrdersList(orders)),
-                  ],
+                    child: IconButton(
+                      onPressed: () {
+                        _readyGetOrder.value = false;
+                        sliderController.reset();
+                        // context.read<LocationServiceCubit>().init();
+                        context.read<OrderCubit>().init();
+                      },
+                      icon: Icon(
+                        Icons.power_settings_new_outlined,
+                        color: context.colorScheme.cardColor,
+                      ),
+                    ),
+                  )
+                      : const SizedBox.shrink(),
+                ),
+                const SizedBox(width: 10),
+              ],
+            ),
+            body: state.runtimeType == DriverType ? BlocListener<LocationServiceCubit, LocationServiceState>(
+              listener: (context, state) => _handleLocationState(state),
+              child: BlocConsumer<OrderCubit, OrderState>(
+                listener: (context, state) {
+                  state.mapOrNull(
+                    success: (orders) {
+                      if (orders.isRealtime && orders.newOrders.isNotEmpty) {
+                        _showOrderSheet(orders.newOrders[0],true);
+                      }
+                    },
+                  );
+                },
+                builder: (context, state) {
+                  return state.maybeWhen(
+                    loading: () => const Center(child: CircularProgressIndicator.adaptive()),
+                    error: (e) => RefreshIndicator(
+                      onRefresh: _handleRefresh,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Center(child: Text(e)),
+                          EcoOutlineButton(onPressed: (){
+                             context.read<LocationServiceCubit>().retryLocation();
+                          }, child: Text(LocaleKeys.tryAgain.tr(context: context)))
+                        ],
+                      ),
+                    ),
+                    success: (orders, currentLocation, isInitialFetch, isRealtime, newOrders) {
+                      // _readyGetOrder.value = true;
+                      return Column(
+                        children: [
+                          _OrderSearch(
+                            searchController: _searchController,
+                            onChanged: _searchOrders,
+                          ),
+                          Expanded(child: _buildOrdersList(orders)),
+                        ],
+                      );
+                    },
+                    init: () => Center(child: _buildSliderButton()),
+                    orElse: () => _buildLocationAccessRequired(),
+                  );
+                },
+              ),
+            ) : BlocProvider<PartnerOrderCubit>(
+              create: (context)=> AppBlocHelper.getPartnerOrderCubit(),
+              child: BlocBuilder<PartnerOrderCubit, PartnerOrderState>(
+                builder: (context, state) {
+                  log('STATE: ${state.partnerOrders}');
+                  if (state.isLoadingShimmer) {
+                    return const Center(child: CircularProgressIndicator.adaptive());
+                  }
+                  if(state.partnerOrders.isEmpty){
+                    return Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(LocaleKeys.tryAgain.tr(context: context)),
+                          5.verticalSpace,
+                          EcoOutlineButton(onPressed: (){
+                            context.read<PartnerOrderCubit>().refresh();
+                          }, child: Text(LocaleKeys.update.tr(context: context)))
+                        ],
+                      ),
+                    );
+                  }
+                  if (state.error != null) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(state.error.toString()),
+                        5.verticalSpace,
+                        EcoOutlineButton(onPressed: (){
+                          context.read<PartnerOrderCubit>().refresh();
+                        }, child: Text(LocaleKeys.tryAgain.tr(context: context)))
+                      ],
+                    );
+                  }
+                  return LayoutBuilder(
+                  builder: (context, constraints) {
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        await context.read<PartnerOrderCubit>().refresh();
+                      },
+                      child: SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        // constraints: BoxConstraints(
+                        //   minHeight: MediaQuery.of(context).size.height,
+                        // ),
+                        child: ListView.builder(
+                          controller: _scrollController,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: state.partnerOrders.length + (state.isLoadingPagination ? 1 : 0),
+                          padding: const EdgeInsets.all(16),
+                          itemBuilder: (context, index) {
+                            if (index >= state.partnerOrders.length) {
+                              return const Center(
+                                child: Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: CircularProgressIndicator.adaptive(),
+                                ),
+                              );
+                            }
+                        
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 16),
+                              child: OrderItem(
+                                key: ValueKey(state.partnerOrders[index].id),
+                                partnerOrder: state.partnerOrders[index],
+                                isNew: false,
+                                onTap: (){
+                                  // _showOrderSheet(state.partnerOrders[index],false);
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    );
+                  },
                 );
-              },
-              init: () => Center(child: _buildSliderButton()),
-              orElse: () => _buildLocationAccessRequired(),
-            );
-          },
-        ),
+                },
+              ),
+            ),
+          );
+        }
       ),
     );
   }
@@ -394,7 +502,11 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
     state.whenOrNull(
       success: (location) async {
         _location = location;
-        await context.read<OrderCubit>().getOrder(location);
+        if(_authType == AuthType.driver){
+          await context.read<OrderCubit>().getOrder(location);
+        }else{
+          await context.read<PartnerOrderCubit>().fetchPartnerOrders();
+        }
         _hasIssue.value = false;
         _readyGetOrder.value = true;
       },
@@ -433,7 +545,6 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
 
 }
 
-// Add this class for search debouncing
 class Debouncer {
   final int milliseconds;
   Timer? _timer;

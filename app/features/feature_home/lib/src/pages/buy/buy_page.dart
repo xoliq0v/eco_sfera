@@ -133,7 +133,26 @@ class _BuyPageState extends State<BuyPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(LocaleKeys.totalBalance.tr(context: context),style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 13),),
-              Text('0sum',style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppColors.main),)
+              BlocProvider<BalanceCubit>(
+                create: (context)=> AppBlocHelper.getBalanceCubit(),
+                child: BlocBuilder<BalanceCubit,BalanceState>(
+                  builder: (context,state) {
+                    return state.maybeWhen(
+                      success: (balance,user){
+                        return Text(balance.formatCompact,style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppColors.main),);
+                      },
+                      orElse: (){
+                        return Text('0sum',style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppColors.main),);
+                      }
+                    );
+                    // if(state.runtimeType == BalanceState.success){
+                    //   return Text(state.balance.sumFormat(),style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppColors.main),);
+                    // }else {
+                    //   return Text('0sum',style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppColors.main),);
+                    // }
+                  }
+                ),
+              )
             ],
           ),
         ),

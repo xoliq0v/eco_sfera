@@ -17,12 +17,14 @@ class AuthCubit extends Cubit<AuthState> {
       this._saveToken,
       this._saveType,
       this._fetchUserProfile,
+      this._fetchPartnerProfile,
       ) : super(const AuthState.init());
 
   final AuthUseCase _authUseCase;
   final SaveToken _saveToken;
   final SaveType _saveType;
   final FetchUserProfile _fetchUserProfile;
+  final FetchPartnerProfile _fetchPartnerProfile;
   String _login = '';
   String _password = '';
   String? _deviceToken = '';
@@ -53,7 +55,11 @@ class AuthCubit extends Cubit<AuthState> {
       log('Login response data: ${result.data!.type}');
       await _saveToken.save(result.data!.token!);
       await _saveType.save(result.data!.type!);
-      await _fetchUserProfile.fetch();
+      if(result.data!.type == AuthType.driver){
+        await _fetchUserProfile.fetch();
+      }else{
+        await _fetchPartnerProfile.fetch();
+      }
       emit(AuthState.success(result.data!.type!));
     } catch (e) {
       emit(AuthState.error(e.toString()));

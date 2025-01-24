@@ -2,6 +2,8 @@ export 'src/di/init.module.dart';
 export 'src/dto/active_history_dto.dart';
 export 'src/dto/auth_res_dto.dart';
 export 'src/dto/buy_check_dto.dart';
+export 'src/dto/partner_order_dto.dart';
+export 'src/dto/partner_order_driver_dto.dart';
 export 'src/dto/customer_dto.dart';
 export 'src/dto/customer_response_dto.dart';
 export 'src/dto/daily_transactions_dto.dart';

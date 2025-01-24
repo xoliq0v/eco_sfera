@@ -26,3 +26,4 @@ export 'src/buy_check_model.dart';
 export 'src/active_history.dart';
 export 'src/transaction.dart';
 export 'src/product.dart';
+export 'src/partner_order_model.dart';

@@ -23,3 +23,4 @@ export 'src/bloc/transaction/transaction_cubit.dart';
 export 'src/bloc/theme/theme_cubit.dart';
 export 'src/bloc/navigation/bloc.dart';
 export 'src/bloc/product/product_cubit.dart';
+export 'src/bloc/partner_order/partner_order_cubit.dart';

@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:core/src/network_config/base_model.dart';
 import 'package:dio/dio.dart';
 import 'package:network/src/dto/order_dto.dart';
+import 'package:network/src/dto/pageable_content_dto.dart';
+import 'package:network/src/dto/partner_order_dto.dart';
 import 'package:network/src/endpoints/endpoints.dart';
 import 'package:network/src/provider/orders_provider.dart';
 
@@ -48,6 +50,26 @@ class OrderProviderImpl extends OrderProvider {
     }catch(e){
       throw e.toString();
     }
+  }
+
+  @override
+  Future<ApiResponse<PageableContentDTO<PartnerOrderDto>>> getPartnerOrders(int page, int size, String status) {
+    return fetchPaginatedData(
+        request: apiClient.get(
+          PartnerEndpoint.order,
+          queryParameters: {
+            'page': page,
+            'per_page': size,
+            'status': status,
+          },
+          options: Options(
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          ),
+        ),
+        itemFromJson: PartnerOrderDto.fromJson,
+    );
   }
 
 }

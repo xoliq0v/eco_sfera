@@ -1,13 +1,18 @@
 import 'dart:developer';
 
+import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
+import '../../navigation.dart';
+
 class AppRouteObserver extends AutoRouterObserver {
+  
   @override
   void didPush(Route route, Route? previousRoute) {
     FocusManager.instance.primaryFocus?.unfocus();
-    log('New route pushed: ${route.settings.name}');
+    final routeName = route.settings.name;
+    log('New route pushed: $routeName');
   }
 
   @override

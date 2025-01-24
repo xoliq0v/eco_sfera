@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:model/model.dart';
 
 class OrderItem extends StatelessWidget {
-  final OrderModel order;
+  final OrderModel? order;
+  final PartnerOrder? partnerOrder;
   final bool isNew;
   final Function()? onTap;
 
   const OrderItem({
     super.key,
-    required this.order,
+    this.order,
+    this.partnerOrder,
     required this.isNew,
     this.onTap,
   });
@@ -50,7 +52,7 @@ class OrderItem extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    order.orderUser.name,
+                                    order?.orderUser.name??partnerOrder?.driver.name??'',
                                     overflow: TextOverflow.ellipsis,
                                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                                         fontWeight: FontWeight.w400,
@@ -60,7 +62,7 @@ class OrderItem extends StatelessWidget {
                                   ),
                                   Flexible(
                                       child: Text(
-                                        order.orderUser.phoneNumber.formatUzbekPhoneNumber(),
+                                        order?.orderUser.phoneNumber.formatUzbekPhoneNumber()??partnerOrder!.driver.phoneNumber?.formatUzbekPhoneNumber()??'',
                                         overflow: TextOverflow.ellipsis,
                                         style: Theme.of(context).textTheme.headlineMedium,
                                       )
@@ -90,13 +92,13 @@ class OrderItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${order.date.hour}:${order.date.minute}'.formatTime(),
+                      '${order?.date.hour}:${order?.date.minute}'.formatTime(),
                       style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           color: isNew ? AppColors.main : context.colorScheme.primary
                       ),
                     ),
                     Text(
-                      order.distance!.toInt().toString().toKm(context),
+                      order?.distance?.toInt().toString().toKm(context)??'0',
                       style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           color: isNew ? AppColors.main : context.colorScheme.primary
                       ),

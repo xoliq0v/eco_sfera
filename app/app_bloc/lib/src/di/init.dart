@@ -30,8 +30,9 @@ abstract class AppBlocModule {
       AuthUseCase authUseCase,
       SaveToken saveSession,
       SaveType saveType,
-      FetchUserProfile fetchUserProfile,){
-    return AuthCubit(authUseCase, saveSession, saveType, fetchUserProfile);
+      FetchUserProfile fetchUserProfile,
+      FetchPartnerProfile partnerProfile){
+    return AuthCubit(authUseCase, saveSession, saveType, fetchUserProfile, partnerProfile);
   }
 
   ProfileCubit provideProfileCubit(
@@ -49,8 +50,8 @@ abstract class AppBlocModule {
     return LogoutCubit(logout);
   }
 
-  OrderCubit provideOrderCubit(GetOrder getOrder,FCMTokenRefresh fcm,WatchPost watchPost){
-    return OrderCubit(getOrder,fcm, watchPost);
+  OrderCubit provideOrderCubit(GetOrder getOrder,FCMTokenRefresh fcm,WatchPost watchPost,GetAuthType getType){
+    return OrderCubit(getOrder,fcm, watchPost,getType);
   }
 
   PostCustomerCubit providePostCustomerCubit(PostCustomer postCustomer){
@@ -119,6 +120,9 @@ abstract class AppBlocModule {
     return ProductCubit(getAllProducts);
   }
 
+  PartnerOrderCubit providePartnerOrderCubit(GetPartnerOrdersUseCase getPartnerOrdersUseCase,GetAuthType getType){
+    return PartnerOrderCubit(getType,getPartnerOrdersUseCase, initialPageSize: 5);
+  }
 }
 
 @InjectableInit.microPackage()

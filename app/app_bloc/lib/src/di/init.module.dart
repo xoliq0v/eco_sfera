@@ -22,12 +22,6 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
         () => appBlocModule.provideThemeChangCubit());
     gh.factory<_i4.FCMHandler>(() => appBlocModule.provideHandler());
     gh.factory<_i3.NavigationBloc>(() => appBlocModule.provideNavigationBloc());
-    gh.factory<_i3.AuthCubit>(() => appBlocModule.provideAuthCubit(
-          gh<_i5.AuthUseCase>(),
-          gh<_i5.SaveToken>(),
-          gh<_i5.SaveType>(),
-          gh<_i5.FetchUserProfile>(),
-        ));
     gh.factory<_i3.ActiveHistoryCubit>(
         () => appBlocModule.provideActiveHistory(gh<_i5.GetActiveHistory>()));
     gh.factory<_i3.InternetConnectivityController>(
@@ -63,17 +57,25 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
         () => appBlocModule.provideRegionCubit(gh<_i5.GetRegions>()));
     gh.factory<_i3.HistoryPaginationCubit>(() =>
         appBlocModule.provideHistoryPaginationCubit(gh<_i5.FetchHistory>()));
-    gh.factory<_i3.LocationServiceCubit>(
-        () => appBlocModule.provideLocationCubit(gh<_i5.GetLocation>()));
     gh.factory<_i3.OrderCubit>(() => appBlocModule.provideOrderCubit(
           gh<_i5.GetOrder>(),
           gh<_i5.FCMTokenRefresh>(),
           gh<_i5.WatchPost>(),
+          gh<_i5.GetAuthType>(),
         ));
+    gh.factory<_i3.LocationServiceCubit>(
+        () => appBlocModule.provideLocationCubit(gh<_i5.GetLocation>()));
     gh.factory<_i3.BalanceCubit>(() => appBlocModule.provideBalanceCubit(
           gh<_i5.GetBalance>(),
           gh<_i5.FetchBalance>(),
           gh<_i5.GetUserProfile>(),
+        ));
+    gh.factory<_i3.AuthCubit>(() => appBlocModule.provideAuthCubit(
+          gh<_i5.AuthUseCase>(),
+          gh<_i5.SaveToken>(),
+          gh<_i5.SaveType>(),
+          gh<_i5.FetchUserProfile>(),
+          gh<_i5.FetchPartnerProfile>(),
         ));
     gh.factory<_i3.TransactionCubit>(
         () => appBlocModule.provideTransactionCubit(
@@ -86,6 +88,11 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
         () => appBlocModule.provideCustomerCubit(gh<_i5.GetCustomer>()));
     gh.factory<_i3.CustomerPaginationCubit>(() =>
         appBlocModule.provideCustomerPaginationCubit(gh<_i5.GetCustomer>()));
+    gh.factory<_i3.PartnerOrderCubit>(
+        () => appBlocModule.providePartnerOrderCubit(
+              gh<_i5.GetPartnerOrdersUseCase>(),
+              gh<_i5.GetAuthType>(),
+            ));
   }
 }
 

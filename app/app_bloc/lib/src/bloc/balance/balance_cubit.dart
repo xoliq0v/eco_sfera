@@ -17,9 +17,8 @@ class BalanceCubit extends Cubit<BalanceState>{
       this._fetchBalance,
       this._getUserProfile,
       ):super(BalanceState.init()){
-    log('EVENT: 123');
+      init();
     _balanceSubscription = _getBalance.watch().listen((event) {
-      log('EVENT: $event');
       if(event == null) return;
       init();
     });
@@ -32,11 +31,11 @@ class BalanceCubit extends Cubit<BalanceState>{
   final GetUserProfile _getUserProfile;
 
   Future<void> refresh() async{
-    emit(const BalanceState.loading());
-    final res = await _fetchBalance.fetch();
+    await _fetchBalance.fetch();
+    final balance = await _getBalance.get();
     final userData = await _getUserProfile.get();
-    if(res != null){
-      emit(BalanceState.success(res.toDouble(),userData!));
+    if(userData != null && balance != null){
+      emit(BalanceState.success(balance.toDouble(),userData));
     }else{
       emit(BalanceState.error(LocaleKeys.errorGettingTheBalance));
     }

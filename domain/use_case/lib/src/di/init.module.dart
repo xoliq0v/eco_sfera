@@ -73,6 +73,8 @@ class UseCasePackageModule extends _i526.MicroPackageModule {
         () => useCaseModule.provideGetOrder(gh<_i585.OrderRepo>()));
     gh.factory<_i987.WatchPost>(
         () => useCaseModule.provideWatchPost(gh<_i585.OrderRepo>()));
+    gh.factory<_i987.GetPartnerOrdersUseCase>(
+        () => useCaseModule.provideGetPartnerOrders(gh<_i585.OrderRepo>()));
     gh.factory<_i987.FetchPartnerProfile>(() =>
         useCaseModule.provideFetchPartnerProfile(gh<_i585.PartnerRepo>()));
     gh.factory<_i987.GetPartnerProfile>(

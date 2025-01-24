@@ -16,6 +16,7 @@ class OrderCubit extends Cubit<OrderState> {
       this.getOrderUseCase,
       this.fcmTokenRefresh,
       this.watchPost,
+      this._getType,
       ) : super(const OrderState.init()) {
     _initializeFCM();
     _listenToBotChanges(); // Listen to bot changes
@@ -29,6 +30,7 @@ class OrderCubit extends Cubit<OrderState> {
   final FirebaseDatabase _firebaseDatabase = FirebaseDatabase.instance;
   bool isInitialFetch = true;
   final WatchPost watchPost;
+  final GetAuthType _getType;
 
   static const AndroidNotificationChannel _channel = AndroidNotificationChannel(
     'high_importance_channel',
@@ -37,7 +39,11 @@ class OrderCubit extends Cubit<OrderState> {
     playSound: true,
   );
 
-  void _listenToBotChanges() {
+  void _listenToBotChanges() async{
+    final type = await _getType.get();
+    if(type.runtimeType == DriverType){
+      return;
+    }
     _firebaseDatabase.ref('bot').onValue.listen((event) {
       final botValue = event.snapshot.value;
       print('[log] Bot value changed: $botValue');
@@ -54,12 +60,18 @@ class OrderCubit extends Cubit<OrderState> {
   }
 
   Future<void> accept(int id) async{
-
+    final type = await _getType.get();
+    if(type.runtimeType == DriverType){
+      return;
+    }
     await watchPost.watch(id);
-
   }
 
   Future<void> getOrder(LocationEntity location) async {
+    final type = await _getType.get();
+    if(type.runtimeType == DriverType){
+      return;
+    }
     if (isInitialFetch) {
       emit(const OrderState.loading());
     }
@@ -98,8 +110,11 @@ class OrderCubit extends Cubit<OrderState> {
 
 
   Future<void> _getOrdersWithoutLoading(LocationEntity location, {required bool isRealtime}) async {
+    final type = await _getType.get();
+    if(type.runtimeType == DriverType){
+      return;
+    }
     final result = await getOrderUseCase.get();
-
     if (result.status == Status.error || result.data == null) {
       emit(OrderState.error(result.error?.message ?? 'Something went wrong'));
       return;
@@ -146,6 +161,10 @@ class OrderCubit extends Cubit<OrderState> {
 
 
   Future<void> _initializeFCM() async {
+    final type = await _getType.get();
+    if(type.runtimeType == DriverType){
+      return;
+    }
     if (_isFCMInitialized) return;
 
     try {
@@ -187,6 +206,10 @@ class OrderCubit extends Cubit<OrderState> {
   }
 
   Future<void> _initLocalNotifications() async {
+    final type = await _getType.get();
+    if(type.runtimeType == DriverType){
+      return;
+    }
     const initializationSettingsAndroid =
     AndroidInitializationSettings('@drawable/ic_notification');
 
