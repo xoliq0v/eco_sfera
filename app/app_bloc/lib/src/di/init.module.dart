@@ -31,6 +31,8 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
             ));
     gh.factory<_i3.TypeBloc>(
         () => appBlocModule.provideTypeBloc(gh<_i5.GetAuthType>()));
+    gh.factory<_i3.EditPartnerInfoCubit>(() => appBlocModule
+        .provideEditPartnerInfoCubit(gh<_i5.PartnerEditUseCase>()));
     gh.factory<_i3.PartnerPaginationCubit>(() =>
         appBlocModule.providePaginationPartnerCubit(gh<_i5.FetchPartners>()));
     gh.factory<_i3.BuyCubit>(() => appBlocModule.provideBuyCubit(
@@ -53,10 +55,18 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
         ));
     gh.factory<_i3.PostCustomerCubit>(
         () => appBlocModule.providePostCustomerCubit(gh<_i5.PostCustomer>()));
+    gh.factory<_i3.PartnerCommentCubit>(() =>
+        appBlocModule.providePartnerCommentCubit(gh<_i5.PostCommentUseCase>()));
     gh.factory<_i3.RegionCubit>(
         () => appBlocModule.provideRegionCubit(gh<_i5.GetRegions>()));
     gh.factory<_i3.HistoryPaginationCubit>(() =>
         appBlocModule.provideHistoryPaginationCubit(gh<_i5.FetchHistory>()));
+    gh.factory<_i3.PartnerOrderCubit>(
+        () => appBlocModule.providePartnerOrderCubit(
+              gh<_i5.GetPartnerOrdersUseCase>(),
+              gh<_i5.GetAuthType>(),
+              gh<_i5.ChangePartnerStatusUseCase>(),
+            ));
     gh.factory<_i3.OrderCubit>(() => appBlocModule.provideOrderCubit(
           gh<_i5.GetOrder>(),
           gh<_i5.FCMTokenRefresh>(),
@@ -88,11 +98,6 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
         () => appBlocModule.provideCustomerCubit(gh<_i5.GetCustomer>()));
     gh.factory<_i3.CustomerPaginationCubit>(() =>
         appBlocModule.provideCustomerPaginationCubit(gh<_i5.GetCustomer>()));
-    gh.factory<_i3.PartnerOrderCubit>(
-        () => appBlocModule.providePartnerOrderCubit(
-              gh<_i5.GetPartnerOrdersUseCase>(),
-              gh<_i5.GetAuthType>(),
-            ));
   }
 }
 

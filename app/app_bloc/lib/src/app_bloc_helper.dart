@@ -1,6 +1,9 @@
 import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart';
 
+import 'bloc/edit_partner/edit_partner_info_cubit.dart';
+import 'bloc/partner_comment/partner_comment_cubit.dart';
+
 mixin AppBlocHelper {
   static InternetConnectivityController getInternetConnectivityController() {
     return GetIt.I.get<InternetConnectivityController>();
@@ -84,5 +87,13 @@ mixin AppBlocHelper {
 
   static PartnerOrderCubit getPartnerOrderCubit(){
     return GetIt.I.get<PartnerOrderCubit>();
+  }
+
+  static EditPartnerInfoCubit getEditPartnerInfoCubit(){
+    return GetIt.I.get<EditPartnerInfoCubit>();
+  }
+
+  static PartnerCommentCubit getPartnerCommentCubit(){
+    return GetIt.I.get<PartnerCommentCubit>();
   }
 }

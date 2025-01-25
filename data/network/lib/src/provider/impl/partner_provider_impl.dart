@@ -49,7 +49,7 @@ class PartnerProviderImpl extends PartnerProvider {
   @override
   Future<ApiResponse<bool>> changeStatus(bool status) {
     return apiCall(
-      apiClient.put(PartnerEndpoint.changeStatus, data: {'status': status}),
+      apiClient.put(PartnerEndpoint.changeStatus, data: {'status': 'accepted'}),
       dataFromJson: (data) {
         return data != null;
       }

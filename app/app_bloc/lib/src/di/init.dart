@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import '../../app_bloc.dart';
@@ -12,6 +11,8 @@ import 'package:app_bloc/src/bloc/order/order_cubit.dart';
 import 'package:app_bloc/src/bloc/theme/theme_cubit.dart';
 import 'package:core/core.dart';
 import 'package:use_case/use_case.dart';
+
+import '../bloc/partner_comment/partner_comment_cubit.dart';
 
 @module
 abstract class AppBlocModule {
@@ -120,8 +121,16 @@ abstract class AppBlocModule {
     return ProductCubit(getAllProducts);
   }
 
-  PartnerOrderCubit providePartnerOrderCubit(GetPartnerOrdersUseCase getPartnerOrdersUseCase,GetAuthType getType){
-    return PartnerOrderCubit(getType,getPartnerOrdersUseCase, initialPageSize: 5);
+  PartnerOrderCubit providePartnerOrderCubit(GetPartnerOrdersUseCase getPartnerOrdersUseCase,GetAuthType getType,ChangePartnerStatusUseCase changePartnerStatus){
+    return PartnerOrderCubit(changePartnerStatus,getType,getPartnerOrdersUseCase, initialPageSize: 5);
+  }
+
+  EditPartnerInfoCubit provideEditPartnerInfoCubit(PartnerEditUseCase editPartnerInfo){
+    return EditPartnerInfoCubit(editPartnerInfo);
+  }
+
+  PartnerCommentCubit providePartnerCommentCubit(PostCommentUseCase postComment){
+    return PartnerCommentCubit(postComment);
   }
 }
 
