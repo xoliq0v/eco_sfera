@@ -85,7 +85,7 @@ class PartnerOrderCubit extends Cubit<PartnerOrderState>
   Future<void> _handleForegroundMessage(RemoteMessage message) async {
     print('Received foreground message: ${message.data}');
 
-    if (message.data['type'] == 'partner_order') {
+    // if (message.data['type'] == 'partner_order') {
       await refresh();
       
       // Show dialog directly if app is in foreground
@@ -100,13 +100,13 @@ class PartnerOrderCubit extends Cubit<PartnerOrderState>
         body: message.notification?.body ?? 'You have a new order!',
         payload: message.data.toString(),
       );
-    }
+    // }
   }
 
   Future<void> _handleBackgroundMessage(RemoteMessage message) async {
     print('Handling background message: ${message.data}');
     
-    if (message.data['type'] == 'partner_order') {
+    // if (message.data['type'] == 'partner_order') {
       await refresh();
       _showOrderDialog(
         orderId: '',
@@ -114,7 +114,7 @@ class PartnerOrderCubit extends Cubit<PartnerOrderState>
         message: message.notification?.body ?? 'You have a new order!',
         isBottomSheet: true,
       );
-    }
+    // }
   }
 
 
@@ -157,7 +157,7 @@ class PartnerOrderCubit extends Cubit<PartnerOrderState>
 
   Future<void> _handleInitialMessage(RemoteMessage message) async {
     await Future.delayed(const Duration(milliseconds: 500)); // Wait for app to initialize
-    if (message.data['type'] == 'partner_order') {
+    // if (message.data['type'] == 'partner_order') {
       await refresh();
       _showOrderDialog(
         orderId: '',
@@ -165,7 +165,7 @@ class PartnerOrderCubit extends Cubit<PartnerOrderState>
         message: message.notification?.body ?? 'You have a new order!',
         isBottomSheet: true,
       );
-    }
+    // }
   }
 
 
