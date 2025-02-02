@@ -2,7 +2,7 @@
 part of '../home_screen.dart';
 
 class _Tablet extends StatefulWidget {
-  const _Tablet({super.key});
+  const _Tablet();
 
   @override
   State<_Tablet> createState() => Tablet();

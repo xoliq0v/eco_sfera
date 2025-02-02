@@ -12,7 +12,7 @@ class HistoryProviderImpl extends HistoryProvider {
   Future<ApiResponse<PageableContentDTO<HistoryDto>>> fetchHistory(int page,int size){
     return fetchPaginatedData(
         request: apiClient.get(
-          '${HistoryEndpoint.history}?page=${page}&per_page=${size}',
+          '${HistoryEndpoint.history}?page=$page&per_page=$size',
           options: Options(
             headers: {
               'Content-Type': 'application/json',
@@ -32,8 +32,8 @@ class HistoryProviderImpl extends HistoryProvider {
             HistoryEndpoint.active,
             queryParameters: {
               'page': page,
-              'size': size
-            }
+              'size': size,
+            },
         ), itemFromJson: ActiveHistoryDto.fromJson,
 
     );

@@ -1,4 +1,4 @@
-import 'package:design_system/design_system.dart';
+import '../../../design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:map_service/map_service.dart';
 
@@ -16,7 +16,7 @@ class AdmissionSheet {
 }
 
 class _AdmissionSheetContent extends StatelessWidget {
-  const _AdmissionSheetContent({super.key});
+  const _AdmissionSheetContent();
 
   @override
   Widget build(BuildContext context) {

@@ -11,7 +11,7 @@ class AliceCallListItemWidget extends StatelessWidget {
   final AliceHttpCall call;
   final Function itemClickAction;
 
-  const AliceCallListItemWidget(this.call, this.itemClickAction);
+  const AliceCallListItemWidget(this.call, this.itemClickAction, {super.key});
 
   @override
   Widget build(BuildContext context) {

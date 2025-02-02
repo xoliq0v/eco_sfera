@@ -1,11 +1,31 @@
 import 'package:core/core.dart' hide Map;
 
-import '../../network.dart';
+import 'package:network/network.dart';
 
 part 'history_dto.g.dart';
 
 @JsonSerializable()
 class HistoryDto {
+
+  HistoryDto({
+    required this.id,
+    required this.date,
+    required this.paperKg,
+    required this.paperPrice,
+    required this.plasticKg,
+    required this.plasticPrice,
+    required this.plasticBottleKg,
+    required this.plasticBottlePrice,
+    required this.cartonKg,
+    required this.cartonPrice,
+    required this.totalKg,
+    required this.totalPrice,
+    required this.type,
+    required this.user,
+    required this.location,
+  });
+
+  factory HistoryDto.fromJson(Map<String, dynamic> json) => _$HistoryDtoFromJson(json);
   final int? id;
   final String? date;
   final UserDto? user;
@@ -31,26 +51,6 @@ class HistoryDto {
   @JsonKey(name: 'total_price')
   final String? totalPrice;
   final String? type;
-
-  HistoryDto({
-    required this.id,
-    required this.date,
-    required this.paperKg,
-    required this.paperPrice,
-    required this.plasticKg,
-    required this.plasticPrice,
-    required this.plasticBottleKg,
-    required this.plasticBottlePrice,
-    required this.cartonKg,
-    required this.cartonPrice,
-    required this.totalKg,
-    required this.totalPrice,
-    required this.type,
-    required this.user,
-    required this.location,
-  });
-
-  factory HistoryDto.fromJson(Map<String, dynamic> json) => _$HistoryDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$HistoryDtoToJson(this);
 }

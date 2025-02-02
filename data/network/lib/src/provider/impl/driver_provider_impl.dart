@@ -6,9 +6,9 @@ import 'package:network/src/dto/driver_dto.dart';
 import 'package:network/src/endpoints/endpoints.dart';
 import 'package:network/src/provider/driver_provider.dart';
 
-import '../../dto/daily_transactions_dto.dart';
-import '../../dto/transaction_dto.dart';
-import '../../dto/transaction_res_dto.dart';
+import 'package:network/src/dto/daily_transactions_dto.dart';
+import 'package:network/src/dto/transaction_dto.dart';
+import 'package:network/src/dto/transaction_res_dto.dart';
 
 class ClientProviderImpl extends ClientProvider {
   ClientProviderImpl({required this.apiClient});
@@ -61,7 +61,7 @@ class ClientProviderImpl extends ClientProvider {
         dataFromJson: (json) {
           return TransactionsResponseDto.fromJson(json as Map<String,dynamic>);
           // return transaction.transactionsByDate.values.first;
-        }
+        },
     );
   }
 
@@ -71,12 +71,12 @@ class ClientProviderImpl extends ClientProvider {
         apiClient.get(
             DriverEndpoint.balance,
           queryParameters: {
-              'type': 'driver'
-          }
+              'type': 'driver',
+          },
         ),
         dataFromJson: (json) {
           return double.parse(json.toString());
-        }
+        },
     );
   }
 }

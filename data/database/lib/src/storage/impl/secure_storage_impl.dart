@@ -1,5 +1,5 @@
-import 'package:database/database.dart';
-import 'package:database/src/endpoints/endpoints.dart';
+import '../../../database.dart';
+import '../../endpoints/endpoints.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageImpl implements SecureStorage {

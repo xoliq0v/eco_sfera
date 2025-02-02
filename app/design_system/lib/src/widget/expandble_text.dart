@@ -32,7 +32,7 @@ class _ExpandableCommentState extends State<ExpandableText> {
         horizontal: 15,
       ),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(15),
       ),
       child: Column(

@@ -1,5 +1,5 @@
-import 'package:database/database.dart';
-import 'package:database/objectbox.g.dart';
+import '../../database.dart';
+import '../../objectbox.g.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 

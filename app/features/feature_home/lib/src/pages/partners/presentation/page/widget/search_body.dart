@@ -1,4 +1,4 @@
-part of '../../../partners_page.dart';
+part of '../../partners_page.dart';
 
 // class _Body extends StatelessWidget {
 //   const _Body({super.key});

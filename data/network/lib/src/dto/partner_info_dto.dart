@@ -10,22 +10,9 @@ class PartnerInfoDto {
     required this.id,
     required this.latitude,
     required this.longitude,
-    this.location,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.province,
-    required this.district,
-    required this.address,
-    required this.isActive,
-    required this.status,
-    required this.nickname,
-    required this.fish,
-    required this.comment,
-    required this.login,
-    required this.password,
-    required this.trashes,
-    required this.trashePrices,
+    required this.createdAt, required this.updatedAt, required this.province, required this.district, required this.address, required this.isActive, required this.status, required this.nickname, required this.fish, required this.comment, required this.login, required this.password, required this.trashes, required this.trashePrices, this.location,
     this.phone,
+    this.about,
   });
 
   // Factory for deserialization
@@ -55,7 +42,7 @@ class PartnerInfoDto {
   @JsonKey(name: 'trashe_prices')
   final String? trashePrices;
   final String? phone;
-
+  final String? about;
   // Method for serialization
   Map<String, dynamic> toJson() => _$PartnerInfoDtoToJson(this);
 }

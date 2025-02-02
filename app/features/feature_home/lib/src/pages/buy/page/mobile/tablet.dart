@@ -2,7 +2,7 @@
 part of '../payment_page.dart';
 
 class _Tablet extends StatefulWidget {
-  const _Tablet({super.key});
+  const _Tablet();
 
   @override
   State<_Tablet> createState() => Tablet();

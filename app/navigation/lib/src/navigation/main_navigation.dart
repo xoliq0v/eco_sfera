@@ -1,4 +1,3 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:model/model.dart';
 
@@ -29,19 +28,17 @@ abstract class MainNavigation {
 
   Future<void> navigateSettingsPage();
 
-  Future<void> navigateBuyPage(OrderModel? params,String type,ActiveHistory? historyOrder);
+  Future<void> navigateBuyPage({OrderModel? params,String type,ActiveHistory? historyOrder,PartnerOrder? partnerOrder} );
 
   Future<dynamic> navigateAddCustomerPage();
 
-  Future<void> navigatePriceChangerPage(String title);
+  Future<void> navigatePriceChangerPage(Product product);
 
   Future<void> navigateAddCommentPage();
 
-  // Future<void> navigateProfilePage();
-  //
-  // Future<void> navigateAdmissionHistoryPage();
-  //
-  // Future<void> navigatePaymentPage();
+  Future<void> navigateSubmissionPage(int partnerId,PartnerItem partner);
+
+  Future<void> navigateAnnouncementPage();
 
 
 }

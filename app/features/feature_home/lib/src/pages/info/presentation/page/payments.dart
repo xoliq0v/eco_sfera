@@ -1,3 +1,4 @@
+import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart';
 import 'package:core/generated/locale_keys.g.dart';
 import 'package:design_system/design_system.dart';
@@ -24,24 +25,41 @@ class _PaymentPageState extends State<PaymentPage> {
   };
 
   @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: data.length,
-        itemBuilder: (context,index){
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10),
-            child: GestureDetector(
-              onTap: (){
-                NavigationUtils.getMainNavigator().navigatePriceChangerPage(data.keys.elementAt(index));
-              },
-              child: _Item(
-                icon: data.values.elementAt(index).toString(),
-                title: data.keys.elementAt(index).toString().tr(context: context),
-              ),
-            ),
-          );
+  void initState() {
+    super.initState();
+    context.read<ProductCubit>().getProducts();
+  }
 
-        }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    context.read<ProductCubit>().getProducts();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ProductCubit, ProductState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          orElse: () => const SizedBox.shrink(),
+          success: (products) => ListView.builder(
+            itemCount: products.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10),
+                child: InkWell(
+                  onTap: () async{
+                    await NavigationUtils.getMainNavigator().navigatePriceChangerPage(products[index]);
+                    await context.read<ProductCubit>().getProducts();
+                  },
+                  child: _Item(icon: 'assets/icons/box.svg', title: products[index].name)),
+              );
+            },
+          ),
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (error) => Center(child: Text(error.toString())),
+        );
+      }
     );
   }
 }
@@ -50,7 +68,7 @@ class _PaymentPageState extends State<PaymentPage> {
 class _Item extends StatelessWidget {
   final String icon;
   final String title;
-  const _Item({super.key, required this.icon, required this.title});
+  const _Item({required this.icon, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +89,7 @@ class _Item extends StatelessWidget {
                 ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 15),
-                child: SvgPicture.asset(icon),
+                child: SvgPicture.asset(icon,color: context.colorScheme.secondary,),
               ),
             ),
             10.horizontalSpace,

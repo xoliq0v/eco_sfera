@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:map_service/src/geocoding.dart';
+import '../geocoding.dart';
 import 'package:yandex_mapkit_lite/yandex_mapkit_lite.dart';
 
 class AppGeocodingImpl implements AppGeocoding {

@@ -16,7 +16,7 @@ class TrashProviderImpl extends TrashProvider {
         return (data as List<dynamic>).map((json){
           return TrashInfoDto.fromJson(json as Map<String, dynamic>);
         }).toList();
-     }
+     },
     );
   }
   
@@ -26,7 +26,7 @@ class TrashProviderImpl extends TrashProvider {
       apiClient.get(TrashEndpoint.partnerTrashes),
       dataFromJson: (data) {
         return (data as List<dynamic>).map((json) => PartnerTrashDto.fromJson(json as Map<String, dynamic>)).toList();
-      }
+      },
     );
   }
 
@@ -38,11 +38,11 @@ class TrashProviderImpl extends TrashProvider {
         data: {
           'price': price,
           'product_id': trashId,
-        }
+        },
       ),
       dataFromJson: (data) {
         return data != null;
-      }
+      },
     );
   }
 
@@ -50,11 +50,11 @@ class TrashProviderImpl extends TrashProvider {
   Future<ApiResponse<bool>> addComment(int productId, String comment) {
     return apiCall(
       apiClient.post(TrashEndpoint.addComment, 
-        data: {'product_id': productId, 'description': comment}
+        data: {'product_id': productId, 'description': comment},
       ),
       dataFromJson: (data) {
         return data != null;
-      }
+      },
     );
   }
 

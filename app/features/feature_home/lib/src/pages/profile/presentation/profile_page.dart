@@ -1,10 +1,12 @@
 
+import 'dart:developer';
+
 import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart' hide AppImage;
-import 'package:feature_home/src/pages/profile/presentation/widget/header_profile_page.dart';
-import 'package:feature_home/src/pages/profile/presentation/widget/payment_item.dart';
-import 'package:feature_home/src/responsive.dart';
+import 'widget/header_profile_page.dart';
+import 'widget/payment_item.dart';
+import '../../../responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 import 'package:model/model.dart';
@@ -46,6 +48,9 @@ class ProfilePage extends StatelessWidget implements AutoRouteWrapper {
             return AppBlocHelper.getThemeChangeCubit();
           },
         ),
+        BlocProvider<TypeBloc>(
+            create: (context) => AppBlocHelper.getTypeBloc()
+        )
       ],
       child: this,
     );

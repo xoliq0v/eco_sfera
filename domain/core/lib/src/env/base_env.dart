@@ -1,4 +1,4 @@
-import 'package:core/src/env/env.dart';
+import 'env.dart';
 import 'package:envied/envied.dart';
 
 part 'base_env.g.dart';

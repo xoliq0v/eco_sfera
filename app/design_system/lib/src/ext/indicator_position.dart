@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:design_system/design_system.dart';
+import '../../design_system.dart';
 import 'package:flutter/material.dart';
 
 extension IndicatorPositionExt on IndicatorPosition {

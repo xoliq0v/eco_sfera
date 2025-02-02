@@ -13,7 +13,6 @@ class _Tablet extends StatefulWidget {
   final List<String> routes;
 
   const _Tablet({
-    super.key,
     required this.pages,
     required this.icons,
     required this.routes,

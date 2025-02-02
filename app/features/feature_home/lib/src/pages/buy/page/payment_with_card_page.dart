@@ -7,10 +7,8 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:model/model.dart';
-import 'package:navigation/navigation.dart';
 
 import '../../../../feature_home.dart';
-import '../../auth/auth_screen.dart';
 
 @RoutePage()
 class PaymentWithCardPage extends StatefulWidget implements AutoRouteWrapper {

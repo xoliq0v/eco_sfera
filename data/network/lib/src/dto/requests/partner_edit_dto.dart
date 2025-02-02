@@ -4,9 +4,6 @@ part 'partner_edit_dto.g.dart';
 
 @JsonSerializable()
 class PartnerEditDto {
-  final String nickname;
-  final String phone;
-  final String comment;
 
   const PartnerEditDto({
     required this.nickname,
@@ -15,5 +12,8 @@ class PartnerEditDto {
   });
 
   factory PartnerEditDto.fromJson(Map<String, dynamic> json) => _$PartnerEditDtoFromJson(json);
+  final String nickname;
+  final String phone;
+  final String comment;
   Map<String, dynamic> toJson() => _$PartnerEditDtoToJson(this);
 }

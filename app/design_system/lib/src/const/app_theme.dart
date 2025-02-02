@@ -1,12 +1,11 @@
-import 'package:design_system/design_system.dart';
-import 'package:design_system/src/widget/google_fonts/google_fonts.dart';
+import '../../design_system.dart';
+import '../widget/google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
 
 abstract class ThemeConfig {
   static ThemeData get light {
     ColorScheme colorScheme = const ColorScheme(
-      background: Colors.white,
       brightness: Brightness.light,
       primary: Colors.black,
       secondary: AppColors.main,
@@ -14,7 +13,6 @@ abstract class ThemeConfig {
       surface: AppColors.alpineGoat,
       onPrimary: Colors.purple,
       onSecondary: AppColors.mintZest,
-      onBackground: Colors.pink,
       onError: Colors.redAccent,
       onSurface: Colors.black,
     );
@@ -47,7 +45,7 @@ abstract class ThemeConfig {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: colorScheme.background,
+        fillColor: colorScheme.surface,
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: colorScheme.primary, width: 1.0),
           borderRadius: BorderRadius.circular(10),
@@ -136,7 +134,6 @@ abstract class ThemeConfig {
 
   static ThemeData get dark {
     ColorScheme colorScheme = const ColorScheme(
-      background: AppColors.blackWash,
       brightness: Brightness.dark,
       primary: Colors.white,
       secondary: AppColors.glen,
@@ -144,7 +141,6 @@ abstract class ThemeConfig {
       surface: AppColors.coalmine,
       onPrimary: AppColors.main,
       onSecondary: AppColors.dynamicBlack,
-      onBackground: AppColors.blackWash,
       onError: Colors.red,
       onSurface: Colors.white,
     );

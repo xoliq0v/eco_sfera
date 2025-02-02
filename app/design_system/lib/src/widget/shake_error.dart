@@ -1,6 +1,6 @@
 import 'dart:math' show pi, sin;
 
-import 'package:design_system/src/widget/state_views/animation_controller_state_view.dart';
+import 'state_views/animation_controller_state_view.dart';
 import 'package:flutter/material.dart';
 
 class ShakeWidget extends StatefulWidget {

@@ -10,6 +10,6 @@ extension PartnerDataMapper on PartnerInfoDto {
 
 extension PartnerEntityMapper on PartnerEntity {
   PartnerInfoModel toUserProfile(){
-    return PartnerInfoModel(id: id, latitude: latitude, longitude: longitude, location: location, createdAt: createdAt, updatedAt: updatedAt, province: province, district: district, address: address, isActive: isActive, status: status, nickname: nickname, fish: fish, comment: comment, login: login, password: password, trashes: trashes, trashePrices: trashePrices, phone: phone);
+    return PartnerInfoModel(id: id, latitude: latitude, longitude: longitude, location: location, createdAt: createdAt, updatedAt: updatedAt, province: province, district: district, address: address, isActive: isActive, status: status, nickname: nickname, fish: fish, comment: comment, login: login, password: password, trashes: trashes, trashePrices: trashePrices, phone: phone, about: about);
   }
 }

@@ -1,4 +1,4 @@
-import 'package:app_bloc/app_bloc.dart';
+import '../../../app_bloc.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 

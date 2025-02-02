@@ -1,14 +1,12 @@
+import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:model/model.dart';
 
-class PartnerItem extends StatelessWidget {
-  final String title;
-  final String caption;
-  final String distance;
-  final bool isNew;
+class PartnerWidget extends StatelessWidget {
+  final PartnerItem partner;
   final Function()? onTap;
-  const PartnerItem({super.key, required this.title, required this.caption, required this.distance, this.isNew = false, this.onTap});
+  const PartnerWidget({super.key, required this.partner, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +23,7 @@ class PartnerItem extends StatelessWidget {
                     blurRadius: 1
                 )
               ],
-              color: Theme.of(context).colorScheme.background,
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(25)
           ),
           child: Column(
@@ -46,17 +44,17 @@ class PartnerItem extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    title,
+                                    partner.nickName,
                                     overflow: TextOverflow.ellipsis,
                                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 20,
-                                      color: isNew ? AppColors.main : context.colorScheme.primary
+                                      color: false ? AppColors.main : context.colorScheme.primary
                                     ),
                                   ),
                                   Flexible(
                                       child: Text(
-                                        caption,
+                                        partner.comment,
                                         overflow: TextOverflow.ellipsis,
                                         style: Theme.of(context).textTheme.headlineMedium,
                                       )
@@ -78,10 +76,11 @@ class PartnerItem extends StatelessWidget {
                     bottom: 10
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    Text(partner.status ?? false ? LocaleKeys.acceptable.tr(context: context) : LocaleKeys.closed.tr(context: context)),
                     // Text('${history.id}:${history.id}',style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : context.colorScheme.primary),),
-                    Text(distance,style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : context.colorScheme.primary),),
+                    Text(partner.distance?.toKm(context)??'0km',style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: false ? AppColors.main : context.colorScheme.primary),),
                   ],
                 ),
               )

@@ -38,17 +38,32 @@ class AppRouter extends _$AppRouter {
           ),
           AutoRoute(page: PartnersRoute.page,),
           AutoRoute(page: ReportRoute.page,),
-          AutoRoute(page: PresentationRoute.page,),
-          AutoRoute(page: ProfileRoute.page,),
+          AutoRoute(
+            page: PresentationRoute.page,
+            children: [
+              AutoRoute(page: AddCommentRoute.page),
+            ]
+          ),
+          AutoRoute(
+            page: ProfileRoute.page,
+            children: [
+              AutoRoute(page: AnnouncementRoute.page,),
+            ]
+          ),
         ]
       ),
       AutoRoute(page: PriceChangerRoute.page,),
       AutoRoute(page: AddCustomerRoute.page,),
-      AutoRoute(page: ProfileRoute.page,),
+      AutoRoute(
+        page: ProfileRoute.page,
+        children: [
+          AutoRoute(page: AnnouncementRoute.page,),
+        ]
+      ),
       AutoRoute(
           page: PaymentRoute.page,
         children: [
-          AutoRoute(page: PaymentWithCardRoute.page),
+          
         ]
       ),
       AutoRoute(page: PaymentWithCardRoute.page),
@@ -60,7 +75,9 @@ class AppRouter extends _$AppRouter {
         type: const RouteType.cupertino(),
       ),
       AutoRoute(page: BuyRoute.page,),
-      AutoRoute(page: AddCustomerRoute.page,),
+      AutoRoute(page: SubmissionRoute.page,),
+      AutoRoute(page: AddCommentRoute.page,),
+      AutoRoute(page: AnnouncementRoute.page,),
     ];
   }
 

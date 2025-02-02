@@ -1,10 +1,8 @@
 import 'dart:developer';
 
-import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
-import '../../navigation.dart';
 
 class AppRouteObserver extends AutoRouterObserver {
   

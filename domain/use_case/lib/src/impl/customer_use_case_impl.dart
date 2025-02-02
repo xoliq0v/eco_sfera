@@ -3,7 +3,7 @@ import 'package:model/model.dart';
 import 'package:model/src/base_paginated_response.dart';
 import 'package:model/src/customer_get.dart';
 import 'package:repository/repository.dart';
-import 'package:use_case/src/customer_use_case.dart';
+import '../customer_use_case.dart';
 
 class GetCustomersImpl implements GetCustomer {
   GetCustomersImpl({required this.customerRepository});

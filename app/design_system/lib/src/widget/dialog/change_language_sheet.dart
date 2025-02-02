@@ -1,6 +1,6 @@
 
 import 'package:core/core.dart';
-import 'package:design_system/design_system.dart';
+import '../../../design_system.dart';
 import 'package:flutter/material.dart';
 
 class ChangeLanguageSheet {
@@ -69,7 +69,7 @@ class _ChangeLanguageContentState extends State<_ChangeLanguageContent> {
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
           ),
           child: Column(

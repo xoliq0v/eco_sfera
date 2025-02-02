@@ -2,9 +2,9 @@ import 'package:core/core.dart';
 import 'package:model/model.dart';
 import 'package:model/src/order.dart';
 import 'package:network/network.dart';
-import 'package:repository/src/mapping/order_mapping.dart';
-import 'package:repository/src/repository/order_repo.dart';
-import 'package:repository/src/mapping/pageable_content_mapping.dart';
+import '../../mapping/order_mapping.dart';
+import '../order_repo.dart';
+import '../../mapping/pageable_content_mapping.dart';
 
 import '../../mapping/partner_order_mapper.dart';
 
@@ -51,4 +51,9 @@ class OrderRepoImpl extends OrderRepo {
     });
   }
 
+  @override
+  Future<Result<bool>> changeOrderStatus(int id, String status) async {
+    final res = await orderProvider.changeOrderStatus(id, status);
+    return Result.completed(res.data ?? false);
+  }
 }

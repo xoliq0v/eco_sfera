@@ -8,11 +8,11 @@ part of 'transaction_dto.dart';
 
 TransactionDto _$TransactionDtoFromJson(Map<String, dynamic> json) =>
     TransactionDto(
-      time: json['time'] as String,
-      user: json['user'] as String,
+      time: json['time'] as String?,
+      user: json['user'] as String?,
       amount: json['amount'],
-      type: json['type'] as String,
-      date: json['date'] as String,
+      type: json['type'] as String?,
+      date: json['date'] as String?,
     );
 
 Map<String, dynamic> _$TransactionDtoToJson(TransactionDto instance) =>

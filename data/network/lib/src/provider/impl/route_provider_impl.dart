@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:network/src/dto/route_dto.dart';
 import 'package:network/src/endpoints/endpoints.dart';
 
-import '../route_provider.dart';
+import 'package:network/src/provider/route_provider.dart';
 
 class RouteProviderImpl extends RouteProvider {
   RouteProviderImpl({required this.apiClient});

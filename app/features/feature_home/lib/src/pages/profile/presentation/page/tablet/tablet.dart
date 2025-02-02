@@ -1,7 +1,7 @@
 part of '../../profile_page.dart';
 
 class _Tablet extends StatelessWidget {
-  const _Tablet({super.key});
+  const _Tablet();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class _Tablet extends StatelessWidget {
   Widget _buildMainContent(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(25),
           topRight: Radius.circular(25),

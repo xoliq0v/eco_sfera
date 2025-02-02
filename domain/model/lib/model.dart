@@ -29,3 +29,8 @@ export 'src/product.dart';
 export 'src/partner_order_model.dart';
 export 'src/partner_trash.dart';
 export 'src/requests/partner_edit.dart';
+export 'src/comment.dart';
+export 'src/partner_product.dart';
+export 'src/partner_data.dart';
+export 'src/submission.dart';
+export 'src/requests/announcement.dart';

@@ -1,11 +1,8 @@
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:model/model.dart';
 
-import '../../../../di/init_route.dart';
-import '../../data/model/payment_history.dart';
 
 class PaymentItem extends StatelessWidget {
   final Transaction paymentHistory;
@@ -26,11 +23,11 @@ class PaymentItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  paymentHistory.type.tr(context: context),
+                  paymentHistory.type?.tr(context: context)??'',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Text(
-                  paymentHistory.date,
+                  paymentHistory.user??'',
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ],
@@ -40,7 +37,7 @@ class PaymentItem extends StatelessWidget {
               text: TextSpan(
                 children: [
                   TextSpan(
-                    text: '${double.parse(paymentHistory.amount).formattedWithSpaces} ',
+                    text: '${double.parse(paymentHistory.amount??'').formattedWithSpaces} ',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: paymentHistory.type == 'income' ? AppColors.main : AppColors.red,
                     ),

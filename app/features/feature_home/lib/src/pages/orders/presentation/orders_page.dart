@@ -6,7 +6,7 @@ import 'package:action_slider/action_slider.dart';
 import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart' hide Order;
 import 'package:design_system/design_system.dart';
-import 'package:feature_home/src/pages/orders/presentation/widgets/price_badge.dart';
+import 'widgets/price_badge.dart';
 import 'package:navigation/navigation.dart';
 import 'widgets/order_item.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +66,7 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
   late LocationEntity _location;
   // Add a Set to keep track of viewed orders
   final Set<String> _viewedOrders = {};
+  final ValueNotifier<List<OrderModel>> searching = ValueNotifier([]);
 
   bool isControllerInitialized() {
     try {
@@ -187,8 +188,11 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
 
   void _searchOrders(String query) {
     _searchDebouncer.run(() {
-      // Implement your search logic here
-      // Use the debouncer to prevent excessive API calls
+      if(_authType == AuthType.driver){
+        context.read<OrderCubit>().search(query);
+      }else{
+        context.read<PartnerOrderCubit>().search(query);
+      }
     });
   }
 
@@ -327,7 +331,7 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
           _authType = state.runtimeType == DriverType ? AuthType.driver : AuthType.partner;
           return Scaffold(
             appBar: AppBar(
-              surfaceTintColor: context.colorScheme.background,
+              surfaceTintColor: context.colorScheme.surface,
               leading: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: GestureDetector(
@@ -478,13 +482,13 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
                                 key: ValueKey(state.partnerOrders[index].id),
                                 partnerOrder: state.partnerOrders[index],
                                 isNew: false,
-                                onTap: (){
-                                  PartnerOrderSheet.show(
+                                onTap: () async{
+                                  await PartnerOrderSheet.show(
                                     context: context, 
                                     order: state.partnerOrders[index],
                                      isNewOrder: false,
-                                      onAcceptPress: (){
-
+                                      onAcceptPress: () async{
+                                        await context.read<PartnerOrderCubit>().accept(state.partnerOrders[index].id);
                                       }
                                   );
                                 },
@@ -512,7 +516,7 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
         if(_authType == AuthType.driver){
           await context.read<OrderCubit>().getOrder(location);
         }else{
-          await context.read<PartnerOrderCubit>().fetchPartnerOrders();
+          await context.read<PartnerOrderCubit>().fetchPartnerOrders(location);
         }
         _hasIssue.value = false;
         _readyGetOrder.value = true;

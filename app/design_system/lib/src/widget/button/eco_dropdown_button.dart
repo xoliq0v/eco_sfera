@@ -126,7 +126,7 @@ class _EcoDropdownMenuState extends State<EcoDropdownMenu> {
                 ..._dropdownEntries,
             ],
             menuStyle: MenuStyle(
-              backgroundColor: MaterialStateProperty.all(colorScheme.background),
+              backgroundColor: WidgetStateProperty.all(colorScheme.surface),
             ),
             inputDecorationTheme: InputDecorationTheme(
                 hintStyle: TextStyle(color: colorScheme.onSurface.withOpacity(0.5)),

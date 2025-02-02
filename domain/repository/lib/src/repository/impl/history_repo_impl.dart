@@ -3,9 +3,9 @@ import 'package:model/model.dart';
 import 'package:model/src/base_paginated_response.dart';
 import 'package:model/src/buy_page_prams_model.dart';
 import 'package:network/network.dart';
-import 'package:repository/src/mapping/history_mapper.dart';
-import 'package:repository/src/repository/history_repo.dart';
-import 'package:repository/src/mapping/pageable_content_mapping.dart';
+import '../../mapping/history_mapper.dart';
+import '../history_repo.dart';
+import '../../mapping/pageable_content_mapping.dart';
 
 import '../../mapping/active_history_mapper.dart';
 

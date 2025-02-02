@@ -1,12 +1,7 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:core/core.dart';
 import '../../../design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:model/model.dart';
-import 'package:navigation/navigation.dart';
-import 'package:audioplayers/audioplayers.dart';
-import 'package:core/core.dart';
-import '../../../design_system.dart';
 
 class PartnerOrderSheet {
   static Future<void> show({
@@ -95,22 +90,27 @@ class _PartnerOrderSheetContentState extends State<PartnerOrderSheetContent> {
               slivers: [
                 _buildHeader(context),
                 // _buildOrderItems(context),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    PInfoBox(
-                      icon: AppIcons.box,
-                      title: LocaleKeys.trash.tr(context: context),
-                      value: widget.order.productType.toString().tr(context: context),
-                    ),
-                    PInfoBox(
-                      icon: AppIcons.weight,
-                      title: LocaleKeys.trash.tr(context: context),
-                      value: widget.order.productWeight.toString(),
-                    ),
-                  ],
-                ).toBoxAdapter(),
+                SliverList.builder(
+                  itemCount: widget.order.products?.length,
+                  itemBuilder:(context, index) {
+                    return Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          PInfoBox(
+                            icon: AppIcons.box,
+                            title: LocaleKeys.trash.tr(context: context),
+                            value: widget.order.products?[index].productUz.toString().tr(context: context) ?? '',
+                          ),
+                          PInfoBox(
+                            icon: AppIcons.weight,
+                            title: LocaleKeys.trash.tr(context: context),
+                            value: widget.order.products?[index].productWeight.toString()??'',
+                          ),
+                        ],
+                      );
+                  },
+                ),
                 _buildFooter(context),
               ],
             ),

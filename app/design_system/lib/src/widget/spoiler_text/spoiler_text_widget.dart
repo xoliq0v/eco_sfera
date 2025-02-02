@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:design_system/src/widget/spoiler_text/extension/rect_x.dart';
-import 'package:design_system/src/widget/spoiler_text/models/particle.dart';
-import 'package:design_system/src/widget/spoiler_text/models/string_details.dart';
-import 'package:design_system/src/widget/spoiler_text/widgets/spoiler_richtext.dart';
+import 'extension/rect_x.dart';
+import 'models/particle.dart';
+import 'models/string_details.dart';
+import 'widgets/spoiler_richtext.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 

@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:core/core.dart';
-import 'package:database/database.dart';
-import 'package:database/src/storage/impl/app_storage_impl.dart';
-import 'package:database/src/storage/impl/secure_storage_impl.dart';
+import '../../database.dart';
+import '../storage/impl/app_storage_impl.dart';
+import '../storage/impl/secure_storage_impl.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

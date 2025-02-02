@@ -45,8 +45,8 @@ class CustomerProviderImpl extends CustomerProvider {
         apiClient.get(
             CustomerEndpoint.search,
           queryParameters: {
-            'search': number
-          }
+            'search': number,
+          },
         ),
         dataFromJson: (data) => (data as List<dynamic>).map((item)=> CustomerDto.fromJson(item as Map<String, dynamic>)).toList(),
     );
@@ -59,7 +59,7 @@ class CustomerProviderImpl extends CustomerProvider {
         apiClient.get(CustomerEndpoint.regions),
         dataFromJson: (json) {
           return (json as List<dynamic>).map((item) => RegionDTO.fromJson(item as Map<String, dynamic>)).toList();
-        }
+        },
     );
   }
 }

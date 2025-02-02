@@ -1,6 +1,6 @@
-import 'package:feature_home/src/pages/category_page/presentation/widget/eco_service_item.dart';
-import 'package:feature_home/src/pages/category_page/presentation/widget/tab_eco_service_item.dart';
-import 'package:feature_home/src/responsive.dart';
+import 'presentation/widget/eco_service_item.dart';
+import 'presentation/widget/tab_eco_service_item.dart';
+import '../../responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart' hide AppImage;

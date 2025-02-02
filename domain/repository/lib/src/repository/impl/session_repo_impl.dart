@@ -1,6 +1,6 @@
 import 'package:database/database.dart';
 import 'package:model/src/auth_result.dart';
-import 'package:repository/repository.dart';
+import '../../../repository.dart';
 
 class SessionRepositoryImpl extends SessionRepository {
   SessionRepositoryImpl({

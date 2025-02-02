@@ -1,5 +1,5 @@
 import 'package:core/core.dart';
-import 'package:navigation/src/routes/main_routes.dart';
+import '../routes/main_routes.dart';
 mixin RouteUtils {
   static List<PageRouteInfo> getTrashRoutes() {
     final mainRoutes = GetIt.I.get<MainRoutes>();

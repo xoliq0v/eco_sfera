@@ -8,7 +8,11 @@ class PostCommentUseCaseImpl implements PostCommentUseCase {
   PostCommentUseCaseImpl(this.partnerRepo);
 
   @override
-  Future<void> post(String comment, int productId) {
-    return partnerRepo.addComment(productId,comment);
+  Future<bool> post(String comment, int productId) async {
+    final result = await partnerRepo.addComment(productId,comment);
+    if(result.data != null){
+      return result.data!;
+    }
+    return false;
   }
 }

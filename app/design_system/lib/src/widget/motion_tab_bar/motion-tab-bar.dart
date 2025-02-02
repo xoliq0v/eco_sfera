@@ -57,9 +57,9 @@ class _MotionTabBarState extends State<MotionTabBar> with TickerProviderStateMix
   late List<String?> labels;
   late Map<String?, String> svgIcons;
 
-  get tabAmount => svgIcons.keys.length;
-  get index => labels.indexOf(selectedTab);
-  get position {
+  int get tabAmount => svgIcons.keys.length;
+  int get index => labels.indexOf(selectedTab);
+  double get position {
     double pace = 2 / (labels.length - 1);
     return (pace * num.parse(index.toString())) - 1;
   }

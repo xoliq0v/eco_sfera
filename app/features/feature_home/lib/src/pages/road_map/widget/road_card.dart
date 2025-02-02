@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:core/generated/locale_keys.g.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 

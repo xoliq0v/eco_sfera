@@ -17,7 +17,6 @@ class TypeBloc extends Cubit<AuthTypeState>{
   Future<void> get() async{
     try{
       final res = await _getAuthType.get();
-        print(res);
         if(res == AuthType.partner){
           emit(PartnerType());
         }else{

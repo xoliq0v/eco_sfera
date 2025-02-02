@@ -1,7 +1,7 @@
 part of '../../category_page.dart';
 
 class _Mobile extends StatelessWidget {
-  const _Mobile({super.key});
+  const _Mobile();
 
   @override
   Widget build(BuildContext context) {

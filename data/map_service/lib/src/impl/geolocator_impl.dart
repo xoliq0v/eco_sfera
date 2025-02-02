@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:map_service/src/geolocator.dart';
+import '../geolocator.dart';
 
 class AppGeolocationImpl implements AppGeolocation {
   @override

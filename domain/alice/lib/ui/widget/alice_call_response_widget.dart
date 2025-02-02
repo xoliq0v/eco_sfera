@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 class AliceCallResponseWidget extends StatefulWidget {
   final AliceHttpCall call;
 
-  const AliceCallResponseWidget(this.call);
+  const AliceCallResponseWidget(this.call, {super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -42,10 +42,10 @@ class _AliceCallResponseWidgetState
         child: ListView(children: rows),
       );
     } else {
-      return Center(
+      return const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             CircularProgressIndicator(),
             Text('Awaiting response...')
           ],
@@ -109,8 +109,8 @@ class _AliceCallResponseWidgetState
     rows.add(
       Column(
         children: [
-          Row(
-            children: const [
+          const Row(
+            children: [
               Text(
                 'Body: Image',
                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -161,7 +161,7 @@ class _AliceCallResponseWidgetState
         ElevatedButton(
           style: ButtonStyle(
             backgroundColor:
-                MaterialStateProperty.all<Color>(AliceConstants.lightRed),
+                WidgetStateProperty.all<Color>(AliceConstants.lightRed),
           ),
           onPressed: () {
             setState(() {
@@ -189,8 +189,8 @@ class _AliceCallResponseWidgetState
   List<Widget> _buildVideoBodyRows() {
     final List<Widget> rows = [];
     rows.add(
-      Row(
-        children: const [
+      const Row(
+        children: [
           Text(
             'Body: Video',
             style: TextStyle(fontWeight: FontWeight.bold),
@@ -232,7 +232,7 @@ class _AliceCallResponseWidgetState
         ElevatedButton(
           style: ButtonStyle(
             backgroundColor:
-                MaterialStateProperty.all<Color>(AliceConstants.lightRed),
+                WidgetStateProperty.all<Color>(AliceConstants.lightRed),
           ),
           onPressed: () {
             setState(() {

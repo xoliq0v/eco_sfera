@@ -1,4 +1,4 @@
-import 'package:database/database.dart';
+import '../../../database.dart';
 import 'package:objectbox/objectbox.dart';
 
 class UserLocationDAO {

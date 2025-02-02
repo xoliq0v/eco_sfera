@@ -19,7 +19,7 @@ mixin _$PartnerCommentState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() success,
+    required TResult Function(List<Comment> comments) success,
     required TResult Function() loading,
     required TResult Function(String message) error,
   }) =>
@@ -27,7 +27,7 @@ mixin _$PartnerCommentState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? success,
+    TResult? Function(List<Comment> comments)? success,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
   }) =>
@@ -35,7 +35,7 @@ mixin _$PartnerCommentState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? success,
+    TResult Function(List<Comment> comments)? success,
     TResult Function()? loading,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -129,7 +129,7 @@ class _$PartnerCommentInitialStateImpl implements _PartnerCommentInitialState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() success,
+    required TResult Function(List<Comment> comments) success,
     required TResult Function() loading,
     required TResult Function(String message) error,
   }) {
@@ -140,7 +140,7 @@ class _$PartnerCommentInitialStateImpl implements _PartnerCommentInitialState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? success,
+    TResult? Function(List<Comment> comments)? success,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
   }) {
@@ -151,7 +151,7 @@ class _$PartnerCommentInitialStateImpl implements _PartnerCommentInitialState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? success,
+    TResult Function(List<Comment> comments)? success,
     TResult Function()? loading,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -211,6 +211,8 @@ abstract class _$$PartnerCommentSuccessStateImplCopyWith<$Res> {
           _$PartnerCommentSuccessStateImpl value,
           $Res Function(_$PartnerCommentSuccessStateImpl) then) =
       __$$PartnerCommentSuccessStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Comment> comments});
 }
 
 /// @nodoc
@@ -222,61 +224,92 @@ class __$$PartnerCommentSuccessStateImplCopyWithImpl<$Res>
       _$PartnerCommentSuccessStateImpl _value,
       $Res Function(_$PartnerCommentSuccessStateImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? comments = null,
+  }) {
+    return _then(_$PartnerCommentSuccessStateImpl(
+      null == comments
+          ? _value._comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as List<Comment>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$PartnerCommentSuccessStateImpl implements _PartnerCommentSuccessState {
-  const _$PartnerCommentSuccessStateImpl();
+  const _$PartnerCommentSuccessStateImpl(final List<Comment> comments)
+      : _comments = comments;
+
+  final List<Comment> _comments;
+  @override
+  List<Comment> get comments {
+    if (_comments is EqualUnmodifiableListView) return _comments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_comments);
+  }
 
   @override
   String toString() {
-    return 'PartnerCommentState.success()';
+    return 'PartnerCommentState.success(comments: $comments)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PartnerCommentSuccessStateImpl);
+            other is _$PartnerCommentSuccessStateImpl &&
+            const DeepCollectionEquality().equals(other._comments, _comments));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_comments));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PartnerCommentSuccessStateImplCopyWith<_$PartnerCommentSuccessStateImpl>
+      get copyWith => __$$PartnerCommentSuccessStateImplCopyWithImpl<
+          _$PartnerCommentSuccessStateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() success,
+    required TResult Function(List<Comment> comments) success,
     required TResult Function() loading,
     required TResult Function(String message) error,
   }) {
-    return success();
+    return success(comments);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? success,
+    TResult? Function(List<Comment> comments)? success,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
   }) {
-    return success?.call();
+    return success?.call(comments);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? success,
+    TResult Function(List<Comment> comments)? success,
     TResult Function()? loading,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(comments);
     }
     return orElse();
   }
@@ -320,8 +353,13 @@ class _$PartnerCommentSuccessStateImpl implements _PartnerCommentSuccessState {
 }
 
 abstract class _PartnerCommentSuccessState implements PartnerCommentState {
-  const factory _PartnerCommentSuccessState() =
+  const factory _PartnerCommentSuccessState(final List<Comment> comments) =
       _$PartnerCommentSuccessStateImpl;
+
+  List<Comment> get comments;
+  @JsonKey(ignore: true)
+  _$$PartnerCommentSuccessStateImplCopyWith<_$PartnerCommentSuccessStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -367,7 +405,7 @@ class _$PartnerCommentLoadingStateImpl implements _PartnerCommentLoadingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() success,
+    required TResult Function(List<Comment> comments) success,
     required TResult Function() loading,
     required TResult Function(String message) error,
   }) {
@@ -378,7 +416,7 @@ class _$PartnerCommentLoadingStateImpl implements _PartnerCommentLoadingState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? success,
+    TResult? Function(List<Comment> comments)? success,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
   }) {
@@ -389,7 +427,7 @@ class _$PartnerCommentLoadingStateImpl implements _PartnerCommentLoadingState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? success,
+    TResult Function(List<Comment> comments)? success,
     TResult Function()? loading,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -512,7 +550,7 @@ class _$PartnerCommentErrorStateImpl implements _PartnerCommentErrorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() success,
+    required TResult Function(List<Comment> comments) success,
     required TResult Function() loading,
     required TResult Function(String message) error,
   }) {
@@ -523,7 +561,7 @@ class _$PartnerCommentErrorStateImpl implements _PartnerCommentErrorState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? success,
+    TResult? Function(List<Comment> comments)? success,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
   }) {
@@ -534,7 +572,7 @@ class _$PartnerCommentErrorStateImpl implements _PartnerCommentErrorState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? success,
+    TResult Function(List<Comment> comments)? success,
     TResult Function()? loading,
     TResult Function(String message)? error,
     required TResult orElse(),

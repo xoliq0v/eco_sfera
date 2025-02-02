@@ -2,7 +2,7 @@ part of '../../profile_page.dart';
 
 class _PartnerProfileWidget extends StatelessWidget {
   final PartnerInfoModel? partner;
-  const _PartnerProfileWidget({super.key,this.partner});
+  const _PartnerProfileWidget({this.partner});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class _PartnerProfileWidget extends StatelessWidget {
                       color: Theme
                           .of(context)
                           .colorScheme
-                          .background,
+                          .surface,
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(25),
                         topRight: Radius.circular(25),
@@ -115,6 +115,36 @@ class _PartnerProfileWidget extends StatelessWidget {
                             ),
                           ),
                         ),
+                        10.verticalSpace,
+                        InkWell(
+                              onTap: (){
+                                NavigationUtils.getMainNavigator().navigateAnnouncementPage();
+                              },
+                              child: SizedBox(
+                                width: MediaQuery
+                                    .sizeOf(context)
+                                    .width * 0.9,
+                                height: 55,
+                                child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                          color: colorScheme.surface,
+                                          width: 2
+                                      )
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      15.horizontalSpace,
+                                      SvgPicture.asset(AppIcons.alertIcon,
+                                        color: colorScheme.primary,),
+                                      10.horizontalSpace,
+                                      Text(LocaleKeys.announcement.tr(context: context))
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                         20.verticalSpace,
                         Align(
                           alignment: Alignment.centerLeft,

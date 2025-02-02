@@ -5,10 +5,6 @@ part 'buy_check_dto.g.dart';
 @JsonSerializable()
 class BuyCheckDto {
 
-  factory BuyCheckDto.fromJson(Map<String, dynamic> json){
-    return _$BuyCheckDtoFromJson(json);
-  }
-
   const BuyCheckDto({
     required this.employeeId,
     required this.userId,
@@ -26,6 +22,10 @@ class BuyCheckDto {
     required this.id,
     required this.date,
   });
+
+  factory BuyCheckDto.fromJson(Map<String, dynamic> json){
+    return _$BuyCheckDtoFromJson(json);
+  }
 
   @JsonKey(name: 'employee_id')
   final int? employeeId;

@@ -1,5 +1,5 @@
 import 'package:geolocator/geolocator.dart';
-import 'package:map_service/src/location_service.dart';
+import '../location_service.dart';
 
 class LocationServiceImpl extends LocationService {
   @override

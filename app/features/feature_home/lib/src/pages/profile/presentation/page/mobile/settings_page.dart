@@ -1,21 +1,46 @@
 import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart';
+import 'package:design_system/design_system.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
+import 'package:model/model.dart';
+
+part 'partner_edit.dart';
 
 @RoutePage()
-class SettingsPage extends StatefulWidget {
+class SettingsPage extends StatefulWidget implements AutoRouteWrapper {
   const SettingsPage({super.key});
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<TypeBloc>(
+          create: (context) => AppBlocHelper.getTypeBloc(),
+        ),
+        BlocProvider<EditPartnerInfoCubit>(
+          create: (context) => AppBlocHelper.getEditPartnerInfoCubit(),
+        )
+      ],
+      child: this,
+    );
+  }
 }
 
 class _SettingsPageState extends State<SettingsPage> {
 
   ValueNotifier<bool> nightMode = ValueNotifier(false);
   ValueNotifier<bool> notifications = ValueNotifier(false);
+
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<TypeBloc>().get();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +50,11 @@ class _SettingsPageState extends State<SettingsPage> {
         automaticallyImplyLeading: false,
         title: Text(LocaleKeys.settings.tr(context: context)),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 25,right: 25,top: 20),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 25,right: 25,top: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -67,9 +93,18 @@ class _SettingsPageState extends State<SettingsPage> {
                 )
               ],
             ),
+          ),
+          BlocBuilder<TypeBloc,AuthTypeState>(
+            builder: (context,state) {
+              if(state is PartnerType){
+                return _PartnerEdit();
+              }
+              return const SizedBox.shrink();
+            }
           )
         ],
-      ),
+        ),
+      )
     );
   }
 }

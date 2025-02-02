@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:network/network.dart';
 
-import '../dto/region_dto.dart';
+import 'package:network/src/dto/region_dto.dart';
 
 abstract class CustomerProvider extends BaseProvider {
   Future<ApiResponse<PageableContentDTO<CustomerDto>>> fetchCustomers(CustomerGetRequestDTO request);

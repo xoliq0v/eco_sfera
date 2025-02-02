@@ -20,7 +20,7 @@ abstract class BaseProvider {
           // API returns proper pagination structure
           return PageableContentDTO.fromJson(
             data,
-                (json) => itemFromJson(json as Map<String, dynamic>),
+                (json) => itemFromJson(json! as Map<String, dynamic>),
           );
         } else if (data is List) {
           // API returns just a list without pagination
@@ -57,7 +57,7 @@ abstract class BaseProvider {
         response.data as Map<String, dynamic>,
             (data) => dataFromJson(data),
       )..success = true;
-    } on DioException catch (e, s) {
+    } on DioException catch (e) {
       if (e.error is SessionExpiredException) {
         log('DIO SessionExpiredException caught');
         throw SessionExpiredException();
@@ -176,7 +176,7 @@ abstract class BaseProvider {
     } on RequestCancelled {
       log('RequestCancelled');
       rethrow;
-    } on Exception catch (e, s) {
+    } on Exception catch (e) {
       log('Exception $e');
       return ApiResponse<T>(
         null,

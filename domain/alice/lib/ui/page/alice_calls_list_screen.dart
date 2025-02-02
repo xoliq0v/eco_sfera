@@ -21,7 +21,7 @@ class AliceCallsListScreen extends StatefulWidget {
   const AliceCallsListScreen(
     this._aliceCore,
     this._aliceLogger,
-    this.onShowDbInspectorPressed,
+    this.onShowDbInspectorPressed, {super.key}
   );
 
   @override
@@ -321,9 +321,9 @@ class _AliceCallsListScreenState extends State<AliceCallsListScreen>
               style: TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 12),
-            Column(
+            const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
                   '• Check if you send any http request',
                   style: TextStyle(fontSize: 12),
@@ -494,7 +494,7 @@ class _AliceCallsListScreenState extends State<AliceCallsListScreen>
                             },
                           ),
                         )
-                        .toList(),
+                        ,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

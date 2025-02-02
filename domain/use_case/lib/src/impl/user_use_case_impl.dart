@@ -1,5 +1,5 @@
 import 'package:model/model.dart';
-import 'package:use_case/src/user_use_case.dart';
+import '../user_use_case.dart';
 import 'package:repository/repository.dart';
 
 class FetchUserProfileImpl extends FetchUserProfile {

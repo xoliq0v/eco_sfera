@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:model/src/order_location.dart';
+import 'order_location.dart';
 
 import 'order_user.dart';
 

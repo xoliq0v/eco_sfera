@@ -3,7 +3,7 @@ part of '../orders_page.dart';
 class _OrderSearch extends StatefulWidget {
   final TextEditingController searchController;
   final Function(String) onChanged;
-  const _OrderSearch({super.key,required this.searchController,required this.onChanged});
+  const _OrderSearch({required this.searchController,required this.onChanged});
 
   @override
   State<_OrderSearch> createState() => _OrderSearchState();
@@ -21,18 +21,20 @@ class _OrderSearchState extends State<_OrderSearch> {
           Expanded(
             child: TextField(
               controller: widget.searchController,
-              // hintText: LocaleKeys.name.tr(context: context),
               onChanged: (value) {
-                widget.onChanged(value);
+                widget.onChanged.call(value);
               },
+              decoration: InputDecoration(
+                hintText: LocaleKeys.search.tr(context: context),
+              ),
             ),
           ),
-          IconButton(
-            onPressed: () {
-              FilterSheet.show(context);
-            },
-            icon: SvgPicture.asset(AppIcons.filter),
-          ),
+          // IconButton(
+          //   onPressed: () {
+          //     FilterSheet.show(context);
+          //   },
+          //   icon: SvgPicture.asset(AppIcons.filter),
+          // ),
         ],
       ),
     );

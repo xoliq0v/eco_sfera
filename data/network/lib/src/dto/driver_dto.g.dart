@@ -18,8 +18,8 @@ DriverDTO _$DriverDTOFromJson(Map<String, dynamic> json) => DriverDTO(
       workOrder: json['work_order'] as String?,
       vehicle: json['vehicle'] as String?,
       vehicleNumber: json['vehicle_number'] as String?,
-      earnings: (json['earnings'] as num?)?.toInt(),
-      outlay: (json['outlay'] as num?)?.toInt(),
+      earnings: json['earnings'] as String?,
+      outlay: json['outlay'] as String?,
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),

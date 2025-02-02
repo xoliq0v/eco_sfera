@@ -10,9 +10,12 @@ part 'product_cubit.freezed.dart';
 class ProductCubit extends Cubit<ProductState> {
   ProductCubit(
     this.getAllProducts,
-  ) : super(const ProductState.init());
+  ) : super(const ProductState.init()){
+    getProducts();
+  }
 
   final GetAllProducts getAllProducts;
+  
 
   Future<void> getProducts() async {
     emit(const ProductState.loading());

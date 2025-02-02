@@ -1,7 +1,7 @@
 part of '../../road_map_screen.dart';
 
 class _Mobile extends StatefulWidget {
-  const _Mobile({super.key});
+  const _Mobile();
 
   @override
   State<_Mobile> createState() => Mobile();

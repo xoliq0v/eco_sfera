@@ -24,14 +24,14 @@ class OrderProviderImpl extends OrderProvider {
           }
 
           // Ensure we're working with a list
-          final List dataList = data is List ? data : [data];
+          final dataList = data is List ? data : [data];
 
           // Convert and filter out any invalid items
           return dataList
-              .where((item) => item is Map<String, dynamic>)
+              .whereType<Map<String, dynamic>>()
               .map((item) => OrderDto.fromJson(item as Map<String, dynamic>))
               .toList();
-        }
+        },
     );
   }
 
@@ -69,6 +69,17 @@ class OrderProviderImpl extends OrderProvider {
           ),
         ),
         itemFromJson: PartnerOrderDto.fromJson,
+    );
+  }
+
+  @override
+  Future<ApiResponse<bool>> changeOrderStatus(int id, String status) {
+    return apiCall(
+      apiClient.post(OrderEndpoint.changeStatus, data: {
+        'order_id': id,
+        'status': status,
+      },),
+      dataFromJson: (data) => data != null,
     );
   }
 

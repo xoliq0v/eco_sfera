@@ -104,7 +104,7 @@ class MainNavigationImpl extends MainNavigation {
   }
 
   @override
-  Future<void> navigateBuyPage(OrderModel? params,String type,ActiveHistory? historyOrder) {
+  Future<void> navigateBuyPage({OrderModel? params,String? type,ActiveHistory? historyOrder,PartnerOrder? partnerOrder}) {
     return appRouter.push(BuyRoute(param: params,type: type,historyOrder: historyOrder));
   }
 
@@ -114,12 +114,22 @@ class MainNavigationImpl extends MainNavigation {
   }
 
   @override
-  Future<void> navigatePriceChangerPage(String title) {
-    return appRouter.push(PriceChangerRoute(title: title));
+  Future<void> navigatePriceChangerPage(Product product) {
+    return appRouter.push(PriceChangerRoute(product: product));
   }
 
   @override
   Future<void> navigateAddCommentPage() {
-    return appRouter.navigate(const AddCommentRoute());
+    return appRouter.push(const AddCommentRoute());
+  }
+
+  @override
+  Future<void> navigateSubmissionPage(int partnerId,PartnerItem partner) {
+    return appRouter.navigate(SubmissionRoute(partnerId: partnerId,parnter: partner));
+  }
+
+  @override
+  Future<void> navigateAnnouncementPage() {
+    return appRouter.navigate(AnnouncementRoute());
   }
 }

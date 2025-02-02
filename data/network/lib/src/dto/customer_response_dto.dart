@@ -4,6 +4,20 @@ part 'customer_response_dto.g.dart';
 
 @JsonSerializable()
 class CustomerResponseDto {
+
+  CustomerResponseDto({
+    required this.fullName,
+    required this.phone,
+    required this.id,
+    required this.regionId,
+    required this.isApproved,
+    required this.isRegistered,
+    required this.isVerified,
+    required this.fullAddress,
+  });
+
+  /// Factory method for creating a `UserDto` from JSON.
+  factory CustomerResponseDto.fromJson(Map<String, dynamic> json) => _$CustomerResponseDtoFromJson(json);
   @JsonKey(name: 'full_name')
   final String fullName;
   @JsonKey(name: 'phone_number')
@@ -19,20 +33,6 @@ class CustomerResponseDto {
   @JsonKey(name: 'region_id')
   final int regionId;
   final int id;
-
-  CustomerResponseDto({
-    required this.fullName,
-    required this.phone,
-    required this.id,
-    required this.regionId,
-    required this.isApproved,
-    required this.isRegistered,
-    required this.isVerified,
-    required this.fullAddress,
-  });
-
-  /// Factory method for creating a `UserDto` from JSON.
-  factory CustomerResponseDto.fromJson(Map<String, dynamic> json) => _$CustomerResponseDtoFromJson(json);
 
   /// Converts `UserDto` to JSON.
   Map<String, dynamic> toJson() => _$CustomerResponseDtoToJson(this);

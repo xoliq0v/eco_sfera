@@ -72,18 +72,21 @@ class _MobileState extends State<_Mobile> {
                   children: [
                     Expanded(
                       child: TextField(
+                        decoration: InputDecoration(
+                          hintText: LocaleKeys.search.tr(context: context),
+                        ),
                         // hintText: LocaleKeys.name.tr(context: context),
                         onChanged: (value) {
                           // _searchOrders(value);
                         },
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        FilterSheet.show(context);
-                      },
-                      icon: SvgPicture.asset(AppIcons.filter),
-                    ),
+                    // IconButton(
+                    //   onPressed: () {
+                    //     FilterSheet.show(context);
+                    //   },
+                    //   icon: SvgPicture.asset(AppIcons.filter),
+                    // ),
                   ],
                 ),
               ),
@@ -108,11 +111,11 @@ class _MobileState extends State<_Mobile> {
 
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 16),
-                          child: PartnerItem(
-                            distance: state.history[index].longitude,
+                          child: PartnerWidget(
                             onTap: (){
+                              NavigationUtils.getMainNavigator().navigateSubmissionPage(state.history[index].id,state.history[index]);
                             },
-                            title: state.history[index].nickName, caption: state.history[index].comment,
+                            partner: state.history[index],
                           ),
                         );
                       },

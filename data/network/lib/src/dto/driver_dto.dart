@@ -1,39 +1,37 @@
 import 'package:core/core.dart';
-
 part 'driver_dto.g.dart';
 
 @JsonSerializable()
 class DriverDTO {
-
   DriverDTO({
-     this.id,
-     this.name,
-     this.surname,
-     this.phone,
-     this.login,
-     this.password,
-     this.walletId,
-     this.walletBalance,
-     this.workOrder,
-     this.vehicle,
-     this.vehicleNumber,
-     this.earnings,
-     this.outlay,
-     this.createdAt,
-     this.updatedAt,
-     this.profileImage,
-     this.patronymic,
-     this.nickname,
-     this.province,
-     this.district,
-     this.address,
-     this.isActive,
-     this.status,
+    this.id,
+    this.name,
+    this.surname,
+    this.phone,
+    this.login,
+    this.password,
+    this.walletId,
+    this.walletBalance,
+    this.workOrder,
+    this.vehicle,
+    this.vehicleNumber,
+    this.earnings,
+    this.outlay,
+    this.createdAt,
+    this.updatedAt,
+    this.profileImage,
+    this.patronymic,
+    this.nickname,
+    this.province,
+    this.district,
+    this.address,
+    this.isActive,
+    this.status,
   });
 
-  // Factory for deserialization
   factory DriverDTO.fromJson(Map<String, dynamic> json) =>
       _$DriverDTOFromJson(json);
+
   final int? id;
   final String? name;
   final String? surname;
@@ -49,8 +47,8 @@ class DriverDTO {
   final String? vehicle;
   @JsonKey(name: 'vehicle_number')
   final String? vehicleNumber;
-  final int? earnings;
-  final int? outlay;
+  final String? earnings; // Changed from int? to String?
+  final String? outlay;   // Changed from int? to String?
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
   @JsonKey(name: 'updated_at')
@@ -66,6 +64,5 @@ class DriverDTO {
   final bool? isActive;
   final bool? status;
 
-  // Method for serialization
   Map<String, dynamic> toJson() => _$DriverDTOToJson(this);
 }

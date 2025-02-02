@@ -13,19 +13,15 @@ class HeaderProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(userProfile != null);
     return Padding(
       padding: const EdgeInsets.only(bottom: 25.0),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 25),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SvgPicture.asset(
-              AppIcons.iconBackground,
-            ),
-            50.verticalSpace,
-            Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.asset(AppIcons.back,width: double.maxFinite,fit: BoxFit.cover,),
+          Padding(
+            padding: const EdgeInsets.only(left: 25.0),
+            child: Row(
               children: [
                 //https://www.wilsoncenter.org/sites/default/files/media/images/person/james-person-1.jpg
                 userProfile != null ? InkWell(
@@ -46,7 +42,7 @@ class HeaderProfilePage extends StatelessWidget {
                     Text(
                       userProfile != null ? '${userProfile?.name} ${userProfile?.surname} ' : '${partner?.nickname}',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.background,
+                          color: Theme.of(context).colorScheme.surface,
                           fontWeight: FontWeight.w700,
                           fontSize: 20
                       ),
@@ -55,15 +51,15 @@ class HeaderProfilePage extends StatelessWidget {
                     Text(
                       userProfile == null ? partner?.phone?.formatUzbekPhoneNumber()??'' : userProfile?.phone??'Phone empty',
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                       ),
                     )
                   ],
                 )
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

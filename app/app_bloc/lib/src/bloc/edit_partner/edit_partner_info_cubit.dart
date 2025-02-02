@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:core/generated/locale_keys.g.dart';
 import 'package:model/model.dart';
 import 'package:use_case/use_case.dart';
 
@@ -9,9 +8,10 @@ part 'edit_partner_info_state.dart';
 part 'edit_partner_info_cubit.freezed.dart';
 
 class EditPartnerInfoCubit extends Cubit<EditPartnerInfoState> {
-  EditPartnerInfoCubit(this._editPartnerInfo) : super(const EditPartnerInfoState.initial());
+  EditPartnerInfoCubit(this._editPartnerInfo,this._getPartnerProfile) : super(const EditPartnerInfoState.initial());
 
   final PartnerEditUseCase _editPartnerInfo;
+  final GetPartnerProfile _getPartnerProfile;
 
   Future<bool> editPartnerInfo(PartnerEdit partnerEdit) async{
     emit(const EditPartnerInfoState.loading());
@@ -22,6 +22,16 @@ class EditPartnerInfoCubit extends Cubit<EditPartnerInfoState> {
     }else{
       emit(const EditPartnerInfoState.error(LocaleKeys.tryAgain));
       return false;
+    }
+  }
+
+  Future<PartnerInfoModel?> getPartnerProfile() async{
+    emit(const EditPartnerInfoState.loading());
+    final result = await _getPartnerProfile.get();
+    if(result != null){
+      return result;
+    }else{
+      return null;
     }
   }
 }

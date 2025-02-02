@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:app_bloc/app_bloc.dart';
+import '../../../app_bloc.dart';
 import 'package:core/core.dart';
 
 part 'internet_connectivity_state.dart';

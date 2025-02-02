@@ -4,12 +4,17 @@ part 'customer_post_dto.g.dart';
 
 @JsonSerializable()
 class CustomerPostDTO {
+
+
+  factory CustomerPostDTO.fromJson(Map<String, dynamic> json) {
+    return _$CustomerPostDTOFromJson(json);
+  }
   CustomerPostDTO({
     required this.fullName,
     required this.phone,
     required this.regionId,
     required this.address,
-    this.pinfl = ''
+    this.pinfl = '',
   });
 
   @JsonKey(name: 'full_name')
@@ -21,11 +26,6 @@ class CustomerPostDTO {
   @JsonKey(name: 'full_address')
   final String address;
   final String? pinfl;
-
-
-  factory CustomerPostDTO.fromJson(Map<String, dynamic> json) {
-    return _$CustomerPostDTOFromJson(json);
-  }
 
   Map<String, dynamic> toJson() => _$CustomerPostDTOToJson(this);
 

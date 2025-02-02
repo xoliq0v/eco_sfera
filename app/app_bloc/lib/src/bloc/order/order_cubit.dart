@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:app_bloc/app_bloc.dart';
+import '../../../app_bloc.dart';
 import 'package:core/core.dart';
 import 'package:firebase_eco/firebase_eco.dart';
 import 'package:model/model.dart';
@@ -450,7 +450,7 @@ class OrderCubit extends Cubit<OrderState> {
             sin(dLon / 2);
 
     double c = 2 * asin(sqrt(a));
-    return earthRadius * c;
+    return (earthRadius * c) < 1 ? earthRadius * c * 1000 : earthRadius * c;
   }
 
   Future<void> retry(LocationEntity location) async {
@@ -480,5 +480,14 @@ class OrderCubit extends Cubit<OrderState> {
 
   Future<void> init() async{
     emit(OrderState.init());
+  }
+
+  Future<void> search(String query) async{
+    final sortedOrders = (state as _Success).orders.where((order) => order.status).toList();
+    if(sortedOrders.isEmpty){
+      emit(OrderState.error('No orders found'));
+    }else{
+      emit(OrderState.success(sortedOrders, currentLocation: (state as _Success).currentLocation, isRealtime: (state as _Success).isRealtime, newOrders: (state as _Success).newOrders));
+    }
   }
 }

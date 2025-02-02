@@ -16,7 +16,7 @@ class PageableContentDTO<T> {
       Map<String, dynamic> json,
       T Function(Object? json) fromJsonT,
       ) {
-    final List<T> items = (json['data'] as List)
+    final items = (json['data'] as List)
         .map((item) => fromJsonT(item))
         .toList();
 

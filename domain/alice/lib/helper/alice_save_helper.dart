@@ -82,9 +82,9 @@ class AliceSaveHelper {
         file.createSync();
         final IOSink sink = file.openWrite(mode: FileMode.append);
         sink.write(await _buildAliceLog());
-        calls.forEach((AliceHttpCall call) {
+        for (var call in calls) {
           sink.write(_buildCallLog(call));
-        });
+        }
         await sink.flush();
         await sink.close();
         AliceAlertHelper.showAlert(

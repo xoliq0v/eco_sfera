@@ -1,12 +1,15 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
 abstract class  LocaleKeys {
+  static const aboutCompany = 'aboutCompany';
+  static const acceptable = 'acceptable';
   static const acceptance = 'acceptance';
   static const accountNumber = 'accountNumber';
   static const active = 'active';
   static const activeHistoryIsEmpty = 'activeHistoryIsEmpty';
   static const actualTime = 'actualTime';
   static const addACustomer = 'addACustomer';
+  static const addComment = 'addComment';
   static const addCustomer = 'addCustomer';
   static const add_customer = 'add_customer';
   static const address = 'address';
@@ -15,6 +18,7 @@ abstract class  LocaleKeys {
   static const admissionsHistory = 'admissionsHistory';
   static const ageRestriction = 'ageRestriction';
   static const amount = 'amount';
+  static const announcement = 'announcement';
   static const appName = 'appName';
   static const appNameM = 'appNameM';
   static const bakalashka = 'bakalashka';
@@ -35,8 +39,14 @@ abstract class  LocaleKeys {
   static const checkNumber = 'checkNumber';
   static const chooseFromGallery = 'chooseFromGallery';
   static const chooseLang = 'chooseLang';
+  static const closed = 'closed';
   static const combinedRoute = 'combinedRoute';
+  static const comment = 'comment';
+  static const commentIsRequired = 'commentIsRequired';
   static const comments = 'comments';
+  static const companyData = 'companyData';
+  static const companyName = 'companyName';
+  static const companyPhoneNumber = 'companyPhoneNumber';
   static const completed = 'completed';
   static const completedHistoryIsEmpty = 'completedHistoryIsEmpty';
   static const confirmation = 'confirmation';
@@ -47,9 +57,11 @@ abstract class  LocaleKeys {
   static const dailyWalkingDistance = 'dailyWalkingDistance';
   static const data = 'data';
   static const departure = 'departure';
+  static const description = 'description';
   static const done = 'done';
   static const driver = 'driver';
   static const employeeRequired = 'employeeRequired';
+  static const endTime = 'endTime';
   static const enter = 'enter';
   static const enterFatherName = 'enterFatherName';
   static const enterHomeAddress = 'enterHomeAddress';
@@ -60,6 +72,7 @@ abstract class  LocaleKeys {
   static const exit = 'exit';
   static const failed_to_get_location = 'failed_to_get_location';
   static const fatherName = 'fatherName';
+  static const fillAllFields = 'fillAllFields';
   static const fillAtLeastOne = 'fillAtLeastOne';
   static const filter = 'filter';
   static const fri = 'fri';
@@ -71,6 +84,7 @@ abstract class  LocaleKeys {
   static const home = 'home';
   static const homeAddress = 'homeAddress';
   static const income = 'income';
+  static const kecha = 'kecha';
   static const landfillOperator = 'landfillOperator';
   static const language = 'language';
   static const lastBalance = 'lastBalance';
@@ -134,6 +148,7 @@ abstract class  LocaleKeys {
   static const plannedTime = 'plannedTime';
   static const plastic = 'plastic';
   static const polygon = 'polygon';
+  static const productPrice = 'productPrice';
   static const profile = 'profile';
   static const recipientsCardNumber = 'recipientsCardNumber';
   static const region = 'region';
@@ -150,6 +165,7 @@ abstract class  LocaleKeys {
   static const secondary = 'secondary';
   static const select = 'select';
   static const selectALanguage = 'selectALanguage';
+  static const selectProducts = 'selectProducts';
   static const selectRegion = 'selectRegion';
   static const settings = 'settings';
   static const showAll = 'showAll';
@@ -159,9 +175,11 @@ abstract class  LocaleKeys {
   static const somethingWentWrongPleaseTryAgainLater = 'somethingWentWrongPleaseTryAgainLater';
   static const speedometerEnd = 'speedometerEnd';
   static const speedometerStart = 'speedometerStart';
+  static const startTime = 'startTime';
   static const stir = 'stir';
   static const stop = 'stop';
   static const stopLoading = 'stopLoading';
+  static const submission = 'submission';
   static const submit = 'submit';
   static const sum = 'sum';
   static const sun = 'sun';
@@ -199,5 +217,6 @@ abstract class  LocaleKeys {
   static const welcome = 'welcome';
   static const welcome_header = 'welcome_header';
   static const workOrder = 'workOrder';
+  static const workingTime = 'workingTime';
 
 }

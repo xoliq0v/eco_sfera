@@ -79,7 +79,7 @@ class _UzbekPhoneInputState extends State<UzbekPhoneInput> {
                 ),
                 color: widget.enabled
                     ? Theme.of(context).colorScheme.surface
-                    : Theme.of(context).colorScheme.surfaceVariant,
+                    : Theme.of(context).colorScheme.surfaceContainerHighest,
               ),
             ),
             Focus(

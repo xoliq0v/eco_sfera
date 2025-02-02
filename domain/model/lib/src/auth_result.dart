@@ -1,6 +1,7 @@
 enum AuthType {
   driver,
   partner,
+  def
 }
 
 class AuthResult {

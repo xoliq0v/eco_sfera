@@ -1,5 +1,5 @@
 import 'package:design_system/design_system.dart';
-import 'package:feature_home/src/pages/category_page/presentation/widget/eco_service_item.dart';
+import 'eco_service_item.dart';
 import 'package:flutter/material.dart';
 
 

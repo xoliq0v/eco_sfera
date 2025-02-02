@@ -1,6 +1,6 @@
 import 'package:core/core.dart' hide CameraUpdate;
 import 'package:design_system/design_system.dart';
-import 'package:feature_home/src/responsive.dart';
+import '../../../responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:map_service/map_service.dart';

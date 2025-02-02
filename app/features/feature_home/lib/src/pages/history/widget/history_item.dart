@@ -25,7 +25,7 @@ class HistoryItem extends StatelessWidget {
                     blurRadius: 1
                 )
               ],
-              color: Theme.of(context).colorScheme.background,
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(25)
           ),
           child: Column(

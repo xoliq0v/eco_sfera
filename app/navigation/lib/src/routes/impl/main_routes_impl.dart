@@ -1,6 +1,6 @@
 import 'package:auto_route/src/route/page_route_info.dart';
 import 'package:feature_home/feature_home.dart';
-import 'package:navigation/src/routes/main_routes.dart';
+import '../main_routes.dart';
 
 class MainRoutesImpl extends MainRoutes {
   @override

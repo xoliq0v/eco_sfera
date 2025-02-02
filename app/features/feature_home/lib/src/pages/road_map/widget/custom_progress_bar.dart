@@ -1,6 +1,5 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomProgressBar extends StatelessWidget {
   final double progress; // Value between 0.0 and 1.0

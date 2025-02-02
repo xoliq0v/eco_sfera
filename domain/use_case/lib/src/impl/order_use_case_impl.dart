@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:model/src/order.dart';
 import 'package:repository/repository.dart';
-import 'package:use_case/src/order_use_case.dart';
+import '../order_use_case.dart';
 
 class GetOrderImpl extends GetOrder{
   GetOrderImpl({required this.orderRepo});

@@ -2,7 +2,7 @@ part of '../profile_page.dart';
 
 class _ProfileWidget extends StatelessWidget {
   final DriverData userProfile;
-  const _ProfileWidget({super.key,required this.userProfile});
+  const _ProfileWidget({required this.userProfile});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class _ProfileWidget extends StatelessWidget {
                       color: Theme
                           .of(context)
                           .colorScheme
-                          .background,
+                          .surface,
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(25),
                         topRight: Radius.circular(25),
@@ -63,7 +63,7 @@ class _ProfileWidget extends StatelessWidget {
                                           .textTheme
                                           .headlineSmall
                                           ?.copyWith(fontSize: 10),),
-                                      Text(userProfile?.outlay??'0.00', style: Theme
+                                      Text(userProfile.outlay??'0.00', style: Theme
                                           .of(context)
                                           .textTheme
                                           .bodyMedium
@@ -91,7 +91,7 @@ class _ProfileWidget extends StatelessWidget {
                                         .start,
                                     children: [
                                       Text(LocaleKeys.income.tr(context: context), style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 10),),
-                                      Text(userProfile?.earnings??'0.00', style: Theme
+                                      Text(userProfile.earnings??'0.00', style: Theme
                                           .of(context)
                                           .textTheme
                                           .bodyMedium
@@ -159,7 +159,17 @@ class _ProfileWidget extends StatelessWidget {
                                     color: colorScheme.primary,),
                                   15.horizontalSpace,
                                   Text(LocaleKeys.language.tr(
-                                      context: context))
+                                      context: context)),
+                                  Spacer(),
+                                  Text(
+                                    switch(context.currentLocale()){
+                                      'uz' => 'O\'zbekcha',
+                                      'ru' => 'Русский',
+                                      'en' => 'English',
+                                      _ => ''
+                                    }
+                                  ),
+                                  15.horizontalSpace,
                                 ],
                               ),
                             ),

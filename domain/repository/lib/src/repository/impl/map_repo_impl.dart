@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 import 'package:model/model.dart';
-import 'package:repository/repository.dart';
+import '../../../repository.dart';
 import 'package:map_service/map_service.dart';
 
 class MapRepositoryImpl implements MapRepo {

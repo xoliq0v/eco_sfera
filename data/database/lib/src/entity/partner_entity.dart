@@ -28,6 +28,7 @@ class PartnerEntity {
   String trashes;
   String trashePrices;
   String? phone;
+  String? about;
 
   PartnerEntity({
     this.id = 0, // Default to 0 for auto-increment
@@ -49,5 +50,6 @@ class PartnerEntity {
     required this.trashes,
     required this.trashePrices,
     this.phone,
+    this.about,
   });
 }

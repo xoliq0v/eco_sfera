@@ -1,4 +1,4 @@
-import 'package:design_system/design_system.dart';
+import '../../../design_system.dart';
 import 'package:flutter/cupertino.dart';
 
 class CustomInfoView extends StatelessWidget {

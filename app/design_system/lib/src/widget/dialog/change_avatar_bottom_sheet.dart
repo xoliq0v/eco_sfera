@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
-import 'package:design_system/design_system.dart';
-import 'package:design_system/src/const/app_const.dart';
+import '../../../design_system.dart';
+import '../../const/app_const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

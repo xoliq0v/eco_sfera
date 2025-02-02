@@ -2,7 +2,7 @@
 part of '../../profile_page.dart';
 
 class _Mobile extends StatefulWidget {
-  const _Mobile({super.key});
+  const _Mobile();
 
   @override
   State<_Mobile> createState() => Mobile();
@@ -14,12 +14,13 @@ class Mobile extends State<_Mobile> {
   void initState() {
     super.initState();
     context.read<ProfileCubit>().init();
+    context.read<TypeBloc>().get();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocProvider<TypeBloc>(
+    return Material(
+      child: BlocProvider<TypeBloc>(
         create: (context)=> AppBlocHelper.getTypeBloc(),
         child: BlocBuilder<TypeBloc,AuthTypeState>(
           builder: (context,state) {
@@ -60,45 +61,52 @@ class Mobile extends State<_Mobile> {
 }
 
 class _Driver extends StatelessWidget {
-  const _Driver({super.key});
+  const _Driver();
 
   @override
   Widget build(BuildContext context) {
     return Material(
-        color: Theme
-            .of(context)
-            .colorScheme
-            .secondary,
-        child: BlocListener<LogoutCubit, LogoutState>(
-          listener: (context, state) {
-            state.maybeWhen(
-                orElse: (){},
-                error: (s){
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(s)));
-                },
-                success: (){
-                  navigateAuthPage();
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              colors: [
+                Color.fromRGBO(23,103,57,1.000),
+                Color.fromRGBO(42,190,105,1.000),
+              ]
+            )
+          ),
+          child: BlocListener<LogoutCubit, LogoutState>(
+            listener: (context, state) {
+              state.maybeWhen(
+                  orElse: (){},
+                  error: (s){
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(s)));
+                  },
+                  success: (){
+                    navigateAuthPage();
+                  }
+              );
+            },
+            child: BlocBuilder<ProfileCubit, ProfileState>(
+                builder: (context, state) {
+                  return AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    child: state.maybeWhen(
+                        user: (driver,partner) => _ProfileWidget(userProfile: driver!,),
+                        error: (String error) => Center(
+                          child: Text(error),
+                        ),
+                        loading: () => Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        ),
+                        orElse: ()=> Center(
+                          child: Text("DRIVER ERROR"),
+                        )
+                    ),
+                  );
                 }
-            );
-          },
-          child: BlocBuilder<ProfileCubit, ProfileState>(
-              builder: (context, state) {
-                return AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  child: state.maybeWhen(
-                      user: (driver,partner) => _ProfileWidget(userProfile: driver!,),
-                      error: (String error) => Center(
-                        child: Text(error),
-                      ),
-                      loading: () => Center(
-                        child: CircularProgressIndicator.adaptive(),
-                      ),
-                      orElse: ()=> Center(
-                        child: Text("DRIVER ERROR"),
-                      )
-                  ),
-                );
-              }
+            ),
           ),
         )
     );

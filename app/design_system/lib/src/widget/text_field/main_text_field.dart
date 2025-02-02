@@ -1,5 +1,5 @@
-import 'package:design_system/design_system.dart';
-import 'package:design_system/src/widget/text_field/custom_input.dart';
+import '../../../design_system.dart';
+import 'custom_input.dart';
 import 'package:flutter/material.dart';
 
 class MainTextField extends AppFormField {

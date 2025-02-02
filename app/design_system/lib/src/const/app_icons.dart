@@ -21,6 +21,7 @@ class AppIcons {
   static const String iconBackground = '$_assetsImagesPath/profile-background.svg';
   static const String cardImage = '$_assetsImagesPath/card.svg';
   static const String appIcon = '$_assetsImagesPath/app_icon.png';
+  static const String back = '$_assetsImagesPath/back.png';
 
   static const String frameBlue = '$_assetsIconsPath/frame_blue.png';
   static const String search = '$_assetsIconsPath/search.svg';
@@ -54,6 +55,7 @@ class AppIcons {
   static const weight = '$_assetsIconsPath/weight.svg';
   static const box = '$_assetsIconsPath/box.svg';
   static const reportSvg = '$_assetsIconsPath/reports.svg';
+  static const alertIcon = '$_assetsIconsPath/alert-circle.svg';
   // static const partnersSvg = '$_assetsIconsPath/partners.svg';
 
   static const favouriteTabBar = '$_assetsTabBarPath/favourite.svg';

@@ -15,7 +15,6 @@ class _Mobile extends StatefulWidget {
   final List<String> icons;
   final List<String> routes;
   const _Mobile({
-    super.key,
     required this.pages,
     required this.icons,
     required this.routes,
@@ -55,7 +54,6 @@ class _View extends StatefulWidget {
   final List<String> icons;
   final List<String> routes;
   const _View({
-    super.key,
     required this.pages,
     required this.icons,
     required this.routes,
@@ -121,7 +119,7 @@ class _ViewState extends State<_View> with TickerProviderStateMixin {
               selectedIcon: SvgPicture.asset(
                 width: 25,
                 icon,
-                color: context.colorScheme.background,
+                color: context.colorScheme.surface,
               ),
               icon: SvgPicture.asset(
                 icon,color: context.colorScheme.secondary,

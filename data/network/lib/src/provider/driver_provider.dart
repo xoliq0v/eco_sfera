@@ -1,7 +1,7 @@
 import 'package:core/core.dart' hide Map;
 import 'package:network/network.dart';
 
-import '../dto/daily_transactions_dto.dart';
+import 'package:network/src/dto/daily_transactions_dto.dart';
 
 abstract class ClientProvider extends BaseProvider {
 

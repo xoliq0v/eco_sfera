@@ -145,7 +145,7 @@ class _ReportScreenState extends State<ReportScreen> {
 
 class _Box extends StatelessWidget {
   final int weight;
-  const _Box({super.key, required this.weight});
+  const _Box({required this.weight});
 
   @override
   Widget build(BuildContext context) {

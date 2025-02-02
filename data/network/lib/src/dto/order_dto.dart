@@ -2,7 +2,7 @@ import 'package:core/core.dart' hide Map;
 import 'package:intl/intl.dart';
 import 'package:network/src/dto/order_user_dto.dart';
 
-import 'location_dto.dart';
+import 'package:network/src/dto/location_dto.dart';
 
 part 'order_dto.g.dart';
 
@@ -16,7 +16,7 @@ class OrderDto {
     required this.user,
     required this.items,
     required this.status,
-    this.locations = const []
+    this.locations = const [],
   });
 
   factory OrderDto.fromJson(Map<String, dynamic> json) => _$OrderDtoFromJson(json);
@@ -61,6 +61,8 @@ class OrderDto {
 @JsonSerializable()
 class OrderItemDTO {
 
+  factory OrderItemDTO.fromJson(Map<String, dynamic> json) => _$OrderItemDTOFromJson(json);
+
   OrderItemDTO({
     required this.name,
     required this.price,
@@ -70,8 +72,6 @@ class OrderItemDTO {
   String? name;
   String? price;
   double? kg;
-
-  factory OrderItemDTO.fromJson(Map<String, dynamic> json) => _$OrderItemDTOFromJson(json);
 
 
 }

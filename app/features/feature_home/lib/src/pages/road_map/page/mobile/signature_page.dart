@@ -1,7 +1,7 @@
 
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
-import 'package:feature_home/feature_home.dart';
+import '../../../../../feature_home.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 import 'package:signature/signature.dart';

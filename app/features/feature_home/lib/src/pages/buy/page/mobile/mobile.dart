@@ -3,7 +3,7 @@ part of '../payment_page.dart';
 
 class _Mobile extends StatefulWidget {
   final BuyReq params;
-  const _Mobile({super.key,required this.params});
+  const _Mobile({required this.params});
 
   @override
   State<_Mobile> createState() => Mobile();

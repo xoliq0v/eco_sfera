@@ -1,5 +1,5 @@
 import 'package:app_bloc/app_bloc.dart';
-import 'package:eco_sfera/di/injection.dart';
+import 'di/injection.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';

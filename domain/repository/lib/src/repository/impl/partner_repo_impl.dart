@@ -4,13 +4,17 @@ import 'package:core/core.dart';
 import 'package:database/database.dart';
 import 'package:model/model.dart';
 import 'package:network/network.dart';
-import 'package:repository/src/mapping/pageable_content_mapping.dart';
+import '../../mapping/pageable_content_mapping.dart';
 
+import '../../mapping/comment_mapping.dart';
 import '../../mapping/partner_data_mapper.dart';
+import '../../mapping/partner_data_mapping.dart';
 import '../../mapping/partner_edit_mapping.dart';
 import '../../mapping/partner_item_mapping.dart';
 import '../../mapping/partner_trash_mapping.dart';
 import '../../mapping/product_mapping.dart';
+import '../../mapping/requests/announcement_mapper.dart';
+import '../../mapping/submission_mapping.dart';
 import '../partner_repo.dart';
 
 class PartnerRepoImpl extends PartnerRepo {
@@ -129,6 +133,46 @@ class PartnerRepoImpl extends PartnerRepo {
   Future<Result<bool>> addComment(int productId, String comment) {
     return toResult2(
       trashProvider.addComment(productId, comment),
+      fromSuccessResponse: (response) {
+        return response.data ?? false;
+      },
+    );
+  }
+
+  @override
+  Future<Result<PartnerData?>> getPartnerData(int id) {
+    return toResult2(
+      partnerProvider.getPartnerData(id),
+      fromSuccessResponse: (response) {
+        return response.data?.toModel();
+      },
+    );
+  }
+
+  @override
+  Future<Result<bool>> createOrder(Submission submission) {
+    return toResult2(
+      partnerProvider.createOrder(submission.toDto()),
+      fromSuccessResponse: (response) {
+        return response.data ?? false;
+      },
+    );
+  }
+
+  @override
+  Future<Result<List<Comment>>> getComments() {
+    return toResult2(
+      partnerProvider.getComments(),
+      fromSuccessResponse: (response) {
+        return response.data?.map((e) => e.toModel()).toList() ?? [];
+      },
+    );
+  }
+  
+  @override
+  Future<Result<bool>> postAd(Announcement announcement) {
+    return toResult2(
+      partnerProvider.postAd(announcement.toDto()),
       fromSuccessResponse: (response) {
         return response.data ?? false;
       },

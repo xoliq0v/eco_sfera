@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 import 'package:core/generated/locale_keys.g.dart';
-import 'package:design_system/design_system.dart';
+import '../../../design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:map_service/map_service.dart';
 
@@ -18,7 +18,7 @@ class FilterSheet {
 }
 
 class _FilterSheetContent extends StatelessWidget {
-  const _FilterSheetContent({super.key});
+  const _FilterSheetContent();
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,6 @@
+import 'package:core/core.dart';
+import 'package:model/model.dart';
+import 'package:model/model.dart';
 import 'package:model/model.dart';
 import 'package:network/network.dart';
 
@@ -11,8 +14,10 @@ extension PartnerOrderMapper on PartnerOrderDto {
       totalPrice: totalPrice,
       longitude: longitude,
       latitude: latitude,
-      productType: productType,
-      productWeight: productWeight, status: status, date: date,
+      status: status, 
+      date: date,
+      distance: 1,
+      products: products?.map((item)=> item.toDTO()).toList()
     );
   }
 }
@@ -23,6 +28,18 @@ extension DriverMapper on DriverDto {
       id: id,
       name: name,
       phoneNumber: phoneNumber,
+    );
+  }
+}
+
+extension ProductItemMapper on PartnerOrderDtoItem{
+
+  ProductItem toDTO(){
+    return ProductItem(
+      productRu: productRu,
+      productUz: productUz,
+      productWeight: productWeight,
+      productEn: productEn
     );
   }
 }

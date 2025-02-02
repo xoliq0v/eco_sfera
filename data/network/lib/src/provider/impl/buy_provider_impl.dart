@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:network/src/endpoints/endpoints.dart';
 import 'package:network/src/provider/buy_provider.dart';
 
-import '../../../network.dart';
+import 'package:network/network.dart';
 
 class BuyProviderImpl extends BuyProvider {
   BuyProviderImpl({required this.apiClient});
@@ -18,7 +18,7 @@ class BuyProviderImpl extends BuyProvider {
           final res = json as List<dynamic>;
           return BuyCheckDto.fromJson(res[0] as Map<String, dynamic>);
 
-        }
+        },
     );
   }
 

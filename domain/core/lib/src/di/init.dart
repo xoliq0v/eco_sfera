@@ -1,7 +1,7 @@
 
 import 'dart:async';
 
-import 'package:core/core.dart';
+import '../../core.dart';
 import 'package:flutter/foundation.dart';
 
 @module

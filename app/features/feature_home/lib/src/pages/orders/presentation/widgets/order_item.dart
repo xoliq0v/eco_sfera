@@ -31,7 +31,7 @@ class OrderItem extends StatelessWidget {
                     blurRadius: 1
                 )
               ],
-              color: Theme.of(context).colorScheme.background,
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(25)
           ),
           child: Column(
@@ -61,12 +61,15 @@ class OrderItem extends StatelessWidget {
                                     ),
                                   ),
                                   Flexible(
-                                      child: Text(
-                                        order?.orderUser.phoneNumber.formatUzbekPhoneNumber()??partnerOrder!.driver.phoneNumber?.formatUzbekPhoneNumber()??'',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: Theme.of(context).textTheme.headlineMedium,
-                                      )
-                                  )
+                                    child: Text(
+                                      order?.orderUser.phoneNumber.formatUzbekPhoneNumber()??partnerOrder!.driver.phoneNumber?.formatUzbekPhoneNumber()??'',
+                                      overflow: TextOverflow.ellipsis,
+                                      style: Theme.of(context).textTheme.headlineMedium,
+                                    ),
+                                  ),
+                                  partnerOrder?.comment != null ? Text(
+                                    partnerOrder!.comment??''
+                                  ) : const SizedBox.shrink(),
                                 ],
                               ),
                             )
@@ -98,7 +101,7 @@ class OrderItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      order?.distance?.toInt().toString().toKm(context)??'0',
+                      order?.distance?.toInt().toString().toKm(context)??partnerOrder?.distance?.toInt().toString().toKm(context)??'0',
                       style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           color: isNew ? AppColors.main : context.colorScheme.primary
                       ),

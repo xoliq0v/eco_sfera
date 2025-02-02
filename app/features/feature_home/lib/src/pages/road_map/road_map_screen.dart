@@ -1,8 +1,8 @@
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart' hide AppImage;
-import 'package:feature_home/src/pages/road_map/widget/road_card.dart';
-import 'package:feature_home/src/pages/road_map/widget/route_detail_tile.dart';
-import 'package:feature_home/src/responsive.dart';
+import 'widget/road_card.dart';
+import 'widget/route_detail_tile.dart';
+import '../../responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 

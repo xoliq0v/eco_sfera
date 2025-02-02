@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:ui' show ImageFilter;
 
 import 'package:core/core.dart';
-import 'package:design_system/design_system.dart';
+import '../../design_system.dart';
 import 'package:flash/flash.dart';
 import 'package:flash/flash_helper.dart';
 import 'package:flutter/cupertino.dart';

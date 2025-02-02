@@ -43,12 +43,12 @@ class BillingInformationSheet extends StatelessWidget {
             Expanded(
               child: list == null || list!.isEmpty
                   ? DecoratedBox(decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.background,
+                      color: Theme.of(context).colorScheme.surface,
                       borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
                     ), child: Center(child: Text(LocaleKeys.noDataAvailable.tr(context: context))))
                   : DecoratedBox(
                       decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
                       ),
                       child: Column(

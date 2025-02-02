@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class AliceLogListWidget extends StatefulWidget {
-  const AliceLogListWidget({
+  const AliceLogListWidget({super.key, 
     required this.logsListenable,
     required this.scrollController,
     required this.emptyWidget,

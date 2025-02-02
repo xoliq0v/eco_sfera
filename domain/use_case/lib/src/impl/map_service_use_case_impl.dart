@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:model/model.dart';
 import 'package:repository/repository.dart';
-import 'package:use_case/src/map_service_use_case.dart';
+import '../map_service_use_case.dart';
 
 class CechPermissionWithoutRequestUseCaseImpl extends CheckPermissionWithoutRequestUseCase {
   CechPermissionWithoutRequestUseCaseImpl({

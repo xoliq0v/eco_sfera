@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 import 'package:model/model.dart';
-import 'package:app_bloc/app_bloc.dart';
+import '../../../app_bloc.dart';
 import 'package:use_case/use_case.dart';
 
 import '../mixin/pagination.dart';

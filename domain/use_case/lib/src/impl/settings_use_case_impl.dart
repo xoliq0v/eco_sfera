@@ -1,4 +1,4 @@
-import 'package:use_case/src/settings_use_case.dart';
+import '../settings_use_case.dart';
 import 'package:app_settings/app_settings.dart';
 
 class OpenAppSettingsImpl extends OpenAppSettings {

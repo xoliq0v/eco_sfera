@@ -24,3 +24,8 @@ export 'src/change_trash_price_use_case.dart';
 export 'src/change_partner_status_use_case.dart';
 export 'src/partner_edit_use_case.dart';
 export 'src/post_comment_use_case.dart';
+export 'src/get_partner_data_use_case.dart';
+export 'src/create_partner_order_use_case.dart';
+export 'src/get_partner_comments.dart';
+export 'src/change_order_status_use_case.dart';
+export 'src/post_add_use_case.dart';

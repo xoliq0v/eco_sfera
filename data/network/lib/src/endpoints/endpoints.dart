@@ -32,6 +32,10 @@ mixin PartnerEndpoint {
   static String products = 'api/partner/products';
   static String changeStatus = 'api/partner/change-status';
   static String editPartner = 'api/partner/edit';
+  static String info = 'api/partner';
+  static String createOrder = 'api/employee/order';
+  static String comments = 'api/partner/product-descriptions';
+  static String postAd = 'api/partner/add-ad';
 }
 
 mixin TrashEndpoint {
@@ -55,6 +59,7 @@ mixin OrderEndpoint {
 
   static String orders = _basePath;
   static String watch = 'api/accept-order';
+  static String changeStatus = 'api/partner/change-order-status';
 
 }
 

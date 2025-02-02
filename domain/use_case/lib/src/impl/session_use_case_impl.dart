@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:model/model.dart';
-import 'package:use_case/src/session_use_case.dart';
+import '../session_use_case.dart';
 import 'package:repository/repository.dart';
 
 class GetTokenImpl extends GetToken{

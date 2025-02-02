@@ -6,7 +6,6 @@ import 'package:design_system/design_system.dart' hide AppImage;
 import 'package:flutter/material.dart';
 import 'package:model/model.dart';
 
-import '../../../data/model/payment_history.dart';
 import '../../widget/payment_item.dart';
 
 @RoutePage()

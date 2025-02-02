@@ -1,5 +1,5 @@
 import 'package:app_bloc/app_bloc.dart';
-import 'package:eco_sfera/di/injection.config.dart';
+import 'injection.config.dart';
 import 'package:core/core.dart';
 import 'package:database/database.dart';
 import 'package:firebase_eco/firebase_eco.dart';

@@ -1,4 +1,4 @@
-import 'package:database/src/entity/drug_search.dart';
+import '../../entity/drug_search.dart';
 import 'package:objectbox/objectbox.dart';
 
 class DrugSearchDAO {

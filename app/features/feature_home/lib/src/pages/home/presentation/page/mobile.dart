@@ -2,7 +2,7 @@
 part of '../home_screen.dart';
 
 class _Mobile extends StatefulWidget {
-  const _Mobile({super.key});
+  const _Mobile();
 
   @override
   State<_Mobile> createState() => Mobile();
@@ -73,7 +73,7 @@ class Mobile extends State<_Mobile> {
                 children: [
                   DecoratedBox(
                     decoration: BoxDecoration(
-                      color: context.colorScheme.background,
+                      color: context.colorScheme.surface,
                       borderRadius: BorderRadius.circular(30)
                     ),
                     child: InkWell(
@@ -91,7 +91,7 @@ class Mobile extends State<_Mobile> {
 
                   DecoratedBox(
                     decoration: BoxDecoration(
-                        color: context.colorScheme.background,
+                        color: context.colorScheme.surface,
                         borderRadius: BorderRadius.circular(30)
                     ),
                     child: InkWell(
@@ -109,7 +109,7 @@ class Mobile extends State<_Mobile> {
 
                   DecoratedBox(
                     decoration: BoxDecoration(
-                        color: context.colorScheme.background,
+                        color: context.colorScheme.surface,
                         borderRadius: BorderRadius.circular(30)
                     ),
                     child: InkWell(

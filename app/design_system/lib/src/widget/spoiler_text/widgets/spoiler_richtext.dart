@@ -1,5 +1,5 @@
-import 'package:design_system/src/widget/spoiler_text/models/string_details.dart';
-import 'package:design_system/src/widget/spoiler_text/widgets/spoiler_paragraph.dart';
+import '../models/string_details.dart';
+import 'spoiler_paragraph.dart';
 import 'package:flutter/rendering.dart'
     show DiagnosticPropertiesBuilder, DiagnosticsProperty, TextSelection;
 import 'package:flutter/widgets.dart'

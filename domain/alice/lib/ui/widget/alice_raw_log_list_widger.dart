@@ -3,11 +3,11 @@ import 'package:flutter/services.dart';
 
 class AliceRawLogListWidget extends StatelessWidget {
   const AliceRawLogListWidget({
-    Key? key,
+    super.key,
     required this.scrollController,
     required this.getRawLogs,
     required this.emptyWidget,
-  }) : super(key: key);
+  });
 
   final ScrollController scrollController;
   final Future<String>? getRawLogs;

@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:core/core.dart';
 import 'package:app_bloc/app_bloc.dart';
 import 'package:design_system/design_system.dart';
-import 'package:feature_home/src/responsive.dart';
+import '../../responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:navigation/navigation.dart';

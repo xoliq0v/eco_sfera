@@ -1,7 +1,7 @@
 part of '../../category_page.dart';
 
 class _Tablet extends StatelessWidget {
-  const _Tablet({super.key});
+  const _Tablet();
 
   @override
   Widget build(BuildContext context) {

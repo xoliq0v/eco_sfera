@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:database/database.dart';
 import 'package:dio/dio.dart';
 import 'package:network/network.dart';
 import 'package:network/src/provider/impl/auth_provider_impl.dart';

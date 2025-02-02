@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 
 class Transaction extends Equatable {
-  final String time;
-  final String user;
-  final String amount;
-  final String type;
-  final String date;
+  final String? time;
+  final String? user;
+  final String? amount;
+  final String? type;
+  final String? date;
 
   const Transaction({
     required this.time,

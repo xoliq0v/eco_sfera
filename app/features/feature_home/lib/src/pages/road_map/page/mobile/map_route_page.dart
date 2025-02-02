@@ -1,5 +1,5 @@
 import 'package:design_system/design_system.dart';
-import 'package:feature_home/src/pages/road_map/widget/custom_progress_bar.dart';
+import '../../widget/custom_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:yandex_mapkit_lite/yandex_mapkit_lite.dart';

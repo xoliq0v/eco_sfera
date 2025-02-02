@@ -1,4 +1,4 @@
-part of '../../../partners_page.dart';
+part of '../../partners_page.dart';
 
 class _BottomLoading extends StatelessWidget {
   const _BottomLoading({super.key});

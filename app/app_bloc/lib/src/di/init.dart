@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import '../../app_bloc.dart';
-import 'package:app_bloc/src/bloc/buy/buy_cubit.dart';
-import 'package:app_bloc/src/bloc/customer/customer_cubit.dart';
-import 'package:app_bloc/src/bloc/customer/post_customer_cubit.dart';
-import 'package:app_bloc/src/bloc/history/history_pagination_cubit.dart';
+import '../bloc/buy/buy_cubit.dart';
+import '../bloc/customer/customer_cubit.dart';
+import '../bloc/customer/post_customer_cubit.dart';
+import '../bloc/history/history_pagination_cubit.dart';
 import '../bloc/customer/get_region_cubit.dart';
 import '../bloc/order/handler.dart';
-import 'package:app_bloc/src/bloc/order/order_cubit.dart';
-import 'package:app_bloc/src/bloc/theme/theme_cubit.dart';
+import '../bloc/order/order_cubit.dart';
+import '../bloc/theme/theme_cubit.dart';
 import 'package:core/core.dart';
 import 'package:use_case/use_case.dart';
 
@@ -121,17 +121,42 @@ abstract class AppBlocModule {
     return ProductCubit(getAllProducts);
   }
 
-  PartnerOrderCubit providePartnerOrderCubit(GetPartnerOrdersUseCase getPartnerOrdersUseCase,GetAuthType getType,ChangePartnerStatusUseCase changePartnerStatus){
-    return PartnerOrderCubit(changePartnerStatus,getType,getPartnerOrdersUseCase, initialPageSize: 5);
+  PartnerOrderCubit providePartnerOrderCubit(GetPartnerOrdersUseCase getPartnerOrdersUseCase,GetAuthType getType,ChangePartnerStatusUseCase changePartnerStatus,ChangeOrderStatusUseCase changeOrderStatus){
+    return PartnerOrderCubit(changePartnerStatus,getType,getPartnerOrdersUseCase, changeOrderStatus, initialPageSize: 5);
   }
 
-  EditPartnerInfoCubit provideEditPartnerInfoCubit(PartnerEditUseCase editPartnerInfo){
-    return EditPartnerInfoCubit(editPartnerInfo);
+  EditPartnerInfoCubit provideEditPartnerInfoCubit(PartnerEditUseCase editPartnerInfo,GetPartnerProfile getPartnerProfile){
+    return EditPartnerInfoCubit(editPartnerInfo,getPartnerProfile);
   }
 
-  PartnerCommentCubit providePartnerCommentCubit(PostCommentUseCase postComment){
-    return PartnerCommentCubit(postComment);
+  PartnerCommentCubit providePartnerCommentCubit(PostCommentUseCase postComment,GetPartnerComments getPartnerComments,GetAllProducts getAllProducts){
+    return PartnerCommentCubit(postComment,getPartnerComments,getAllProducts);
   }
+
+  SubmissionCubit provideSubmissionCubit(GetPartnerDataUseCase getPartnerDataUseCase,CreatePartnerOrderUseCase createPartnerOrderUseCase,GetUserProfile getDriverDataUseCase){
+    return SubmissionCubit(getPartnerDataUseCase,createPartnerOrderUseCase,getDriverDataUseCase);
+  }
+
+  PartnerTrashCubit providePartnerTrashCubit(PartnerGetTrashUseCase getPartnerTrash,ChangeTrashPriceUseCase changeTrashPrice){
+    return PartnerTrashCubit(getPartnerTrash,changeTrashPrice);
+  }
+
+  PartnerHistoryCubit providePartnerHistoryCubit(GetPartnerOrdersUseCase getPartnerOrdersUseCase,GetAuthType getType){
+    return PartnerHistoryCubit(getPartnerOrdersUseCase,getType, initialPageSize: 5);
+  }
+
+  PartnerCompletedHistoryCubit providePartnerCompletedHistoryCubit(GetPartnerOrdersUseCase getPartnerOrdersUseCase,GetAuthType getType){
+    return PartnerCompletedHistoryCubit(getPartnerOrdersUseCase,initialPageSize: 5);
+  }
+
+  UserDataCubit provideUserDataCubit(GetUserProfile user,GetPartnerProfile partner,GetAuthType type){
+    return UserDataCubit(user,partner,type);
+  }
+
+  AdCubit provideAdCubit(PostAddUseCase ad){
+    return AdCubit(ad);
+  }
+
 }
 
 @InjectableInit.microPackage()

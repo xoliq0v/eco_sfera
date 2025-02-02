@@ -1,4 +1,4 @@
-import 'package:core/core.dart' hide Map;
+import '../../core.dart' hide Map;
 
 part 'pagination_model.g.dart';
 

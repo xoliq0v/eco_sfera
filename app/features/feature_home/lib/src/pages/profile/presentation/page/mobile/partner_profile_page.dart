@@ -1,7 +1,7 @@
 part of '../../profile_page.dart';
 
 class _PartnerMobile extends StatefulWidget {
-  const _PartnerMobile({super.key});
+  const _PartnerMobile();
 
   @override
   State<_PartnerMobile> createState() => PartnerMobile();

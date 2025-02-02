@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 
-import '../../network.dart';
+import 'package:network/network.dart';
 
 part 'active_history_dto.g.dart';
 

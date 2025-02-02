@@ -28,7 +28,7 @@ class _PriceBadgeState extends State<PriceBadge> {
           width: 50,
           child: DecoratedBox(
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.background,
+                color: Theme.of(context).colorScheme.surface,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),

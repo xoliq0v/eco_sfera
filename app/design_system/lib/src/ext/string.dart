@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:core/core.dart';
-import 'package:design_system/design_system.dart';
+import '../../design_system.dart';
 import 'package:flutter/services.dart' as services;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';

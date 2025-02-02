@@ -11,7 +11,6 @@ PartnerInfoDto _$PartnerInfoDtoFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num).toInt(),
       latitude: json['latitude'] as String?,
       longitude: json['longitude'] as String?,
-      location: json['location'] as String?,
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -30,7 +29,9 @@ PartnerInfoDto _$PartnerInfoDtoFromJson(Map<String, dynamic> json) =>
       password: json['password'] as String?,
       trashes: json['trashes'] as String?,
       trashePrices: json['trashe_prices'] as String?,
+      location: json['location'] as String?,
       phone: json['phone'] as String?,
+      about: json['about'] as String?,
     );
 
 Map<String, dynamic> _$PartnerInfoDtoToJson(PartnerInfoDto instance) =>
@@ -54,4 +55,5 @@ Map<String, dynamic> _$PartnerInfoDtoToJson(PartnerInfoDto instance) =>
       'trashes': instance.trashes,
       'trashe_prices': instance.trashePrices,
       'phone': instance.phone,
+      'about': instance.about,
     };

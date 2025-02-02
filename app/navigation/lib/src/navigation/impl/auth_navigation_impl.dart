@@ -1,8 +1,8 @@
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:navigation/src/app_router.dart';
-import 'package:navigation/src/navigation/auth_navigation.dart';
+import '../../app_router.dart';
+import '../auth_navigation.dart';
 
 class AuthNavigationImpl extends AuthNavigation {
   AuthNavigationImpl({required this.appRouter});

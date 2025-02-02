@@ -1,3 +1,4 @@
+import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
@@ -7,11 +8,26 @@ import 'page/comment.dart';
 import 'page/payments.dart';
 
 @RoutePage()
-class PresentationPage extends StatefulWidget {
+class PresentationPage extends StatefulWidget implements AutoRouteWrapper {
   const PresentationPage({super.key});
 
   @override
   State<PresentationPage> createState() => _PresentationPageState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ProductCubit>(
+          create: (context) => AppBlocHelper.getProductCubit(),
+        ),
+        BlocProvider<PartnerCommentCubit>(
+          create: (context) => AppBlocHelper.getPartnerCommentCubit()
+        ),
+      ],
+      child: this,
+    );
+  }
 }
 
 class _PresentationPageState extends State<PresentationPage> with TickerProviderStateMixin {

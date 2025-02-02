@@ -5,6 +5,8 @@ part 'region_dto.g.dart';
 @JsonSerializable()
 class RegionDTO {
 
+  factory RegionDTO.fromJson(Map<String, dynamic> json) => _$RegionDTOFromJson(json);
+
   RegionDTO({
     required this.id,
     required this.name,
@@ -12,8 +14,6 @@ class RegionDTO {
 
   int? id;
   String? name;
-
-  factory RegionDTO.fromJson(Map<String, dynamic> json) => _$RegionDTOFromJson(json);
 
 
 }

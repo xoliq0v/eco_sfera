@@ -1,4 +1,4 @@
-import 'package:app_bloc/app_bloc.dart';
+import '../app_bloc.dart';
 import 'package:core/core.dart';
 
 import 'bloc/edit_partner/edit_partner_info_cubit.dart';
@@ -95,5 +95,33 @@ mixin AppBlocHelper {
 
   static PartnerCommentCubit getPartnerCommentCubit(){
     return GetIt.I.get<PartnerCommentCubit>();
+  }
+
+  static SubmissionCubit getSubmissionCubit(){
+    return GetIt.I.get<SubmissionCubit>();
+  }
+
+  static ProductCubit getProductCubit(){
+    return GetIt.I.get<ProductCubit>();
+  }
+
+  static PartnerTrashCubit getPartnerTrashCubit(){
+    return GetIt.I.get<PartnerTrashCubit>();
+  }
+
+  static PartnerCompletedHistoryCubit getPartnerCompletedHistoryCubit(){
+    return GetIt.I.get<PartnerCompletedHistoryCubit>();
+  }
+
+  static PartnerHistoryCubit getPartnerHistoryCubit(){
+    return GetIt.I.get<PartnerHistoryCubit>();
+  }
+
+  static UserDataCubit getUserDataCubit(){
+    return GetIt.I.get<UserDataCubit>();
+  }
+
+  static AdCubit getAdCubit(){
+    return GetIt.I.get<AdCubit>();
   }
 }

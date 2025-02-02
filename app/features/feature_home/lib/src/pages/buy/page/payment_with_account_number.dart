@@ -69,7 +69,7 @@ class _PaymentWithAccountNumberState extends State<PaymentWithAccountNumber> {
                 }
             );
           },
-          backgroundColor: colorScheme.background,
+          backgroundColor: colorScheme.surface,
           borderRadius: 40,
           border: Border.all(
             color: colorScheme.secondary,

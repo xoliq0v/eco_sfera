@@ -3,7 +3,6 @@ import 'package:core/core.dart';
 import '../../../design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:model/model.dart';
-import 'package:navigation/navigation.dart';
 
 class OrderSheet {
   static Future<void> show({

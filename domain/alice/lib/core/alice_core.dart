@@ -6,7 +6,6 @@ import 'package:alice/helper/alice_save_helper.dart';
 import 'package:alice/model/alice_http_call.dart';
 import 'package:alice/model/alice_http_error.dart';
 import 'package:alice/model/alice_http_response.dart';
-import 'package:alice/model/alice_log.dart';
 import 'package:alice/ui/page/alice_calls_list_screen.dart';
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';

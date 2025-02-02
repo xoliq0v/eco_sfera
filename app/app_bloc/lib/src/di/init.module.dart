@@ -22,6 +22,11 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
         () => appBlocModule.provideThemeChangCubit());
     gh.factory<_i4.FCMHandler>(() => appBlocModule.provideHandler());
     gh.factory<_i3.NavigationBloc>(() => appBlocModule.provideNavigationBloc());
+    gh.factory<_i3.UserDataCubit>(() => appBlocModule.provideUserDataCubit(
+          gh<_i5.GetUserProfile>(),
+          gh<_i5.GetPartnerProfile>(),
+          gh<_i5.GetAuthType>(),
+        ));
     gh.factory<_i3.ActiveHistoryCubit>(
         () => appBlocModule.provideActiveHistory(gh<_i5.GetActiveHistory>()));
     gh.factory<_i3.InternetConnectivityController>(
@@ -31,10 +36,17 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
             ));
     gh.factory<_i3.TypeBloc>(
         () => appBlocModule.provideTypeBloc(gh<_i5.GetAuthType>()));
-    gh.factory<_i3.EditPartnerInfoCubit>(() => appBlocModule
-        .provideEditPartnerInfoCubit(gh<_i5.PartnerEditUseCase>()));
+    gh.factory<_i3.AdCubit>(
+        () => appBlocModule.provideAdCubit(gh<_i5.PostAddUseCase>()));
     gh.factory<_i3.PartnerPaginationCubit>(() =>
         appBlocModule.providePaginationPartnerCubit(gh<_i5.FetchPartners>()));
+    gh.factory<_i3.PartnerOrderCubit>(
+        () => appBlocModule.providePartnerOrderCubit(
+              gh<_i5.GetPartnerOrdersUseCase>(),
+              gh<_i5.GetAuthType>(),
+              gh<_i5.ChangePartnerStatusUseCase>(),
+              gh<_i5.ChangeOrderStatusUseCase>(),
+            ));
     gh.factory<_i3.BuyCubit>(() => appBlocModule.provideBuyCubit(
           gh<_i5.Buy>(),
           gh<_i5.FetchBuyPageParams>(),
@@ -55,18 +67,16 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
         ));
     gh.factory<_i3.PostCustomerCubit>(
         () => appBlocModule.providePostCustomerCubit(gh<_i5.PostCustomer>()));
-    gh.factory<_i3.PartnerCommentCubit>(() =>
-        appBlocModule.providePartnerCommentCubit(gh<_i5.PostCommentUseCase>()));
+    gh.factory<_i3.PartnerCommentCubit>(
+        () => appBlocModule.providePartnerCommentCubit(
+              gh<_i5.PostCommentUseCase>(),
+              gh<_i5.GetPartnerComments>(),
+              gh<_i5.GetAllProducts>(),
+            ));
     gh.factory<_i3.RegionCubit>(
         () => appBlocModule.provideRegionCubit(gh<_i5.GetRegions>()));
     gh.factory<_i3.HistoryPaginationCubit>(() =>
         appBlocModule.provideHistoryPaginationCubit(gh<_i5.FetchHistory>()));
-    gh.factory<_i3.PartnerOrderCubit>(
-        () => appBlocModule.providePartnerOrderCubit(
-              gh<_i5.GetPartnerOrdersUseCase>(),
-              gh<_i5.GetAuthType>(),
-              gh<_i5.ChangePartnerStatusUseCase>(),
-            ));
     gh.factory<_i3.OrderCubit>(() => appBlocModule.provideOrderCubit(
           gh<_i5.GetOrder>(),
           gh<_i5.FCMTokenRefresh>(),
@@ -80,6 +90,16 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
           gh<_i5.FetchBalance>(),
           gh<_i5.GetUserProfile>(),
         ));
+    gh.factory<_i3.PartnerTrashCubit>(
+        () => appBlocModule.providePartnerTrashCubit(
+              gh<_i5.PartnerGetTrashUseCase>(),
+              gh<_i5.ChangeTrashPriceUseCase>(),
+            ));
+    gh.factory<_i3.EditPartnerInfoCubit>(
+        () => appBlocModule.provideEditPartnerInfoCubit(
+              gh<_i5.PartnerEditUseCase>(),
+              gh<_i5.GetPartnerProfile>(),
+            ));
     gh.factory<_i3.AuthCubit>(() => appBlocModule.provideAuthCubit(
           gh<_i5.AuthUseCase>(),
           gh<_i5.SaveToken>(),
@@ -98,6 +118,21 @@ class AppBlocPackageModule extends _i1.MicroPackageModule {
         () => appBlocModule.provideCustomerCubit(gh<_i5.GetCustomer>()));
     gh.factory<_i3.CustomerPaginationCubit>(() =>
         appBlocModule.provideCustomerPaginationCubit(gh<_i5.GetCustomer>()));
+    gh.factory<_i3.PartnerHistoryCubit>(
+        () => appBlocModule.providePartnerHistoryCubit(
+              gh<_i5.GetPartnerOrdersUseCase>(),
+              gh<_i5.GetAuthType>(),
+            ));
+    gh.factory<_i3.PartnerCompletedHistoryCubit>(
+        () => appBlocModule.providePartnerCompletedHistoryCubit(
+              gh<_i5.GetPartnerOrdersUseCase>(),
+              gh<_i5.GetAuthType>(),
+            ));
+    gh.factory<_i3.SubmissionCubit>(() => appBlocModule.provideSubmissionCubit(
+          gh<_i5.GetPartnerDataUseCase>(),
+          gh<_i5.CreatePartnerOrderUseCase>(),
+          gh<_i5.GetUserProfile>(),
+        ));
   }
 }
 

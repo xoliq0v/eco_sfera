@@ -1,7 +1,7 @@
 import 'package:core/src/network_config/result_mapping.dart';
 import 'package:model/model.dart';
-import 'package:repository/src/mapping/driver_mapper.dart';
-import 'package:repository/src/repository/user_repo.dart';
+import '../../mapping/driver_mapper.dart';
+import '../user_repo.dart';
 import 'package:database/database.dart';
 import 'package:network/network.dart';
 

@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:model/model.dart';
 import 'package:repository/repository.dart' hide Logout;
-import 'package:use_case/use_case.dart';
+import '../../use_case.dart';
 
 @injectable
 class AuthImpl implements AuthUseCase {

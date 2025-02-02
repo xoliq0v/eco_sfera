@@ -1,4 +1,4 @@
-import 'package:design_system/src/widget/spoiler_text/models/string_details.dart';
+import '../models/string_details.dart';
 import 'package:flutter/rendering.dart';
 
 typedef PaintCallback = void Function(

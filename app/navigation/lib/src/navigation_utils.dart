@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
-import 'package:navigation/navigation.dart';
-import 'package:navigation/src/navigation/auth_navigation.dart';
+import '../navigation.dart';
+import 'navigation/auth_navigation.dart';
 
 mixin NavigationUtils {
   static MainNavigation getMainNavigator() {

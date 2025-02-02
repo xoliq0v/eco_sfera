@@ -18,8 +18,9 @@ enum BuyType {
 class BuyPage extends StatefulWidget implements AutoRouteWrapper {
   final OrderModel? param;
   final ActiveHistory? historyOrder;
+  final PartnerOrder? partnerOrder;
   final String? type;
-  const BuyPage({super.key, this.param, this.type,  this.historyOrder});
+  const BuyPage({super.key, this.param, this.type,  this.historyOrder, this.partnerOrder});
 
   @override
   State<BuyPage> createState() => _BuyPageState();
@@ -166,8 +167,7 @@ class _BuyPageState extends State<BuyPage> {
                       setState(() {
                         for (int i = 0; i < state.params.length; i++) {
                           final trashInfo = state.params[i];
-                          final historyItem = widget.historyOrder!.items.firstWhere(
-                                (item) {
+                          final historyItem = widget.historyOrder!.items.firstWhere((item) {
                               switch(trashInfo.key) {
                                 case 'paper':
                                   return item.name?.toLowerCase().contains('qog\'oz') ?? false;
@@ -187,7 +187,6 @@ class _BuyPageState extends State<BuyPage> {
                           if (historyItem.name?.isNotEmpty ?? false) {
                             _values[i] = historyItem.kg.toDouble();
                             _controllers[i]?.text = historyItem.kg.toString();
-                            log('Setting value for ${trashInfo.name}: ${historyItem.kg}');
                           }
                         }
 
@@ -284,7 +283,7 @@ class _BuyPageState extends State<BuyPage> {
                         SliverList(
                           delegate: SliverChildBuilderDelegate(
                                 (BuildContext context, int index) {
-                              if (params.params == null || index >= params.params.length) {
+                              if (index >= params.params.length) {
                                 return null;
                               }
 

@@ -20,6 +20,7 @@ class PartnerInfoModel extends Equatable {
   final String trashes;
   final String trashePrices;
   final String? phone;
+  final String? about;
 
   PartnerInfoModel({
     required this.id,
@@ -41,6 +42,7 @@ class PartnerInfoModel extends Equatable {
     required this.trashes,
     required this.trashePrices,
     this.phone,
+    this.about,
   });
 
   @override

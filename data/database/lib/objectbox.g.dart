@@ -220,7 +220,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(12, 1204596445333538320),
       name: 'PartnerEntity',
-      lastPropertyId: const obx_int.IdUid(19, 12837458166937713),
+      lastPropertyId: const obx_int.IdUid(20, 6245655921568490254),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -316,6 +316,11 @@ final _entities = <obx_int.ModelEntity>[
         obx_int.ModelProperty(
             id: const obx_int.IdUid(19, 12837458166937713),
             name: 'phone',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(20, 6245655921568490254),
+            name: 'about',
             type: 9,
             flags: 0)
       ],
@@ -709,7 +714,9 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final trashePricesOffset = fbb.writeString(object.trashePrices);
           final phoneOffset =
               object.phone == null ? null : fbb.writeString(object.phone!);
-          fbb.startTable(20);
+          final aboutOffset =
+              object.about == null ? null : fbb.writeString(object.about!);
+          fbb.startTable(21);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, latitudeOffset);
           fbb.addOffset(2, longitudeOffset);
@@ -729,6 +736,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           fbb.addOffset(16, trashesOffset);
           fbb.addOffset(17, trashePricesOffset);
           fbb.addOffset(18, phoneOffset);
+          fbb.addOffset(19, aboutOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -774,6 +782,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
                   .vTableGet(buffer, rootOffset, 38, '');
           final phoneParam = const fb.StringReader(asciiOptimization: true)
               .vTableGetNullable(buffer, rootOffset, 40);
+          final aboutParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 42);
           final object = PartnerEntity(
               id: idParam,
               latitude: latitudeParam,
@@ -793,7 +803,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
               password: passwordParam,
               trashes: trashesParam,
               trashePrices: trashePricesParam,
-              phone: phoneParam);
+              phone: phoneParam,
+              about: aboutParam);
 
           return object;
         }),
@@ -1040,6 +1051,10 @@ class PartnerEntity_ {
   /// See [PartnerEntity.phone].
   static final phone =
       obx.QueryStringProperty<PartnerEntity>(_entities[4].properties[18]);
+
+  /// See [PartnerEntity.about].
+  static final about =
+      obx.QueryStringProperty<PartnerEntity>(_entities[4].properties[19]);
 }
 
 /// [BalanceEntity] entity fields to define ObjectBox queries.

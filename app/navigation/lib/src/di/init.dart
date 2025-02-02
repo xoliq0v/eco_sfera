@@ -2,13 +2,13 @@
 import 'dart:async';
 
 import 'package:core/core.dart';
-import 'package:navigation/navigation.dart';
-import 'package:navigation/src/navigation/auth_navigation.dart';
-import 'package:navigation/src/navigation/impl/auth_navigation_impl.dart';
-import 'package:navigation/src/routes/auth_routes.dart';
-import 'package:navigation/src/routes/impl/auth_routes_impl.dart';
-import 'package:navigation/src/routes/impl/main_routes_impl.dart';
-import 'package:navigation/src/routes/main_routes.dart';
+import '../../navigation.dart';
+import '../navigation/auth_navigation.dart';
+import '../navigation/impl/auth_navigation_impl.dart';
+import '../routes/auth_routes.dart';
+import '../routes/impl/auth_routes_impl.dart';
+import '../routes/impl/main_routes_impl.dart';
+import '../routes/main_routes.dart';
 
 import '../app_router.dart';
 

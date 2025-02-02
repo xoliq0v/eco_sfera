@@ -6,11 +6,6 @@ part 'transaction_dto.g.dart';
 
 @JsonSerializable()
 class TransactionDto {
-  final String time;
-  final String user;
-  final dynamic amount;
-  final String type;
-  final String date;
 
   TransactionDto({
     required this.time,
@@ -22,6 +17,11 @@ class TransactionDto {
 
   factory TransactionDto.fromJson(Map<String, dynamic> json) =>
       _$TransactionDtoFromJson(json);
+  final String? time;
+  final String? user;
+  final dynamic amount;
+  final String? type;
+  final String? date;
 
   Map<String, dynamic> toJson() => _$TransactionDtoToJson(this);
 }

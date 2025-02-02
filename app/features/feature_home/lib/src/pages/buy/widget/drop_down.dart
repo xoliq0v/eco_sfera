@@ -1,9 +1,7 @@
 
 import 'package:core/core.dart';
-import 'package:core/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 
-import '../../../di/init_route.dart';
 
 class CustomDropDown extends StatefulWidget {
   final List<String>? items;

@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import '../../core.dart';
 
 class Result<T> {
   Result.completed(this.data, [this.error]) : status = Status.completed;
