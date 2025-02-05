@@ -107,32 +107,32 @@ class _ProfileWidget extends StatelessWidget {
                             ),
                           ),
                         ),
-                        30.verticalSpace,
-                        SizedBox(
-                          width: MediaQuery
-                              .sizeOf(context)
-                              .width * 0.9,
-                          height: 55,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: colorScheme.surface,
-                                    width: 2
-                                )
-                            ),
-                            child: Row(
-                              children: [
-                                15.horizontalSpace,
-                                SvgPicture.asset(AppIcons.bell02,
-                                  color: colorScheme.primary,),
-                                15.horizontalSpace,
-                                Text(LocaleKeys.notifications.tr(
-                                    context: context))
-                              ],
-                            ),
-                          ),
-                        ),
+                        // 30.verticalSpace,
+                        // SizedBox(
+                        //   width: MediaQuery
+                        //       .sizeOf(context)
+                        //       .width * 0.9,
+                        //   height: 55,
+                        //   child: DecoratedBox(
+                        //     decoration: BoxDecoration(
+                        //         borderRadius: BorderRadius.circular(10),
+                        //         border: Border.all(
+                        //             color: colorScheme.surface,
+                        //             width: 2
+                        //         )
+                        //     ),
+                        //     child: Row(
+                        //       children: [
+                        //         15.horizontalSpace,
+                        //         SvgPicture.asset(AppIcons.bell02,
+                        //           color: colorScheme.primary,),
+                        //         15.horizontalSpace,
+                        //         Text(LocaleKeys.notifications.tr(
+                        //             context: context))
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                         10.verticalSpace,
                         InkWell(
                           onTap: () {

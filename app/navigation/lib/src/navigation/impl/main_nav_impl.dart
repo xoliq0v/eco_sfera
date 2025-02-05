@@ -31,7 +31,7 @@ class MainNavigationImpl extends MainNavigation {
         LocaleKeys.orders,
         LocaleKeys.buy,
         LocaleKeys.history,
-        LocaleKeys.profile,
+        LocaleKeys.partners,
         // LocaleKeys.reports,
         // LocaleKeys.profile.tr(context: context)
       ])]);
@@ -39,13 +39,13 @@ class MainNavigationImpl extends MainNavigation {
       return await appRouter.replaceAll([MainRoute(pages: RouteUtils.getPartnerRoutes(), icons: [
         AppIcons.home01,
         AppIcons.menu02,
-        AppIcons.userProfile02,
         AppIcons.historySvg,
+        AppIcons.userProfile02,
       ], routes: [
         LocaleKeys.home,
         LocaleKeys.data,
+        LocaleKeys.history,
         LocaleKeys.profile,
-        LocaleKeys.history
         // LocaleKeys.profile.tr(context: context)
       ])]);
     }

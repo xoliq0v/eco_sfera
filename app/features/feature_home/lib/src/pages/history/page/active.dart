@@ -15,8 +15,8 @@ class _ActivePageState extends State<ActivePage> {
   @override
   void initState() {
     super.initState();
-    _fetchType();
     _scrollController.addListener(_onScroll);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _fetchType());
   }
 
   Future<void> _fetchType() async {
@@ -25,6 +25,20 @@ class _ActivePageState extends State<ActivePage> {
       await context.read<ActiveHistoryCubit>().fetchHistory();
     }
   }
+
+  Widget _buildErrorOrEmpty(String message, VoidCallback onRetry) {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Text(message),
+      const SizedBox(height: 5),
+      EcoOutlineButton(
+        onPressed: onRetry,
+        child: Text(LocaleKeys.tryAgain.tr(context: context))
+      )
+    ],
+  );
+}
 
   @override
   void dispose() {
@@ -47,114 +61,176 @@ class _ActivePageState extends State<ActivePage> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<AuthType>(
-      valueListenable: type,
-      builder: (context, type, child) {
-        if(type == AuthType.def){
-          return const Center(child: CircularProgressIndicator.adaptive());
-        }
-        if(type == AuthType.driver){
-          return BlocBuilder<ActiveHistoryCubit, ActiveHistoryPaginationState>(
-            builder: (context, state) {
-              if (state.isLoadingShimmer) {
+    return StreamBuilder<Object>(
+      stream: null,
+      builder: (context, snapshot) {
+        return ValueListenableBuilder<AuthType>(
+          valueListenable: type,
+          builder: (context, type, child) {
+            if(type == AuthType.def){
               return const Center(child: CircularProgressIndicator.adaptive());
             }
-        
-            if(state.history.isEmpty){
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(LocaleKeys.activeHistoryIsEmpty.tr(context: context)),
-                  5.verticalSpace,
-                  EcoOutlineButton(onPressed: (){
-                    context.read<ActiveHistoryCubit>().refresh();
-                  }, child: Text(LocaleKeys.update.tr(context: context)))
-                ],
-              );
-        
-            }
-        
-            if (state.error != null) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(state.error.toString()),
-                  5.verticalSpace,
-                  EcoOutlineButton(onPressed: (){
-                    context.read<ActiveHistoryCubit>().refresh();
-                  }, child: Text(LocaleKeys.tryAgain.tr(context: context)))
-                ],
-              );
-            }
-        
-            return LayoutBuilder(
-              builder: (context, constraints) {
-                if (constraints.maxWidth > 600) {
-                  return RefreshIndicator(
-                    onRefresh: () async {
-                      await context.read<ActiveHistoryCubit>().refresh();
-                    },
-                    child: GridView.builder(
-                      controller: _scrollController,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 3,
-                        crossAxisSpacing: 16,
-                        mainAxisSpacing: 16,
-                      ),
-                      itemCount: state.history.length + (state.isLoadingPagination ? 1 : 0),
-                      padding: const EdgeInsets.all(16),
-                      itemBuilder: (context, index) {
-                        if (index >= state.history.length) {
-                          return const Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: CircularProgressIndicator.adaptive(),
-                            ),
-                          );
-                        }
-        
-                        return ActiveItem(history: state.history[index]);
-                      },
-                    ),
+            if(type == AuthType.driver){
+              return BlocBuilder<ActiveHistoryCubit, ActiveHistoryPaginationState>(
+                builder: (context, state) {
+                  if (state.isLoadingShimmer) {
+                  return const Center(child: CircularProgressIndicator.adaptive());
+                }
+            
+                if(state.history.isEmpty){
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(LocaleKeys.activeHistoryIsEmpty.tr(context: context)),
+                      5.verticalSpace,
+                      EcoOutlineButton(onPressed: (){
+                        context.read<ActiveHistoryCubit>().refresh();
+                      }, child: Text(LocaleKeys.update.tr(context: context)))
+                    ],
+                  );
+            
+                }
+            
+                if (state.error != null) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(state.error.toString()),
+                      5.verticalSpace,
+                      EcoOutlineButton(onPressed: (){
+                        context.read<ActiveHistoryCubit>().refresh();
+                      }, child: Text(LocaleKeys.tryAgain.tr(context: context)))
+                    ],
                   );
                 }
-        
-                return RefreshIndicator(
-                  onRefresh: () async {
-                    await context.read<ActiveHistoryCubit>().refresh();
+            
+                return LayoutBuilder(
+                  builder: (context, constraints) {
+                    if (constraints.maxWidth > 600) {
+                      return RefreshIndicator(
+                        onRefresh: () async {
+                          await context.read<ActiveHistoryCubit>().refresh();
+                        },
+                        child: GridView.builder(
+                          controller: _scrollController,
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 3,
+                            crossAxisSpacing: 16,
+                            mainAxisSpacing: 16,
+                          ),
+                          itemCount: state.history.length + (state.isLoadingPagination ? 1 : 0),
+                          padding: const EdgeInsets.all(16),
+                          itemBuilder: (context, index) {
+                            if (index >= state.history.length) {
+                              return const Center(
+                                child: Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: CircularProgressIndicator.adaptive(),
+                                ),
+                              );
+                            }
+            
+                            return ActiveItem(history: state.history[index]);
+                          },
+                        ),
+                      );
+                    }
+            
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        await context.read<ActiveHistoryCubit>().refresh();
+                      },
+                      child: SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        // constraints: BoxConstraints(
+                        //   minHeight: MediaQuery.of(context).size.height,
+                        // ),
+                        child: ListView.builder(
+                          controller: _scrollController,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: state.history.length + (state.isLoadingPagination ? 1 : 0),
+                          padding: const EdgeInsets.all(16),
+                          itemBuilder: (context, index) {
+                            if (index >= state.history.length) {
+                              return const Center(
+                                child: Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: CircularProgressIndicator.adaptive(),
+                                ),
+                              );
+                            }
+            
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 16),
+                              child: ActiveItem(
+                                  history: state.history[index],
+                                onTap: (){
+                                    ActiveHistoryBottomSheet.show(context, state.history[index]);
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    );
                   },
-                  child: SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    // constraints: BoxConstraints(
-                    //   minHeight: MediaQuery.of(context).size.height,
-                    // ),
+                );
+              },
+            );
+            }
+            if(type == AuthType.partner){
+              return BlocBuilder<PartnerHistoryCubit, PartnerHistoryState>(
+                builder: (context, state) {
+                  if(state.isLoadingShimmer){
+                    return const Center(child: CircularProgressIndicator.adaptive());
+                  }
+                if(state.partnerOrdersHistory.isEmpty){
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(LocaleKeys.activeHistoryIsEmpty.tr(context: context)),
+                      5.verticalSpace,
+                      EcoOutlineButton(onPressed: (){
+                        context.read<PartnerHistoryCubit>().refresh();
+                      }, child: Text(LocaleKeys.update.tr(context: context)))
+                    ],
+                  );
+                }
+                if(state.error != null){
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(state.error.toString()),
+                      5.verticalSpace,
+                      EcoOutlineButton(onPressed: (){
+                        context.read<PartnerHistoryCubit>().refresh();
+                      }, child: Text(LocaleKeys.tryAgain.tr(context: context)))
+                    ],
+                  );
+                }
+                return SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      await context.read<PartnerHistoryCubit>().refresh();
+                    },
                     child: ListView.builder(
+                      itemCount: state.partnerOrdersHistory.length,
                       controller: _scrollController,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: state.history.length + (state.isLoadingPagination ? 1 : 0),
-                      padding: const EdgeInsets.all(16),
-                      itemBuilder: (context, index) {
-                        if (index >= state.history.length) {
-                          return const Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: CircularProgressIndicator.adaptive(),
-                            ),
-                          );
-                        }
-        
+                      itemBuilder: (context, index){
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 16),
-                          child: ActiveItem(
-                              history: state.history[index],
-                            onTap: (){
-                                ActiveHistoryBottomSheet.show(context, state.history[index]);
-                            },
-                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 16),
+                          child: _Item(history: state.partnerOrdersHistory[index], onTap: (){
+                            PartnerHistoryBottomSheet.show(context, state.partnerOrdersHistory[index]);
+                          }),
                         );
                       },
                     ),
@@ -162,67 +238,10 @@ class _ActivePageState extends State<ActivePage> {
                 );
               },
             );
-          },
+            }
+            return const Center(child: CircularProgressIndicator.adaptive());
+          }
         );
-        }
-        if(type == AuthType.partner){
-          return BlocBuilder<PartnerHistoryCubit, PartnerHistoryState>(
-            builder: (context, state) {
-              if(state.isLoadingShimmer){
-              return const Center(child: CircularProgressIndicator.adaptive());
-            }
-            if(state.partnerOrdersHistory.isEmpty){
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(LocaleKeys.activeHistoryIsEmpty.tr(context: context)),
-                  5.verticalSpace,
-                  EcoOutlineButton(onPressed: (){
-                    context.read<PartnerHistoryCubit>().refresh();
-                  }, child: Text(LocaleKeys.update.tr(context: context)))
-                ],
-              );
-            }
-            if(state.error != null){
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(state.error.toString()),
-                  5.verticalSpace,
-                  EcoOutlineButton(onPressed: (){
-                    context.read<PartnerHistoryCubit>().refresh();
-                  }, child: Text(LocaleKeys.tryAgain.tr(context: context)))
-                ],
-              );
-            }
-            return SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              child: RefreshIndicator(
-                onRefresh: () async {
-                  await context.read<PartnerHistoryCubit>().refresh();
-                },
-                child: ListView.builder(
-                  itemCount: state.partnerOrdersHistory.length,
-                  controller: _scrollController,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index){
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 16),
-                      child: _Item(history: state.partnerOrdersHistory[index], onTap: (){
-                        PartnerHistoryBottomSheet.show(context, state.partnerOrdersHistory[index]);
-                      }),
-                    );
-                  },
-                ),
-              ),
-            );
-          },
-        );
-        }
-        return const Center(child: CircularProgressIndicator.adaptive());
       }
     );
   }

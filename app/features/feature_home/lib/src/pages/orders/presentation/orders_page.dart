@@ -59,11 +59,14 @@ class OrdersPage extends StatefulWidget implements AutoRouteWrapper {
 class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMixin {
   final ScrollController _scrollController = ScrollController();
   final ValueNotifier<bool> _readyGetOrder = ValueNotifier(false);
+  final ValueNotifier<bool> _isPartner = ValueNotifier(false);
   final ValueNotifier<bool> _hasIssue = ValueNotifier(true);
   final TextEditingController _searchController = TextEditingController();
   late final ActionSliderController sliderController;
   AuthType? _authType;
   late LocationEntity _location;
+  final ValueNotifier<List<OrderModel>> _searchResults = ValueNotifier([]);
+  bool _isSearching = false;
   // Add a Set to keep track of viewed orders
   final Set<String> _viewedOrders = {};
   final ValueNotifier<List<OrderModel>> searching = ValueNotifier([]);
@@ -78,6 +81,15 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
     }
   }
 
+    void _searchOrders(String query) {
+      _searchDebouncer.run(() async {
+        if (_authType == AuthType.driver) {
+          await context.read<OrderCubit>().search(query);
+        } else {
+          await context.read<PartnerOrderCubit>().search(query);
+        }
+      });
+    }
   // Add debouncer for search
   final _searchDebouncer = Debouncer(milliseconds: 300);
 
@@ -173,6 +185,9 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
   Future<void> _getAuthType() async {
     await context.read<TypeBloc>().get();
     _authType = context.read<TypeBloc>().state.runtimeType == DriverType ? AuthType.driver : AuthType.partner;
+    if(_authType == AuthType.partner){
+      _isPartner.value = true;
+    }
   }
 
   @override
@@ -183,17 +198,6 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
 
   void _onResume() {
     context.read<BalanceCubit>().refresh();
-  }
-
-
-  void _searchOrders(String query) {
-    _searchDebouncer.run(() {
-      if(_authType == AuthType.driver){
-        context.read<OrderCubit>().search(query);
-      }else{
-        context.read<PartnerOrderCubit>().search(query);
-      }
-    });
   }
 
   Future<void> _handleRefresh() async {
@@ -343,27 +347,35 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
               title: Text(LocaleKeys.orders.tr(context: context)),
               actions: [
                 ValueListenableBuilder(
-                  valueListenable: _readyGetOrder,
-                  builder: (_, value, __) => value
-                      ? DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.secondary,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: IconButton(
-                      onPressed: () {
-                        _readyGetOrder.value = false;
-                        sliderController.reset();
-                        // context.read<LocationServiceCubit>().init();
-                        context.read<OrderCubit>().init();
-                      },
-                      icon: Icon(
-                        Icons.power_settings_new_outlined,
-                        color: context.colorScheme.cardColor,
-                      ),
-                    ),
-                  )
-                      : const SizedBox.shrink(),
+                  valueListenable: _isPartner,
+                  builder: (context,val,_) {
+                    return val ? EcoIconButton(
+                        icon: Icons.add_outlined,
+                        onPressed: (){
+                          NavigationUtils.getMainNavigator().navigateAnnouncementPage();
+                        }
+                      ) : ValueListenableBuilder(
+                      valueListenable: _readyGetOrder,
+                      builder: (_, value, __) => value ? DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: context.colorScheme.secondary,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: IconButton(
+                          onPressed: () {
+                            _readyGetOrder.value = false;
+                            sliderController.reset();
+                            // context.read<LocationServiceCubit>().init();
+                            context.read<OrderCubit>().init();
+                          },
+                          icon: Icon(
+                            Icons.power_settings_new_outlined,
+                            color: context.colorScheme.cardColor,
+                          ),
+                        ),
+                      ) : const SizedBox.shrink(),
+                    );
+                  }
                 ),
                 const SizedBox(width: 10),
               ],
@@ -551,6 +563,8 @@ class _OrdersPageState extends State<OrdersPage> with AutomaticKeepAliveClientMi
       ],
     );
   }
+
+  
 
   
 

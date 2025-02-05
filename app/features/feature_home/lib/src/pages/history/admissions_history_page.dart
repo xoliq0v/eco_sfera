@@ -1,6 +1,7 @@
 
 
 import 'dart:developer';
+import 'dart:typed_data';
 
 import 'package:app_bloc/app_bloc.dart';
 import 'package:core/core.dart' hide Order;

@@ -25,9 +25,11 @@ class AppRouter extends _$AppRouter {
       AutoRoute(
         page: MainRoute.page,
         children: [
-          CustomRoute(page: HomeRoute.page),
+          CustomRoute(
+            page: HomeRoute.page,
+          ),
           CustomRoute(page: BuyRoute.page,),
-          CustomRoute(page: OrdersRoute.page,),
+          CustomRoute(page: OrdersRoute.page,children: [AutoRoute(page: AnnouncementRoute.page,),]),
           CustomRoute(page: RoadMapRoute.page,),
           AutoRoute(
               page: AdmissionsHistoryRoute.page,

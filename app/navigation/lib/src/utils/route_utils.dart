@@ -17,8 +17,8 @@ mixin RouteUtils {
     return [
       mainRoutes.getOrderPage(),
       mainRoutes.getPresentationPage(),
-      mainRoutes.getProfilePage(),
       mainRoutes.getConfirmedHistoryPage(),
+      mainRoutes.getProfilePage(),
     ];
   }
 

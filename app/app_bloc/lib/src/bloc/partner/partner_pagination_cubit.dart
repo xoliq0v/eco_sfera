@@ -41,6 +41,22 @@ class PartnerPaginationCubit extends Cubit<PartnerPaginationState> with Paginati
     return _fetch(isRefresh: true);
   }
 
+  void updateSearchQuery(String query) {
+    final filtered = _applySearchFilter(state.history, query);
+    emit(state.copyWith(
+      searchQuery: query,
+      filteredHistory: filtered,
+    ));
+  }
+
+  List<PartnerItem> _applySearchFilter(List<PartnerItem> partners, String query) {
+    if (query.isEmpty) return partners;
+    final lowerQuery = query.toLowerCase();
+    return partners.where((partner) {
+      return partner.nickName.toLowerCase().contains(lowerQuery);
+    }).toList();
+  }
+
   // Future<bool> _fetch({
   //   bool isRefresh = false,
   // }) async {
@@ -102,37 +118,46 @@ double _toRadians(double degree) {
   );
   switch (res.status) {
     case Status.completed:
-      final history = res.data?.content ?? [];
-      isLastPage = history.length < localPageSize;
-      isLoaded = true;
-      if (res.data?.pagination.total != null) {
-        isLastPage = res.data!.pagination.total - 1 == localCurrentPage;
-      }
-      if (!isLastPage) localCurrentPage += 1;
+        final newPartners = res.data?.content ?? [];
+        final updatedHistory = isRefresh
+            ? newPartners
+            : [...state.history, ...newPartners];
 
-      // Get the user's current location (you need to implement this)
-      final userLocation = await _getUserLocation();
+        // Calculate distances
+        final userLocation = await _getUserLocation();
+        final historyWithDistance = updatedHistory.map((partner) {
+          final distance = calculateDistance(
+            userLocation.latitude,
+            userLocation.longitude,
+            double.parse(partner.latitude),
+            double.parse(partner.longitude),
+          );
+          return partner.copyWith(distance: distance.toStringAsFixed(2));
+        }).toList();
 
-      // Calculate and set the distance for each PartnerItem
-      final updatedHistory = history.map((partner) {
-        final distance = calculateDistance(
-          userLocation.latitude,
-          userLocation.longitude,
-          double.parse(partner.latitude),
-          double.parse(partner.longitude),
+        // Apply search filter to updated list
+        final filteredHistory = _applySearchFilter(
+          historyWithDistance,
+          state.searchQuery,
         );
-        return partner.copyWith(distance: distance.toStringAsFixed(2));
-      }).toList();
 
-      if (isRefresh) {
-        emit(state.copyWith(customers: updatedHistory));
-      } else {
-        emit(state.copyWith(customers: [
-          ...state.history,
-          ...updatedHistory,
-        ]));
-      }
-      return true;
+        // Update pagination status
+        isLastPage = newPartners.length < localPageSize;
+        isLoaded = true;
+        if (res.data?.pagination.total != null) {
+          isLastPage = res.data!.pagination.total - 1 == localCurrentPage;
+        }
+        if (!isLastPage) localCurrentPage += 1;
+
+        emit(state.copyWith(
+          history: historyWithDistance,
+          filteredHistory: filteredHistory,
+          isLoadingShimmer: false,
+          isLoadingPagination: false,
+          error: null,
+          errorPagination: null,
+        ));
+        return true;
     case Status.error:
       if (state.isLoadingPagination) {
         emit(state.copyWith(errorPagination: res.error?.message ?? ''));

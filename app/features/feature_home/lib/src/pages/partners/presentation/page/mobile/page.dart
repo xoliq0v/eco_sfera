@@ -8,11 +8,9 @@ class _Mobile extends StatefulWidget {
 }
 
 class _MobileState extends State<_Mobile> {
-
   final ScrollController _scrollController = ScrollController();
   final TextEditingController searchController = TextEditingController();
-  final ScrollController scrollController = ScrollController();
-
+  Timer? _searchDebounce;
 
   @override
   void initState() {
@@ -22,10 +20,10 @@ class _MobileState extends State<_Mobile> {
 
   @override
   void dispose() {
+    _searchDebounce?.cancel();
     _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
     searchController.dispose();
-    scrollController.dispose();
     super.dispose();
   }
 
@@ -37,14 +35,21 @@ class _MobileState extends State<_Mobile> {
     }
   }
 
+  void _onSearchChanged(String query) {
+    if (_searchDebounce?.isActive ?? false) _searchDebounce?.cancel();
+    _searchDebounce = Timer(const Duration(milliseconds: 500), () {
+      context.read<PartnerPaginationCubit>().updateSearchQuery(query);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(LocaleKeys.partners.tr(context: context)),
       ),
-      body: BlocBuilder<PartnerPaginationCubit,PartnerPaginationState>(
-        builder: (context,state) {
+      body: BlocBuilder<PartnerPaginationCubit, PartnerPaginationState>(
+        builder: (context, state) {
           if (state.isLoadingShimmer) {
             return const Center(child: CircularProgressIndicator.adaptive());
           }
@@ -55,9 +60,12 @@ class _MobileState extends State<_Mobile> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(state.error.toString()),
-                ElevatedButton(onPressed: (){
-                  context.read<PartnerPaginationCubit>().refresh();
-                }, child: Text(LocaleKeys.tryAgain.tr(context: context)))
+                ElevatedButton(
+                  onPressed: () {
+                    context.read<PartnerPaginationCubit>().refresh();
+                  },
+                  child: Text(LocaleKeys.tryAgain.tr(context: context)),
+                )
               ],
             );
           }
@@ -65,68 +73,61 @@ class _MobileState extends State<_Mobile> {
           return Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
                       child: TextField(
+                        controller: searchController,
                         decoration: InputDecoration(
                           hintText: LocaleKeys.search.tr(context: context),
                         ),
-                        // hintText: LocaleKeys.name.tr(context: context),
-                        onChanged: (value) {
-                          // _searchOrders(value);
-                        },
+                        onChanged: _onSearchChanged,
                       ),
                     ),
-                    // IconButton(
-                    //   onPressed: () {
-                    //     FilterSheet.show(context);
-                    //   },
-                    //   icon: SvgPicture.asset(AppIcons.filter),
-                    // ),
                   ],
                 ),
               ),
               Expanded(
-                  child: RefreshIndicator(
-                    onRefresh: () async {
-                      await context.read<PartnerPaginationCubit>().refresh();
-                    },
-                    child: ListView.builder(
-                      controller: _scrollController,
-                      itemCount: state.history.length + (state.isLoadingPagination ? 1 : 0),
-                      padding: const EdgeInsets.all(16),
-                      itemBuilder: (context, index) {
-                        if (index >= state.history.length) {
-                          return const Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: CircularProgressIndicator.adaptive(),
-                            ),
-                          );
-                        }
-
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 16),
-                          child: PartnerWidget(
-                            onTap: (){
-                              NavigationUtils.getMainNavigator().navigateSubmissionPage(state.history[index].id,state.history[index]);
-                            },
-                            partner: state.history[index],
-                          ),
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    await context.read<PartnerPaginationCubit>().refresh();
+                  },
+                  child: ListView.builder(
+                    controller: _scrollController,
+                    itemCount: state.filteredHistory.length + (state.isLoadingPagination ? 1 : 0),
+                    padding: const EdgeInsets.all(16),
+                    itemBuilder: (context, index) {
+                      if (index >= state.filteredHistory.length) {
+                        return Center(
+                          child: CircularProgressIndicator.adaptive(),
                         );
-                      },
-                    ),
+                      }
+                      if (index >= state.history.length) {
+                        return const Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Center(child: CircularProgressIndicator.adaptive()),
+                        );
+                      }
+
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: PartnerWidget(
+                          onTap: () {
+                            NavigationUtils.getMainNavigator()
+                                .navigateSubmissionPage(state.history[index].id, state.history[index]);
+                          },
+                          partner: state.history[index],
+                        ),
+                      );
+                    },
                   ),
+                ),
               ),
             ],
           );
-        }
+        },
       ),
     );
   }
 }
-

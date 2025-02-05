@@ -70,7 +70,7 @@ class ActiveHistoryBottomSheet {
                               color: Theme.of(context).colorScheme.surface,
                               onPressed: () async {
                                 await availableMaps.first.showMarker(
-                                  coords: Coords(double.parse(order.locations[0].longitude),double.parse(order.locations[0].latitude),),
+                                  coords: Coords(double.parse(order.locations[0].latitude),double.parse(order.locations[0].longitude),),
                                   title: "${order.user.name}\n${order.user.phoneNumber?.formatUzbekPhoneNumber()}",
                                 );
                               },

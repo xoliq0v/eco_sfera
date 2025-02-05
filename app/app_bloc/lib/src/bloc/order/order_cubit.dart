@@ -32,6 +32,98 @@ class OrderCubit extends Cubit<OrderState> {
   final WatchPost watchPost;
   final GetAuthType _getType;
 
+
+   // Add private variables to track all orders and current search query
+  List<OrderModel> _allOrders = [];
+  String _currentSearchQuery = '';
+
+  // Helper method to apply status and search filters
+  List<OrderModel> _applyStatusAndSearch(List<OrderModel> orders) {
+    // Filter active orders
+    List<OrderModel> activeOrders = orders.where((o) => o.status).toList();
+    if (_currentSearchQuery.isEmpty) {
+      return activeOrders;
+    }
+    // Apply search query
+    String query = _currentSearchQuery.toLowerCase();
+    return activeOrders.where((order) {
+      return order.id.toString().contains(query) ||
+          order.totalPrice.toString().contains(query) ||
+          order.totalKg.toString().contains(query) ||
+          order.orderUser.name.toLowerCase().contains(query) ||
+          order.orderUser.phoneNumber.contains(query) ||
+          order.locations.any((location) =>
+              location.latitude.contains(query) ||
+              location.longitude.contains(query));
+    }).toList();
+  }
+
+  Future<void> getOrder(LocationEntity location) async {
+    emit(const OrderState.loading());
+
+    final result = await getOrderUseCase.get();
+
+    if (result.status == Status.error || result.data == null) {
+      emit(OrderState.error(result.error?.message ?? 'Something went wrong'));
+      return;
+    }
+
+    try {
+      _allOrders = result.data ?? [];
+      final displayedOrders = _applyStatusAndSearch(_allOrders);
+
+      emit(OrderState.success(
+        displayedOrders,
+        currentLocation: location,
+        isInitialFetch: isInitialFetch,
+      ));
+
+      isInitialFetch = false;
+    } catch (e) {
+      emit(OrderState.error(e.toString()));
+    }
+  }
+
+  Future<List<OrderModel>> search(String query) async {
+    if (state is! _Success) return [];
+    _currentSearchQuery = query;
+
+    final currentState = state as _Success;
+    final displayedOrders = _applyStatusAndSearch(_allOrders);
+
+    emit(OrderState.success(
+      displayedOrders,
+      currentLocation: currentState.currentLocation,
+      isInitialFetch: currentState.isInitialFetch,
+      isRealtime: currentState.isRealtime,
+      newOrders: currentState.newOrders,
+    ));
+
+    return displayedOrders;
+  }
+
+  void _handleNewOrder(Map<String, dynamic> data) {
+    try {
+      final newOrder = data.toOrderModel();
+      if (newOrder == null) return;
+
+      _allOrders.insert(0, newOrder);
+      final displayedOrders = _applyStatusAndSearch(_allOrders);
+
+      if (state is _Success) {
+        final currentState = state as _Success;
+        emit(OrderState.success(
+          displayedOrders,
+          currentLocation: currentState.currentLocation,
+          isRealtime: true,
+          newOrders: [newOrder, ...currentState.newOrders],
+        ));
+      }
+    } catch (e) {
+      print('Error handling new order: $e');
+    }
+  }
+
   static const AndroidNotificationChannel _channel = AndroidNotificationChannel(
     'high_importance_channel',
     'High Importance Notifications',
@@ -65,47 +157,6 @@ class OrderCubit extends Cubit<OrderState> {
       return;
     }
     await watchPost.watch(id);
-  }
-
-  Future<void> getOrder(LocationEntity location) async {
-    final type = await _getType.get();
-    if(type.runtimeType == DriverType){
-      return;
-    }
-    if (isInitialFetch) {
-      emit(const OrderState.loading());
-    }
-
-    final result = await getOrderUseCase.get();
-
-    if (result.status == Status.error || result.data == null) {
-      emit(OrderState.error(result.error?.message ?? 'Something went wrong'));
-      return;
-    }
-
-    try {
-      final value = await result.data?.map((data) {
-        if (data.locations.isEmpty) return data;
-
-        return data.copyWith(
-          distance: calculateDistance(
-            location,
-            double.parse(data.locations[0].latitude),
-            double.parse(data.locations[0].longitude),
-          ),
-        );
-      }).toList();
-
-      emit(OrderState.success(
-        value ?? [],
-        currentLocation: location,
-        isInitialFetch: isInitialFetch,
-      ));
-
-      isInitialFetch = false;
-    } catch (e) {
-      emit(OrderState.error(e.toString()));
-    }
   }
 
 
@@ -313,45 +364,45 @@ class OrderCubit extends Cubit<OrderState> {
     // }
   }
 
-  void _handleNewOrder(Map<String, dynamic> data) {
-    try {
-      final newOrder = data.toOrderModel();
-      if (newOrder == null) {
-        print('[log] Failed to parse new order data');
-        return;
-      }
+  // void _handleNewOrder(Map<String, dynamic> data) { 
+  //   try {
+  //     final newOrder = data.toOrderModel();
+  //     if (newOrder == null) {
+  //       print('[log] Failed to parse new order data');
+  //       return;
+  //     }
 
-      if (state is _Success) {
-        final currentState = state as _Success;
-        final currentLocation = currentState.currentLocation;
-        final currentOrders = List<OrderModel>.from(currentState.orders);
+  //     if (state is _Success) {
+  //       final currentState = state as _Success;
+  //       final currentLocation = currentState.currentLocation;
+  //       final currentOrders = List<OrderModel>.from(currentState.orders);
 
-        // Calculate distance if location is available
-        OrderModel orderToAdd = newOrder;
-        if (currentLocation != null && newOrder.locations.isNotEmpty) {
-          final distance = calculateDistance(
-            currentLocation,
-            double.parse(newOrder.locations[0].latitude),
-            double.parse(newOrder.locations[0].longitude),
-          );
-          orderToAdd = newOrder.copyWith(distance: distance);
-        }
+  //       // Calculate distance if location is available
+  //       OrderModel orderToAdd = newOrder;
+  //       if (currentLocation != null && newOrder.locations.isNotEmpty) {
+  //         final distance = calculateDistance(
+  //           currentLocation,
+  //           double.parse(newOrder.locations[0].latitude),
+  //           double.parse(newOrder.locations[0].longitude),
+  //         );
+  //         orderToAdd = newOrder.copyWith(distance: distance);
+  //       }
 
-        // Insert new order at the beginning of the list
-        currentOrders.insert(0, orderToAdd);
+  //       // Insert new order at the beginning of the list
+  //       currentOrders.insert(0, orderToAdd);
 
-        // Update state with new order list and animate flag
-        emit(OrderState.success(
-          currentOrders, currentLocation: currentLocation,
-        ));
+  //       // Update state with new order list and animate flag
+  //       emit(OrderState.success(
+  //         currentOrders, currentLocation: currentLocation,
+  //       ));
 
-        // Show notification
-        _showNewOrderNotification(orderToAdd);
-      }
-    } catch (e) {
-      print('[log] Error handling new order: $e');
-    }
-  }
+  //       // Show notification
+  //       _showNewOrderNotification(orderToAdd);
+  //     }
+  //   } catch (e) {
+  //     print('[log] Error handling new order: $e');
+  //   }
+  // }
 
   Future<void> _showNewOrderNotification(OrderModel order) async {
     const androidDetails = AndroidNotificationDetails(
@@ -482,12 +533,61 @@ class OrderCubit extends Cubit<OrderState> {
     emit(OrderState.init());
   }
 
-  Future<void> search(String query) async{
-    final sortedOrders = (state as _Success).orders.where((order) => order.status).toList();
-    if(sortedOrders.isEmpty){
-      emit(OrderState.error('No orders found'));
-    }else{
-      emit(OrderState.success(sortedOrders, currentLocation: (state as _Success).currentLocation, isRealtime: (state as _Success).isRealtime, newOrders: (state as _Success).newOrders));
-    }
-  }
+  //   Future<List<OrderModel>> search(String query) async {
+  //   if (state is! _Success) {
+  //     return [];
+  //   }
+
+  //   final currentState = state as _Success;
+  //   final allOrders = currentState.orders;
+    
+  //   if (query.isEmpty) {
+  //     return allOrders.where((order) => order.status).toList();
+  //   }
+
+  //   // Convert query to lowercase for case-insensitive search
+  //   final searchQuery = query.toLowerCase();
+
+  //   // Filter orders based on multiple criteria
+  //   final filteredOrders = allOrders.where((order) {
+  //     // Only include active orders
+  //     if (!order.status) return false;
+
+  //     // Search in various order fields
+  //     return 
+  //       // Search in order ID
+  //       order.id.toString().contains(searchQuery) ||
+  //       // Search in price
+  //       order.totalPrice.toString().contains(searchQuery) ||
+  //       // Search in weight
+  //       order.totalKg.toString().contains(searchQuery) ||
+  //       // Search in user name
+  //       order.orderUser.name.toLowerCase().contains(searchQuery) ||
+  //       // Search in phone number
+  //       order.orderUser.phoneNumber.contains(searchQuery) ||
+  //       // Search in locations
+  //       order.locations.any((location) =>
+  //         location.latitude.contains(searchQuery) ||
+  //         location.longitude.contains(searchQuery)
+  //       );
+  //   }).toList();
+
+  //   // Sort filtered orders by relevance (optional)
+  //   filteredOrders.sort((a, b) {
+  //     // Prioritize exact matches in ID
+  //     if (a.id.toString() == searchQuery) return -1;
+  //     if (b.id.toString() == searchQuery) return 1;
+  //     return 0;
+  //   });
+
+  //   // Emit new state with filtered orders
+  //   emit(OrderState.success(
+  //     filteredOrders,
+  //     currentLocation: currentState.currentLocation,
+  //     isRealtime: currentState.isRealtime,
+  //     newOrders: currentState.newOrders,
+  //   ));
+
+  //   return filteredOrders;
+  // }
 }
