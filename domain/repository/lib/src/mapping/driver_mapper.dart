@@ -12,6 +12,6 @@ extension ClientInfoDTOExt on DriverDTO {
 
 extension UserProfileEntityExt on DriverEntity {
   DriverData toUserProfile() {
-    return DriverData(id: id,profileImage: profileImage, name: name, surname: surname, phone: phone, login: login, password: password, walletId: walletId, walletBalance: walletBalance, workOrder: workOrder, vehicle: vehicle, vehicleNumber: vehicleNumber, createdAt: createdAt, updatedAt: updatedAt, patronymic: patronymic, nickname: nickname, province: province, district: district, address: address, isActive: isActive, status: status);
+    return DriverData(outlay: outlay.toString(), earnings: earnings.toString(), id: id,profileImage: profileImage, name: name, surname: surname, phone: phone, login: login, password: password, walletId: walletId, walletBalance: walletBalance, workOrder: workOrder, vehicle: vehicle, vehicleNumber: vehicleNumber, createdAt: createdAt, updatedAt: updatedAt, patronymic: patronymic, nickname: nickname, province: province, district: district, address: address, isActive: isActive, status: status);
   }
 }

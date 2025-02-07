@@ -12,8 +12,8 @@ class DriverData extends Equatable {
   final String workOrder;
   final String vehicle;
   final String vehicleNumber;
-  final String? earnings;
-  final String? outlay;
+  final String earnings;
+  final String outlay;
   final DateTime createdAt;
   final DateTime updatedAt;
   final String profileImage;
@@ -37,8 +37,8 @@ class DriverData extends Equatable {
     required this.workOrder,
     required this.vehicle,
     required this.vehicleNumber,
-    this.earnings,
-    this.outlay,
+    required this.earnings,
+    required this.outlay,
     required this.createdAt,
     required this.updatedAt,
     required this.profileImage,
