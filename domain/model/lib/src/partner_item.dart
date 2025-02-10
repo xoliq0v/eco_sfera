@@ -15,10 +15,10 @@ class PartnerItem extends Equatable {
   });
 
   final int id;
-  final String comment;
-  final String nickName;
-  final String longitude;
-  final String latitude;
+  final String? comment;
+  final String? nickName;
+  final String? longitude;
+  final String? latitude;
   final String? phone; // Nullable field
   final bool? status; // Nullable field
   final String? walletId; // Nullable field

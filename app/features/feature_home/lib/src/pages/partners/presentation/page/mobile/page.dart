@@ -11,6 +11,7 @@ class _MobileState extends State<_Mobile> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController searchController = TextEditingController();
   Timer? _searchDebounce;
+  final _debouncer = Debouncer(milliseconds: 300);
 
   @override
   void initState() {
@@ -20,6 +21,7 @@ class _MobileState extends State<_Mobile> {
 
   @override
   void dispose() {
+    _debouncer.dispose();
     _searchDebounce?.cancel();
     _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
@@ -37,7 +39,7 @@ class _MobileState extends State<_Mobile> {
 
   void _onSearchChanged(String query) {
     if (_searchDebounce?.isActive ?? false) _searchDebounce?.cancel();
-    _searchDebounce = Timer(const Duration(milliseconds: 500), () {
+    _debouncer.run(() {
       context.read<PartnerPaginationCubit>().updateSearchQuery(query);
     });
   }

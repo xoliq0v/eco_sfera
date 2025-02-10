@@ -29,16 +29,16 @@ class PartnerDto {
   final int id;
 
   @JsonKey(name: 'nickname')
-  final String nickname;
+  final String? nickname;
 
   @JsonKey(name: 'about')
-  final String comment;
+  final String? comment;
 
   @JsonKey(name: 'longitude')
-  final String longitude;
+  final String? longitude;
 
   @JsonKey(name: 'latitude')
-  final String latitude;
+  final String? latitude;
 
   @JsonKey(name: 'phone')
   final String? phone;

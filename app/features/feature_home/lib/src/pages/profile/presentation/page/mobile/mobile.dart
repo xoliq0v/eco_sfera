@@ -18,20 +18,25 @@ class Mobile extends State<_Mobile> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    context.read<ProfileCubit>().reload();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Material(
       child: BlocProvider<TypeBloc>(
         create: (context)=> AppBlocHelper.getTypeBloc(),
         child: BlocBuilder<TypeBloc,AuthTypeState>(
           builder: (context,state) {
-            print('STATE: $state');
             if(state is Init){
               return Center(
-                child: Text("Loading"),
+                child: CircularProgressIndicator.adaptive(),
               );
             }else if(state is Fail){
               return Center(
-                child: Text('state.message'),
+                child: Text(LocaleKeys.updateApp.tr(context: context)),
               );
             }else if(state is PartnerType){
               return _PartnerMobile();
@@ -39,7 +44,7 @@ class Mobile extends State<_Mobile> {
               return _Driver();
             }else{
               return Center(
-                child: Text("Error"),
+                child: Text(LocaleKeys.updateApp.tr(context: context)),
               );
             }
             // return PartnerOrDriver(

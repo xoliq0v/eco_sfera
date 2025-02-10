@@ -132,7 +132,17 @@ class _ProfileWidget extends StatelessWidget {
                         //       ],
                         //     ),
                         //   ),
-                        // ),
+                        // )
+                        10.verticalSpace,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                          child: EcoElevatedButton.loading(
+                                      loading: false,
+                                      onPressed: (){
+                                        navigateAccountRoute();
+                                      }, child: Text(LocaleKeys.moreAboutTransfers.tr(context: context))
+                                  ),
+                        ),
                         10.verticalSpace,
                         InkWell(
                           onTap: () {
@@ -257,6 +267,7 @@ class _ProfileWidget extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(horizontal: 20),
                                 child: EcoElevatedButton.loading(
                                     loading: isLoading,
+                                    backgroundColor: context.colorScheme.primary.withOpacity(0.1),
                                     onPressed: ()async{
                                       await LogOutDialog.showLogoutDialog(context).then((value){
                                         if(value ?? false){

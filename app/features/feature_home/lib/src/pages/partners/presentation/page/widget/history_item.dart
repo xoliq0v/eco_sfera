@@ -44,7 +44,7 @@ class PartnerWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    partner.nickName,
+                                    partner.nickName ?? 'NULL',
                                     overflow: TextOverflow.ellipsis,
                                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                                         fontWeight: FontWeight.w400,
@@ -54,7 +54,7 @@ class PartnerWidget extends StatelessWidget {
                                   ),
                                   Flexible(
                                       child: Text(
-                                        partner.comment,
+                                        partner.comment ?? '',
                                         overflow: TextOverflow.ellipsis,
                                         style: Theme.of(context).textTheme.headlineMedium,
                                       )

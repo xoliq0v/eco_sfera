@@ -91,7 +91,7 @@ class __SuccessState extends State<_Success> {
                       child: Text(widget.partnerData!.comment ?? ''),
                     ) 
                   else 
-                    Text(widget.partner.comment),
+                    Text(widget.partner.comment ?? LocaleKeys.commentIsNotAvailable.tr(context: context)),
                   
                   ValueListenableBuilder(
                     valueListenable: _editAble,

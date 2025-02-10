@@ -1,4 +1,5 @@
 
+import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:model/model.dart';
@@ -80,10 +81,10 @@ class ActiveItem extends StatelessWidget {
                     bottom: 10
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text('${history.id}:${history.id}',style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : context.colorScheme.primary),),
-                    Text(history.id.toString(),style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : context.colorScheme.primary),),
+                    Text('${DateFormat('dd.MM.yyyy HH:mm').parse(history.date!).customFormat('HH:mm')}',style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : context.colorScheme.primary),),
+                    // Text(history.id.toString(),style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: isNew ? AppColors.main : context.colorScheme.primary),),
                   ],
                 ),
               )

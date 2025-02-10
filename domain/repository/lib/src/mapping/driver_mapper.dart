@@ -4,7 +4,7 @@ import 'package:model/model.dart';
 
 extension ClientInfoDTOExt on DriverDTO {
   DriverEntity toUserProfileEntity() {
-    return DriverEntity(profileImage: profileImage??'NULL', name: name ?? 'NULL', surname: surname ?? 'NULL', phone: phone?? 'NULL', login: login?? 'NULL', password: password?? 'NULL', walletId: walletId?? -1, walletBalance: walletBalance ?? 'NULL', workOrder: workOrder ?? 'NULL', vehicle: vehicle ?? 'NULL', vehicleNumber: vehicleNumber?? 'NULL', createdAt: createdAt ?? DateTime.now()
+    return DriverEntity(earnings: int.parse(earnings.toString()) ?? 0, outlay: int.parse(outlay.toString()) ?? 0, profileImage: profileImage??'NULL', name: name ?? 'NULL', surname: surname ?? 'NULL', phone: phone?? 'NULL', login: login?? 'NULL', password: password?? 'NULL', walletId: walletId?? -1, walletBalance: walletBalance ?? 'NULL', workOrder: workOrder ?? 'NULL', vehicle: vehicle ?? 'NULL', vehicleNumber: vehicleNumber?? 'NULL', createdAt: createdAt ?? DateTime.now()
         , updatedAt: updatedAt ?? DateTime.now(), patronymic: patronymic ?? 'NULL', nickname: nickname?? 'NULL', province: province?? 'NULL', district: district?? 'NULL', address: address?? 'NULL', isActive: isActive?? false, status: status?? false);
   }
 }

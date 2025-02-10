@@ -20,14 +20,24 @@ class _ActivePageState extends State<ActivePage> {
   }
 
   Future<void> _fetchType() async {
-    // Listen to TypeBloc state changes
     final typeState = context.read<TypeBloc>().state;
-    if (typeState is DriverType) {
-      type.value = AuthType.driver;
+    type.value = typeState is DriverType ? AuthType.driver : AuthType.partner;
+    await _fetchHistory(); // Yangi method
+  }
+
+  Future<void> _fetchHistory() async {
+    if (type.value == AuthType.driver) {
       await context.read<ActiveHistoryCubit>().fetchHistory();
     } else {
-      type.value = AuthType.partner;
       await context.read<PartnerHistoryCubit>().fetchPartnerHistory();
+    }
+  }
+
+  void _refreshHistory() {
+    if (type.value == AuthType.driver) {
+      context.read<ActiveHistoryCubit>().refresh();
+    } else {
+      context.read<PartnerHistoryCubit>().refresh();
     }
   }
 
@@ -35,13 +45,8 @@ class _ActivePageState extends State<ActivePage> {
   Widget build(BuildContext context) {
     return BlocListener<TypeBloc, AuthTypeState>(
       listener: (context, state) {
-        if (state is DriverType) {
-          type.value = AuthType.driver;
-          context.read<ActiveHistoryCubit>().refresh();
-        } else {
-          type.value = AuthType.partner;
-          context.read<PartnerHistoryCubit>().refresh();
-        }
+        type.value = state is DriverType ? AuthType.driver : AuthType.partner;
+        _refreshHistory();
       },
       child: ValueListenableBuilder<AuthType>(
         valueListenable: type,
@@ -49,8 +54,6 @@ class _ActivePageState extends State<ActivePage> {
           if (currentType == AuthType.def) {
             return const Center(child: CircularProgressIndicator.adaptive());
           }
-
-          // Return appropriate widget based on type
           return currentType == AuthType.driver
               ? _buildDriverContent()
               : _buildPartnerContent();
@@ -59,25 +62,17 @@ class _ActivePageState extends State<ActivePage> {
     );
   }
 
-  Widget _buildDriverContent() {
-    return BlocBuilder<ActiveHistoryCubit, ActiveHistoryPaginationState>(
-      builder: (context, state) {
-        if (state.isLoadingShimmer) {
-          return const Center(child: CircularProgressIndicator.adaptive());
-        }
+Widget _buildDriverContent() {
+  return BlocBuilder<ActiveHistoryCubit, ActiveHistoryPaginationState>(
+    builder: (context, state) {
+      log('FUCK HISTORY STATE: ${state.error}');
+      // Agar loading bo'lsa
+      if (state.isLoadingShimmer) {
+        return const Center(child: CircularProgressIndicator.adaptive());
+      }
 
-        if (state.history.isEmpty) {
-          return _buildEmptyState(() {
-            context.read<ActiveHistoryCubit>().refresh();
-          });
-        }
-
-        if (state.error != null) {
-          return _buildErrorState(state.error.toString(), () {
-            context.read<ActiveHistoryCubit>().refresh();
-          });
-        }
-
+      // Agar ma'lumotlar bo'lsa va error bo'lmasa
+      if (state.history.isNotEmpty) {
         return _buildHistoryList(
           itemCount: state.history.length + (state.isLoadingPagination ? 1 : 0),
           itemBuilder: (context, index) {
@@ -90,23 +85,39 @@ class _ActivePageState extends State<ActivePage> {
               );
             }
 
+            final item = state.history[index];
             return Padding(
               padding: const EdgeInsets.only(bottom: 16),
               child: ActiveItem(
-                history: state.history[index],
-                onTap: () {
-                  ActiveHistoryBottomSheet.show(context, state.history[index]);
-                },
+                history: item,
+                onTap: () => ActiveHistoryBottomSheet.show(context, item),
               ),
             );
           },
-          onRefresh: () async {
-            await context.read<ActiveHistoryCubit>().refresh();
-          },
+          onRefresh: () => context.read<ActiveHistoryCubit>().refresh(),
         );
-      },
-    );
-  }
+      }
+
+      // Agar ma'lumotlar bo'sh bo'lsa
+      if (state.history.isEmpty && state.error == null) {
+        return _buildEmptyState(
+          () => context.read<ActiveHistoryCubit>().refresh(),
+        );
+      }
+
+      // Agar error bo'lsa
+      if (state.error != null) {
+        return _buildErrorState(
+          state.error.toString(),
+          () => context.read<ActiveHistoryCubit>().refresh(),
+        );
+      }
+
+      // Default holat
+      return const Center(child: CircularProgressIndicator.adaptive());
+    },
+  );
+}
 
   Widget _buildPartnerContent() {
     return BlocBuilder<PartnerHistoryCubit, PartnerHistoryState>(
@@ -115,39 +126,70 @@ class _ActivePageState extends State<ActivePage> {
           return const Center(child: CircularProgressIndicator.adaptive());
         }
 
-        if (state.partnerOrdersHistory.isEmpty) {
-          return _buildEmptyState(() {
-            context.read<PartnerHistoryCubit>().refresh();
-          });
+        if (state.error != null) {
+          return _buildErrorState(
+            state.error.toString(),
+            () => context.read<PartnerHistoryCubit>().refresh(),
+          );
         }
 
-        if (state.error != null) {
-          return _buildErrorState(state.error.toString(), () {
-            context.read<PartnerHistoryCubit>().refresh();
-          });
+        if (state.partnerOrdersHistory.isEmpty) {
+          return _buildEmptyState(
+            () => context.read<PartnerHistoryCubit>().refresh(),
+          );
         }
 
         return _buildHistoryList(
           itemCount: state.partnerOrdersHistory.length,
           itemBuilder: (context, index) {
+            final item = state.partnerOrdersHistory[index];
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
               child: _Item(
-                history: state.partnerOrdersHistory[index],
-                onTap: () {
-                  PartnerHistoryBottomSheet.show(
-                    context,
-                    state.partnerOrdersHistory[index],
-                  );
-                },
+                history: item,
+                onTap: () => PartnerHistoryBottomSheet.show(context, item),
               ),
             );
           },
-          onRefresh: () async {
-            await context.read<PartnerHistoryCubit>().refresh();
-          },
+          onRefresh: () => context.read<PartnerHistoryCubit>().refresh(),
         );
       },
+    );
+  }
+
+  Widget _buildHistoryList({
+    required int itemCount,
+    required Widget Function(BuildContext, int) itemBuilder,
+    required Future<void> Function() onRefresh,
+  }) {
+    return RefreshIndicator(
+      onRefresh: onRefresh,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth > 600) {
+            return GridView.builder(
+              controller: _scrollController,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 3,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+              ),
+              itemCount: itemCount,
+              padding: const EdgeInsets.all(16),
+              itemBuilder: itemBuilder,
+            );
+          }
+
+          return ListView.builder(
+            controller: _scrollController,
+            physics: const AlwaysScrollableScrollPhysics(),
+            itemCount: itemCount,
+            padding: const EdgeInsets.all(16),
+            itemBuilder: itemBuilder,
+          );
+        },
+      ),
     );
   }
 
@@ -181,55 +223,13 @@ class _ActivePageState extends State<ActivePage> {
     );
   }
 
-  Widget _buildHistoryList({
-    required int itemCount,
-    required Widget Function(BuildContext, int) itemBuilder,
-    required Future<void> Function() onRefresh,
-  }) {
-    return RefreshIndicator(
-      onRefresh: onRefresh,
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          if (constraints.maxWidth > 600) {
-            return GridView.builder(
-              controller: _scrollController,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 3,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-              ),
-              itemCount: itemCount,
-              padding: const EdgeInsets.all(16),
-              itemBuilder: itemBuilder,
-            );
-          }
-
-          return SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            child: ListView.builder(
-              controller: _scrollController,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: itemCount,
-              padding: const EdgeInsets.all(16),
-              itemBuilder: itemBuilder,
-            ),
-          );
-        },
-      ),
-    );
-  }
-
   void _onScroll() {
+    if (!_scrollController.hasClients) return;
+    
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.offset;
     if (currentScroll >= maxScroll - 200) {
-      if (type.value == AuthType.driver) {
-        context.read<ActiveHistoryCubit>().fetchHistory();
-      } else {
-        context.read<PartnerHistoryCubit>().fetchPartnerHistory();
-      }
+      _fetchHistory();
     }
   }
 
@@ -240,7 +240,6 @@ class _ActivePageState extends State<ActivePage> {
     super.dispose();
   }
 }
-
 
 class _Item extends StatelessWidget {
   final PartnerOrder history; 

@@ -42,6 +42,7 @@ abstract class  LocaleKeys {
   static const closed = 'closed';
   static const combinedRoute = 'combinedRoute';
   static const comment = 'comment';
+  static const commentIsNotAvailable = 'commentIsNotAvailable';
   static const commentIsRequired = 'commentIsRequired';
   static const comments = 'comments';
   static const companyData = 'companyData';
@@ -106,6 +107,9 @@ abstract class  LocaleKeys {
   static const menu = 'menu';
   static const metal = 'metal';
   static const mon = 'mon';
+  static const moreAboutTransactions = 'moreAboutTransactions';
+  static const moreAboutTransfers = 'moreAboutTransfers';
+  static const moreAboutTranslations = 'moreAboutTranslations';
   static const myAccount = 'myAccount';
   static const name = 'name';
   static const nameLength = 'nameLength';

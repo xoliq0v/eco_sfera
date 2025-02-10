@@ -90,6 +90,14 @@ class ProfileCubit extends Cubit<ProfileState>{
     }
   }
 
+  Future<void> reload() async{
+    if(await type() == AuthType.driver){
+      await fetchUserProfile.fetch();
+    }else{
+      await fetchPartnerProfile.fetch();
+    }
+  }
+
   /// need complete
   Future<void> checkStatus()async{
     return;
